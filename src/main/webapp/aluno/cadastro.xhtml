@@ -1,0 +1,136 @@
+<?xml version='1.0' encoding='ISO-8859-1' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+<h:head>
+	<title>Cadastro</title>
+	<h:outputScript library="script" name="javascript.js" target="form" />
+</h:head>
+<h:body>
+	<p:growl widgetVar="growlWV">
+		<p:autoUpdate />
+	</p:growl>
+
+	<div align="center">
+		<h:graphicImage style="width: 50%;" library="images"
+			name="logo-senai.png" />
+	</div>
+	<br />
+
+	<h:form>
+		<p:toolbar>
+			<f:facet name="left">
+				<p:outputLabel value="Insira seus dados de cadastro" />
+			</f:facet>
+			<f:facet name="right">
+				<p:commandButton value="Sair" action="index?faces-redirect=true"
+					icon="ui-icon-extlink" />
+			</f:facet>
+		</p:toolbar>
+	</h:form>
+	<br />
+
+	<p:panel>
+		<center>
+			<h:form id="formCadastro">
+				<p:panelGrid columns="2">
+					<p:outputLabel value="Insira seu nome: " />
+					<p:inputText placeholder="Insira seu nome completo" required="true"
+						value="#{alunoCadastroMBean.usuario.nome}"
+						title="Campo para o nome"
+						requiredMessage="O nome é completo é necessário !" />
+
+					<p:outputLabel value="Insira seu e-mail: " />
+					<p:inputText placeholder="Insira seu e-mail completo"
+						value="#{alunoCadastroMBean.usuario.email}" required="true"
+						title="Campo para e-mail"
+						requiredMessage="O e-mail é completo é necessário !" />
+
+					<p:outputLabel value="Insira sua data de nascimento: " />
+					<p:calendar pattern="dd/MM/yyyy" placeholder="Insira sua idade completa"
+						value="#{alunoCadastroMBean.usuario.idade.time}"
+						title="Campo para idade" required="true"
+						requiredMessage="A idade é necessária !" />
+
+					<p:outputLabel value="Insira seu CPF: " />
+					<p:inputMask mask="999.999.999-99"
+						value="#{alunoCadastroMBean.usuario.cpf}"
+						placeholder="Insira seu CPF completo" required="true"
+						title="Campo para CPF" onfocus="desligaBtCriarUsuario()"
+						onblur="!TestaCPF(this.value) ? this.value = '' : this.value; avisoGrowl(TestaCPF(this.value)); ligaBtCriarUsuario();"
+						requiredMessage="O CPF é completo é necessário !" />
+
+					<p:outputLabel value="Insira seu RG: " />
+					<p:inputMask mask="99.999.999-9"
+						placeholder="Insira seu RG completo" required="true"
+						value="#{alunoCadastroMBean.usuario.rg}" title="Campo para RG"
+						requiredMessage="O e-mail é completo é necessário !" />
+
+
+					<p:outputLabel value="Insira seu curso atual: " />
+					<p:selectOneMenu value="#{alunoCadastroMBean.usuario.curso.id}"
+						required="true" requiredMessage="Um curso é necessário">
+						<f:selectItem itemLabel="SELECIONE SEU CURSO ATUAL" itemValue="" />
+						<f:selectItems value="#{alunoCadastroMBean.cursos}" var="curso"
+							itemLabel="#{curso.nome}" itemValue="#{curso.id}" />
+						<p:ajax event="change" update="selecaoTurma"
+							listener="#{alunoCadastroMBean.buscaTurma()}" />
+					</p:selectOneMenu>
+
+
+					<p:outputLabel value="Insira sua turma atual: " />
+					<p:selectOneMenu value="#{alunoCadastroMBean.usuario.turma.id}"
+						id="selecaoTurma" required="true"
+						requiredMessage="Uma turma é necessária">
+						<f:selectItem itemLabel="SELECIONE SUA TURMA ATUAL" itemValue="" />
+						<f:selectItems value="#{alunoCadastroMBean.turmas}" var="turma"
+							itemLabel="#{turma.nome}" itemValue="#{turma.id}" />
+					</p:selectOneMenu>
+
+					<p:outputLabel value="Insira seu estado: " />
+					<p:selectOneMenu value="#{alunoCadastroMBean.usuario.estado.id}"
+						required="true" requiredMessage="Um estado é necessário">
+						<f:selectItem itemLabel="SELECIONE SEU ESTADO" itemValue="" />
+						<f:selectItems value="#{alunoCadastroMBean.estados}" var="estado"
+							itemLabel="#{estado.nome}" itemValue="#{estado.id}" />
+						<p:ajax event="change" update="selecaoCidade"
+							listener="#{alunoCadastroMBean.buscaCidade()}" />
+					</p:selectOneMenu>
+
+					<p:outputLabel value="Insira sua cidade: " />
+					<p:selectOneMenu value="#{alunoCadastroMBean.usuario.cidade.id}"
+						id="selecaoCidade" required="true"
+						requiredMessage="Uma cidade é necessária">
+						<f:selectItem itemLabel="SELECIONE SUA CIDADE" itemValue="" />
+						<f:selectItems value="#{alunoCadastroMBean.cidades}" var="cidade"
+							itemLabel="#{cidade.nome}" itemValue="#{cidade.id}" />
+					</p:selectOneMenu>
+
+					<p:outputLabel value="Insira sua senha: " />
+					<p:password required="true" onfocus="desligaBtCriarUsuario();"
+						widgetVar="campoSenha" id="campoSenha"
+						onblur="ligaBtCriarUsuario();"
+						requiredMessage="Sua senha é necessária"
+						placeholder="Insira sua senha" title="Campo para a senha" />
+
+					<p:outputLabel value="Repita sua senha: " />
+					<p:password placeholder="Repita sua senha" required="true"
+						requiredMessage="Repetir a senha é necessário"
+						onfocus="desligaBtCriarUsuario();"
+						onblur="ligaBtCriarUsuario(); testaSenha(this);"
+						title="Campo para repetir a senha"
+						value="#{alunoCadastroMBean.usuario.senha}" />
+
+
+				</p:panelGrid>
+				<br />
+				<p:commandButton widgetVar="btCriarUsuario" value="Criar usuário"
+					action="#{alunoCadastroMBean.salvarUsuario()}" />
+			</h:form>
+		</center>
+	</p:panel>
+</h:body>
+</html>

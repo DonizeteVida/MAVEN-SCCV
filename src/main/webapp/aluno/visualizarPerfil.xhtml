@@ -1,0 +1,62 @@
+<?xml version='1.0' encoding='ISO-8859-1' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns:ui="http://java.sun.com/jsf/facelets"
+	template="../menu/template.xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://java.sun.com/jsf/core">
+	<ui:define name="Conteudo">
+
+		<p:growl>
+			<p:autoUpdate />
+		</p:growl>
+
+		<p:panel>
+			<center>
+				<h:form id="formCadastro">
+					<p:panelGrid columns="2">
+						<p:outputLabel value="Seu nome: " />
+						<p:outputLabel placeholder="Insira seu nome completo"
+							value="#{alunoVisualizarPerfilMBean.usuario.nome}"
+							title="Campo para o nome" />
+
+						<p:outputLabel value="Seu e-mail: " />
+						<p:outputLabel value="#{alunoVisualizarPerfilMBean.usuario.email}"
+							title="Campo para e-mail" />
+
+						<p:outputLabel value="Sua idade: " />
+						<p:calendar pattern="dd/MM/yyyy" value="#{alunoVisualizarPerfilMBean.usuario.idade.time}"
+							title="Campo para idade" />
+
+						<p:outputLabel value="Insira seu CPF: " />
+						<p:inputMask mask="999.999.999-99"
+							value="#{alunoVisualizarPerfilMBean.usuario.cpf}"
+							title="Campo para CPF"
+							requiredMessage="O CPF é completo é necessário !" />
+
+						<p:outputLabel value="Seu RG: " />
+						<p:inputMask mask="99.999.999-9"
+							value="#{alunoVisualizarPerfilMBean.usuario.rg}"
+							title="Campo para RG" />
+
+
+						<p:outputLabel value="Seu curso: " />
+						<p:outputLabel
+							value="#{alunoVisualizarPerfilMBean.usuario.curso.nome}" />
+
+
+						<p:outputLabel value="Sua turma: " />
+						<p:outputLabel
+							value="#{alunoVisualizarPerfilMBean.usuario.turma.nome}" />
+
+						<p:outputLabel value="Sua cidade: " />
+						<p:outputLabel
+							value="#{alunoVisualizarPerfilMBean.usuario.cidade.nome}" />
+
+					</p:panelGrid>
+				</h:form>
+			</center>
+		</p:panel>
+
+	</ui:define>
+</ui:composition>

@@ -1,0 +1,51 @@
+<?xml version='1.0' encoding='ISO-8859-1' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+<h:head>
+	<h:outputStylesheet library="css" name="style.css" />
+	<h:outputScript library="script" name="javascript.js" target="form" />
+</h:head>
+<h:body>
+	<br />
+	<div align="center">
+		<h:graphicImage style="width: 50%;" library="images"
+			name="logo-senai.png" />
+	</div>
+	<br />
+	<h:form id="barraDeFerramentas">
+		<p:menubar>
+
+			<p:menuitem value="Home" url="home.xhtml" icon="fa fa-home" />
+
+			<p:submenu label="Perfil" icon="fa fa-user">
+				<p:menuitem value="Visualizar perfil" url="visualizarPerfil.xhtml"
+					icon="fa fa-user" />
+				<p:menuitem value="Editar perfil" url="editarPerfil.xhtml"
+					icon="fa fa-edit" />
+			</p:submenu>
+
+			<f:facet name="options">
+				<p:commandButton value="Sair"
+					action="#{templateMBean.removeSessionScoped()}"
+					icon="ui-icon-extlink" />
+			</f:facet>
+
+		</p:menubar>
+	</h:form>
+
+	<h:panelGroup styleClass="toolbar">
+		<div align="right">
+			<h:outputLabel styleClass="toolbar_text"
+				value="Copyright © 2018 by SENAI - Jaguariúna" />
+		</div>
+	</h:panelGroup>
+
+	<div>
+		<ui:insert name="Conteudo"> Aqui vai o conteudo </ui:insert>
+	</div>
+</h:body>
+</html>
