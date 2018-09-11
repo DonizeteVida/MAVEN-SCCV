@@ -6,6 +6,7 @@ import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
+import javax.swing.plaf.metal.MetalPopupMenuSeparatorUI;
 
 import br.senai.sp.jaguariuna.sccv.entities.Usuario;
 import br.senai.sp.jaguariuna.sccv.entities.UsuarioAdministrador;
@@ -23,6 +24,8 @@ public class AlunoIndexMBean {
 	private String cpfOuNif;
 	private String senha;
 	private UsuarioDao usuarioDao;
+
+	private String cpfRecuperar;
 
 	public AlunoIndexMBean() {
 		modoSelecionado = "user";
@@ -59,6 +62,14 @@ public class AlunoIndexMBean {
 
 	public void setModoSelecionado(String modoSelecionado) {
 		this.modoSelecionado = modoSelecionado;
+	}
+
+	public String getCpfRecuperar() {
+		return cpfRecuperar;
+	}
+
+	public void setCpfRecuperar(String cpfRecuperar) {
+		this.cpfRecuperar = cpfRecuperar;
 	}
 
 	public String getFuncaoCPF() {
@@ -103,7 +114,7 @@ public class AlunoIndexMBean {
 								new FacesMessage("Usuario ou senha incorretos !"));
 					}
 				} else {
-					FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Usuario não encontrado !"));
+					FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Usuario nï¿½o encontrado !"));
 				}
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
@@ -115,6 +126,15 @@ public class AlunoIndexMBean {
 
 		}
 		return null;
+	}
+	
+	public void recuperarSenha() {
+		try {
+			Usuario u = usuarioDao.buscaUsuarioPorCpf(cpfRecuperar);
+		} catch (SQLException e) {
+			e.printStackTrace();
+			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(e.toString()));
+		}
 	}
 
 }
