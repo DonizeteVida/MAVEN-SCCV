@@ -76,11 +76,14 @@
 		<p:dialog header="Recuperar senha: " widgetVar="dlg1" width="50%"
 			height="50%" maximizable="true" draggable="true">
 			<h:form>
+			
 				<p:panelGrid columns="2">
 					<p:outputLabel value="Insira seu CPF: " />
-					<p:inputMask mask="999.999.999-99" />
+					<p:inputMask mask="999.999.999-99" value="#{alunoIndexMBean.cpfRecuperar}" />
 				</p:panelGrid>
+				<br/>
 				<p:commandButton value="Enviar código" />
+				<br/>
 			</h:form>
 		</p:dialog>
 	</center>

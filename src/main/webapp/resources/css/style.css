@@ -1,0 +1,16 @@
+@charset "ISO-8859-1";
+
+.toolbar{
+	background-color: red;
+	width: 100%;
+	position: absolute;
+	height: 2%;
+	left: 0px;
+	right: 0px;
+	bottom: 0px;
+}
+
+.toolbar_text{
+	font-family: sans-serif;
+	color: white;
+}
