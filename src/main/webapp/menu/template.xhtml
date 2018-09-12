@@ -28,9 +28,12 @@
 					icon="fa fa-edit" />
 			</p:submenu>
 
+			<p:menuitem value="Cadastrar currículo" url="cadastroCurriculo.xhtml"
+				icon="fa fa-pencil-square-o" />
+
 			<f:facet name="options">
 				<p:commandButton value="Sair"
-					action="#{templateMBean.removeSessionScoped()}"
+					action="#{templateMBean.removeSessionScoped}"
 					icon="ui-icon-extlink" />
 			</f:facet>
 
