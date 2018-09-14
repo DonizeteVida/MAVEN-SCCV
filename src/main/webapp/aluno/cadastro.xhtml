@@ -50,7 +50,8 @@
 						requiredMessage="O e-mail é completo é necessário !" />
 
 					<p:outputLabel value="Insira sua data de nascimento: " />
-					<p:calendar pattern="dd/MM/yyyy" placeholder="Insira sua idade completa"
+					<p:calendar pattern="dd/MM/yyyy"
+						placeholder="Insira sua idade completa"
 						value="#{alunoCadastroMBean.usuario.idade.time}"
 						title="Campo para idade" required="true"
 						requiredMessage="A idade é necessária !" />
@@ -128,7 +129,7 @@
 				</p:panelGrid>
 				<br />
 				<p:commandButton widgetVar="btCriarUsuario" value="Criar usuário"
-					action="#{alunoCadastroMBean.salvarUsuario()}" />
+					action="#{alunoCadastroMBean.salvarUsuario}" />
 			</h:form>
 		</center>
 	</p:panel>
