@@ -16,17 +16,15 @@ import br.senai.sp.jaguariuna.sccv.uDao.CurriculoDao;
 @ManagedBean
 @ViewScoped
 public class AlunoHomeMBean {
-	
+
 	CurriculoDao curriculoDao;
 	List<Curriculo> listarCurriculo;
-	
+
 	public AlunoHomeMBean() {
 		curriculoDao = new CurriculoDao();
 		listarCurriculo = new ArrayList<Curriculo>();
-		System.out.println("Pegou 65465465");
-
 	}
-	
+
 	@ManagedProperty(value = "#{alunoIndexMBean}")
 	private AlunoIndexMBean alunoIndexMBean;
 
@@ -34,18 +32,16 @@ public class AlunoHomeMBean {
 		this.alunoIndexMBean = alunoIndexMBean;
 		System.out.println("Pegou usuario");
 	}
-	
+
 	@PostConstruct
 	public void postConstruct() {
-		Usuario u = alunoIndexMBean.getUsuario();
 		try {
-			listarCurriculo = curriculoDao.listarCurriculo(u.getId());
+			listarCurriculo = curriculoDao.listarCurriculo(alunoIndexMBean.getUsuario().getId());
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		System.out.println(listarCurriculo.size());
-		System.out.println("Teste");
 	}
 
 	public List<Curriculo> getListarCurriculo() {

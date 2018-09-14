@@ -42,11 +42,18 @@ public class AlunoCadastroCurriculoMBean {
 		}
 	}
 
+	@ManagedProperty(value = "#{alunoIndexMBean}")
+	private AlunoIndexMBean alunoIndexMBean;
+
+	public void setAlunoIndexMBean(AlunoIndexMBean alunoIndexMBean) {
+		this.alunoIndexMBean = alunoIndexMBean;
+	}
+
 	@PostConstruct
 	void post() {
 		try {
 			usuario = usuarioDao.buscaUsuarioPorCpf(alunoIndexMBean.getUsuario().getCpf());
-			System.out.println(alunoIndexMBean.getUsuario().getCpf());
+			curriculumVitae.setUsuario(alunoIndexMBean.getUsuario());
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -63,11 +70,22 @@ public class AlunoCadastroCurriculoMBean {
 		}
 	}
 
-	@ManagedProperty(value = "#{alunoIndexMBean}")
-	private AlunoIndexMBean alunoIndexMBean;
+	public String salvarCurriculo() {
+		try {
+			if (usuarioDao.criarCurriculo(curriculumVitae)) {
+				FacesContext.getCurrentInstance().getExternalContext().getFlash().setKeepMessages(true);
 
-	public void setAlunoIndexMBean(AlunoIndexMBean alunoIndexMBean) {
-		this.alunoIndexMBean = alunoIndexMBean;
+				return "home?faces-redirect=true";
+			} else {
+				mens("Falha ao salvar usuario !");
+				return null;
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			mens(e.toString());
+		}
+		return null;
 	}
 
 	private void mens(String s) {

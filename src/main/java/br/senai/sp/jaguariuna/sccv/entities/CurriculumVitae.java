@@ -3,12 +3,13 @@ package br.senai.sp.jaguariuna.sccv.entities;
 import br.senai.sp.jaguariuna.sccv.subEntities.ClasseGenerica;
 
 public class CurriculumVitae {
-	
+
 	public CurriculumVitae() {
 		curso = new ClasseGenerica();
 		turma = new ClasseGenerica();
 		status = new ClasseGenerica();
 		usuario = new Usuario();
+		semestre = new Integer(0);
 	}
 
 	private Integer id;

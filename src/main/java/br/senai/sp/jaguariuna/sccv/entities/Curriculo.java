@@ -11,7 +11,7 @@ public class Curriculo {
 
 	private ClasseGenerica turma;
 	private ClasseGenerica curso;
-	private Integer data_criacao;
+	private Long data_criacao;
 
 	public ClasseGenerica getTurma() {
 		return turma;
@@ -29,11 +29,11 @@ public class Curriculo {
 		this.curso = curso;
 	}
 
-	public Integer getData_criacao() {
+	public Long getData_criacao() {
 		return data_criacao;
 	}
 
-	public void setData_criacao(Integer data_criacao) {
+	public void setData_criacao(Long data_criacao) {
 		this.data_criacao = data_criacao;
 	}
 

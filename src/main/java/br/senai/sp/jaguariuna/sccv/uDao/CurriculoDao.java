@@ -21,7 +21,8 @@ public class CurriculoDao {
 	public List<Curriculo> listarCurriculo(Integer id_usuario) throws SQLException {
 		String sql = "SELECT curriculum_vitae.*, tur.nome AS nomeTurma, cur.nome AS nomeCurso, curriculum_vitae.semestre FROM curriculum_vitae "
 				+ "INNER JOIN turma AS tur ON tur.id = curriculum_vitae.id_turma "
-				+ "INNER JOIN curso AS cur ON cur.id = curriculum_vitae.id_curso " + "WHERE curriculum_vitae.id_usuario = ?;";
+				+ "INNER JOIN curso AS cur ON cur.id = curriculum_vitae.id_curso "
+				+ "WHERE curriculum_vitae.id_usuario = ?;";
 
 		PreparedStatement ps = conn.prepareStatement(sql);
 
@@ -35,8 +36,8 @@ public class CurriculoDao {
 
 			c.getTurma().setNome(rs.getString("nomeTurma"));
 			c.getCurso().setNome(rs.getString("nomeCurso"));
-			c.setData_criacao(rs.getInt("data_criacao"));
-			
+			c.setData_criacao(rs.getLong("data_criacao"));
+
 			lista.add(c);
 		}
 

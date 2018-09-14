@@ -36,10 +36,15 @@
 							<f:selectItems value="#{alunoCadastroCurriculoMBean.turmas}"
 								var="turma" itemLabel="#{turma.nome}" itemValue="#{turma.id}" />
 						</p:selectOneMenu>
+
+						<p:outputLabel value="Insira seu semestre atual: " />
+						<p:inputMask mask="9" required="true"
+							value="#{alunoCadastroCurriculoMBean.curriculumVitae.semestre}" />
 					</p:panelGrid>
 
 					<br />
-					<p:commandButton value="Salvar novo curriculo" />
+					<p:commandButton value="Salvar novo curriculo"
+						action="#{alunoCadastroCurriculoMBean.salvarCurriculo}" />
 				</h:form>
 			</center>
 		</p:panel>
