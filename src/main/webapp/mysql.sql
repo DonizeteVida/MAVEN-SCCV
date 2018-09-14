@@ -74,7 +74,7 @@ CREATE TABLE usuario_administrador(
 
 CREATE TABLE curriculum_vitae(
 	id INTEGER NOT NULL PRIMARY KEY AUTO_INCREMENT,
-    peso INTEGER NOT NULL,
+    peso INTEGER NOT NULL DEFAULT 0,
     data_criacao INTEGER,
     id_curso INTEGER NOT NULL,
     id_turma INTEGER NOT NULL,
