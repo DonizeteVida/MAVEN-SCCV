@@ -1,6 +1,6 @@
 @charset "ISO-8859-1";
 
-.toolbar{
+.toolbar {
 	background-color: red;
 	width: 100%;
 	position: absolute;
@@ -10,7 +10,16 @@
 	bottom: 0px;
 }
 
-.toolbar_text{
+.toolbar_text {
 	font-family: sans-serif;
 	color: white;
+}
+
+.datagrid td {
+	text-align: center;
+	width:100%
+}
+
+.panel div {
+	text-align: center;
 }
