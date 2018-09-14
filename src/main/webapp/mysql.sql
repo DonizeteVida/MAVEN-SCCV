@@ -1,6 +1,7 @@
 CREATE DATABASE SCCV;
 USE SCCV;
 
+
 CREATE TABLE curso(
 	id INTEGER NOT NULL PRIMARY KEY AUTO_INCREMENT,
     nome VARCHAR(100) NOT NULL);
@@ -80,7 +81,7 @@ CREATE TABLE curriculum_vitae(
     id_turma INTEGER NOT NULL,
     semestre INTEGER NOT NULL,
     id_usuario INTEGER NOT NULL,
-    id_status INTEGER NOT NULL,
+    id_status INTEGER NOT NULL DEFAULT 1,
     FOREIGN KEY (id_usuario) REFERENCES usuario(id),
 	FOREIGN KEY (id_curso) REFERENCES curso(id),
 	FOREIGN KEY (id_turma) REFERENCES turma(id),
