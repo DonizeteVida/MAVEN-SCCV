@@ -6,6 +6,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Calendar;
 
+import br.senai.sp.jaguariuna.sccv.entities.CurriculumVitae;
 import br.senai.sp.jaguariuna.sccv.entities.Usuario;
 import br.senai.sp.jaguariuna.sccv.jdbc.ConnectionDB;
 import br.senai.sp.jaguariuna.sccv.utils.FormatarCPFouRGtoString;
@@ -17,6 +18,20 @@ public class UsuarioDao {
 
 	public UsuarioDao() {
 		conn = ConnectionDB.getConnection();
+	}
+	
+	public boolean criarCurriculo(CurriculumVitae c) throws SQLException {
+		String sql = "INSERT INTO curriculum_vitae(data_criacao, id_curso, id_turma, semestre, id_usuario) VALUES (?, ?, ?, ?, ?);";
+		
+		PreparedStatement ps = conn.prepareStatement(sql);
+		
+		ps.setLong(1, Calendar.getInstance().getTimeInMillis());
+		ps.setInt(2, c.getCurso().getId());
+		ps.setInt(3, c.getTurma().getId());
+		ps.setInt(4, c.getSemestre());
+		ps.setInt(5, c.getUsuario().getId());
+		
+		return ps.executeUpdate() > 0;
 	}
 
 	public boolean updateUsuario(Usuario u) throws SQLException {
