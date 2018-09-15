@@ -12,12 +12,14 @@
 		</p:growl>
 
 		<h:form id="form">
-			<p:dataGrid var="cur" value="#{alunoHomeMBean.listarCurriculo}"
-				columns="10" layout="grid" id="curri">
+			<p:dataGrid
+				emptyMessage="Não foram encontrados curriculos cadastrados."
+				var="cur" value="#{alunoHomeMBean.listarCurriculo}" columns="10"
+				layout="grid" id="curri">
 
 				<f:facet name="header">
-            Currículos
-        </f:facet>
+					<p:outputLabel value="Currículos" />
+				</f:facet>
 				<p:panel header="#{cur.curso.nome}" styleClass="panel">
 					<h:panelGrid columns="1" styleClass="datagrid">
 						<p:graphicImage name="images/pdf.ico" />
@@ -26,12 +28,10 @@
 						<p:commandLink title="Ver curriculo">
 							<h:outputText styleClass="ui-icon ui-icon-search"
 								style="margin:0 auto;" />
-							<!-- <f:setPropertyActionListener value="#{cur}"
-								target="#{dataGridView.selectedCar}" /> -->
 						</p:commandLink>
 					</h:panelGrid>
 				</p:panel>
-
+				<h:inputSecret value="" />
 			</p:dataGrid>
 		</h:form>
 

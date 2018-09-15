@@ -6,7 +6,6 @@ import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
-import javax.swing.plaf.metal.MetalPopupMenuSeparatorUI;
 
 import br.senai.sp.jaguariuna.sccv.entities.Usuario;
 import br.senai.sp.jaguariuna.sccv.entities.UsuarioAdministrador;
@@ -127,7 +126,7 @@ public class AlunoIndexMBean {
 		}
 		return null;
 	}
-	
+
 	public void recuperarSenha() {
 		try {
 			Usuario u = usuarioDao.buscaUsuarioPorCpf(cpfRecuperar);

@@ -19,26 +19,12 @@ public class UsuarioDao {
 	public UsuarioDao() {
 		conn = ConnectionDB.getConnection();
 	}
-	
-	public boolean criarCurriculo(CurriculumVitae c) throws SQLException {
-		String sql = "INSERT INTO curriculum_vitae(data_criacao, id_curso, id_turma, semestre, id_usuario) VALUES (?, ?, ?, ?, ?);";
-		
-		PreparedStatement ps = conn.prepareStatement(sql);
-		
-		ps.setLong(1, Calendar.getInstance().getTimeInMillis());
-		ps.setInt(2, c.getCurso().getId());
-		ps.setInt(3, c.getTurma().getId());
-		ps.setInt(4, c.getSemestre());
-		ps.setInt(5, c.getUsuario().getId());
-		
-		return ps.executeUpdate() > 0;
-	}
 
 	public boolean updateUsuario(Usuario u) throws SQLException {
 		String sql = "UPDATE usuario SET nome = ?, email = ?, senha = ?, idade = ?, cpf = ?, rg = ?, id_curso = ?, id_turma = ?, id_cidade = ?, id_estado = ? WHERE usuario.id = ?;";
-		
+
 		PreparedStatement ps = conn.prepareStatement(sql);
-		
+
 		ps.setString(1, u.getNome());
 		ps.setString(2, u.getEmail());
 		ps.setString(3, StringToMD5.convertStringToMd5(u.getSenha()));
@@ -50,7 +36,7 @@ public class UsuarioDao {
 		ps.setInt(9, u.getCidade().getId());
 		ps.setInt(10, u.getEstado().getId());
 		ps.setInt(11, u.getId());
-		
+
 		return ps.executeUpdate() > 0;
 	}
 
@@ -59,7 +45,7 @@ public class UsuarioDao {
 				+ " VALUES(?,?,?,?,?,?,?,?,?, ?)";
 
 		PreparedStatement ps = conn.prepareStatement(sql);
-		
+
 		ps.setString(1, u.getNome());
 		ps.setString(2, u.getEmail());
 		ps.setString(3, StringToMD5.convertStringToMd5(u.getSenha()));
@@ -75,13 +61,10 @@ public class UsuarioDao {
 	};
 
 	public Usuario buscaUsuarioPorEmail(String email) throws SQLException {
-		String sql = "	SELECT u.*, c.nome AS nomeCidade, e.nome AS nomeEstado, st.nome AS nomeStatus, cur.nome AS nomeCurso, tur.nome AS nomeTurma FROM usuario AS u " + 
-				"INNER JOIN cidade AS c ON c.id = u.id_cidade " + 
-				"INNER JOIN estado AS e ON e.id = u.id_estado " + 
-				"INNER JOIN status_ AS st ON st.id = u.id_status " + 
-				"INNER JOIN curso AS cur ON cur.id = u.id_curso " + 
-				"INNER JOIN turma AS tur ON tur.id = u.id_turma " + 
-				"WHERE u.email = ?;";
+		String sql = "	SELECT u.*, c.nome AS nomeCidade, e.nome AS nomeEstado, st.nome AS nomeStatus, cur.nome AS nomeCurso, tur.nome AS nomeTurma FROM usuario AS u "
+				+ "INNER JOIN cidade AS c ON c.id = u.id_cidade " + "INNER JOIN estado AS e ON e.id = u.id_estado "
+				+ "INNER JOIN status_ AS st ON st.id = u.id_status " + "INNER JOIN curso AS cur ON cur.id = u.id_curso "
+				+ "INNER JOIN turma AS tur ON tur.id = u.id_turma " + "WHERE u.email = ?;";
 
 		PreparedStatement ps = conn.prepareStatement(sql);
 		ps.setString(1, email);
@@ -91,9 +74,9 @@ public class UsuarioDao {
 		Usuario u = null;
 		if (rs.next()) {
 			u = new Usuario();
-			
+
 			Calendar c = Calendar.getInstance();
-			c.setTimeInMillis(rs.getLong("idade"));   
+			c.setTimeInMillis(rs.getLong("idade"));
 
 			u.setId(rs.getInt("id"));
 			u.setNome(rs.getString("nome"));
@@ -118,13 +101,10 @@ public class UsuarioDao {
 	}
 
 	public Usuario buscaUsuarioPorCpf(String cpf) throws SQLException {
-		String sql = "	SELECT u.*, c.nome AS nomeCidade, e.nome AS nomeEstado, st.nome AS nomeStatus, cur.nome AS nomeCurso, tur.nome AS nomeTurma FROM usuario AS u " + 
-				"INNER JOIN cidade AS c ON c.id = u.id_cidade " + 
-				"INNER JOIN estado AS e ON e.id = u.id_estado " + 
-				"INNER JOIN status_ AS st ON st.id = u.id_status " + 
-				"INNER JOIN curso AS cur ON cur.id = u.id_curso " + 
-				"INNER JOIN turma AS tur ON tur.id = u.id_turma " + 
-				"WHERE u.cpf = ?;";
+		String sql = "	SELECT u.*, c.nome AS nomeCidade, e.nome AS nomeEstado, st.nome AS nomeStatus, cur.nome AS nomeCurso, tur.nome AS nomeTurma FROM usuario AS u "
+				+ "INNER JOIN cidade AS c ON c.id = u.id_cidade " + "INNER JOIN estado AS e ON e.id = u.id_estado "
+				+ "INNER JOIN status_ AS st ON st.id = u.id_status " + "INNER JOIN curso AS cur ON cur.id = u.id_curso "
+				+ "INNER JOIN turma AS tur ON tur.id = u.id_turma " + "WHERE u.cpf = ?;";
 
 		PreparedStatement ps = conn.prepareStatement(sql);
 		ps.setString(1, FormatarCPFouRGtoString.format(cpf));
@@ -134,9 +114,9 @@ public class UsuarioDao {
 		Usuario u = null;
 		if (rs.next()) {
 			u = new Usuario();
-			
+
 			Calendar c = Calendar.getInstance();
-			c.setTimeInMillis(rs.getLong("idade"));   
+			c.setTimeInMillis(rs.getLong("idade"));
 
 			u.setId(rs.getInt("id"));
 			u.setNome(rs.getString("nome"));

@@ -9,8 +9,7 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.ViewScoped;
 
-import br.senai.sp.jaguariuna.sccv.entities.Curriculo;
-import br.senai.sp.jaguariuna.sccv.entities.Usuario;
+import br.senai.sp.jaguariuna.sccv.entities.CurriculumVitae;
 import br.senai.sp.jaguariuna.sccv.uDao.CurriculoDao;
 
 @ManagedBean
@@ -18,11 +17,11 @@ import br.senai.sp.jaguariuna.sccv.uDao.CurriculoDao;
 public class AlunoHomeMBean {
 
 	CurriculoDao curriculoDao;
-	List<Curriculo> listarCurriculo;
+	List<CurriculumVitae> listarCurriculo;
 
 	public AlunoHomeMBean() {
 		curriculoDao = new CurriculoDao();
-		listarCurriculo = new ArrayList<Curriculo>();
+		listarCurriculo = new ArrayList<CurriculumVitae>();
 	}
 
 	@ManagedProperty(value = "#{alunoIndexMBean}")
@@ -30,7 +29,6 @@ public class AlunoHomeMBean {
 
 	public void setAlunoIndexMBean(AlunoIndexMBean alunoIndexMBean) {
 		this.alunoIndexMBean = alunoIndexMBean;
-		System.out.println("Pegou usuario");
 	}
 
 	@PostConstruct
@@ -44,11 +42,11 @@ public class AlunoHomeMBean {
 		System.out.println(listarCurriculo.size());
 	}
 
-	public List<Curriculo> getListarCurriculo() {
+	public List<CurriculumVitae> getListarCurriculo() {
 		return listarCurriculo;
 	}
 
-	public void setListarCurriculo(List<Curriculo> listarCurriculo) {
+	public void setListarCurriculo(List<CurriculumVitae> listarCurriculo) {
 		this.listarCurriculo = listarCurriculo;
 	}
 

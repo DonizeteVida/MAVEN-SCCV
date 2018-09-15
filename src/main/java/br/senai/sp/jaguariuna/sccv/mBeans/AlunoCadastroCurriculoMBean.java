@@ -15,6 +15,7 @@ import br.senai.sp.jaguariuna.sccv.entities.CurriculumVitae;
 import br.senai.sp.jaguariuna.sccv.entities.Usuario;
 import br.senai.sp.jaguariuna.sccv.subEntities.ClasseGenerica;
 import br.senai.sp.jaguariuna.sccv.uDao.ClasseGenericaDao;
+import br.senai.sp.jaguariuna.sccv.uDao.CurriculoDao;
 import br.senai.sp.jaguariuna.sccv.uDao.UsuarioDao;
 
 @ManagedBean
@@ -26,6 +27,7 @@ public class AlunoCadastroCurriculoMBean {
 	private CurriculumVitae curriculumVitae;
 	private List<ClasseGenerica> cursos;
 	private List<ClasseGenerica> turmas;
+	private CurriculoDao curriculoDao;
 
 	private ClasseGenericaDao classeGenericaDao;
 
@@ -34,6 +36,7 @@ public class AlunoCadastroCurriculoMBean {
 		usuarioDao = new UsuarioDao();
 		curriculumVitae = new CurriculumVitae();
 		classeGenericaDao = new ClasseGenericaDao();
+		curriculoDao = new CurriculoDao();
 		try {
 			cursos = classeGenericaDao.buscaCurso();
 		} catch (SQLException e) {
@@ -72,8 +75,9 @@ public class AlunoCadastroCurriculoMBean {
 
 	public String salvarCurriculo() {
 		try {
-			if (usuarioDao.criarCurriculo(curriculumVitae)) {
+			if (curriculoDao.criarCurriculo(curriculumVitae)) {
 				FacesContext.getCurrentInstance().getExternalContext().getFlash().setKeepMessages(true);
+				mens("Curriculo criado com sucesso !");
 
 				return "home?faces-redirect=true";
 			} else {
