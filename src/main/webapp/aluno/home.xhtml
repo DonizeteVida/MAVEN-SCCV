@@ -14,8 +14,8 @@
 		<h:form id="form">
 			<p:dataGrid
 				emptyMessage="Não foram encontrados curriculos cadastrados."
-				var="cur" value="#{alunoHomeMBean.listarCurriculo}" columns="10"
-				layout="grid" id="curri">
+				var="cur" value="#{alunoHomeMBean.listaCurriculo}" columns="10"
+				layout="grid">
 
 				<f:facet name="header">
 					<p:outputLabel value="Currículos" />
@@ -31,7 +31,8 @@
 						</p:commandLink>
 					</h:panelGrid>
 				</p:panel>
-				<h:inputSecret value="" />
+				<p:outputLabel value="#{cur.id}" />
+				<h:inputSecret value="#{cur.id}" />
 			</p:dataGrid>
 		</h:form>
 

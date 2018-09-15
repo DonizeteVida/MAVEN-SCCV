@@ -17,11 +17,11 @@ import br.senai.sp.jaguariuna.sccv.uDao.CurriculoDao;
 public class AlunoHomeMBean {
 
 	CurriculoDao curriculoDao;
-	List<CurriculumVitae> listarCurriculo;
+	List<CurriculumVitae> listaCurriculo;
 
 	public AlunoHomeMBean() {
 		curriculoDao = new CurriculoDao();
-		listarCurriculo = new ArrayList<CurriculumVitae>();
+		listaCurriculo = new ArrayList<CurriculumVitae>();
 	}
 
 	@ManagedProperty(value = "#{alunoIndexMBean}")
@@ -34,20 +34,19 @@ public class AlunoHomeMBean {
 	@PostConstruct
 	public void postConstruct() {
 		try {
-			listarCurriculo = curriculoDao.listarCurriculo(alunoIndexMBean.getUsuario().getId());
+			listaCurriculo = curriculoDao.listarCurriculo(alunoIndexMBean.getUsuario().getId());
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		System.out.println(listarCurriculo.size());
 	}
 
-	public List<CurriculumVitae> getListarCurriculo() {
-		return listarCurriculo;
+	public List<CurriculumVitae> getListaCurriculo() {
+		return listaCurriculo;
 	}
 
-	public void setListarCurriculo(List<CurriculumVitae> listarCurriculo) {
-		this.listarCurriculo = listarCurriculo;
+	public void setListaCurriculo(List<CurriculumVitae> listaCurriculo) {
+		this.listaCurriculo = listaCurriculo;
 	}
 
 }
