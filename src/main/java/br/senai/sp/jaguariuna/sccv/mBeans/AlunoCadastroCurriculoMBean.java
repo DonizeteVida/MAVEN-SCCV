@@ -75,14 +75,18 @@ public class AlunoCadastroCurriculoMBean {
 
 	public String salvarCurriculo() {
 		try {
-			if (curriculoDao.criarCurriculo(curriculumVitae)) {
-				FacesContext.getCurrentInstance().getExternalContext().getFlash().setKeepMessages(true);
-				mens("Curriculo criado com sucesso !");
+			if (curriculoDao.listarCurriculo(usuario.getId(), curriculumVitae.getCurso().getId()).size() == 0) {
+				if (curriculoDao.criarCurriculo(curriculumVitae)) {
+					FacesContext.getCurrentInstance().getExternalContext().getFlash().setKeepMessages(true);
+					mens("Curriculo criado com sucesso !");
 
-				return "home?faces-redirect=true";
+					return "home?faces-redirect=true";
+				} else {
+					mens("Falha ao salvar usuario !");
+					return null;
+				}
 			} else {
-				mens("Falha ao salvar usuario !");
-				return null;
+				mens("Já existe um curriculo com este curso !");
 			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
