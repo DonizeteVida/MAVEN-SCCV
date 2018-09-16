@@ -78,7 +78,7 @@
 						<f:selectItems value="#{alunoCadastroMBean.cursos}" var="curso"
 							itemLabel="#{curso.nome}" itemValue="#{curso.id}" />
 						<p:ajax event="change" update="selecaoTurma"
-							listener="#{alunoCadastroMBean.buscaTurma()}" />
+							listener="#{alunoCadastroMBean.buscaTurma}" />
 					</p:selectOneMenu>
 
 
@@ -98,7 +98,7 @@
 						<f:selectItems value="#{alunoCadastroMBean.estados}" var="estado"
 							itemLabel="#{estado.nome}" itemValue="#{estado.id}" />
 						<p:ajax event="change" update="selecaoCidade"
-							listener="#{alunoCadastroMBean.buscaCidade()}" />
+							listener="#{alunoCadastroMBean.buscaCidade}" />
 					</p:selectOneMenu>
 
 					<p:outputLabel value="Insira sua cidade: " />

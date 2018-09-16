@@ -2,8 +2,6 @@ package br.senai.sp.jaguariuna.sccv.filter;
 
 import java.io.IOException;
 
-import javax.annotation.PostConstruct;
-import javax.faces.bean.ManagedProperty;
 import javax.servlet.Filter;
 import javax.servlet.FilterChain;
 import javax.servlet.FilterConfig;
@@ -36,7 +34,7 @@ public class UserFilter implements Filter {
 			} else {
 				redirecionar(request, response);
 			}
-		}else {
+		} else {
 			redirecionar(request, response);
 		}
 	}
@@ -46,7 +44,7 @@ public class UserFilter implements Filter {
 		// TODO Auto-generated method stub
 
 	}
-	
+
 	private void redirecionar(ServletRequest request, ServletResponse response) throws IOException {
 		String path = ((HttpServletRequest) request).getContextPath();
 		((HttpServletResponse) response).sendRedirect(path + "/aluno/index.xhtml");
