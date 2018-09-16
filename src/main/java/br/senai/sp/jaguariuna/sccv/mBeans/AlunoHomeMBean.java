@@ -19,6 +19,8 @@ public class AlunoHomeMBean {
 	CurriculoDao curriculoDao;
 	List<CurriculumVitae> listaCurriculo;
 
+	CurriculumVitae curClick;
+
 	public AlunoHomeMBean() {
 		curriculoDao = new CurriculoDao();
 		listaCurriculo = new ArrayList<CurriculumVitae>();
@@ -47,6 +49,19 @@ public class AlunoHomeMBean {
 
 	public void setListaCurriculo(List<CurriculumVitae> listaCurriculo) {
 		this.listaCurriculo = listaCurriculo;
+	}
+
+	public CurriculumVitae getCurClick() {
+		return curClick;
+	}
+
+	public void setCurClick(CurriculumVitae curClick) {
+		System.out.println("PEGOU");
+		this.curClick = curClick;
+	}
+
+	public String abrirEditar() {
+		return null;
 	}
 
 }

@@ -11,7 +11,7 @@
 			<p:autoUpdate />
 		</p:growl>
 
-		<h:form id="form">
+		<h:form>
 			<p:dataGrid
 				emptyMessage="Não foram encontrados curriculos cadastrados."
 				var="cur" value="#{alunoHomeMBean.listaCurriculo}" columns="10"
@@ -28,6 +28,8 @@
 						<p:commandLink title="Ver curriculo">
 							<h:outputText styleClass="ui-icon ui-icon-search"
 								style="margin:0 auto;" />
+							<f:setPropertyActionListener value="#{cur}"
+								target="#{alunoHomeMBean.curClick}" />
 						</p:commandLink>
 					</h:panelGrid>
 				</p:panel>
