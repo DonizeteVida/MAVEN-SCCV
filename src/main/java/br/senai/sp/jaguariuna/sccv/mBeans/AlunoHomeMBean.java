@@ -20,10 +20,12 @@ public class AlunoHomeMBean {
 	List<CurriculumVitae> listaCurriculo;
 
 	CurriculumVitae curClick;
+	Boolean clicado;
 
 	public AlunoHomeMBean() {
 		curriculoDao = new CurriculoDao();
 		listaCurriculo = new ArrayList<CurriculumVitae>();
+		clicado = false;
 	}
 
 	@ManagedProperty(value = "#{alunoIndexMBean}")
@@ -56,12 +58,26 @@ public class AlunoHomeMBean {
 	}
 
 	public void setCurClick(CurriculumVitae curClick) {
-		System.out.println("PEGOU");
-		this.curClick = curClick;
+		if (this.curClick == curClick) {
+			clicado = false;
+			this.curClick = new CurriculumVitae();
+		} else {
+			clicado = true;
+			this.curClick = curClick;
+			System.out.println("PEGOU " + this.curClick.getCurso().getNome());
+		}
 	}
 
 	public String abrirEditar() {
 		return null;
+	}
+
+	public Boolean getClicado() {
+		return clicado;
+	}
+
+	public void setClicado(Boolean clicado) {
+		this.clicado = clicado;
 	}
 
 }
