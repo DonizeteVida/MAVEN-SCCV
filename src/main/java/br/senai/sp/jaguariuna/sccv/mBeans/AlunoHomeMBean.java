@@ -5,9 +5,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.ViewScoped;
+import javax.faces.context.FacesContext;
 
 import br.senai.sp.jaguariuna.sccv.entities.CurriculumVitae;
 import br.senai.sp.jaguariuna.sccv.uDao.CurriculoDao;
@@ -23,6 +25,7 @@ public class AlunoHomeMBean {
 	Boolean clicado;
 
 	public AlunoHomeMBean() {
+		curClick = new CurriculumVitae();
 		curriculoDao = new CurriculoDao();
 		listaCurriculo = new ArrayList<CurriculumVitae>();
 		clicado = false;
@@ -78,6 +81,18 @@ public class AlunoHomeMBean {
 
 	public void setClicado(Boolean clicado) {
 		this.clicado = clicado;
+	}
+
+	public String editarCurriculo() {
+		if (curClick.getCurso().getNome() == null) {
+			mens("Nenhum currículo selecionado, tente novamente !!!");
+			return null;
+		}
+		return null;
+	}
+
+	private void mens(String s) {
+		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(s));
 	}
 
 }
