@@ -30,7 +30,7 @@
 						<p:outputLabel value="Insira sua turma atual: " />
 						<p:selectOneMenu
 							value="#{alunoCadastroCurriculoMBean.curriculumVitae.turma.id}"
-							id="selecaoTurma" required="true"
+							id="selecaoTurma" required="true" onchange=""
 							requiredMessage="Uma turma é necessária">
 							<f:selectItem itemLabel="SELECIONE SUA TURMA ATUAL" itemValue="" />
 							<f:selectItems value="#{alunoCadastroCurriculoMBean.turmas}"

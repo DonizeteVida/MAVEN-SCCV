@@ -8,7 +8,8 @@ CREATE TABLE curso(
 	id INTEGER NOT NULL PRIMARY KEY AUTO_INCREMENT,
     nome VARCHAR(100) NOT NULL);
     
-    INSERT INTO curso(nome) VALUES ("Técnico em Informática"), ("Eletrônica");
+        INSERT INTO curso(nome) VALUES ("Técnico em Informática"), ("Técnico em Eletrônica"), ("Técnico em Mecatrônica"), ("Eletricista de Manutenção Eletroeletronica"), ("Mecanico de Usinagem") ;
+
 
 CREATE TABLE turma(
 	id INTEGER NOT NULL PRIMARY KEY AUTO_INCREMENT,
@@ -17,8 +18,11 @@ CREATE TABLE turma(
     FOREIGN KEY (id_curso) REFERENCES curso(id)
 );
 
-	INSERT INTO turma(id_curso, nome) VALUES (2, "2022"), (2, "2020");
-	INSERT INTO turma(id_curso, nome) VALUES (1, "2018"), (1, "2016");
+	INSERT INTO turma(id_curso, nome) VALUES (5, "2017"), (5, "2018");
+    INSERT INTO turma(id_curso, nome) VALUES (4, "2017"), (4, "2018");
+    INSERT INTO turma(id_curso, nome) VALUES (3, "2017"), (3, "2018");
+	INSERT INTO turma(id_curso, nome) VALUES (2, "2017"), (2, "2018");
+	INSERT INTO turma(id_curso, nome) VALUES (1, "2017"), (1, "2018");
 
 
 CREATE TABLE status_(
