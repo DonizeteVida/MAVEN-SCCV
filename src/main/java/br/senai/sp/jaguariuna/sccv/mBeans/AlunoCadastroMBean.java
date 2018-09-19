@@ -36,16 +36,36 @@ public class AlunoCadastroMBean {
 		categorias = classeGenericaDao.buscaCategoria();
 	}
 
-	public void buscaCategoria() throws SQLException {
-		categorias = classeGenericaDao.buscaCurso(usuario.getCategoria().getId());
+	public void buscaCategoria() {
+		try {
+			categorias = classeGenericaDao.buscaCurso(usuario.getCategoria().getId());
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			mens(e.toString());
+
+		}
 	}
 
-	public void buscaTurma() throws SQLException {
-		turmas = classeGenericaDao.buscaTurma(usuario.getCurso().getId());
+	public void buscaTurma() {
+		try {
+			turmas = classeGenericaDao.buscaTurma(usuario.getCurso().getId());
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			mens(e.toString());
+
+		}
 	}
 
-	public void buscaCidade() throws SQLException {
-		cidades = classeGenericaDao.buscaCidade(usuario.getEstado().getId());
+	public void buscaCidade() {
+		try {
+			cidades = classeGenericaDao.buscaCidade(usuario.getEstado().getId());
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			mens(e.toString());
+		}
 	}
 
 	public List<ClasseGenerica> getCidades() {
@@ -94,6 +114,10 @@ public class AlunoCadastroMBean {
 
 	public void setUsuario(Usuario usuario) {
 		this.usuario = usuario;
+	}
+
+	private void mens(String s) {
+		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(s));
 	}
 
 	public String salvarUsuario() {
