@@ -86,7 +86,7 @@ public class AlunoCadastroCurriculoMBean {
 					return null;
 				}
 			} else {
-				mens("Já existe um curriculo com este curso !");
+				mens("JÃ¡ existe um curriculo com este curso !");
 			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block

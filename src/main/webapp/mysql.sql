@@ -4,11 +4,23 @@ CREATE DATABASE SCCV;
 USE SCCV;
 
 
+CREATE TABLE categoria(
+	id INTEGER NOT NULL PRIMARY KEY AUTO_INCREMENT,
+    nome VARCHAR(100)
+);
+    
+    INSERT INTO categoria (nome) VALUES("Técnico"), ("CAI"), ("METALMECÂNICA"), ("Segurança do Trabalho"), ("Eletroeletrônica"), ("Gestão"), ("Logistica"), ("Técnologia da Informação"), ("Automação Industrial"), ("Energia"), ("Gestão");
+
 CREATE TABLE curso(
 	id INTEGER NOT NULL PRIMARY KEY AUTO_INCREMENT,
-    nome VARCHAR(100) NOT NULL);
+    nome VARCHAR(100) NOT NULL, 
+    id_categoria INTEGER NOT NULL,
+    FOREIGN KEY (id_categoria) REFERENCES categoria(id));
     
-    INSERT INTO curso(nome) VALUES ("Técnico em Informática"), ("Eletrônica");
+        INSERT INTO curso(nome, id_categoria) VALUES ("Técnico em Informática", 1), ("Técnico em Eletrônica", 1), 
+        ("Eletricista de Manutenção Eletroeletronica", 2), ("Mecanico de Usinagem", 2), ("Assitente Administrativo", 2), ("Almoxarife", 2 ), ("Auxiliar de Linha de Produção", 2) ;
+
+SELECT * FROM curso;
 
 CREATE TABLE turma(
 	id INTEGER NOT NULL PRIMARY KEY AUTO_INCREMENT,
@@ -17,8 +29,13 @@ CREATE TABLE turma(
     FOREIGN KEY (id_curso) REFERENCES curso(id)
 );
 
-	INSERT INTO turma(id_curso, nome) VALUES (2, "2022"), (2, "2020");
-	INSERT INTO turma(id_curso, nome) VALUES (1, "2018"), (1, "2016");
+	INSERT INTO turma(id_curso, nome) VALUES (7, "2014"), (7, "2018");
+	INSERT INTO turma(id_curso, nome) VALUES (6, "2014"), (6, "2018");
+	INSERT INTO turma(id_curso, nome) VALUES (5, "2014"), (5, "2018");
+    INSERT INTO turma(id_curso, nome) VALUES (4, "2014"), (4, "2018");
+    INSERT INTO turma(id_curso, nome) VALUES (3, "2014"), (3, "2018");
+	INSERT INTO turma(id_curso, nome) VALUES (2, "2014"), (2, "2018");
+	INSERT INTO turma(id_curso, nome) VALUES (1, "2014"), (1, "2018");
 
 
 CREATE TABLE status_(
