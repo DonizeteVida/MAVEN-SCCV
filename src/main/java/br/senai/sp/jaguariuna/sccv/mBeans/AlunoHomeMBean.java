@@ -25,7 +25,6 @@ public class AlunoHomeMBean {
 	Boolean clicado;
 
 	public AlunoHomeMBean() {
-		curClick = new CurriculumVitae();
 		curriculoDao = new CurriculoDao();
 		listaCurriculo = new ArrayList<CurriculumVitae>();
 		clicado = false;
@@ -61,14 +60,14 @@ public class AlunoHomeMBean {
 	}
 
 	public void setCurClick(CurriculumVitae curClick) {
-		if (this.curClick == curClick) {
-			clicado = false;
-			this.curClick = new CurriculumVitae();
-		} else {
-			clicado = true;
-			this.curClick = curClick;
-			System.out.println("PEGOU " + this.curClick.getCurso().getNome());
+		this.curClick = curClick;
+	}
+
+	public String editarCurriculo() {
+		if (curClick != null) {
+			return "cadastroCurriculo?faces-redirect=true";
 		}
+		return null;
 	}
 
 	public String abrirEditar() {
@@ -81,14 +80,6 @@ public class AlunoHomeMBean {
 
 	public void setClicado(Boolean clicado) {
 		this.clicado = clicado;
-	}
-
-	public String editarCurriculo() {
-		if (curClick.getCurso().getNome() == null) {
-			mens("Nenhum currículo selecionado, tente novamente !!!");
-			return null;
-		}
-		return null;
 	}
 
 	private void mens(String s) {
