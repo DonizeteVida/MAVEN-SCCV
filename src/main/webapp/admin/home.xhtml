@@ -11,7 +11,7 @@
 			<p:autoUpdate />
 		</p:growl>
 
-<p:dataTable var="aluno">
+<p:dataTable var="alunos" value="{dtView.alunos}">
 	<p:column headerText="Nome do Aluno">
 		<h:outputText value="#{aluno.nome}"/>
 	</p:column>
@@ -24,9 +24,7 @@
 		<h:outputText value="#{aluno.anoinicio}"/>
 	</p:column>
 	
-	<p:column headerText="Ano de Termino">
-		<h:outputText value="#{aluno.anotermino}"/>
-	</p:column>
+	
 </p:dataTable>
 
 
