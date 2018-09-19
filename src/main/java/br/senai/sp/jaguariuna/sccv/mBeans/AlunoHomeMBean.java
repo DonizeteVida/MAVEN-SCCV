@@ -66,6 +66,8 @@ public class AlunoHomeMBean {
 	public String editarCurriculo() {
 		if (curClick != null) {
 			return "cadastroCurriculo?faces-redirect=true";
+		} else {
+			mens("Selecione um curriculo");
 		}
 		return null;
 	}
