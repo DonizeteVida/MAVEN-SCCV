@@ -67,7 +67,7 @@ public class AlunoCadastroCurriculoMBean {
 
 	public void buscaCurso() {
 		try {
-			cursos = classeGenericaDao.buscaCurso(usuario.getCategoria().getId());
+			cursos = classeGenericaDao.buscaCurso(curriculumVitae.getUsuario().getCategoria().getId());
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

@@ -16,8 +16,21 @@
 				<h:form>
 					<p:panelGrid columns="2">
 
-						<p:outputLabel value="Insira seu curso atual: " />
+						<p:outputLabel value="Insira a categoria do seu curso atual: " />
 						<p:selectOneMenu
+							value="#{alunoCadastroCurriculoMBean.curriculumVitae.usuario.categoria.id}"
+							required="true" requiredMessage="Uma categoria é necessária">
+							<f:selectItem itemLabel="SELECIONE SUA CATEGORIA ATUAL"
+								itemValue="" />
+							<f:selectItems value="#{alunoCadastroCurriculoMBean.categorias}"
+								var="categoria" itemLabel="#{categoria.nome}"
+								itemValue="#{categoria.id}" />
+							<p:ajax event="change" update="selecaoCurso"
+								listener="#{alunoCadastroCurriculoMBean.buscaCurso}" />
+						</p:selectOneMenu>
+
+						<p:outputLabel value="Insira seu curso atual: " />
+						<p:selectOneMenu id="selecaoCurso"
 							value="#{alunoCadastroCurriculoMBean.curriculumVitae.curso.id}"
 							required="true" requiredMessage="Um curso é necessário">
 							<f:selectItem itemLabel="SELECIONE SEU CURSO ATUAL" itemValue="" />

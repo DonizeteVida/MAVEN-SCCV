@@ -12,12 +12,12 @@ public class CurriculumVitae {
 		semestre = new Integer(0);
 	}
 
+	private Integer semestre;
 	private Integer id;
 	private Integer peso;
 	private Long data_criacao;
 	private ClasseGenerica curso;
 	private ClasseGenerica turma;
-	private Integer semestre;
 	private ClasseGenerica status;
 	private Usuario usuario;
 
