@@ -36,9 +36,9 @@ public class AlunoCadastroMBean {
 		categorias = classeGenericaDao.buscaCategoria();
 	}
 
-	public void buscaCategoria() {
+	public void buscaCurso() {
 		try {
-			categorias = classeGenericaDao.buscaCurso(usuario.getCategoria().getId());
+			cursos = classeGenericaDao.buscaCurso(usuario.getCategoria().getId());
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
