@@ -60,6 +60,14 @@ public class AlunoCadastroMBean {
 		return estados;
 	}
 
+	public List<ClasseGenerica> getCategorias() {
+		return categorias;
+	}
+
+	public void setCategorias(List<ClasseGenerica> categorias) {
+		this.categorias = categorias;
+	}
+
 	public void setEstados(List<ClasseGenerica> estados) {
 		this.estados = estados;
 	}

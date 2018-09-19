@@ -84,6 +84,14 @@ public class AlunoCadastroCurriculoMBean {
 		}
 	}
 
+	public List<ClasseGenerica> getCategorias() {
+		return categorias;
+	}
+
+	public void setCategorias(List<ClasseGenerica> categorias) {
+		this.categorias = categorias;
+	}
+
 	public String salvarCurriculo() {
 		try {
 			if (curriculoDao.listarCurriculo(usuario.getId(), curriculumVitae.getCurso().getId()).size() == 0) {

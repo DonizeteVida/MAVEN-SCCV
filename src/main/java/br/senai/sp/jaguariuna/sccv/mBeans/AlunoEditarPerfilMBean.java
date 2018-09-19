@@ -101,6 +101,14 @@ public class AlunoEditarPerfilMBean {
 		}
 	}
 
+	public List<ClasseGenerica> getCategorias() {
+		return categorias;
+	}
+
+	public void setCategorias(List<ClasseGenerica> categorias) {
+		this.categorias = categorias;
+	}
+
 	public String getAntigaSenhaDigitada() {
 		return antigaSenhaDigitada;
 	}
