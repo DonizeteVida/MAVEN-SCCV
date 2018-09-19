@@ -1,0 +1,53 @@
+<?xml version='1.0' encoding='ISO-8859-1' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns:ui="http://java.sun.com/jsf/facelets"
+	template="../menu/template.xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://java.sun.com/jsf/core">
+	<ui:define name="Conteudo">
+
+		<p:growl>
+			<p:autoUpdate />
+		</p:growl>
+
+		<p:panel>
+			<center>
+				<h:form>
+					<p:panelGrid columns="2">
+
+						<p:outputLabel value="Insira seu curso atual: " />
+						<p:selectOneMenu
+							value="#{alunoCadastroCurriculoMBean.curriculumVitae.curso.id}"
+							required="true" requiredMessage="Um curso é necessário">
+							<f:selectItem itemLabel="SELECIONE SEU CURSO ATUAL" itemValue="" />
+							<f:selectItems value="#{alunoCadastroCurriculoMBean.cursos}"
+								var="curso" itemLabel="#{curso.nome}" itemValue="#{curso.id}" />
+							<p:ajax event="change" update="selecaoTurma"
+								listener="#{alunoCadastroCurriculoMBean.buscaTurma}" />
+						</p:selectOneMenu>
+
+						<p:outputLabel value="Insira sua turma atual: " />
+						<p:selectOneMenu
+							value="#{alunoCadastroCurriculoMBean.curriculumVitae.turma.id}"
+							id="selecaoTurma" required="true"
+							requiredMessage="Uma turma é necessária">
+							<f:selectItem itemLabel="SELECIONE SUA TURMA ATUAL" itemValue="" />
+							<f:selectItems value="#{alunoCadastroCurriculoMBean.turmas}"
+								var="turma" itemLabel="#{turma.nome}" itemValue="#{turma.id}" />
+						</p:selectOneMenu>
+
+						<p:outputLabel value="Insira seu semestre atual: " />
+						<p:inputMask mask="9" required="true"
+							value="#{alunoCadastroCurriculoMBean.curriculumVitae.semestre}" />
+					</p:panelGrid>
+
+					<br />
+					<p:commandButton value="Salvar novo curriculo"
+						action="#{alunoCadastroCurriculoMBean.salvarCurriculo}" />
+				</h:form>
+			</center>
+		</p:panel>
+
+	</ui:define>
+</ui:composition>

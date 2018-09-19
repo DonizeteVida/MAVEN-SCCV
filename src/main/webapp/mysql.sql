@@ -1,5 +1,8 @@
+DROP DATABASE SCCV;
+
 CREATE DATABASE SCCV;
 USE SCCV;
+
 
 CREATE TABLE curso(
 	id INTEGER NOT NULL PRIMARY KEY AUTO_INCREMENT,
@@ -74,18 +77,24 @@ CREATE TABLE usuario_administrador(
 
 CREATE TABLE curriculum_vitae(
 	id INTEGER NOT NULL PRIMARY KEY AUTO_INCREMENT,
-    peso INTEGER NOT NULL,
-    data_criacao INTEGER,
+    peso INTEGER NOT NULL DEFAULT 0,
+    data_criacao FLOAT,
     id_curso INTEGER NOT NULL,
     id_turma INTEGER NOT NULL,
     semestre INTEGER NOT NULL,
     id_usuario INTEGER NOT NULL,
-    id_status INTEGER NOT NULL,
+    id_status INTEGER NOT NULL DEFAULT 1,
     FOREIGN KEY (id_usuario) REFERENCES usuario(id),
 	FOREIGN KEY (id_curso) REFERENCES curso(id),
 	FOREIGN KEY (id_turma) REFERENCES turma(id),
     FOREIGN KEY (id_status) REFERENCES status_(id)
 );
+	
+    SELECT c.*, cur.nome AS nomeCurso, tur.nome AS nomeTurma, sts.nome AS nomeStatus FROM curriculum_vitae AS c
+    INNER JOIN curso AS cur ON cur.id = c.id_curso
+    INNER JOIN turma AS tur ON tur.id = c.id_turma
+    INNER JOIN status_ AS sts ON sts.id = c.id_status 
+    WHERE c.id_usuario = 1 AND c.id_curso = 1;
 
 CREATE TABLE relacao_p_chave(
 	id INTEGER NOT NULL PRIMARY KEY AUTO_INCREMENT,

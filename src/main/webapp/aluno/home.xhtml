@@ -11,5 +11,39 @@
 			<p:autoUpdate />
 		</p:growl>
 
+		<h:form id="form">
+			<p:dataGrid
+				emptyMessage="Não foram encontrados curriculos cadastrados."
+				var="cur" value="#{alunoHomeMBean.listaCurriculo}" columns="10"
+				layout="grid">
+
+
+				<f:facet name="header" id="face">
+					<p:outputLabel value="Seus currículos" />
+				</f:facet>
+				<p:panel header="#{cur.curso.nome}" styleClass="panel">
+					<h:panelGrid columns="1" styleClass="datagrid">
+						<p:graphicImage name="images/pdf.ico" />
+
+						<h:outputText value="#{cur.turma.nome}" style="text-align:center" />
+						<p:commandLink title="Ver curriculo" ajax="true" event="onclick"
+							update=":form:command">
+							<h:outputText styleClass="ui-icon ui-icon-search"
+								style="margin:0 auto;" />
+							<f:setPropertyActionListener value="#{cur}"
+								target="#{alunoHomeMBean.curClick}" />
+						</p:commandLink>
+					</h:panelGrid>
+				</p:panel>
+			</p:dataGrid>
+			<p:panel>
+				<center>
+					<p:commandButton id="command"
+						value="#{alunoHomeMBean.clicado ? 'Editar curriculo selecionado: '.concat(alunoHomeMBean.curClick.curso.nome) : 'Nenhum currículo selecionado'}"
+						action="#{alunoHomeMBean.editarCurriculo}" />
+				</center>
+			</p:panel>
+		</h:form>
+
 	</ui:define>
 </ui:composition>

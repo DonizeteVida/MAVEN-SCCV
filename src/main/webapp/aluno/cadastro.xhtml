@@ -50,7 +50,8 @@
 						requiredMessage="O e-mail é completo é necessário !" />
 
 					<p:outputLabel value="Insira sua data de nascimento: " />
-					<p:calendar pattern="dd/MM/yyyy" placeholder="Insira sua idade completa"
+					<p:calendar pattern="dd/MM/yyyy"
+						placeholder="Insira sua idade completa"
 						value="#{alunoCadastroMBean.usuario.idade.time}"
 						title="Campo para idade" required="true"
 						requiredMessage="A idade é necessária !" />
@@ -77,7 +78,7 @@
 						<f:selectItems value="#{alunoCadastroMBean.cursos}" var="curso"
 							itemLabel="#{curso.nome}" itemValue="#{curso.id}" />
 						<p:ajax event="change" update="selecaoTurma"
-							listener="#{alunoCadastroMBean.buscaTurma()}" />
+							listener="#{alunoCadastroMBean.buscaTurma}" />
 					</p:selectOneMenu>
 
 
@@ -97,7 +98,7 @@
 						<f:selectItems value="#{alunoCadastroMBean.estados}" var="estado"
 							itemLabel="#{estado.nome}" itemValue="#{estado.id}" />
 						<p:ajax event="change" update="selecaoCidade"
-							listener="#{alunoCadastroMBean.buscaCidade()}" />
+							listener="#{alunoCadastroMBean.buscaCidade}" />
 					</p:selectOneMenu>
 
 					<p:outputLabel value="Insira sua cidade: " />
@@ -128,7 +129,7 @@
 				</p:panelGrid>
 				<br />
 				<p:commandButton widgetVar="btCriarUsuario" value="Criar usuário"
-					action="#{alunoCadastroMBean.salvarUsuario()}" />
+					action="#{alunoCadastroMBean.salvarUsuario}" />
 			</h:form>
 		</center>
 	</p:panel>
