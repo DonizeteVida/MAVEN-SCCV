@@ -12,6 +12,7 @@ public class Usuario {
 		turma = new ClasseGenerica();
 		cidade = new ClasseGenerica();
 		estado = new ClasseGenerica();
+		categoria = new ClasseGenerica();
 		idade = Calendar.getInstance();
 	}
 
@@ -27,6 +28,15 @@ public class Usuario {
 	private ClasseGenerica turma;
 	private ClasseGenerica cidade;
 	private ClasseGenerica estado;
+	private ClasseGenerica categoria;
+
+	public ClasseGenerica getCategoria() {
+		return categoria;
+	}
+
+	public void setCategoria(ClasseGenerica categoria) {
+		this.categoria = categoria;
+	}
 
 	public ClasseGenerica getEstado() {
 		return estado;

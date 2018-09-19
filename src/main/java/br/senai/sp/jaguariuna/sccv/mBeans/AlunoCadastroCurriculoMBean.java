@@ -27,6 +27,7 @@ public class AlunoCadastroCurriculoMBean {
 	private CurriculumVitae curriculumVitae;
 	private List<ClasseGenerica> cursos;
 	private List<ClasseGenerica> turmas;
+	private List<ClasseGenerica> categorias;
 	private CurriculoDao curriculoDao;
 
 	private ClasseGenericaDao classeGenericaDao;
@@ -38,7 +39,7 @@ public class AlunoCadastroCurriculoMBean {
 		classeGenericaDao = new ClasseGenericaDao();
 		curriculoDao = new CurriculoDao();
 		try {
-			cursos = classeGenericaDao.buscaCurso();
+			categorias = classeGenericaDao.buscaCategoria();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -57,6 +58,16 @@ public class AlunoCadastroCurriculoMBean {
 		try {
 			usuario = usuarioDao.buscaUsuarioPorCpf(alunoIndexMBean.getUsuario().getCpf());
 			curriculumVitae.setUsuario(alunoIndexMBean.getUsuario());
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			mens(e.toString());
+		}
+	}
+
+	public void buscaCategoria() {
+		try {
+			categorias = classeGenericaDao.buscaCurso(usuario.getCategoria().getId());
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

@@ -23,6 +23,7 @@ public class AlunoCadastroMBean {
 	List<ClasseGenerica> turmas;
 	List<ClasseGenerica> estados;
 	List<ClasseGenerica> cidades;
+	List<ClasseGenerica> categorias;
 	// usuario a ser salvo no banco
 	Usuario usuario;
 	UsuarioDao usuarioDao;
@@ -31,8 +32,12 @@ public class AlunoCadastroMBean {
 		classeGenericaDao = new ClasseGenericaDao();
 		usuario = new Usuario();
 		usuarioDao = new UsuarioDao();
-		cursos = classeGenericaDao.buscaCurso();
 		estados = classeGenericaDao.buscaEstado();
+		categorias = classeGenericaDao.buscaCategoria();
+	}
+
+	public void buscaCategoria() throws SQLException {
+		categorias = classeGenericaDao.buscaCurso(usuario.getCategoria().getId());
 	}
 
 	public void buscaTurma() throws SQLException {
@@ -98,11 +103,11 @@ public class AlunoCadastroMBean {
 					}
 				} else {
 					FacesContext.getCurrentInstance().addMessage(null,
-							new FacesMessage("Já existe um usuario cadastrado com este CPF !"));
+							new FacesMessage("Jï¿½ existe um usuario cadastrado com este CPF !"));
 				}
 			} else {
 				FacesContext.getCurrentInstance().addMessage(null,
-						new FacesMessage("Já existe um usuario cadastrado com este e-mail !"));
+						new FacesMessage("Jï¿½ existe um usuario cadastrado com este e-mail !"));
 			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
