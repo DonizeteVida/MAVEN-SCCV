@@ -43,6 +43,7 @@ public class CurriculoDao {
 		ps.setInt(1, id_usuario);
 
 		ResultSet rs = ps.executeQuery();
+
 		List<CurriculumVitae> lista = new ArrayList<CurriculumVitae>();
 
 		while (rs.next()) {

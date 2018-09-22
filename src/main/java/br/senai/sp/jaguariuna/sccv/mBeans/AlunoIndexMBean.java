@@ -1,25 +1,15 @@
 package br.senai.sp.jaguariuna.sccv.mBeans;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
-import javax.servlet.ServletContext;
 
 import br.senai.sp.jaguariuna.sccv.entities.Usuario;
 import br.senai.sp.jaguariuna.sccv.entities.UsuarioAdministrador;
-import br.senai.sp.jaguariuna.sccv.jdbc.ConnectionDB;
+
 import br.senai.sp.jaguariuna.sccv.uDao.UsuarioDao;
 import br.senai.sp.jaguariuna.sccv.utils.StringToMD5;
 
@@ -187,14 +177,11 @@ public class AlunoIndexMBean {
 		}
 		return null;
 	}
-
-	public void recuperarSenha() {
-		try {
-			Usuario u = usuarioDao.buscaUsuarioPorCpf(cpfRecuperar);
-		} catch (SQLException e) {
-			e.printStackTrace();
-			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(e.toString()));
-		}
-	}
+	/*
+	 * public void recuperarSenha() { try { Usuario u =
+	 * usuarioDao.buscaUsuarioPorCpf(cpfRecuperar); } catch (SQLException e) {
+	 * e.printStackTrace(); FacesContext.getCurrentInstance().addMessage(null, new
+	 * FacesMessage(e.toString())); } }
+	 */
 
 }
