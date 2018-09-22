@@ -40,8 +40,8 @@ public class UsuarioDao {
 	}
 
 	public boolean inserirUsuario(Usuario u) throws SQLException {
-		String sql = "INSERT INTO usuario(nome, email, senha, idade, cpf, rg, id_curso, id_turma, id_cidade, id_estado)"
-				+ " VALUES(?,?,?,?,?,?,?,?,?, ?)";
+		String sql = "INSERT INTO usuario(nome, email, senha, idade, cpf, rg, id_curso, id_turma, id_cidade, id_estado, id_categoria)"
+				+ " VALUES(?,?,?,?,?,?,?,?,?, ?, ?)";
 
 		PreparedStatement ps = conn.prepareStatement(sql);
 
@@ -55,6 +55,7 @@ public class UsuarioDao {
 		ps.setInt(8, u.getTurma().getId());
 		ps.setInt(9, u.getCidade().getId());
 		ps.setInt(10, u.getEstado().getId());
+		ps.setInt(11, u.getCategoria().getId());
 
 		return ps.executeUpdate() > 0;
 	};
