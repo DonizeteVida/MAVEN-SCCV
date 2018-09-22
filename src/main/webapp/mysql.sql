@@ -9,7 +9,7 @@ CREATE TABLE categoria(
     nome VARCHAR(100)
 );
     
-    INSERT INTO categoria (nome) VALUES("Técnico"), ("CAI"), ("METALMECÂNICA"), ("Segurança do Trabalho"), ("Eletroeletrônica"), ("Gestão"), ("Logistica"), ("Técnologia da Informação"), ("Automação Industrial"), ("Energia"), ("Gestão");
+INSERT INTO categoria (nome) VALUES("Técnico"), ("CAI"), ("METALMECÂNICA"), ("Segurança do Trabalho"), ("Eletroeletrônica"), ("Gestão"), ("Logistica"), ("Técnologia da Informação"), ("Automação Industrial"), ("Energia"), ("Gestão");
 
 CREATE TABLE curso(
 	id INTEGER NOT NULL PRIMARY KEY AUTO_INCREMENT,
@@ -17,10 +17,8 @@ CREATE TABLE curso(
     id_categoria INTEGER NOT NULL,
     FOREIGN KEY (id_categoria) REFERENCES categoria(id));
     
-        INSERT INTO curso(nome, id_categoria) VALUES ("Técnico em Informática", 1), ("Técnico em Eletrônica", 1), 
-        ("Eletricista de Manutenção Eletroeletronica", 2), ("Mecanico de Usinagem", 2), ("Assitente Administrativo", 2), ("Almoxarife", 2 ), ("Auxiliar de Linha de Produção", 2) ;
-
-SELECT * FROM curso;
+INSERT INTO curso(nome, id_categoria) VALUES ("Técnico em Informática", 1), ("Técnico em Eletrônica", 1), 
+("Eletricista de Manutenção Eletroeletronica", 2), ("Mecanico de Usinagem", 2), ("Assitente Administrativo", 2), ("Almoxarife", 2 ), ("Auxiliar de Linha de Produção", 2) ;
 
 CREATE TABLE turma(
 	id INTEGER NOT NULL PRIMARY KEY AUTO_INCREMENT,
@@ -45,10 +43,6 @@ CREATE TABLE status_(
     INSERT INTO status_(nome) VALUES ("ATIVO"), ("INATIVO");
 
 CREATE TABLE tipo_formacao(
-	id INTEGER NOT NULL PRIMARY KEY AUTO_INCREMENT,
-    nome VARCHAR(100) NOT NULL);
-
-CREATE TABLE palavras_chave(
 	id INTEGER NOT NULL PRIMARY KEY AUTO_INCREMENT,
     nome VARCHAR(100) NOT NULL);
 
@@ -78,10 +72,6 @@ CREATE TABLE usuario(
     INNER JOIN turma AS tur ON tur.id = u.id_turma
     WHERE u.cpf = "46939417869";*/
     
-    SELECT * FROM usuario;
-    
-	UPDATE usuario SET id_status = 1 WHERE usuario.id = 2;
-    
 CREATE TABLE usuario_administrador(
 	id INTEGER NOT NULL PRIMARY KEY AUTO_INCREMENT,
     nome VARCHAR(100) NOT NULL,
@@ -107,19 +97,11 @@ CREATE TABLE curriculum_vitae(
     FOREIGN KEY (id_status) REFERENCES status_(id)
 );
 	
-    SELECT c.*, cur.nome AS nomeCurso, tur.nome AS nomeTurma, sts.nome AS nomeStatus FROM curriculum_vitae AS c
+   /* SELECT c.*, cur.nome AS nomeCurso, tur.nome AS nomeTurma, sts.nome AS nomeStatus FROM curriculum_vitae AS c
     INNER JOIN curso AS cur ON cur.id = c.id_curso
     INNER JOIN turma AS tur ON tur.id = c.id_turma
     INNER JOIN status_ AS sts ON sts.id = c.id_status 
-    WHERE c.id_usuario = 1 AND c.id_curso = 1;
-
-CREATE TABLE relacao_p_chave(
-	id INTEGER NOT NULL PRIMARY KEY AUTO_INCREMENT,
-    id_curriculum_vitae INTEGER NOT NULL,
-    id_palavras_chave INTEGER NOT NULL,
-    FOREIGN KEY (id_curriculum_vitae) REFERENCES curriculum_vitae(id),
-    FOREIGN KEY (id_palavras_chave) REFERENCES palavras_chave(id)
-);
+    WHERE c.id_usuario = 1 AND c.id_curso = 1;*/
 
 CREATE TABLE experiencia(
 	id INTEGER NOT NULL PRIMARY KEY AUTO_INCREMENT,
