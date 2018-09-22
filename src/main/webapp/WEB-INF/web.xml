@@ -35,6 +35,7 @@
 		<url-pattern>/aluno/visualizarPerfil.xhtml</url-pattern>
 		<url-pattern>/aluno/editarPerfil.xhtml</url-pattern>
 		<url-pattern>/aluno/cadastroCurriculo.xhtml</url-pattern>
+		<url-pattern>/aluno/editarCurriculo.xhtml</url-pattern>
 	</filter-mapping>
 
 </web-app>

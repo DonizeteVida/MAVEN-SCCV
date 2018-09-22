@@ -46,6 +46,13 @@ public class AlunoCadastroCurriculoMBean {
 		}
 	}
 
+	@ManagedProperty(value = "#{alunoHomeMBean}")
+	private AlunoHomeMBean alunoHomeMBean;
+
+	public void setAlunoHomeMBean(AlunoHomeMBean alunoHomeMBean) {
+		this.alunoHomeMBean = alunoHomeMBean;
+	}
+
 	@ManagedProperty(value = "#{alunoIndexMBean}")
 	private AlunoIndexMBean alunoIndexMBean;
 
@@ -97,6 +104,7 @@ public class AlunoCadastroCurriculoMBean {
 			if (curriculoDao.listarCurriculo(usuario.getId(), curriculumVitae.getCurso().getId()).size() == 0) {
 				if (curriculoDao.criarCurriculo(curriculumVitae)) {
 					FacesContext.getCurrentInstance().getExternalContext().getFlash().setKeepMessages(true);
+					alunoHomeMBean.listarCurriculo();
 					mens("Curriculo criado com sucesso !");
 
 					return "home?faces-redirect=true";

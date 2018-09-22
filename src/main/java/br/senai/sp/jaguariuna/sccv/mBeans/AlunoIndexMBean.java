@@ -28,7 +28,6 @@ public class AlunoIndexMBean {
 	private String cpfRecuperar;
 
 	public AlunoIndexMBean() {
-		System.out.println("Entrou no Construtor");
 		modoSelecionado = "user";
 		funcaoCPF = "!TestaCPF(this.value) ? this.value = '' : this.value; avisoGrowl(TestaCPF(this.value));";
 		usuarioDao = new UsuarioDao();
