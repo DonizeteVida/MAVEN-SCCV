@@ -3,149 +3,12 @@ DROP DATABASE SCCV;
 CREATE DATABASE SCCV;
 USE SCCV;
 
-
-CREATE TABLE categoria(
-	id INTEGER NOT NULL PRIMARY KEY AUTO_INCREMENT,
-    nome VARCHAR(100)
-);
-    
-INSERT INTO categoria (nome) VALUES("Técnico"), ("CAI"), ("METALMECÂNICA"), ("Segurança do Trabalho"), ("Eletroeletrônica"), ("Gestão"), ("Logistica"), ("Técnologia da Informação"), ("Automação Industrial"), ("Energia"), ("Gestão");
-
-CREATE TABLE curso(
-	id INTEGER NOT NULL PRIMARY KEY AUTO_INCREMENT,
-    nome VARCHAR(100) NOT NULL, 
-    id_categoria INTEGER NOT NULL,
-    FOREIGN KEY (id_categoria) REFERENCES categoria(id));
-    
-INSERT INTO curso(nome, id_categoria) VALUES ("Técnico em Informática", 1), ("Técnico em Eletrônica", 1), 
-("Eletricista de Manutenção Eletroeletronica", 2), ("Mecanico de Usinagem", 2), ("Assitente Administrativo", 2), ("Almoxarife", 2 ), ("Auxiliar de Linha de Produção", 2) ;
-
-CREATE TABLE turma(
-	id INTEGER NOT NULL PRIMARY KEY AUTO_INCREMENT,
-    id_curso INTEGER NOT NULL,
-    nome VARCHAR(100) NOT NULL,
-    FOREIGN KEY (id_curso) REFERENCES curso(id)
-);
-
-	INSERT INTO turma(id_curso, nome) VALUES (7, "2014"), (7, "2018");
-	INSERT INTO turma(id_curso, nome) VALUES (6, "2014"), (6, "2018");
-	INSERT INTO turma(id_curso, nome) VALUES (5, "2014"), (5, "2018");
-    INSERT INTO turma(id_curso, nome) VALUES (4, "2014"), (4, "2018");
-    INSERT INTO turma(id_curso, nome) VALUES (3, "2014"), (3, "2018");
-	INSERT INTO turma(id_curso, nome) VALUES (2, "2014"), (2, "2018");
-	INSERT INTO turma(id_curso, nome) VALUES (1, "2014"), (1, "2018");
-
-
-CREATE TABLE status_(
-	id INTEGER NOT NULL PRIMARY KEY AUTO_INCREMENT,
-    nome VARCHAR(100) NOT NULL);
-    
-    INSERT INTO status_(nome) VALUES ("ATIVO"), ("INATIVO");
-
-CREATE TABLE tipo_formacao(
-	id INTEGER NOT NULL PRIMARY KEY AUTO_INCREMENT,
-    nome VARCHAR(100) NOT NULL);
-
-CREATE TABLE usuario(
-	id INTEGER NOT NULL PRIMARY KEY AUTO_INCREMENT,
-    nome VARCHAR(100) NOT NULL,
-    email VARCHAR(100) NOT NULL UNIQUE,
-    senha VARCHAR(1000) NOT NULL,
-    idade LONG NOT NULL,
-    cpf CHAR(11) NOT NULL UNIQUE,
-    rg CHAR(9) NOT NULL UNIQUE,
-    id_cidade INTEGER NOT NULL,
-    id_estado INTEGER NOT NULL,
-    id_status INTEGER NOT NULL DEFAULT 1,
-    id_curso INTEGER NOT NULL,
-    id_turma INTEGER NOT NULL,
-    FOREIGN KEY (id_curso) REFERENCES curso(id),
-    FOREIGN KEY (id_turma) REFERENCES turma(id),
-    FOREIGN KEY (id_status) REFERENCES status_(id)
-); 
-;
-	/*SELECT u.*, c.nome AS nomeCidade, e.nome AS nomeEstado, st.nome AS nomeStatus, cur.nome AS nomeCurso, tur.nome AS nomeTurma FROM usuario AS u 
-    INNER JOIN cidade AS c ON c.id = u.id_cidade
-    INNER JOIN estado AS e ON e.id = u.id_estado
-    INNER JOIN status_ AS st ON st.id = u.id_status
-    INNER JOIN curso AS cur ON cur.id = u.id_curso
-    INNER JOIN turma AS tur ON tur.id = u.id_turma
-    WHERE u.cpf = "46939417869";*/
-    
-CREATE TABLE usuario_administrador(
-	id INTEGER NOT NULL PRIMARY KEY AUTO_INCREMENT,
-    nome VARCHAR(100) NOT NULL,
-    email VARCHAR(100) NOT NULL,
-    senha VARCHAR(1000) NOT NULL,
-	nif VARCHAR(10) NOT NULL,
-	id_status INTEGER NOT NULL,
-    FOREIGN KEY (id_status) REFERENCES status_(id)
-);
-
-CREATE TABLE curriculum_vitae(
-	id INTEGER NOT NULL PRIMARY KEY AUTO_INCREMENT,
-    peso INTEGER NOT NULL DEFAULT 0,
-    data_criacao FLOAT,
-    id_curso INTEGER NOT NULL,
-    id_turma INTEGER NOT NULL,
-    semestre INTEGER NOT NULL,
-    id_usuario INTEGER NOT NULL,
-    id_status INTEGER NOT NULL DEFAULT 1,
-    FOREIGN KEY (id_usuario) REFERENCES usuario(id),
-	FOREIGN KEY (id_curso) REFERENCES curso(id),
-	FOREIGN KEY (id_turma) REFERENCES turma(id),
-    FOREIGN KEY (id_status) REFERENCES status_(id)
-);
-	
-   /* SELECT c.*, cur.nome AS nomeCurso, tur.nome AS nomeTurma, sts.nome AS nomeStatus FROM curriculum_vitae AS c
-    INNER JOIN curso AS cur ON cur.id = c.id_curso
-    INNER JOIN turma AS tur ON tur.id = c.id_turma
-    INNER JOIN status_ AS sts ON sts.id = c.id_status 
-    WHERE c.id_usuario = 1 AND c.id_curso = 1;*/
-
-CREATE TABLE experiencia(
-	id INTEGER NOT NULL PRIMARY KEY AUTO_INCREMENT,
-    nome VARCHAR(100),
-    data_inicio DATE NOT NULL,
-    data_fim DATE NOT NULL,
-    id_curriculum_vitae INTEGER NOT NULL,
-    FOREIGN KEY (id_curriculum_vitae) REFERENCES curriculum_vitae(id)
-);
-
-CREATE TABLE formacoes(
-	id INTEGER NOT NULL PRIMARY KEY AUTO_INCREMENT,
-    nome VARCHAR(100),
-    data_inicio DATE NOT NULL,
-    data_fim DATE NOT NULL,
-    id_curriculum_vitae INTEGER NOT NULL,
-    formacao INTEGER NOT NULL,
-	FOREIGN KEY (formacao) REFERENCES tipo_formacao(id),
-    FOREIGN KEY (id_curriculum_vitae) REFERENCES curriculum_vitae(id)
-);
-
-CREATE TABLE root_log_alt(
-	id INTEGER NOT NULL PRIMARY KEY AUTO_INCREMENT,
-    id_usuario_root INTEGER NOT NULL,
-    id_usuario_alt INTEGER NOT NULL,
-    data_alt TIMESTAMP NOT NULL,
-    FOREIGN KEY (id_usuario_root) REFERENCES usuario (id),
-    FOREIGN KEY (id_usuario_alt) REFERENCES usuario (id)
-);
-
-
---
--- Estrutura da tabela `cidade`
---
-
 CREATE TABLE `cidade` (
   `id` int(11) NOT NULL,
   `nome` varchar(120) DEFAULT NULL,
   `estado` int(5) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
---
--- Extraindo dados da tabela `cidade`
---
 INSERT INTO `cidade` (`id`, `nome`, `estado`) VALUES
 (1, 'Afonso Cláudio', 8),
 (2, 'Água Doce do Norte', 8),
@@ -5714,21 +5577,11 @@ INSERT INTO `cidade` (`id`, `nome`, `estado`) VALUES
 (5563, 'Wanderlândia', 27),
 (5564, 'Xambioá', 27);
 
--- --------------------------------------------------------
-
---
--- Estrutura da tabela `estado`
---
-
 CREATE TABLE `estado` (
   `id` int(11) NOT NULL,
   `nome` varchar(75) DEFAULT NULL,
   `uf` varchar(5) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Extraindo dados da tabela `estado`
---
 
 INSERT INTO `estado` (`id`, `nome`, `uf`) VALUES
 (1, 'Acre', 'AC'),
@@ -5759,39 +5612,171 @@ INSERT INTO `estado` (`id`, `nome`, `uf`) VALUES
 (26, 'São Paulo', 'SP'),
 (27, 'Tocantins', 'TO');
 
---
--- Indexes for dumped tables
---
-
---
--- Indexes for table `cidade`
---
 ALTER TABLE `cidade`
   ADD PRIMARY KEY (`id`),
   ADD KEY `fk_Cidade_estado` (`estado`);
 
---
--- Indexes for table `estado`
---
 ALTER TABLE `estado`
   ADD PRIMARY KEY (`id`);
 
---
--- AUTO_INCREMENT for dumped tables
---
-
---
--- AUTO_INCREMENT for table `cidade`
---
 ALTER TABLE `cidade`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5565;
---
--- AUTO_INCREMENT for table `estado`
---
+
 ALTER TABLE `estado`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
   
-  COMMIT;
+COMMIT;
+
+
+CREATE TABLE categoria(
+	id INTEGER NOT NULL PRIMARY KEY AUTO_INCREMENT,
+    nome VARCHAR(100)
+);
+    
+INSERT INTO categoria (nome) VALUES
+("Técnico"), 
+("CAI"), 
+("METALMECÂNICA"), 
+("Segurança do Trabalho"), 
+("Eletroeletrônica"), 
+("Gestão"), 
+("Logistica"), 
+("Técnologia da Informação"), 
+("Automação Industrial"), 
+("Energia"), 
+("Gestão");
+
+CREATE TABLE curso(
+	id INTEGER NOT NULL PRIMARY KEY AUTO_INCREMENT,
+    nome VARCHAR(100) NOT NULL, 
+    id_categoria INTEGER NOT NULL,
+    FOREIGN KEY (id_categoria) REFERENCES categoria(id));
+    
+INSERT INTO curso(nome, id_categoria) VALUES 
+("Técnico em Informática", 1),
+("Técnico em Eletrônica", 1), 
+("Eletricista de Manutenção Eletroeletronica", 2),
+("Mecanico de Usinagem", 2),
+("Assitente Administrativo", 2),
+("Almoxarife", 2 ),
+("Auxiliar de Linha de Produção", 2);
+
+CREATE TABLE turma(
+	id INTEGER NOT NULL PRIMARY KEY AUTO_INCREMENT,
+    id_curso INTEGER NOT NULL,
+    nome VARCHAR(100) NOT NULL,
+    FOREIGN KEY (id_curso) REFERENCES curso(id)
+);
+
+	INSERT INTO turma(id_curso, nome) VALUES (7, "2014"), (7, "2018");
+	INSERT INTO turma(id_curso, nome) VALUES (6, "2014"), (6, "2018");
+	INSERT INTO turma(id_curso, nome) VALUES (5, "2014"), (5, "2018");
+    INSERT INTO turma(id_curso, nome) VALUES (4, "2014"), (4, "2018");
+    INSERT INTO turma(id_curso, nome) VALUES (3, "2014"), (3, "2018");
+	INSERT INTO turma(id_curso, nome) VALUES (2, "2014"), (2, "2018");
+	INSERT INTO turma(id_curso, nome) VALUES (1, "2014"), (1, "2018");
+
+
+CREATE TABLE status_(
+	id INTEGER NOT NULL PRIMARY KEY AUTO_INCREMENT,
+    nome VARCHAR(100) NOT NULL);
+    
+    INSERT INTO status_(nome) VALUES ("ATIVO"), ("INATIVO");
+
+CREATE TABLE tipo_formacao(
+	id INTEGER NOT NULL PRIMARY KEY AUTO_INCREMENT,
+    nome VARCHAR(100) NOT NULL);
+
+CREATE TABLE usuario(
+	id INTEGER NOT NULL PRIMARY KEY AUTO_INCREMENT,
+    nome VARCHAR(100) NOT NULL,
+    email VARCHAR(100) NOT NULL UNIQUE,
+    senha VARCHAR(1000) NOT NULL,
+    idade LONG NOT NULL,
+    cpf CHAR(11) NOT NULL UNIQUE,
+    rg CHAR(9) NOT NULL UNIQUE,
+    id_cidade INTEGER NOT NULL,
+    id_estado INTEGER NOT NULL,
+    id_status INTEGER NOT NULL DEFAULT 1,
+    id_categoria INTEGER NOT NULL,
+    id_curso INTEGER NOT NULL,
+    id_turma INTEGER NOT NULL,
+    FOREIGN KEY (id_cidade) REFERENCES cidade (id),
+    FOREIGN KEY (id_estado) REFERENCES estado (id),
+	FOREIGN KEY (id_status) REFERENCES status_(id),
+	FOREIGN KEY (id_categoria) REFERENCES categoria (id),
+    FOREIGN KEY (id_curso) REFERENCES curso(id),
+    FOREIGN KEY (id_turma) REFERENCES turma(id)
+); 
+
+	/*SELECT u.*, c.nome AS nomeCidade, e.nome AS nomeEstado, st.nome AS nomeStatus, cur.nome AS nomeCurso, tur.nome AS nomeTurma FROM usuario AS u 
+    INNER JOIN cidade AS c ON c.id = u.id_cidade
+    INNER JOIN estado AS e ON e.id = u.id_estado
+    INNER JOIN status_ AS st ON st.id = u.id_status
+    INNER JOIN curso AS cur ON cur.id = u.id_curso
+    INNER JOIN turma AS tur ON tur.id = u.id_turma
+    WHERE u.cpf = "46939417869";*/
+    
+CREATE TABLE usuario_administrador(
+	id INTEGER NOT NULL PRIMARY KEY AUTO_INCREMENT,
+    nome VARCHAR(100) NOT NULL,
+    email VARCHAR(100) NOT NULL,
+    senha VARCHAR(1000) NOT NULL,
+	nif VARCHAR(10) NOT NULL,
+	id_status INTEGER NOT NULL,
+    FOREIGN KEY (id_status) REFERENCES status_(id)
+);
+
+CREATE TABLE curriculum_vitae(
+	id INTEGER NOT NULL PRIMARY KEY AUTO_INCREMENT,
+    peso INTEGER NOT NULL DEFAULT 0,
+    data_criacao FLOAT,
+    id_curso INTEGER NOT NULL,
+    id_turma INTEGER NOT NULL,
+    semestre INTEGER NOT NULL,
+    id_usuario INTEGER NOT NULL,
+    id_status INTEGER NOT NULL DEFAULT 1,
+    FOREIGN KEY (id_usuario) REFERENCES usuario(id),
+	FOREIGN KEY (id_curso) REFERENCES curso(id),
+	FOREIGN KEY (id_turma) REFERENCES turma(id),
+    FOREIGN KEY (id_status) REFERENCES status_(id)
+);
+	
+   /* SELECT c.*, cur.nome AS nomeCurso, tur.nome AS nomeTurma, sts.nome AS nomeStatus FROM curriculum_vitae AS c
+    INNER JOIN curso AS cur ON cur.id = c.id_curso
+    INNER JOIN turma AS tur ON tur.id = c.id_turma
+    INNER JOIN status_ AS sts ON sts.id = c.id_status 
+    WHERE c.id_usuario = 1 AND c.id_curso = 1;*/
+
+CREATE TABLE experiencia(
+	id INTEGER NOT NULL PRIMARY KEY AUTO_INCREMENT,
+    nome VARCHAR(100),
+    data_inicio DATE NOT NULL,
+    data_fim DATE NOT NULL,
+    id_curriculum_vitae INTEGER NOT NULL,
+    FOREIGN KEY (id_curriculum_vitae) REFERENCES curriculum_vitae(id)
+);
+
+CREATE TABLE formacoes(
+	id INTEGER NOT NULL PRIMARY KEY AUTO_INCREMENT,
+    nome VARCHAR(100),
+    data_inicio DATE NOT NULL,
+    data_fim DATE NOT NULL,
+    id_curriculum_vitae INTEGER NOT NULL,
+    formacao INTEGER NOT NULL,
+	FOREIGN KEY (formacao) REFERENCES tipo_formacao(id),
+    FOREIGN KEY (id_curriculum_vitae) REFERENCES curriculum_vitae(id)
+);
+
+CREATE TABLE root_log_alt(
+	id INTEGER NOT NULL PRIMARY KEY AUTO_INCREMENT,
+    id_usuario_root INTEGER NOT NULL,
+    id_usuario_alt INTEGER NOT NULL,
+    data_alt TIMESTAMP NOT NULL,
+    FOREIGN KEY (id_usuario_root) REFERENCES usuario (id),
+    FOREIGN KEY (id_usuario_alt) REFERENCES usuario (id)
+);
+
 
 
 
