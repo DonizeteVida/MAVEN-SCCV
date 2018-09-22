@@ -20,7 +20,7 @@ public class UsuarioDao {
 	}
 
 	public boolean updateUsuario(Usuario u) throws SQLException {
-		String sql = "UPDATE usuario SET nome = ?, email = ?, senha = ?, idade = ?, cpf = ?, rg = ?, id_curso = ?, id_turma = ?, id_cidade = ?, id_estado = ? WHERE usuario.id = ?;";
+		String sql = "UPDATE usuario SET nome = ?, email = ?, senha = ?, idade = ?, cpf = ?, rg = ?, id_curso = ?, id_turma = ?, id_cidade = ?, id_estado = ?, id_categoria = ? WHERE usuario.id = ?;";
 
 		PreparedStatement ps = conn.prepareStatement(sql);
 
@@ -34,7 +34,8 @@ public class UsuarioDao {
 		ps.setInt(8, u.getTurma().getId());
 		ps.setInt(9, u.getCidade().getId());
 		ps.setInt(10, u.getEstado().getId());
-		ps.setInt(11, u.getId());
+		ps.setInt(11, u.getCategoria().getId());
+		ps.setInt(12, u.getId());
 
 		return ps.executeUpdate() > 0;
 	}
@@ -61,10 +62,11 @@ public class UsuarioDao {
 	};
 
 	public Usuario buscaUsuarioPorEmail(String email) throws SQLException {
-		String sql = "	SELECT u.*, c.nome AS nomeCidade, e.nome AS nomeEstado, st.nome AS nomeStatus, cur.nome AS nomeCurso, tur.nome AS nomeTurma FROM usuario AS u "
+		String sql = "SELECT u.*, c.nome AS nomeCidade, e.nome AS nomeEstado, st.nome AS nomeStatus, cur.nome AS nomeCurso, tur.nome AS nomeTurma, cat.nome AS nomeCategoria FROM usuario AS u "
 				+ "INNER JOIN cidade AS c ON c.id = u.id_cidade " + "INNER JOIN estado AS e ON e.id = u.id_estado "
 				+ "INNER JOIN status_ AS st ON st.id = u.id_status " + "INNER JOIN curso AS cur ON cur.id = u.id_curso "
-				+ "INNER JOIN turma AS tur ON tur.id = u.id_turma " + "WHERE u.email = ?;";
+				+ "INNER JOIN turma AS tur ON tur.id = u.id_turma "
+				+ "INNER JOIN categoria AS cat ON cat.id = u.id_categoria " + "WHERE u.email = ?;";
 
 		PreparedStatement ps = conn.prepareStatement(sql);
 		ps.setString(1, email);
@@ -95,16 +97,19 @@ public class UsuarioDao {
 			u.getCidade().setNome(rs.getString("nomeCidade"));
 			u.getEstado().setId(rs.getInt("id_estado"));
 			u.getEstado().setNome(rs.getString("nomeEstado"));
+			u.getCategoria().setId(rs.getInt("id_categoria"));
+			u.getCategoria().setNome(rs.getString("nomeCategoria"));
 		}
 
 		return u;
 	}
 
 	public Usuario buscaUsuarioPorCpf(String cpf) throws SQLException {
-		String sql = "	SELECT u.*, c.nome AS nomeCidade, e.nome AS nomeEstado, st.nome AS nomeStatus, cur.nome AS nomeCurso, tur.nome AS nomeTurma FROM usuario AS u "
+		String sql = "SELECT u.*, c.nome AS nomeCidade, e.nome AS nomeEstado, st.nome AS nomeStatus, cur.nome AS nomeCurso, tur.nome AS nomeTurma, cat.nome AS nomeCategoria FROM usuario AS u "
 				+ "INNER JOIN cidade AS c ON c.id = u.id_cidade " + "INNER JOIN estado AS e ON e.id = u.id_estado "
 				+ "INNER JOIN status_ AS st ON st.id = u.id_status " + "INNER JOIN curso AS cur ON cur.id = u.id_curso "
-				+ "INNER JOIN turma AS tur ON tur.id = u.id_turma " + "WHERE u.cpf = ?;";
+				+ "INNER JOIN turma AS tur ON tur.id = u.id_turma "
+				+ "INNER JOIN categoria AS cat ON cat.id = u.id_categoria " + "WHERE u.cpf = ?;";
 
 		PreparedStatement ps = conn.prepareStatement(sql);
 		ps.setString(1, FormatarCPFouRGtoString.format(cpf));
@@ -135,6 +140,8 @@ public class UsuarioDao {
 			u.getCidade().setNome(rs.getString("nomeCidade"));
 			u.getEstado().setId(rs.getInt("id_estado"));
 			u.getEstado().setNome(rs.getString("nomeEstado"));
+			u.getCategoria().setId(rs.getInt("id_categoria"));
+			u.getCategoria().setNome(rs.getString("nomeCategoria"));
 		}
 
 		return u;

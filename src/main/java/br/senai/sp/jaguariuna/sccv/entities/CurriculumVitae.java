@@ -9,7 +9,7 @@ public class CurriculumVitae {
 		turma = new ClasseGenerica();
 		status = new ClasseGenerica();
 		usuario = new Usuario();
-		semestre = new Integer(0);
+		semestre = new Integer(1);
 	}
 
 	private Integer semestre;

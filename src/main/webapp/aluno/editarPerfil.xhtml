@@ -46,9 +46,20 @@
 							title="Campo para RG"
 							requiredMessage="O e-mail é completo é necessário !" />
 
+						<p:outputLabel value="Insira sua categoria atual: " />
+						<p:selectOneMenu
+							value="#{alunoEditarPerfilMBean.usuario.categoria.id}"
+							required="true" requiredMessage="Uma categoria é necessária">
+							<f:selectItem itemLabel="SELECIONE SUA CATEGORIA ATUAL"
+								itemValue="" />
+							<f:selectItems value="#{alunoEditarPerfilMBean.categorias}"
+								var="cat" itemLabel="#{cat.nome}" itemValue="#{cat.id}" />
+							<p:ajax event="change" update="selecaoCurso"
+								listener="#{alunoEditarPerfilMBean.buscaCurso}" />
+						</p:selectOneMenu>
 
 						<p:outputLabel value="Insira seu curso atual: " />
-						<p:selectOneMenu
+						<p:selectOneMenu id="selecaoCurso"
 							value="#{alunoEditarPerfilMBean.usuario.curso.id}"
 							required="true" requiredMessage="Um curso é necessário">
 							<f:selectItem itemLabel="SELECIONE SEU CURSO ATUAL" itemValue="" />

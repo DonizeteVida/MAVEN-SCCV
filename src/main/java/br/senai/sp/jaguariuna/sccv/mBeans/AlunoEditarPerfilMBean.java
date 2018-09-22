@@ -63,6 +63,7 @@ public class AlunoEditarPerfilMBean {
 			usuario = usuarioDao.buscaUsuarioPorCpf(alunoIndexMBean.getUsuario().getCpf());
 			turmas = classeGenericaDao.buscaTurma(usuario.getCurso().getId());
 			cidades = classeGenericaDao.buscaCidade(usuario.getEstado().getId());
+			cursos = classeGenericaDao.buscaCurso(usuario.getCategoria().getId());
 			antigaSenha = usuario.getSenha();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -71,9 +72,9 @@ public class AlunoEditarPerfilMBean {
 		}
 	}
 
-	public void buscaCategoria() {
+	public void buscaCurso() {
 		try {
-			categorias = classeGenericaDao.buscaCurso(usuario.getCategoria().getId());
+			cursos = classeGenericaDao.buscaCurso(usuario.getCategoria().getId());
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
