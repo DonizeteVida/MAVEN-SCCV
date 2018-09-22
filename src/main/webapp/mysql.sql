@@ -5709,6 +5709,8 @@ CREATE TABLE usuario(
     FOREIGN KEY (id_turma) REFERENCES turma(id)
 ); 
 
+	SELECT * FROM usuario;
+
 	/*SELECT u.*, c.nome AS nomeCidade, e.nome AS nomeEstado, st.nome AS nomeStatus, cur.nome AS nomeCurso, tur.nome AS nomeTurma FROM usuario AS u 
     INNER JOIN cidade AS c ON c.id = u.id_cidade
     INNER JOIN estado AS e ON e.id = u.id_estado
