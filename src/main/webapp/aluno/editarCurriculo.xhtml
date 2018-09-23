@@ -7,8 +7,34 @@
 	xmlns:f="http://java.sun.com/jsf/core">
 	<ui:define name="Conteudo">
 
+		<p:growl>
+			<p:autoUpdate />
+		</p:growl>
+
 		<p:outputLabel
 			value="#{alunoEditarCurriculoMBean.curriculumAtual.curso.nome}" />
+
+		<p:dataTable selectionMode="single"
+			value="#{alunoEditarCurriculoMBean.experiencias}" var="experiencia"
+			rowKey="#{experiencia.id}">
+
+			<f:facet name="header">Experiencias</f:facet>
+			<p:column>
+				<f:facet name="header">Experiencia</f:facet>
+				#{experiencia.nome}
+			</p:column>
+			<p:column>
+				<f:facet name="header">Data inicio: </f:facet>
+				<p:calendar value="#{experiencia.data_inicio.time}"
+					pattern="dd/MM/yyyy" />
+			</p:column>
+			<p:column>
+				<f:facet name="header">Data fim: </f:facet>
+				<p:calendar value="#{experiencia.data_fim.time}"
+					pattern="dd/MM/yyyy" />
+			</p:column>
+
+		</p:dataTable>
 
 	</ui:define>
 </ui:composition>

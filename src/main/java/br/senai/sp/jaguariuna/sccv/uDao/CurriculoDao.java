@@ -10,6 +10,7 @@ import java.util.List;
 
 import br.senai.sp.jaguariuna.sccv.entities.CurriculumVitae;
 import br.senai.sp.jaguariuna.sccv.jdbc.ConnectionDB;
+import br.senai.sp.jaguariuna.sccv.subEntities.Experiencia;
 
 public class CurriculoDao {
 
@@ -17,6 +18,44 @@ public class CurriculoDao {
 
 	public CurriculoDao() {
 		conn = ConnectionDB.getConnection();
+	}
+
+	public List<Experiencia> listarExperiencias(CurriculumVitae curriculumVitae) throws SQLException {
+		String sql = "SELECT * FROM experiencia WHERE id_curriculum_vitae = ?;";
+
+		PreparedStatement ps = conn.prepareStatement(sql);
+
+		ps.setInt(1, curriculumVitae.getId());
+
+		ResultSet rs = ps.executeQuery();
+
+		List<Experiencia> experiencias = new ArrayList<>();
+
+		while (rs.next()) {
+			Calendar data_inicio = Calendar.getInstance();
+			Calendar data_fim = Calendar.getInstance();
+
+			data_inicio.setTimeInMillis(rs.getLong("data_inicio"));
+			data_fim.setTimeInMillis(rs.getLong("data_fim"));
+
+			experiencias.add(new Experiencia(rs.getInt("id"), rs.getString("nome"), data_inicio, data_fim,
+					rs.getInt("id_curriculum_vitae")));
+		}
+
+		return experiencias;
+	}
+
+	public boolean inserirExperiencia(Experiencia experiencia, CurriculumVitae curriculumVitae) throws SQLException {
+		String sql = "INSERT INTO experiencia(nome, data_inicio, data_fim, id_curriculum_vitae) VALUES (?, ?, ?, ?);";
+
+		PreparedStatement ps = conn.prepareStatement(sql);
+
+		ps.setString(1, experiencia.getNome());
+		ps.setLong(2, experiencia.getData_inicio().getTimeInMillis());
+		ps.setLong(3, experiencia.getData_fim().getTimeInMillis());
+		ps.setInt(4, curriculumVitae.getId());
+
+		return ps.executeUpdate() > 0;
 	}
 
 	public boolean criarCurriculo(CurriculumVitae c) throws SQLException {

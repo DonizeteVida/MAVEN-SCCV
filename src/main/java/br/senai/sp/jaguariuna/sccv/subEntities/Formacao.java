@@ -2,12 +2,17 @@ package br.senai.sp.jaguariuna.sccv.subEntities;
 
 import java.util.Calendar;
 
-public class Experiencias {
+public class Formacao {
+
+	public Formacao() {
+		tipoformacao = new ClasseGenerica();
+	}
 
 	private Integer id;
 	private String nome;
 	private Calendar data_inicio;
 	private Calendar data_fim;
+	private ClasseGenerica tipoformacao;
 	private Integer id_curriculum_vitae;
 
 	public Integer getId_curriculum_vitae() {
@@ -48,6 +53,14 @@ public class Experiencias {
 
 	public void setData_fim(Calendar data_fim) {
 		this.data_fim = data_fim;
+	}
+
+	public ClasseGenerica getTipoformacao() {
+		return tipoformacao;
+	}
+
+	public void setTipoformacao(ClasseGenerica tipoformacao) {
+		this.tipoformacao = tipoformacao;
 	}
 
 }
