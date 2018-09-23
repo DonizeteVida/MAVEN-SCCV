@@ -5,14 +5,20 @@ import java.util.Calendar;
 public class Formacao {
 
 	public Formacao() {
-		tipoformacao = new ClasseGenerica();
+	}
+
+	public Formacao(Integer id, String nome, Calendar data_inicio, Calendar data_fim, Integer id_curriculum_vitae) {
+		this.id = id;
+		this.nome = nome;
+		this.data_inicio = data_inicio;
+		this.data_fim = data_fim;
+		this.id_curriculum_vitae = id_curriculum_vitae;
 	}
 
 	private Integer id;
 	private String nome;
 	private Calendar data_inicio;
 	private Calendar data_fim;
-	private ClasseGenerica tipoformacao;
 	private Integer id_curriculum_vitae;
 
 	public Integer getId_curriculum_vitae() {
@@ -53,14 +59,6 @@ public class Formacao {
 
 	public void setData_fim(Calendar data_fim) {
 		this.data_fim = data_fim;
-	}
-
-	public ClasseGenerica getTipoformacao() {
-		return tipoformacao;
-	}
-
-	public void setTipoformacao(ClasseGenerica tipoformacao) {
-		this.tipoformacao = tipoformacao;
 	}
 
 }

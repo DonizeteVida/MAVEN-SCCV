@@ -5683,10 +5683,6 @@ CREATE TABLE status_(
     
     INSERT INTO status_(nome) VALUES ("ATIVO"), ("INATIVO");
 
-CREATE TABLE tipo_formacao(
-	id INTEGER NOT NULL PRIMARY KEY AUTO_INCREMENT,
-    nome VARCHAR(100) NOT NULL);
-
 CREATE TABLE usuario(
 	id INTEGER NOT NULL PRIMARY KEY AUTO_INCREMENT,
     nome VARCHAR(100) NOT NULL,
@@ -5758,19 +5754,15 @@ CREATE TABLE experiencia(
     id_curriculum_vitae INTEGER NOT NULL,
     FOREIGN KEY (id_curriculum_vitae) REFERENCES curriculum_vitae(id)
 );
-	
-	INSERT INTO experiencia(nome, data_inicio, data_fim, id_curriculum_vitae) VALUES ("Donizete", 1, 1, 1);
-    
-    SELECT * FROM experiencia;
 
-CREATE TABLE formacoes(
+	
+
+CREATE TABLE formacao(
 	id INTEGER NOT NULL PRIMARY KEY AUTO_INCREMENT,
     nome VARCHAR(100),
     data_inicio LONG NOT NULL,
     data_fim LONG NOT NULL,
     id_curriculum_vitae INTEGER NOT NULL,
-    formacao INTEGER NOT NULL,
-	FOREIGN KEY (formacao) REFERENCES tipo_formacao(id),
     FOREIGN KEY (id_curriculum_vitae) REFERENCES curriculum_vitae(id)
 );
 

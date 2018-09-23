@@ -15,6 +15,7 @@
 			value="#{alunoEditarCurriculoMBean.curriculumAtual.curso.nome}" />
 
 		<p:dataTable selectionMode="single"
+			emptyMessage="Nenhuma experiencia encontrada"
 			value="#{alunoEditarCurriculoMBean.experiencias}" var="experiencia"
 			rowKey="#{experiencia.id}">
 
@@ -32,6 +33,30 @@
 				<f:facet name="header">Data fim: </f:facet>
 				<p:calendar value="#{experiencia.data_fim.time}"
 					pattern="dd/MM/yyyy" />
+			</p:column>
+		</p:dataTable>
+
+		<br />
+
+		<p:dataTable selection="single"
+			emptyMessage="Nenhuma formação encontrada"
+			value="#{alunoEditarCurriculoMBean.formacoes}" var="formacao"
+			rowKey="#{formacao.id}">
+
+			<f:facet name="header">Formações</f:facet>
+
+			<p:column>
+				<f:facet name="header">Experiencia</f:facet>
+				#{formacao.nome}
+			</p:column>
+			<p:column>
+				<f:facet name="header">Data inicio: </f:facet>
+				<p:calendar value="#{formacao.data_inicio.time}"
+					pattern="dd/MM/yyyy" />
+			</p:column>
+			<p:column>
+				<f:facet name="header">Data fim: </f:facet>
+				<p:calendar value="#{formacao.data_fim.time}" pattern="dd/MM/yyyy" />
 			</p:column>
 
 		</p:dataTable>

@@ -14,6 +14,7 @@ import javax.faces.context.FacesContext;
 
 import br.senai.sp.jaguariuna.sccv.entities.CurriculumVitae;
 import br.senai.sp.jaguariuna.sccv.subEntities.Experiencia;
+import br.senai.sp.jaguariuna.sccv.subEntities.Formacao;
 import br.senai.sp.jaguariuna.sccv.uDao.CurriculoDao;
 
 @ManagedBean
@@ -23,7 +24,10 @@ public class AlunoEditarCurriculoMBean {
 	CurriculumVitae curriculumAtual;
 
 	private Experiencia experiencia;
+	private Formacao formacao;
+
 	private List<Experiencia> experiencias;
+	private List<Formacao> formacoes;
 
 	private CurriculoDao curriculoDao;
 
@@ -31,6 +35,7 @@ public class AlunoEditarCurriculoMBean {
 		experiencia = new Experiencia();
 		curriculoDao = new CurriculoDao();
 		experiencias = new ArrayList<>();
+		formacoes = new ArrayList<>();
 	}
 
 	@ManagedProperty(value = "#{alunoHomeMBean}")
@@ -53,6 +58,7 @@ public class AlunoEditarCurriculoMBean {
 			curriculumAtual = alunoHomeMBean.getCurClick();
 			try {
 				experiencias = curriculoDao.listarExperiencias(curriculumAtual);
+				formacoes = curriculoDao.listarFormacoes(curriculumAtual);
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -87,6 +93,22 @@ public class AlunoEditarCurriculoMBean {
 
 	public void setExperiencias(List<Experiencia> experiencias) {
 		this.experiencias = experiencias;
+	}
+
+	public Formacao getFormacao() {
+		return formacao;
+	}
+
+	public void setFormacao(Formacao formacao) {
+		this.formacao = formacao;
+	}
+
+	public List<Formacao> getFormacoes() {
+		return formacoes;
+	}
+
+	public void setFormacoes(List<Formacao> formacoes) {
+		this.formacoes = formacoes;
 	}
 
 }
