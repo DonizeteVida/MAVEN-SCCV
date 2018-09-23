@@ -108,7 +108,7 @@ public class AlunoCadastroCurriculoMBean {
 
 					return "home?faces-redirect=true";
 				} else {
-					mens("Falha ao salvar usuario !");
+					mens("Falha ao salvar um novo curriculo !");
 					return null;
 				}
 			} else {
