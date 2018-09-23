@@ -5755,8 +5755,6 @@ CREATE TABLE experiencia(
     FOREIGN KEY (id_curriculum_vitae) REFERENCES curriculum_vitae(id)
 );
 
-	
-
 CREATE TABLE formacao(
 	id INTEGER NOT NULL PRIMARY KEY AUTO_INCREMENT,
     nome VARCHAR(100),
@@ -5765,7 +5763,8 @@ CREATE TABLE formacao(
     id_curriculum_vitae INTEGER NOT NULL,
     FOREIGN KEY (id_curriculum_vitae) REFERENCES curriculum_vitae(id)
 );
-
+	SELECT * FROM formacao;
+    
 CREATE TABLE root_log_alt(
 	id INTEGER NOT NULL PRIMARY KEY AUTO_INCREMENT,
     id_usuario_root INTEGER NOT NULL,
