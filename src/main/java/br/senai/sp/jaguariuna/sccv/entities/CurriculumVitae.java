@@ -8,6 +8,7 @@ public class CurriculumVitae {
 		curso = new ClasseGenerica();
 		turma = new ClasseGenerica();
 		status = new ClasseGenerica();
+		categoria = new ClasseGenerica();
 		usuario = new Usuario();
 		semestre = new Integer(1);
 	}
@@ -19,6 +20,7 @@ public class CurriculumVitae {
 	private ClasseGenerica curso;
 	private ClasseGenerica turma;
 	private ClasseGenerica status;
+	private ClasseGenerica categoria;
 	private Usuario usuario;
 
 	public int getId() {
@@ -75,6 +77,30 @@ public class CurriculumVitae {
 
 	public void setStatus(ClasseGenerica status) {
 		this.status = status;
+	}
+
+	public ClasseGenerica getCategoria() {
+		return categoria;
+	}
+
+	public void setCategoria(ClasseGenerica categoria) {
+		this.categoria = categoria;
+	}
+
+	public void setSemestre(Integer semestre) {
+		this.semestre = semestre;
+	}
+
+	public void setId(Integer id) {
+		this.id = id;
+	}
+
+	public void setPeso(Integer peso) {
+		this.peso = peso;
+	}
+
+	public void setData_criacao(Long data_criacao) {
+		this.data_criacao = data_criacao;
 	}
 
 	public Usuario getUsuario() {

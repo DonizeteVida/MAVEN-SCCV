@@ -9,6 +9,7 @@ import java.util.Calendar;
 import java.util.List;
 
 import br.senai.sp.jaguariuna.sccv.entities.CurriculumVitae;
+import br.senai.sp.jaguariuna.sccv.entities.Usuario;
 import br.senai.sp.jaguariuna.sccv.jdbc.ConnectionDB;
 import br.senai.sp.jaguariuna.sccv.subEntities.Experiencia;
 import br.senai.sp.jaguariuna.sccv.subEntities.Formacao;
@@ -99,7 +100,7 @@ public class CurriculoDao {
 		return ps.executeUpdate() > 0;
 	}
 
-	public boolean criarCurriculo(CurriculumVitae c) throws SQLException {
+	public boolean criarCurriculo(CurriculumVitae c, Usuario u) throws SQLException {
 		String sql = "INSERT INTO curriculum_vitae(data_criacao, id_curso, id_turma, semestre, id_usuario) VALUES (?, ?, ?, ?, ?);";
 
 		PreparedStatement ps = conn.prepareStatement(sql);
@@ -108,7 +109,7 @@ public class CurriculoDao {
 		ps.setInt(2, c.getCurso().getId());
 		ps.setInt(3, c.getTurma().getId());
 		ps.setInt(4, c.getSemestre());
-		ps.setInt(5, c.getUsuario().getId());
+		ps.setInt(5, u.getId());
 
 		return ps.executeUpdate() > 0;
 	}

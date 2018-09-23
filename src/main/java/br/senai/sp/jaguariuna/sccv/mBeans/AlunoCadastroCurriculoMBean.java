@@ -64,7 +64,6 @@ public class AlunoCadastroCurriculoMBean {
 	void post() {
 		try {
 			usuario = usuarioDao.buscaUsuarioPorCpf(alunoIndexMBean.getUsuario().getCpf());
-			curriculumVitae.setUsuario(alunoIndexMBean.getUsuario());
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -74,7 +73,7 @@ public class AlunoCadastroCurriculoMBean {
 
 	public void buscaCurso() {
 		try {
-			cursos = classeGenericaDao.buscaCurso(curriculumVitae.getUsuario().getCategoria().getId());
+			cursos = classeGenericaDao.buscaCurso(curriculumVitae.getCategoria().getId());
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -102,7 +101,7 @@ public class AlunoCadastroCurriculoMBean {
 	public String salvarCurriculo() {
 		try {
 			if (curriculoDao.listarCurriculo(usuario.getId(), curriculumVitae.getCurso().getId()).size() == 0) {
-				if (curriculoDao.criarCurriculo(curriculumVitae)) {
+				if (curriculoDao.criarCurriculo(curriculumVitae, usuario)) {
 					FacesContext.getCurrentInstance().getExternalContext().getFlash().setKeepMessages(true);
 					alunoHomeMBean.listarCurriculo();
 					mens("Curriculo criado com sucesso !");
