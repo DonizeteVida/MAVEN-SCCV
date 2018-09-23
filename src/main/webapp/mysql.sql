@@ -5760,6 +5760,8 @@ CREATE TABLE experiencia(
 );
 	
 	INSERT INTO experiencia(nome, data_inicio, data_fim, id_curriculum_vitae) VALUES ("Donizete", 1, 1, 1);
+    
+    SELECT * FROM experiencia;
 
 CREATE TABLE formacoes(
 	id INTEGER NOT NULL PRIMARY KEY AUTO_INCREMENT,
