@@ -17,9 +17,13 @@
 
 .datagrid td {
 	text-align: center;
-	width:100%
+	width: 100%
 }
 
 .panel div {
 	text-align: center;
+}
+
+.datagrid input {
+	opacity: 1 !important;
 }
