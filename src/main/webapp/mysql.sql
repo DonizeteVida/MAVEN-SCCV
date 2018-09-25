@@ -5770,7 +5770,7 @@ CREATE TABLE formacao(
     id_curriculum_vitae INTEGER NOT NULL,
     FOREIGN KEY (id_curriculum_vitae) REFERENCES curriculum_vitae(id)
 );
-	/*INSERT INTO formacao(nome, data_inicio, data_fim, id_curriculum_vitae) VALUES ("Mestre PHP", 1, 1, 1);*/
+	INSERT INTO formacao(nome, data_inicio, data_fim, escola, id_curriculum_vitae) VALUES ("Mestre PHP", 1, 1, "SENAI", 1);
     
     SELECT * FROM formacao;
     
