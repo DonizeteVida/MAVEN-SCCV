@@ -58,8 +58,7 @@ public class AlunoEditarCurriculoMBean {
 		} else {
 			curriculumAtual = alunoHomeMBean.getCurClick();
 			try {
-				experiencias = curriculoDao.listarExperiencias(curriculumAtual);
-				formacoes = curriculoDao.listarFormacoes(curriculumAtual);
+				listarTudo();
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -70,6 +69,11 @@ public class AlunoEditarCurriculoMBean {
 
 	public CurriculumVitae getCurriculumAtual() {
 		return curriculumAtual;
+	}
+
+	public void listarTudo() throws SQLException {
+		experiencias = curriculoDao.listarExperiencias(curriculumAtual);
+		formacoes = curriculoDao.listarFormacoes(curriculumAtual);
 	}
 
 	public void setCurriculumAtual(CurriculumVitae curriculumAtual) {
