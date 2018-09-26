@@ -219,5 +219,89 @@
 
 		</p:dialog>
 
+		<p:dialog header="Altere a sua experiencia"
+			widgetVar="inserirExperienciaEdit" resizable="true" responsive="true"
+			closable="true">
+			<h:form>
+				<center>
+					<p:panelGrid columns="2">
+
+						<p:outputLabel value="Nome da experiencia: " />
+						<p:inputText
+							value="#{alunoEditarCurriculoMBean.experienciaSelecionada.nome}" />
+
+						<p:outputLabel value="Data inicio: " />
+						<p:calendar
+							value="#{alunoEditarCurriculoMBean.experienciaSelecionada.data_inicio.time}"
+							pattern="dd/MM/yyyy" />
+
+						<p:outputLabel value="Data fim: " />
+						<p:calendar
+							value="#{alunoEditarCurriculoMBean.experienciaSelecionada.data_fim.time}"
+							pattern="dd/MM/yyyy" />
+
+						<p:outputLabel value="Nome do cargo: " />
+						<p:inputText
+							value="#{alunoEditarCurriculoMBean.experienciaSelecionada.cargo}" />
+
+						<p:outputLabel value="Nome da empresa: " />
+						<p:inputText
+							value="#{alunoEditarCurriculoMBean.experienciaSelecionada.empresa}" />
+
+						<p:outputLabel value="Suas funções: " />
+						<p:inputText
+							value="#{alunoEditarCurriculoMBean.experienciaSelecionada.funcoes}" />
+
+
+					</p:panelGrid>
+
+					<br />
+
+					<p:commandButton value="Salvar sua experiencia" ajax="true"
+						update=":form:exp"
+						actionListener="#{alunoEditarCurriculoMBean.editarExperienciaM}" />
+				</center>
+			</h:form>
+
+		</p:dialog>
+
+		<p:dialog header="Altere a sua formação"
+			widgetVar="inserirFormacaoEdit" resizable="true" responsive="true"
+			closable="true">
+
+			<h:form>
+				<center>
+					<p:panelGrid columns="2">
+
+						<p:outputLabel value="Nome da formacao: " />
+						<p:inputText
+							value="#{alunoEditarCurriculoMBean.formacaoSelecionada.nome}" />
+
+						<p:outputLabel value="Data inicio: " />
+						<p:calendar
+							value="#{alunoEditarCurriculoMBean.formacaoSelecionada.data_inicio.time}"
+							pattern="dd/MM/yyyy" />
+
+						<p:outputLabel value="Data fim: " />
+						<p:calendar
+							value="#{alunoEditarCurriculoMBean.formacaoSelecionada.data_fim.time}"
+							pattern="dd/MM/yyyy" />
+
+						<p:outputLabel value="Nome da escola: " />
+						<p:inputText
+							value="#{alunoEditarCurriculoMBean.formacaoSelecionada.escola}" />
+
+					</p:panelGrid>
+
+					<br />
+
+					<p:commandButton value="Salvar sua formacao" ajax="true"
+						update=":form2:form"
+						actionListener="#{alunoEditarCurriculoMBean.editarFormacaoM}" />
+				</center>
+			</h:form>
+
+		</p:dialog>
+
 	</ui:define>
 </ui:composition>
