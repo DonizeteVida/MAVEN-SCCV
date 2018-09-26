@@ -100,6 +100,32 @@ public class AlunoEditarCurriculoMBean {
 		}
 	}
 
+	public void inserirFormacaoM() {
+		try {
+			if (curriculoDao.inserirFormacao(inserirFormacao, curriculumAtual)) {
+				mens("Formacao salva com sucesso");
+				listarTudo();
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			mens(e.toString());
+		}
+	}
+
+	public void deletarFormacaoM() {
+		try {
+			if (curriculoDao.deletarFormacao(formacaoSelecionada)) {
+				listarTudo();
+				mens("Formacao deletada com sucesso !");
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			mens(e.toString());
+		}
+	}
+
 	public CurriculumVitae getCurriculumAtual() {
 		return curriculumAtual;
 	}

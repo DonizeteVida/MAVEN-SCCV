@@ -100,7 +100,8 @@
 					<p:toolbar styleClass="toolbarCurriculo">
 
 						<f:facet name="left">
-							<p:commandLink update=":form2:form" title="Deletar">
+							<p:commandLink update=":form2:form" title="Deletar"
+								action="#{alunoEditarCurriculoMBean.deletarFormacaoM}">
 								<h:outputText styleClass="fa fa-eraser" style="color:black" />
 								<f:setPropertyActionListener value="#{form}"
 									target="#{alunoEditarCurriculoMBean.formacaoSelecionada}" />
@@ -183,6 +184,38 @@
 
 		<p:dialog header="Insira a sua formação" widgetVar="inserirFormacao"
 			resizable="true" responsive="true" closable="true">
+
+			<h:form>
+				<center>
+					<p:panelGrid columns="2">
+
+						<p:outputLabel value="Nome da formacao: " />
+						<p:inputText
+							value="#{alunoEditarCurriculoMBean.inserirFormacao.nome}" />
+
+						<p:outputLabel value="Data inicio: " />
+						<p:calendar
+							value="#{alunoEditarCurriculoMBean.inserirFormacao.data_inicio.time}"
+							pattern="dd/MM/yyyy" />
+
+						<p:outputLabel value="Data fim: " />
+						<p:calendar
+							value="#{alunoEditarCurriculoMBean.inserirFormacao.data_fim.time}"
+							pattern="dd/MM/yyyy" />
+
+						<p:outputLabel value="Nome da escola: " />
+						<p:inputText
+							value="#{alunoEditarCurriculoMBean.inserirFormacao.escola}" />
+
+					</p:panelGrid>
+
+					<br />
+
+					<p:commandButton value="Salvar sua formacao" ajax="true"
+						update=":form2:form"
+						actionListener="#{alunoEditarCurriculoMBean.inserirFormacaoM}" />
+				</center>
+			</h:form>
 
 		</p:dialog>
 

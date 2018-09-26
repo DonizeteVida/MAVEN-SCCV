@@ -22,6 +22,16 @@ public class CurriculoDao {
 		conn = ConnectionDB.getConnection();
 	}
 
+	public boolean deletarFormacao(Formacao form) throws SQLException {
+		String sql = "DELETE FROM formacao WHERE id = ?;";
+
+		PreparedStatement ps = conn.prepareStatement(sql);
+
+		ps.setInt(1, form.getId());
+
+		return ps.executeUpdate() > 0;
+	}
+
 	public List<Formacao> listarFormacoes(CurriculumVitae curriculumVitae) throws SQLException {
 		String sql = "SELECT * FROM formacao WHERE id_curriculum_vitae = ?;";
 
