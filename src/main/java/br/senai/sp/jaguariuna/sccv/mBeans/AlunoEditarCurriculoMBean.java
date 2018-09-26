@@ -74,6 +74,30 @@ public class AlunoEditarCurriculoMBean {
 		}
 	}
 
+	public void editarExperienciaM() {
+		try {
+			if (curriculoDao.editarExperiencia(experienciaSelecionada)) {
+				listarTudo();
+				mens("Experiencia alterada com sucesso !");
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+
+	public void editarFormacaoM() {
+		try {
+			if (curriculoDao.editarFormacao(formacaoSelecionada)) {
+				listarTudo();
+				mens("Formação alterada com sucesso !");
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+
 	public void inserirExperienciaM() {
 		try {
 			if (curriculoDao.inserirExperiencia(inserirExperiencia, curriculumAtual)) {

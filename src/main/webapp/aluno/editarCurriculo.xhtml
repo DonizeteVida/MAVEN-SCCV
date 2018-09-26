@@ -60,7 +60,8 @@
 						</f:facet>
 
 						<f:facet name="right">
-							<p:commandLink update=":form:exp" title="Editar">
+							<p:commandLink update=":form:exp" title="Editar"
+								oncomplete="PF('inserirExperienciaEdit').show();">
 								<h:outputText styleClass="fa fa-edit" style="color:black" />
 								<f:setPropertyActionListener value="#{exp}"
 									target="#{alunoEditarCurriculoMBean.experienciaSelecionada}" />
@@ -109,7 +110,8 @@
 						</f:facet>
 
 						<f:facet name="right">
-							<p:commandLink update=":form2:form" title="Editar">
+							<p:commandLink update=":form2:form" title="Editar"
+								oncomplete="PF('inserirFormacaoEdit').show();">
 								<h:outputText styleClass="fa fa-edit" style="color:black" />
 								<f:setPropertyActionListener value="#{form}"
 									target="#{alunoEditarCurriculoMBean.formacaoSelecionada}" />
