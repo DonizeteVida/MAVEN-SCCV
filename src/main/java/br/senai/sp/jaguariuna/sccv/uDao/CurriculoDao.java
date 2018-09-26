@@ -42,7 +42,7 @@ public class CurriculoDao {
 			data_fim.setTimeInMillis(rs.getLong("data_fim"));
 
 			formacoes.add(new Formacao(rs.getInt("id"), rs.getString("nome"), data_inicio, data_fim,
-					rs.getInt("id_curriculum_vitae")));
+					rs.getString("escola"), rs.getInt("id_curriculum_vitae")));
 
 		}
 
@@ -80,8 +80,9 @@ public class CurriculoDao {
 			data_inicio.setTimeInMillis(rs.getLong("data_inicio"));
 			data_fim.setTimeInMillis(rs.getLong("data_fim"));
 
-			experiencias.add(new Experiencia(rs.getInt("id"), rs.getString("nome"), data_inicio, data_fim,
-					rs.getInt("id_curriculum_vitae")));
+			experiencias.add(
+					new Experiencia(rs.getInt("id"), rs.getString("nome"), data_inicio, data_fim, rs.getString("cargo"),
+							rs.getString("empresa"), rs.getString("funcoes"), rs.getInt("id_curriculum_vitae")));
 		}
 
 		return experiencias;

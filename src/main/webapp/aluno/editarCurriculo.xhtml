@@ -14,52 +14,89 @@
 		<p:outputLabel
 			value="#{alunoEditarCurriculoMBean.curriculumAtual.curso.nome}" />
 
-		<p:dataTable selectionMode="single"
-			emptyMessage="Nenhuma experiencia encontrada"
-			value="#{alunoEditarCurriculoMBean.experiencias}" var="experiencia"
-			rowKey="#{experiencia.id}">
+		<h:form id="form">
+			<p:dataGrid id="exp"
+				emptyMessage="Não foram experiencias cadastradas." var="exp"
+				value="#{alunoEditarCurriculoMBean.experiencias}" columns="10"
+				layout="grid">
 
-			<f:facet name="header">Experiencias</f:facet>
-			<p:column>
-				<f:facet name="header">Experiencia</f:facet>
-				#{experiencia.nome}
-			</p:column>
-			<p:column>
-				<f:facet name="header">Data inicio: </f:facet>
-				<p:calendar value="#{experiencia.data_inicio.time}"
-					pattern="dd/MM/yyyy" />
-			</p:column>
-			<p:column>
-				<f:facet name="header">Data fim: </f:facet>
-				<p:calendar value="#{experiencia.data_fim.time}"
-					pattern="dd/MM/yyyy" />
-			</p:column>
-		</p:dataTable>
+
+				<f:facet name="header">
+					<p:outputLabel value="Suas experiencias" />
+				</f:facet>
+				<p:panel header="#{exp.nome}" styleClass="panel">
+					<h:panelGrid columns="2" styleClass="datagrid">
+						Data inicio: 
+						<p:calendar disabled="true" value="#{exp.data_inicio.time}"
+							pattern="dd/MM/yyyy" />
+						
+						Data fim:
+						<p:calendar disabled="true" value="#{exp.data_fim.time}"
+							pattern="dd/MM/yyyy" />
+						
+						Cargo:
+						<p:inputText disabled="true" value="#{exp.cargo}" />
+						
+						Empresa:
+						<p:inputText disabled="true" value="#{exp.empresa}" />
+						
+						Funções:
+						<p:outputLabel value="#{exp.funcoes}" />
+
+					</h:panelGrid>
+
+					<br />
+
+					<p:toolbar styleClass="toolbarCurriculo">
+
+						<f:facet name="left">
+							<p:commandLink update=":form:exp" title="Deletar">
+								<h:outputText styleClass="fa fa-eraser" style="color:black" />
+								<f:setPropertyActionListener value="#{exp}"
+									target="#{alunoEditarCurriculoMBean.experienciaSelecionada}" />
+							</p:commandLink>
+						</f:facet>
+
+						<f:facet name="right">
+							<p:commandLink update=":form:exp" title="Editar">
+								<h:outputText styleClass="fa fa-edit"  style="color:black" />
+								<f:setPropertyActionListener value="#{exp}"
+									target="#{alunoEditarCurriculoMBean.experienciaSelecionada}" />
+							</p:commandLink>
+						</f:facet>
+					</p:toolbar>
+				</p:panel>
+			</p:dataGrid>
+		</h:form>
 
 		<br />
 
-		<p:dataTable selection="single"
-			emptyMessage="Nenhuma formação encontrada"
-			value="#{alunoEditarCurriculoMBean.formacoes}" var="formacao"
-			rowKey="#{formacao.id}">
+		<h:form id="form2">
+			<p:dataGrid emptyMessage="Não foram formações cadastradas."
+				var="form" value="#{alunoEditarCurriculoMBean.formacoes}"
+				columns="10" layout="grid">
 
-			<f:facet name="header">Formações</f:facet>
 
-			<p:column>
-				<f:facet name="header">Experiencia</f:facet>
-				#{formacao.nome}
-			</p:column>
-			<p:column>
-				<f:facet name="header">Data inicio: </f:facet>
-				<p:calendar value="#{formacao.data_inicio.time}"
-					pattern="dd/MM/yyyy" />
-			</p:column>
-			<p:column>
-				<f:facet name="header">Data fim: </f:facet>
-				<p:calendar value="#{formacao.data_fim.time}" pattern="dd/MM/yyyy" />
-			</p:column>
+				<f:facet name="header">
+					<p:outputLabel value="Suas formações" />
+				</f:facet>
+				<p:panel header="#{form.nome}" styleClass="panel">
+					<h:panelGrid columns="2" styleClass="datagrid">
+						Data inicio: 
+						<p:calendar disabled="true" value="#{form.data_inicio.time}"
+							pattern="dd/MM/yyyy" />
+						
+						Data fim:
+						<p:calendar disabled="true" value="#{form.data_fim.time}"
+							pattern="dd/MM/yyyy" />
+						
+						Escola:
+						<p:inputText disabled="true" value="#{form.escola}" />
 
-		</p:dataTable>
+					</h:panelGrid>
+				</p:panel>
+			</p:dataGrid>
+		</h:form>
 
 	</ui:define>
 </ui:composition>

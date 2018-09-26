@@ -23,8 +23,8 @@ public class AlunoEditarCurriculoMBean {
 
 	CurriculumVitae curriculumAtual;
 
-	private Experiencia experiencia;
-	private Formacao formacao;
+	private Experiencia experienciaSelecionada;
+	private Formacao formacaoSelecionada;
 
 	private List<Experiencia> experiencias;
 	private List<Formacao> formacoes;
@@ -32,7 +32,8 @@ public class AlunoEditarCurriculoMBean {
 	private CurriculoDao curriculoDao;
 
 	public AlunoEditarCurriculoMBean() {
-		experiencia = new Experiencia();
+		experienciaSelecionada = new Experiencia();
+		formacaoSelecionada = new Formacao();
 		curriculoDao = new CurriculoDao();
 		experiencias = new ArrayList<>();
 		formacoes = new ArrayList<>();
@@ -75,14 +76,6 @@ public class AlunoEditarCurriculoMBean {
 		this.curriculumAtual = curriculumAtual;
 	}
 
-	public Experiencia getExperiencia() {
-		return experiencia;
-	}
-
-	public void setExperiencia(Experiencia experiencia) {
-		this.experiencia = experiencia;
-	}
-
 	private void mens(String s) {
 		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(s));
 	}
@@ -95,20 +88,28 @@ public class AlunoEditarCurriculoMBean {
 		this.experiencias = experiencias;
 	}
 
-	public Formacao getFormacao() {
-		return formacao;
-	}
-
-	public void setFormacao(Formacao formacao) {
-		this.formacao = formacao;
-	}
-
 	public List<Formacao> getFormacoes() {
 		return formacoes;
 	}
 
 	public void setFormacoes(List<Formacao> formacoes) {
 		this.formacoes = formacoes;
+	}
+
+	public Experiencia getExperienciaSelecionada() {
+		return experienciaSelecionada;
+	}
+
+	public void setExperienciaSelecionada(Experiencia experienciaSelecionada) {
+		this.experienciaSelecionada = experienciaSelecionada;
+	}
+
+	public Formacao getFormacaoSelecionada() {
+		return formacaoSelecionada;
+	}
+
+	public void setFormacaoSelecionada(Formacao formacaoSelecionada) {
+		this.formacaoSelecionada = formacaoSelecionada;
 	}
 
 }
