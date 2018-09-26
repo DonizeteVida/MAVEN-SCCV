@@ -50,7 +50,9 @@
 					<p:toolbar styleClass="toolbarCurriculo">
 
 						<f:facet name="left">
-							<p:commandLink update=":form:exp" title="Deletar">
+							<p:commandLink update=":form:exp"
+								action="#{alunoEditarCurriculoMBean.deletarExperienciaM}"
+								title="Deletar">
 								<h:outputText styleClass="fa fa-eraser" style="color:black" />
 								<f:setPropertyActionListener value="#{exp}"
 									target="#{alunoEditarCurriculoMBean.experienciaSelecionada}" />

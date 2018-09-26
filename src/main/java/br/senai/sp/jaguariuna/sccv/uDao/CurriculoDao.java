@@ -63,6 +63,16 @@ public class CurriculoDao {
 		return ps.executeUpdate() > 0;
 	}
 
+	public boolean deletarExperiencia(Experiencia exp) throws SQLException {
+		String sql = "DELETE FROM experiencia WHERE id = ?;";
+
+		PreparedStatement ps = conn.prepareStatement(sql);
+
+		ps.setInt(1, exp.getId());
+
+		return ps.executeUpdate() > 0;
+	}
+
 	public List<Experiencia> listarExperiencias(CurriculumVitae curriculumVitae) throws SQLException {
 		String sql = "SELECT * FROM experiencia WHERE id_curriculum_vitae = ?;";
 

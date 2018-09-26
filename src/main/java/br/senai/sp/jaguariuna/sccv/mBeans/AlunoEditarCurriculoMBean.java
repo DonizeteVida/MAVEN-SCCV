@@ -87,6 +87,19 @@ public class AlunoEditarCurriculoMBean {
 		}
 	}
 
+	public void deletarExperienciaM() {
+		try {
+			if (curriculoDao.deletarExperiencia(experienciaSelecionada)) {
+				listarTudo();
+				mens("Experiencia deletada com sucesso !");
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			mens(e.toString());
+		}
+	}
+
 	public CurriculumVitae getCurriculumAtual() {
 		return curriculumAtual;
 	}
