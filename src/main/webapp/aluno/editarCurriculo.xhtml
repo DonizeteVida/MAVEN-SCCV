@@ -117,5 +117,72 @@
 			</p:dataGrid>
 		</h:form>
 
+		<br />
+
+		<p:toolbar styleClass="toolbarCurriculo">
+			<f:facet name="left">
+				<p:commandButton onclick="PF('inserirExperiencia').show();"
+					value="Inserir experiencia" />
+			</f:facet>
+
+			<f:facet name="right">
+				<p:commandButton onclick="PF('inserirFormacao').show();"
+					value="Inserir formação" />
+			</f:facet>
+		</p:toolbar>
+
+		<br />
+
+		<p:dialog header="Insira a sua experiencia"
+			widgetVar="inserirExperiencia" resizable="true" responsive="true"
+			closable="true">
+			<h:form>
+				<center>
+					<p:panelGrid columns="2">
+
+						<p:outputLabel value="Nome da experiencia: " />
+						<p:inputText
+							value="#{alunoEditarCurriculoMBean.inserirExperiencia.nome}" />
+
+						<p:outputLabel value="Data inicio: " />
+						<p:calendar
+							value="#{alunoEditarCurriculoMBean.inserirExperiencia.data_inicio.time}"
+							pattern="dd/MM/yyyy" />
+
+						<p:outputLabel value="Data fim: " />
+						<p:calendar
+							value="#{alunoEditarCurriculoMBean.inserirExperiencia.data_fim.time}"
+							pattern="dd/MM/yyyy" />
+
+						<p:outputLabel value="Nome do cargo: " />
+						<p:inputText
+							value="#{alunoEditarCurriculoMBean.inserirExperiencia.cargo}" />
+
+						<p:outputLabel value="Nome da empresa: " />
+						<p:inputText
+							value="#{alunoEditarCurriculoMBean.inserirExperiencia.empresa}" />
+
+						<p:outputLabel value="Suas funções: " />
+						<p:inputText
+							value="#{alunoEditarCurriculoMBean.inserirExperiencia.funcoes}" />
+
+
+					</p:panelGrid>
+
+					<br />
+
+					<p:commandButton value="Salvar sua experiencia" ajax="true"
+						update=":form:exp"
+						actionListener="#{alunoEditarCurriculoMBean.inserirExperienciaM}" />
+				</center>
+			</h:form>
+
+		</p:dialog>
+
+		<p:dialog header="Insira a sua formação" widgetVar="inserirFormacao"
+			resizable="true" responsive="true" closable="true">
+
+		</p:dialog>
+
 	</ui:define>
 </ui:composition>

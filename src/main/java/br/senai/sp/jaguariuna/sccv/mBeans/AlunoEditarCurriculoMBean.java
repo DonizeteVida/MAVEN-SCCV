@@ -26,6 +26,9 @@ public class AlunoEditarCurriculoMBean {
 	private Experiencia experienciaSelecionada;
 	private Formacao formacaoSelecionada;
 
+	private Formacao inserirFormacao;
+	private Experiencia inserirExperiencia;
+
 	private List<Experiencia> experiencias;
 	private List<Formacao> formacoes;
 
@@ -34,6 +37,10 @@ public class AlunoEditarCurriculoMBean {
 	public AlunoEditarCurriculoMBean() {
 		experienciaSelecionada = new Experiencia();
 		formacaoSelecionada = new Formacao();
+
+		inserirExperiencia = new Experiencia();
+		inserirFormacao = new Formacao();
+
 		curriculoDao = new CurriculoDao();
 		experiencias = new ArrayList<>();
 		formacoes = new ArrayList<>();
@@ -58,8 +65,7 @@ public class AlunoEditarCurriculoMBean {
 		} else {
 			curriculumAtual = alunoHomeMBean.getCurClick();
 			try {
-				experiencias = curriculoDao.listarExperiencias(curriculumAtual);
-				formacoes = curriculoDao.listarFormacoes(curriculumAtual);
+				listarTudo();
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -68,8 +74,26 @@ public class AlunoEditarCurriculoMBean {
 		}
 	}
 
+	public void inserirExperienciaM() {
+		try {
+			if (curriculoDao.inserirExperiencia(inserirExperiencia, curriculumAtual)) {
+				mens("Experiencia salva com sucesso");
+				listarTudo();
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			mens(e.toString());
+		}
+	}
+
 	public CurriculumVitae getCurriculumAtual() {
 		return curriculumAtual;
+	}
+
+	public void listarTudo() throws SQLException {
+		experiencias = curriculoDao.listarExperiencias(curriculumAtual);
+		formacoes = curriculoDao.listarFormacoes(curriculumAtual);
 	}
 
 	public void setCurriculumAtual(CurriculumVitae curriculumAtual) {
@@ -110,6 +134,22 @@ public class AlunoEditarCurriculoMBean {
 
 	public void setFormacaoSelecionada(Formacao formacaoSelecionada) {
 		this.formacaoSelecionada = formacaoSelecionada;
+	}
+
+	public Formacao getInserirFormacao() {
+		return inserirFormacao;
+	}
+
+	public void setInserirFormacao(Formacao inserirFormacao) {
+		this.inserirFormacao = inserirFormacao;
+	}
+
+	public Experiencia getInserirExperiencia() {
+		return inserirExperiencia;
+	}
+
+	public void setInserirExperiencia(Experiencia inserirExperiencia) {
+		this.inserirExperiencia = inserirExperiencia;
 	}
 
 }

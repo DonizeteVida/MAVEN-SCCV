@@ -5,6 +5,8 @@ import java.util.Calendar;
 public class Formacao {
 
 	public Formacao() {
+		data_fim = Calendar.getInstance();
+		data_inicio = Calendar.getInstance();
 	}
 
 	public Formacao(Integer id, String nome, Calendar data_inicio, Calendar data_fim, String escola,
