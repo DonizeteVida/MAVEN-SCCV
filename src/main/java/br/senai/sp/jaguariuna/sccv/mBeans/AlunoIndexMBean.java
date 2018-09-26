@@ -1,12 +1,17 @@
 package br.senai.sp.jaguariuna.sccv.mBeans;
 
 import java.sql.SQLException;
+import java.util.Calendar;
 
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 
+import org.apache.commons.mail.EmailException;
+
+import br.senai.sp.jaguariuna.sccv.email.EmailUtil;
+import br.senai.sp.jaguariuna.sccv.email.Mensagem;
 import br.senai.sp.jaguariuna.sccv.entities.Usuario;
 import br.senai.sp.jaguariuna.sccv.entities.UsuarioAdministrador;
 
@@ -26,11 +31,14 @@ public class AlunoIndexMBean {
 	private UsuarioDao usuarioDao;
 
 	private String cpfRecuperar;
+	private Mensagem mensagem;
+	private String codigo;
 
 	public AlunoIndexMBean() {
 		modoSelecionado = "user";
 		funcaoCPF = "!TestaCPF(this.value) ? this.value = '' : this.value; avisoGrowl(TestaCPF(this.value));";
 		usuarioDao = new UsuarioDao();
+		mensagem = new Mensagem();
 
 		/*
 		 * String dir = ((ServletContext)
@@ -80,6 +88,29 @@ public class AlunoIndexMBean {
 		 * catch block e.printStackTrace(); }
 		 */
 
+	}
+
+	public void enviar() {
+		try {
+			Usuario usuarioLocal = usuarioDao.buscaUsuarioPorCpf(cpfRecuperar);
+			if (usuarioLocal != null) {
+				codigo = String.valueOf(Calendar.getInstance().getTimeInMillis());
+				mensagem.setMensagem(codigo);
+				EmailUtil.enviaEmail(mensagem);
+				FacesContext.getCurrentInstance().addMessage(null,
+						new FacesMessage("Codigo enviado, aguarde alguns instantes !"));
+			} else {
+				FacesContext.getCurrentInstance().addMessage(null,
+						new FacesMessage("Usuario não encontrado !"));
+			}
+		} catch (EmailException e) {
+			FacesContext.getCurrentInstance().addMessage(null,
+					new FacesMessage("Erro ao enviar o e-mail", e.toString()));
+			e.printStackTrace();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 	public void trocaModoSelecionado() {
