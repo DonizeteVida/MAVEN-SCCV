@@ -2,7 +2,9 @@ package br.senai.sp.jaguariuna.sccv.uDao;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.Calendar;
 
 import br.senai.sp.jaguariuna.sccv.jdbc.ConnectionDB;
 import br.senai.sp.jaguariuna.sccv.utils.StringToMD5;
@@ -47,6 +49,27 @@ public class AdministradorDao {
 		return ps.executeUpdate() > 0;
 	};
 	
+	public AdministradorDao buscarAdministradorPorNif(String nif) throws SQLException{
+		String sql = "SELECT tudo = ?, WHERE a.nif = ?;";
+				
+		PreparedStatement ps = 	conn.prepareStatement(sql);
+		ps.setString(4,getNif(nif));
+		
+		ResultSet rs = ps.executeQuery();
+		
+		AdministradorDao a = null;
+		if(rs.next()) {
+			a = new AdministradorDao();
+			
+			Calendar c = Calendar.getInstance();
+			c.setTimeInMillis(rs.getLong("idade"));
+			
+			
+		}
+		
+		
+		
+	}
 	
 
 	
