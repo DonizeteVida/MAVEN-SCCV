@@ -59,7 +59,7 @@
 
 						<f:facet name="right">
 							<p:commandLink update=":form:exp" title="Editar">
-								<h:outputText styleClass="fa fa-edit"  style="color:black" />
+								<h:outputText styleClass="fa fa-edit" style="color:black" />
 								<f:setPropertyActionListener value="#{exp}"
 									target="#{alunoEditarCurriculoMBean.experienciaSelecionada}" />
 							</p:commandLink>
@@ -72,7 +72,7 @@
 		<br />
 
 		<h:form id="form2">
-			<p:dataGrid emptyMessage="Não foram formações cadastradas."
+			<p:dataGrid id="form" emptyMessage="Não foram formações cadastradas."
 				var="form" value="#{alunoEditarCurriculoMBean.formacoes}"
 				columns="10" layout="grid">
 
@@ -94,6 +94,25 @@
 						<p:inputText disabled="true" value="#{form.escola}" />
 
 					</h:panelGrid>
+					<br />
+					<p:toolbar styleClass="toolbarCurriculo">
+
+						<f:facet name="left">
+							<p:commandLink update=":form2:form" title="Deletar">
+								<h:outputText styleClass="fa fa-eraser" style="color:black" />
+								<f:setPropertyActionListener value="#{form}"
+									target="#{alunoEditarCurriculoMBean.formacaoSelecionada}" />
+							</p:commandLink>
+						</f:facet>
+
+						<f:facet name="right">
+							<p:commandLink update=":form2:form" title="Editar">
+								<h:outputText styleClass="fa fa-edit" style="color:black" />
+								<f:setPropertyActionListener value="#{form}"
+									target="#{alunoEditarCurriculoMBean.formacaoSelecionada}" />
+							</p:commandLink>
+						</f:facet>
+					</p:toolbar>
 				</p:panel>
 			</p:dataGrid>
 		</h:form>
