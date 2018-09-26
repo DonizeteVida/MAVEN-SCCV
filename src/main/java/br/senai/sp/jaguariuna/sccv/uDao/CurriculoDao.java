@@ -50,14 +50,15 @@ public class CurriculoDao {
 	}
 
 	public boolean inserirFormacao(Formacao formacao, CurriculumVitae curriculumVitae) throws SQLException {
-		String sql = "INSERT INTO formacao(nome, data_inicio, data_fim, id_curriculum_vitae) VALUES (?, ?, ?, ?);";
+		String sql = "INSERT INTO formacao(nome, data_inicio, data_fim, escola, id_curriculum_vitae) VALUES (?, ?, ?, ?, ?);";
 
 		PreparedStatement ps = conn.prepareStatement(sql);
 
 		ps.setString(1, formacao.getNome());
 		ps.setLong(2, formacao.getData_inicio().getTimeInMillis());
 		ps.setLong(3, formacao.getData_fim().getTimeInMillis());
-		ps.setInt(4, curriculumVitae.getId());
+		ps.setString(4, formacao.getEscola());
+		ps.setInt(5, curriculumVitae.getId());
 
 		return ps.executeUpdate() > 0;
 	}
@@ -89,14 +90,17 @@ public class CurriculoDao {
 	}
 
 	public boolean inserirExperiencia(Experiencia experiencia, CurriculumVitae curriculumVitae) throws SQLException {
-		String sql = "INSERT INTO experiencia(nome, data_inicio, data_fim, id_curriculum_vitae) VALUES (?, ?, ?, ?);";
+		String sql = "INSERT INTO experiencia(nome, data_inicio, data_fim, cargo, empresa, funcoes, id_curriculum_vitae) VALUES (?, ?, ?, ?, ?, ?, ?);";
 
 		PreparedStatement ps = conn.prepareStatement(sql);
 
 		ps.setString(1, experiencia.getNome());
 		ps.setLong(2, experiencia.getData_inicio().getTimeInMillis());
 		ps.setLong(3, experiencia.getData_fim().getTimeInMillis());
-		ps.setInt(4, curriculumVitae.getId());
+		ps.setString(4, experiencia.getCargo());
+		ps.setString(5, experiencia.getEmpresa());
+		ps.setString(6, experiencia.getFuncoes());
+		ps.setInt(7, curriculumVitae.getId());
 
 		return ps.executeUpdate() > 0;
 	}

@@ -5773,7 +5773,7 @@ CREATE TABLE formacao(
 	INSERT INTO formacao(nome, data_inicio, data_fim, escola, id_curriculum_vitae) VALUES ("Mestre PHP", 1, 1, "SENAI", 1);
     
     SELECT * FROM formacao;
-    
+        
 CREATE TABLE root_log_alt(
 	id INTEGER NOT NULL PRIMARY KEY AUTO_INCREMENT,
     id_usuario_root INTEGER NOT NULL,
