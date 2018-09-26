@@ -33,6 +33,8 @@ public class AlunoIndexMBean {
 	private String cpfRecuperar;
 	private Mensagem mensagem;
 	private String codigo;
+	private String codEnviado;
+	private String novaSenha;
 
 	public AlunoIndexMBean() {
 		modoSelecionado = "user";
@@ -96,12 +98,16 @@ public class AlunoIndexMBean {
 			if (usuarioLocal != null) {
 				codigo = String.valueOf(Calendar.getInstance().getTimeInMillis());
 				mensagem.setMensagem(codigo);
+				mensagem.setDestinatario(usuarioLocal.getEmail());
+				mensagem.setAssunto("Codigo de Alteração de Senha");
 				EmailUtil.enviaEmail(mensagem);
 				FacesContext.getCurrentInstance().addMessage(null,
 						new FacesMessage("Codigo enviado, aguarde alguns instantes !"));
-			} else {
+
 				FacesContext.getCurrentInstance().addMessage(null,
-						new FacesMessage("Usuario não encontrado !"));
+						new FacesMessage("Verifique sua caixa de entrada, e/ou caixa de spam !"));
+			} else {
+				FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Usuario não encontrado !"));
 			}
 		} catch (EmailException e) {
 			FacesContext.getCurrentInstance().addMessage(null,
@@ -113,11 +119,45 @@ public class AlunoIndexMBean {
 		}
 	}
 
+	public void comparaCod() {
+		if (codigo.equals(codEnviado)) {
+			try {
+				Usuario usuarioLocal = usuarioDao.buscaUsuarioPorCpf(cpfRecuperar);
+				usuarioLocal.setSenha(novaSenha);
+				if(usuarioDao.updateUsuario(usuarioLocal)) {
+					FacesContext.getCurrentInstance().addMessage(null, 
+							new FacesMessage("Senha editada com sucesso"));
+				}
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		} else {
+			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Código incorreto"));
+		}
+	}
+
 	public void trocaModoSelecionado() {
 		modoSelecionado = modoSelecionado.equals("user") ? "admin" : "user";
 		funcaoCPF = modoSelecionado.equals("user")
 				? "!TestaCPF(this.value) ? this.value = '' : this.value; avisoGrowl(TestaCPF(this.value));"
 				: "";
+	}
+
+	public String getNovaSenha() {
+		return novaSenha;
+	}
+
+	public void setNovaSenha(String novaSenha) {
+		this.novaSenha = novaSenha;
+	}
+
+	public String getCodEnviado() {
+		return codEnviado;
+	}
+
+	public void setCodEnviado(String codEnviado) {
+		this.codEnviado = codEnviado;
 	}
 
 	public String getCpfOuNif() {

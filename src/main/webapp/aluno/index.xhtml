@@ -84,12 +84,29 @@
 				</p:panelGrid>
 				<br />
 				<p:commandButton actionListener="#{alunoIndexMBean.enviar}"
-					value="Enviar código"/>
+					value="Enviar código" />
 				<br />
-				<p:commandButton value="Tenho um codigo" onclick="PF(dlg2).show()"/>
+				<br />
 			</h:form>
-			<p:dialog header="Inserir Codigo" widgetVar="dlg2"></p:dialog>
+			<p:commandButton value="Tenho um codigo" onclick="PF('dlg2').show()" />
+			<p:dialog header="Inserir Codigo" widgetVar="dlg2">
+				<h:form>
+
+					<p:panelGrid columns="2">
+						<p:outputLabel value="Insira o codigo enviado " />
+						<p:inputText value="#{alunoIndexMBean.codEnviado}" />
+
+						<p:outputLabel value="Insira a nova Senha " />
+						<p:password value="#{alunoIndexMBean.novaSenha}" />
+					</p:panelGrid>
+					<br />
+					<p:commandButton value="Enviar" actionListener="#{alunoIndexMBean.comparaCod}"/>
+
+				</h:form>
+			</p:dialog>
 		</p:dialog>
+
+
 	</center>
 
 </h:body>
