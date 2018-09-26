@@ -26,6 +26,9 @@ public class AlunoEditarCurriculoMBean {
 	private Experiencia experienciaSelecionada;
 	private Formacao formacaoSelecionada;
 
+	private Formacao inserirFormacao;
+	private Experiencia inserirExperiencia;
+
 	private List<Experiencia> experiencias;
 	private List<Formacao> formacoes;
 
@@ -34,6 +37,10 @@ public class AlunoEditarCurriculoMBean {
 	public AlunoEditarCurriculoMBean() {
 		experienciaSelecionada = new Experiencia();
 		formacaoSelecionada = new Formacao();
+
+		inserirExperiencia = new Experiencia();
+		inserirFormacao = new Formacao();
+
 		curriculoDao = new CurriculoDao();
 		experiencias = new ArrayList<>();
 		formacoes = new ArrayList<>();
@@ -64,6 +71,19 @@ public class AlunoEditarCurriculoMBean {
 				e.printStackTrace();
 				mens(e.toString());
 			}
+		}
+	}
+
+	public void inserirExperienciaM() {
+		try {
+			if (curriculoDao.inserirExperiencia(inserirExperiencia, curriculumAtual)) {
+				mens("Experiencia salva com sucesso");
+				listarTudo();
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			mens(e.toString());
 		}
 	}
 
@@ -114,6 +134,22 @@ public class AlunoEditarCurriculoMBean {
 
 	public void setFormacaoSelecionada(Formacao formacaoSelecionada) {
 		this.formacaoSelecionada = formacaoSelecionada;
+	}
+
+	public Formacao getInserirFormacao() {
+		return inserirFormacao;
+	}
+
+	public void setInserirFormacao(Formacao inserirFormacao) {
+		this.inserirFormacao = inserirFormacao;
+	}
+
+	public Experiencia getInserirExperiencia() {
+		return inserirExperiencia;
+	}
+
+	public void setInserirExperiencia(Experiencia inserirExperiencia) {
+		this.inserirExperiencia = inserirExperiencia;
 	}
 
 }

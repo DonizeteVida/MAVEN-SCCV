@@ -5,7 +5,8 @@ import java.util.Calendar;
 public class Experiencia {
 
 	public Experiencia() {
-
+		data_fim = Calendar.getInstance();
+		data_inicio = Calendar.getInstance();
 	}
 
 	public Experiencia(Integer id, String nome, Calendar data_inicio, Calendar data_fim, String cargo, String empresa,
