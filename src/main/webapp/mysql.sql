@@ -5758,8 +5758,6 @@ CREATE TABLE experiencia(
     FOREIGN KEY (id_curriculum_vitae) REFERENCES curriculum_vitae(id)
 );
 
-	INSERT INTO experiencia(nome, data_inicio, data_fim, cargo, empresa, funcoes, id_curriculum_vitae) VALUES ("Produção", 1, 1, "Auxiliar de produção", "Jaguar Plásticos", "Eu empilhava baldes", 1);
-
 
 CREATE TABLE formacao(
 	id INTEGER NOT NULL PRIMARY KEY AUTO_INCREMENT,
@@ -5770,9 +5768,7 @@ CREATE TABLE formacao(
     id_curriculum_vitae INTEGER NOT NULL,
     FOREIGN KEY (id_curriculum_vitae) REFERENCES curriculum_vitae(id)
 );
-	INSERT INTO formacao(nome, data_inicio, data_fim, escola, id_curriculum_vitae) VALUES ("Mestre PHP", 1, 1, "SENAI", 1);
     
-    SELECT * FROM formacao;
         
 CREATE TABLE root_log_alt(
 	id INTEGER NOT NULL PRIMARY KEY AUTO_INCREMENT,

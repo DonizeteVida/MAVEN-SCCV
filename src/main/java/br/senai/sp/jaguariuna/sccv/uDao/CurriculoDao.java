@@ -22,6 +22,16 @@ public class CurriculoDao {
 		conn = ConnectionDB.getConnection();
 	}
 
+	public boolean deletarFormacao(Formacao form) throws SQLException {
+		String sql = "DELETE FROM formacao WHERE id = ?;";
+
+		PreparedStatement ps = conn.prepareStatement(sql);
+
+		ps.setInt(1, form.getId());
+
+		return ps.executeUpdate() > 0;
+	}
+
 	public List<Formacao> listarFormacoes(CurriculumVitae curriculumVitae) throws SQLException {
 		String sql = "SELECT * FROM formacao WHERE id_curriculum_vitae = ?;";
 
@@ -47,6 +57,20 @@ public class CurriculoDao {
 		}
 
 		return formacoes;
+	}
+
+	public boolean editarFormacao(Formacao formacao) throws SQLException {
+		String sql = "UPDATE formacao SET nome = ?, data_inicio = ?, data_fim = ?, escola = ? WHERE id = ?;";
+
+		PreparedStatement ps = conn.prepareStatement(sql);
+
+		ps.setString(1, formacao.getNome());
+		ps.setLong(2, formacao.getData_inicio().getTimeInMillis());
+		ps.setLong(3, formacao.getData_fim().getTimeInMillis());
+		ps.setString(4, formacao.getEscola());
+		ps.setInt(5, formacao.getId());
+
+		return ps.executeUpdate() > 0;
 	}
 
 	public boolean inserirFormacao(Formacao formacao, CurriculumVitae curriculumVitae) throws SQLException {
@@ -115,6 +139,22 @@ public class CurriculoDao {
 		return ps.executeUpdate() > 0;
 	}
 
+	public boolean editarExperiencia(Experiencia experiencia) throws SQLException {
+		String sql = "UPDATE experiencia SET nome = ?, data_inicio = ?, data_fim = ?, cargo = ?, empresa = ?, funcoes = ? WHERE id = ?;";
+
+		PreparedStatement ps = conn.prepareStatement(sql);
+
+		ps.setString(1, experiencia.getNome());
+		ps.setLong(2, experiencia.getData_inicio().getTimeInMillis());
+		ps.setLong(3, experiencia.getData_fim().getTimeInMillis());
+		ps.setString(4, experiencia.getCargo());
+		ps.setString(5, experiencia.getEmpresa());
+		ps.setString(6, experiencia.getFuncoes());
+		ps.setInt(7, experiencia.getId());
+
+		return ps.executeUpdate() > 0;
+	}
+
 	public boolean criarCurriculo(CurriculumVitae c, Usuario u) throws SQLException {
 		String sql = "INSERT INTO curriculum_vitae(data_criacao, id_curso, id_turma, semestre, id_usuario) VALUES (?, ?, ?, ?, ?);";
 
@@ -147,7 +187,7 @@ public class CurriculoDao {
 
 			c.setId(rs.getInt("id"));
 			c.setPeso(rs.getInt("peso"));
-			c.setData_criacao(rs.getLong("data_criacao"));
+			c.getData_criacao().setTimeInMillis(rs.getLong("data_criacao"));
 			c.getCurso().setId(rs.getInt("id_curso"));
 			c.getCurso().setNome(rs.getString("nomeCurso"));
 			c.getTurma().setId(rs.getInt("id_turma"));
@@ -181,7 +221,7 @@ public class CurriculoDao {
 
 			c.setId(rs.getInt("id"));
 			c.setPeso(rs.getInt("peso"));
-			c.setData_criacao(rs.getLong("data_criacao"));
+			c.getData_criacao().setTimeInMillis(rs.getLong("data_criacao"));
 			c.getCurso().setId(rs.getInt("id_curso"));
 			c.getCurso().setNome(rs.getString("nomeCurso"));
 			c.getTurma().setId(rs.getInt("id_turma"));
