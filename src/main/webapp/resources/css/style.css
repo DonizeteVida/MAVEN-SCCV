@@ -3,11 +3,12 @@
 .toolbar {
 	background-color: red;
 	width: 100%;
-	position: absolute;
-	height: 2%;
+	position: fixed;
+	height: 4%;
 	left: 0px;
 	right: 0px;
 	bottom: 0px;
+	z-index: 999;
 }
 
 .toolbar_text {
@@ -28,6 +29,16 @@
 	opacity: 1 !important;
 }
 
+.dialogRec {
+	height: 50%;
+	width: 50% ;
+
+}
+
 .toolbarCurriculo {
 	background: white !important;
+}
+
+.opacityOnly input {
+	opacity: 1 !important;
 }

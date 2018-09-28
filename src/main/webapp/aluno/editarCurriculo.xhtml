@@ -11,8 +11,21 @@
 			<p:autoUpdate />
 		</p:growl>
 
-		<p:outputLabel
-			value="#{alunoEditarCurriculoMBean.curriculumAtual.curso.nome}" />
+		<p:panel>
+			<center>
+				<p:panelGrid columns="2" style="text-align: center;">
+					
+					Nome do curso: 
+					<p:outputLabel
+						value="#{alunoEditarCurriculoMBean.curriculumAtual.curso.nome}" />
+
+					Data da criação do curriculo: 
+					<p:calendar
+						value="#{alunoEditarCurriculoMBean.curriculumAtual.data_criacao.time}"
+						pattern="dd/MM/yyyy" style="text-align: center;" />
+				</p:panelGrid>
+			</center>
+		</p:panel>
 
 		<h:form id="form">
 			<p:dataGrid id="exp"
@@ -50,7 +63,9 @@
 					<p:toolbar styleClass="toolbarCurriculo">
 
 						<f:facet name="left">
-							<p:commandLink update=":form:exp" title="Deletar">
+							<p:commandLink update=":form:exp"
+								action="#{alunoEditarCurriculoMBean.deletarExperienciaM}"
+								title="Deletar">
 								<h:outputText styleClass="fa fa-eraser" style="color:black" />
 								<f:setPropertyActionListener value="#{exp}"
 									target="#{alunoEditarCurriculoMBean.experienciaSelecionada}" />
@@ -58,7 +73,8 @@
 						</f:facet>
 
 						<f:facet name="right">
-							<p:commandLink update=":form:exp" title="Editar">
+							<p:commandLink update="editarExperiencia" title="Editar"
+								oncomplete="PF('editarExperiencia').show();">
 								<h:outputText styleClass="fa fa-edit" style="color:black" />
 								<f:setPropertyActionListener value="#{exp}"
 									target="#{alunoEditarCurriculoMBean.experienciaSelecionada}" />
@@ -98,7 +114,8 @@
 					<p:toolbar styleClass="toolbarCurriculo">
 
 						<f:facet name="left">
-							<p:commandLink update=":form2:form" title="Deletar">
+							<p:commandLink update=":form2:form" title="Deletar"
+								action="#{alunoEditarCurriculoMBean.deletarFormacaoM}">
 								<h:outputText styleClass="fa fa-eraser" style="color:black" />
 								<f:setPropertyActionListener value="#{form}"
 									target="#{alunoEditarCurriculoMBean.formacaoSelecionada}" />
@@ -106,7 +123,8 @@
 						</f:facet>
 
 						<f:facet name="right">
-							<p:commandLink update=":form2:form" title="Editar">
+							<p:commandLink update="editarFormacao" title="Editar"
+								oncomplete="PF('editarFormacao').show();">
 								<h:outputText styleClass="fa fa-edit" style="color:black" />
 								<f:setPropertyActionListener value="#{form}"
 									target="#{alunoEditarCurriculoMBean.formacaoSelecionada}" />
@@ -141,29 +159,35 @@
 					<p:panelGrid columns="2">
 
 						<p:outputLabel value="Nome da experiencia: " />
-						<p:inputText
+						<p:inputText required="true"
+							requiredMessage="Insira o nome da experiencia"
 							value="#{alunoEditarCurriculoMBean.inserirExperiencia.nome}" />
 
 						<p:outputLabel value="Data inicio: " />
-						<p:calendar
+						<p:calendar required="true"
+							requiredMessage="Insira data inicio da experiencia"
 							value="#{alunoEditarCurriculoMBean.inserirExperiencia.data_inicio.time}"
 							pattern="dd/MM/yyyy" />
 
 						<p:outputLabel value="Data fim: " />
-						<p:calendar
+						<p:calendar required="true"
+							requiredMessage="Insira a data fim da experiencia"
 							value="#{alunoEditarCurriculoMBean.inserirExperiencia.data_fim.time}"
 							pattern="dd/MM/yyyy" />
 
 						<p:outputLabel value="Nome do cargo: " />
-						<p:inputText
+						<p:inputText required="true"
+							requiredMessage="Insira o nome do cargo da experiencia"
 							value="#{alunoEditarCurriculoMBean.inserirExperiencia.cargo}" />
 
 						<p:outputLabel value="Nome da empresa: " />
-						<p:inputText
+						<p:inputText required="true"
+							requiredMessage="Insira o nome da empresa da experiencia"
 							value="#{alunoEditarCurriculoMBean.inserirExperiencia.empresa}" />
 
 						<p:outputLabel value="Suas funções: " />
-						<p:inputText
+						<p:inputText required="true"
+							requiredMessage="Insira suas funções da experiencia"
 							value="#{alunoEditarCurriculoMBean.inserirExperiencia.funcoes}" />
 
 
@@ -181,6 +205,136 @@
 
 		<p:dialog header="Insira a sua formação" widgetVar="inserirFormacao"
 			resizable="true" responsive="true" closable="true">
+
+			<h:form>
+				<center>
+					<p:panelGrid columns="2">
+
+						<p:outputLabel value="Nome da formacao: " />
+						<p:inputText required="true"
+							requiredMessage="Insira o nome da formação"
+							value="#{alunoEditarCurriculoMBean.inserirFormacao.nome}" />
+
+						<p:outputLabel value="Data inicio: " />
+						<p:calendar required="true"
+							requiredMessage="Insira a data inicio da formação"
+							value="#{alunoEditarCurriculoMBean.inserirFormacao.data_inicio.time}"
+							pattern="dd/MM/yyyy" />
+
+						<p:outputLabel value="Data fim: " />
+						<p:calendar required="true"
+							requiredMessage="Insira a data fim da formação"
+							value="#{alunoEditarCurriculoMBean.inserirFormacao.data_fim.time}"
+							pattern="dd/MM/yyyy" />
+
+						<p:outputLabel value="Nome da escola: " />
+						<p:inputText required="true"
+							requiredMessage="Insira o nome da escola da formação"
+							value="#{alunoEditarCurriculoMBean.inserirFormacao.escola}" />
+
+					</p:panelGrid>
+
+					<br />
+
+					<p:commandButton value="Salvar sua formacao" ajax="true"
+						update=":form2:form"
+						actionListener="#{alunoEditarCurriculoMBean.inserirFormacaoM}" />
+				</center>
+			</h:form>
+
+		</p:dialog>
+
+		<p:dialog header="Altere a sua experiencia"
+			widgetVar="editarExperiencia" id="editarExperiencia" resizable="true"
+			responsive="true" closable="true">
+			<h:form>
+				<center>
+					<p:panelGrid columns="2">
+
+						<p:outputLabel value="Nome da experiencia: " />
+						<p:inputText required="true"
+							requiredMessage="Insira o nome da experiencia"
+							value="#{alunoEditarCurriculoMBean.experienciaSelecionada.nome}" />
+
+						<p:outputLabel value="Data inicio: " />
+						<p:calendar required="true"
+							requiredMessage="Insira a data inicio da experiencia"
+							value="#{alunoEditarCurriculoMBean.experienciaSelecionada.data_inicio.time}"
+							pattern="dd/MM/yyyy" />
+
+						<p:outputLabel value="Data fim: " />
+						<p:calendar required="true"
+							requiredMessage="Insira a data fim da experiencia"
+							value="#{alunoEditarCurriculoMBean.experienciaSelecionada.data_fim.time}"
+							pattern="dd/MM/yyyy" />
+
+						<p:outputLabel value="Nome do cargo: " />
+						<p:inputText required="true"
+							requiredMessage="Insira o nome do cargo da experiencia"
+							value="#{alunoEditarCurriculoMBean.experienciaSelecionada.cargo}" />
+
+						<p:outputLabel value="Nome da empresa: " />
+						<p:inputText required="true"
+							requiredMessage="Insira o nome da empresa da experiencia"
+							value="#{alunoEditarCurriculoMBean.experienciaSelecionada.empresa}" />
+
+						<p:outputLabel value="Suas funções: " />
+						<p:inputText required="true"
+							requiredMessage="Insira suas funções da experiencia"
+							value="#{alunoEditarCurriculoMBean.experienciaSelecionada.funcoes}" />
+
+
+					</p:panelGrid>
+
+					<br />
+
+					<p:commandButton value="Salvar sua experiencia" ajax="true"
+						update=":form:exp"
+						actionListener="#{alunoEditarCurriculoMBean.editarExperienciaM}" />
+				</center>
+			</h:form>
+
+		</p:dialog>
+
+		<p:dialog header="Altere a sua formação" id="editarFormacao"
+			widgetVar="editarFormacao" resizable="true" responsive="true"
+			closable="true">
+
+			<h:form>
+				<center>
+					<p:panelGrid columns="2">
+
+						<p:outputLabel value="Nome da formacao: " />
+						<p:inputText required="true"
+							requiredMessage="Insira o nome da formação"
+							value="#{alunoEditarCurriculoMBean.formacaoSelecionada.nome}" />
+
+						<p:outputLabel value="Data inicio: " />
+						<p:calendar required="true"
+							requiredMessage="Insira a data inicio da formação"
+							value="#{alunoEditarCurriculoMBean.formacaoSelecionada.data_inicio.time}"
+							pattern="dd/MM/yyyy" />
+
+						<p:outputLabel value="Data fim: " />
+						<p:calendar required="true"
+							requiredMessage="Insira a data fim da formação"
+							value="#{alunoEditarCurriculoMBean.formacaoSelecionada.data_fim.time}"
+							pattern="dd/MM/yyyy" />
+
+						<p:outputLabel value="Nome da escola: " />
+						<p:inputText required="true"
+							requiredMessage="Insira o nome da escola da formação"
+							value="#{alunoEditarCurriculoMBean.formacaoSelecionada.escola}" />
+
+					</p:panelGrid>
+
+					<br />
+
+					<p:commandButton value="Salvar sua formacao" ajax="true"
+						update=":form2:form"
+						actionListener="#{alunoEditarCurriculoMBean.editarFormacaoM}" />
+				</center>
+			</h:form>
 
 		</p:dialog>
 

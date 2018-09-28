@@ -6,6 +6,7 @@
 	xmlns:p="http://primefaces.org/ui"
 	xmlns:ui="http://java.sun.com/jsf/facelets">
 <h:head>
+	<h:outputStylesheet library="css" name="style.css" />
 	<title>Login</title>
 	<h:outputScript library="script" name="javascript.js" />
 </h:head>
@@ -73,19 +74,47 @@
 			</p:commandLink>
 		</p:panel>
 		<br />
-		<p:dialog header="Recuperar senha: " widgetVar="dlg1" width="50%"
-			height="50%" maximizable="true" draggable="true">
-			<h:form>
-			
+		<p:dialog styleClass="dialogRec" id="block" header="Recuperar senha: "
+			widgetVar="dlg1">
+			<h:form id="formEnviar">
+
 				<p:panelGrid columns="2">
 					<p:outputLabel value="Insira seu CPF: " />
-					<p:inputMask mask="999.999.999-99" value="#{alunoIndexMBean.cpfRecuperar}" />
+					<p:inputMask mask="999.999.999-99" required="true"
+						value="#{alunoIndexMBean.cpfRecuperar}" />
 				</p:panelGrid>
-				<br/>
-				<p:commandButton value="Enviar código" />
-				<br/>
+				<br />
+				<p:commandButton id="btEnviarcod"
+					actionListener="#{alunoIndexMBean.enviar}" value="Enviar código" />
+				<br />
+				<br />
 			</h:form>
+			<p:commandButton value="Tenho um codigo" onclick="PF('dlg2').show()" />
+			<p:dialog header="Inserir Codigo" widgetVar="dlg2">
+				<h:form>
+
+					<p:panelGrid columns="2">
+						<p:outputLabel value="Insira o codigo enviado " />
+						<p:inputText value="#{alunoIndexMBean.codEnviado}" />
+
+						<p:outputLabel value="Insira a nova Senha " />
+						<p:password value="#{alunoIndexMBean.novaSenha}" />
+					</p:panelGrid>
+					<br />
+					<p:commandButton value="Enviar"
+						actionListener="#{alunoIndexMBean.comparaCod}"
+						oncomplete="PF('dlg2').hide()" />
+
+				</h:form>
+			</p:dialog>
 		</p:dialog>
+
+		<p:blockUI block="block" trigger=":formEnviar:btEnviarcod">
+        CARREGANDO<br />
+			<p:graphicImage library="images" name="carregar.gif" />
+		</p:blockUI>
+
+
 	</center>
 
 </h:body>

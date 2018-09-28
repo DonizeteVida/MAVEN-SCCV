@@ -1,5 +1,7 @@
 package br.senai.sp.jaguariuna.sccv.entities;
 
+import java.util.Calendar;
+
 import br.senai.sp.jaguariuna.sccv.subEntities.ClasseGenerica;
 
 public class CurriculumVitae {
@@ -11,12 +13,13 @@ public class CurriculumVitae {
 		categoria = new ClasseGenerica();
 		usuario = new Usuario();
 		semestre = new Integer(1);
+		data_criacao = Calendar.getInstance();
 	}
 
 	private Integer semestre;
 	private Integer id;
 	private Integer peso;
-	private Long data_criacao;
+	private Calendar data_criacao;
 	private ClasseGenerica curso;
 	private ClasseGenerica turma;
 	private ClasseGenerica status;
@@ -39,11 +42,11 @@ public class CurriculumVitae {
 		this.peso = peso;
 	}
 
-	public long getData_criacao() {
+	public Calendar getData_criacao() {
 		return data_criacao;
 	}
 
-	public void setData_criacao(long data_criacao) {
+	public void setData_criacao(Calendar data_criacao) {
 		this.data_criacao = data_criacao;
 	}
 
@@ -97,10 +100,6 @@ public class CurriculumVitae {
 
 	public void setPeso(Integer peso) {
 		this.peso = peso;
-	}
-
-	public void setData_criacao(Long data_criacao) {
-		this.data_criacao = data_criacao;
 	}
 
 	public Usuario getUsuario() {
