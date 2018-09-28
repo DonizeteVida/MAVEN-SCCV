@@ -187,7 +187,7 @@ public class CurriculoDao {
 
 			c.setId(rs.getInt("id"));
 			c.setPeso(rs.getInt("peso"));
-			c.setData_criacao(rs.getLong("data_criacao"));
+			c.getData_criacao().setTimeInMillis(rs.getLong("data_criacao"));
 			c.getCurso().setId(rs.getInt("id_curso"));
 			c.getCurso().setNome(rs.getString("nomeCurso"));
 			c.getTurma().setId(rs.getInt("id_turma"));
@@ -221,7 +221,7 @@ public class CurriculoDao {
 
 			c.setId(rs.getInt("id"));
 			c.setPeso(rs.getInt("peso"));
-			c.setData_criacao(rs.getLong("data_criacao"));
+			c.getData_criacao().setTimeInMillis(rs.getLong("data_criacao"));
 			c.getCurso().setId(rs.getInt("id_curso"));
 			c.getCurso().setNome(rs.getString("nomeCurso"));
 			c.getTurma().setId(rs.getInt("id_turma"));

@@ -4,7 +4,6 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.Calendar;
 
 import br.senai.sp.jaguariuna.sccv.entities.Usuario;
 import br.senai.sp.jaguariuna.sccv.jdbc.ConnectionDB;
@@ -77,14 +76,11 @@ public class UsuarioDao {
 		if (rs.next()) {
 			u = new Usuario();
 
-			Calendar c = Calendar.getInstance();
-			c.setTimeInMillis(rs.getLong("idade"));
-
 			u.setId(rs.getInt("id"));
 			u.setNome(rs.getString("nome"));
 			u.setEmail(rs.getString("email"));
 			u.setSenha(rs.getString("senha"));
-			u.setIdade(c);
+			u.getIdade().setTimeInMillis(rs.getLong("idade"));
 			u.setCpf(rs.getString("cpf"));
 			u.setRg(rs.getString("rg"));
 			u.getStatus().setId(rs.getInt("id_status"));
@@ -120,14 +116,11 @@ public class UsuarioDao {
 		if (rs.next()) {
 			u = new Usuario();
 
-			Calendar c = Calendar.getInstance();
-			c.setTimeInMillis(rs.getLong("idade"));
-
 			u.setId(rs.getInt("id"));
 			u.setNome(rs.getString("nome"));
 			u.setEmail(rs.getString("email"));
 			u.setSenha(rs.getString("senha"));
-			u.setIdade(c);
+			u.getIdade().setTimeInMillis(rs.getLong("idade"));
 			u.setCpf(rs.getString("cpf"));
 			u.setRg(rs.getString("rg"));
 			u.getStatus().setId(rs.getInt("id_status"));
