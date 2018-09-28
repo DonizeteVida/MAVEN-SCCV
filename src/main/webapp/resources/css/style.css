@@ -28,6 +28,12 @@
 	opacity: 1 !important;
 }
 
+.dialogRec {
+	height: 50%;
+	width: 50% ;
+
+}
+
 .toolbarCurriculo {
 	background: white !important;
 }
