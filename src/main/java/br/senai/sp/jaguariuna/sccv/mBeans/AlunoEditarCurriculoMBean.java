@@ -103,6 +103,7 @@ public class AlunoEditarCurriculoMBean {
 			if (curriculoDao.inserirExperiencia(inserirExperiencia, curriculumAtual)) {
 				mens("Experiencia salva com sucesso");
 				listarTudo();
+				inserirExperiencia = new Experiencia();
 			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block

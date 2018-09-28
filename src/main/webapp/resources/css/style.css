@@ -4,7 +4,7 @@
 	background-color: red;
 	width: 100%;
 	position: fixed;
-	height: 4%;
+	height: 3%;
 	left: 0px;
 	right: 0px;
 	bottom: 0px;
@@ -14,6 +14,7 @@
 .toolbar_text {
 	font-family: sans-serif;
 	color: white;
+	
 }
 
 .datagrid td {
@@ -29,11 +30,6 @@
 	opacity: 1 !important;
 }
 
-.dialogRec {
-	height: 50%;
-	width: 50% ;
-
-}
 
 .toolbarCurriculo {
 	background: white !important;
