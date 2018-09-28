@@ -27,6 +27,7 @@ public class AlunoCadastroCurriculoMBean {
 	private CurriculumVitae curriculumVitae;
 	private List<ClasseGenerica> cursos;
 	private List<ClasseGenerica> turmas;
+	private List<ClasseGenerica> categorias;
 	private CurriculoDao curriculoDao;
 
 	private ClasseGenericaDao classeGenericaDao;
@@ -38,11 +39,18 @@ public class AlunoCadastroCurriculoMBean {
 		classeGenericaDao = new ClasseGenericaDao();
 		curriculoDao = new CurriculoDao();
 		try {
-			cursos = classeGenericaDao.buscaCurso();
+			categorias = classeGenericaDao.buscaCategoria();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+	}
+
+	@ManagedProperty(value = "#{alunoHomeMBean}")
+	private AlunoHomeMBean alunoHomeMBean;
+
+	public void setAlunoHomeMBean(AlunoHomeMBean alunoHomeMBean) {
+		this.alunoHomeMBean = alunoHomeMBean;
 	}
 
 	@ManagedProperty(value = "#{alunoIndexMBean}")
@@ -56,7 +64,16 @@ public class AlunoCadastroCurriculoMBean {
 	void post() {
 		try {
 			usuario = usuarioDao.buscaUsuarioPorCpf(alunoIndexMBean.getUsuario().getCpf());
-			curriculumVitae.setUsuario(alunoIndexMBean.getUsuario());
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			mens(e.toString());
+		}
+	}
+
+	public void buscaCurso() {
+		try {
+			cursos = classeGenericaDao.buscaCurso(curriculumVitae.getCategoria().getId());
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -73,16 +90,25 @@ public class AlunoCadastroCurriculoMBean {
 		}
 	}
 
+	public List<ClasseGenerica> getCategorias() {
+		return categorias;
+	}
+
+	public void setCategorias(List<ClasseGenerica> categorias) {
+		this.categorias = categorias;
+	}
+
 	public String salvarCurriculo() {
 		try {
 			if (curriculoDao.listarCurriculo(usuario.getId(), curriculumVitae.getCurso().getId()).size() == 0) {
-				if (curriculoDao.criarCurriculo(curriculumVitae)) {
+				if (curriculoDao.criarCurriculo(curriculumVitae, usuario)) {
 					FacesContext.getCurrentInstance().getExternalContext().getFlash().setKeepMessages(true);
+					alunoHomeMBean.listarCurriculo();
 					mens("Curriculo criado com sucesso !");
 
 					return "home?faces-redirect=true";
 				} else {
-					mens("Falha ao salvar usuario !");
+					mens("Falha ao salvar um novo curriculo !");
 					return null;
 				}
 			} else {

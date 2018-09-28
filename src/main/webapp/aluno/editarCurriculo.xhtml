@@ -7,5 +7,182 @@
 	xmlns:f="http://java.sun.com/jsf/core">
 	<ui:define name="Conteudo">
 
+		<p:growl>
+			<p:autoUpdate />
+		</p:growl>
+
+		<p:outputLabel
+			value="#{alunoEditarCurriculoMBean.curriculumAtual.curso.nome}" />
+
+		<h:form id="form">
+			<p:dataGrid id="exp"
+				emptyMessage="Não foram experiencias cadastradas." var="exp"
+				value="#{alunoEditarCurriculoMBean.experiencias}" columns="10"
+				layout="grid">
+
+
+				<f:facet name="header">
+					<p:outputLabel value="Suas experiencias" />
+				</f:facet>
+				<p:panel header="#{exp.nome}" styleClass="panel">
+					<h:panelGrid columns="2" styleClass="datagrid">
+						Data inicio: 
+						<p:calendar disabled="true" value="#{exp.data_inicio.time}"
+							pattern="dd/MM/yyyy" />
+						
+						Data fim:
+						<p:calendar disabled="true" value="#{exp.data_fim.time}"
+							pattern="dd/MM/yyyy" />
+						
+						Cargo:
+						<p:inputText disabled="true" value="#{exp.cargo}" />
+						
+						Empresa:
+						<p:inputText disabled="true" value="#{exp.empresa}" />
+						
+						Funções:
+						<p:outputLabel value="#{exp.funcoes}" />
+
+					</h:panelGrid>
+
+					<br />
+
+					<p:toolbar styleClass="toolbarCurriculo">
+
+						<f:facet name="left">
+							<p:commandLink update=":form:exp" title="Deletar">
+								<h:outputText styleClass="fa fa-eraser" style="color:black" />
+								<f:setPropertyActionListener value="#{exp}"
+									target="#{alunoEditarCurriculoMBean.experienciaSelecionada}" />
+							</p:commandLink>
+						</f:facet>
+
+						<f:facet name="right">
+							<p:commandLink update=":form:exp" title="Editar">
+								<h:outputText styleClass="fa fa-edit" style="color:black" />
+								<f:setPropertyActionListener value="#{exp}"
+									target="#{alunoEditarCurriculoMBean.experienciaSelecionada}" />
+							</p:commandLink>
+						</f:facet>
+					</p:toolbar>
+				</p:panel>
+			</p:dataGrid>
+		</h:form>
+
+		<br />
+
+		<h:form id="form2">
+			<p:dataGrid id="form" emptyMessage="Não foram formações cadastradas."
+				var="form" value="#{alunoEditarCurriculoMBean.formacoes}"
+				columns="10" layout="grid">
+
+
+				<f:facet name="header">
+					<p:outputLabel value="Suas formações" />
+				</f:facet>
+				<p:panel header="#{form.nome}" styleClass="panel">
+					<h:panelGrid columns="2" styleClass="datagrid">
+						Data inicio: 
+						<p:calendar disabled="true" value="#{form.data_inicio.time}"
+							pattern="dd/MM/yyyy" />
+						
+						Data fim:
+						<p:calendar disabled="true" value="#{form.data_fim.time}"
+							pattern="dd/MM/yyyy" />
+						
+						Escola:
+						<p:inputText disabled="true" value="#{form.escola}" />
+
+					</h:panelGrid>
+					<br />
+					<p:toolbar styleClass="toolbarCurriculo">
+
+						<f:facet name="left">
+							<p:commandLink update=":form2:form" title="Deletar">
+								<h:outputText styleClass="fa fa-eraser" style="color:black" />
+								<f:setPropertyActionListener value="#{form}"
+									target="#{alunoEditarCurriculoMBean.formacaoSelecionada}" />
+							</p:commandLink>
+						</f:facet>
+
+						<f:facet name="right">
+							<p:commandLink update=":form2:form" title="Editar">
+								<h:outputText styleClass="fa fa-edit" style="color:black" />
+								<f:setPropertyActionListener value="#{form}"
+									target="#{alunoEditarCurriculoMBean.formacaoSelecionada}" />
+							</p:commandLink>
+						</f:facet>
+					</p:toolbar>
+				</p:panel>
+			</p:dataGrid>
+		</h:form>
+
+		<br />
+
+		<p:toolbar styleClass="toolbarCurriculo">
+			<f:facet name="left">
+				<p:commandButton onclick="PF('inserirExperiencia').show();"
+					value="Inserir experiencia" />
+			</f:facet>
+
+			<f:facet name="right">
+				<p:commandButton onclick="PF('inserirFormacao').show();"
+					value="Inserir formação" />
+			</f:facet>
+		</p:toolbar>
+
+		<br />
+
+		<p:dialog header="Insira a sua experiencia"
+			widgetVar="inserirExperiencia" resizable="true" responsive="true"
+			closable="true">
+			<h:form>
+				<center>
+					<p:panelGrid columns="2">
+
+						<p:outputLabel value="Nome da experiencia: " />
+						<p:inputText
+							value="#{alunoEditarCurriculoMBean.inserirExperiencia.nome}" />
+
+						<p:outputLabel value="Data inicio: " />
+						<p:calendar
+							value="#{alunoEditarCurriculoMBean.inserirExperiencia.data_inicio.time}"
+							pattern="dd/MM/yyyy" />
+
+						<p:outputLabel value="Data fim: " />
+						<p:calendar
+							value="#{alunoEditarCurriculoMBean.inserirExperiencia.data_fim.time}"
+							pattern="dd/MM/yyyy" />
+
+						<p:outputLabel value="Nome do cargo: " />
+						<p:inputText
+							value="#{alunoEditarCurriculoMBean.inserirExperiencia.cargo}" />
+
+						<p:outputLabel value="Nome da empresa: " />
+						<p:inputText
+							value="#{alunoEditarCurriculoMBean.inserirExperiencia.empresa}" />
+
+						<p:outputLabel value="Suas funções: " />
+						<p:inputText
+							value="#{alunoEditarCurriculoMBean.inserirExperiencia.funcoes}" />
+
+
+					</p:panelGrid>
+
+					<br />
+
+					<p:commandButton value="Salvar sua experiencia" ajax="true"
+						update=":form:exp"
+						actionListener="#{alunoEditarCurriculoMBean.inserirExperienciaM}" />
+				</center>
+			</h:form>
+
+		</p:dialog>
+
+		<p:dialog header="Insira a sua formação" widgetVar="inserirFormacao"
+			resizable="true" responsive="true" closable="true">
+
+		</p:dialog>
+
 	</ui:define>
 </ui:composition>

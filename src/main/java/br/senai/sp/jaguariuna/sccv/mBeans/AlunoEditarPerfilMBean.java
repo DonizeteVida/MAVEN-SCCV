@@ -29,6 +29,7 @@ public class AlunoEditarPerfilMBean {
 	private List<ClasseGenerica> turmas;
 	private List<ClasseGenerica> estados;
 	private List<ClasseGenerica> cidades;
+	private List<ClasseGenerica> categorias;
 	private String antigaSenha;
 	private String antigaSenhaDigitada;
 
@@ -37,11 +38,12 @@ public class AlunoEditarPerfilMBean {
 		turmas = new ArrayList<ClasseGenerica>();
 		cursos = new ArrayList<ClasseGenerica>();
 		estados = new ArrayList<ClasseGenerica>();
+		categorias = new ArrayList<>();
 
 		classeGenericaDao = new ClasseGenericaDao();
 		try {
-			cursos = classeGenericaDao.buscaCurso();
 			estados = classeGenericaDao.buscaEstado();
+			categorias = classeGenericaDao.buscaCategoria();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -61,7 +63,18 @@ public class AlunoEditarPerfilMBean {
 			usuario = usuarioDao.buscaUsuarioPorCpf(alunoIndexMBean.getUsuario().getCpf());
 			turmas = classeGenericaDao.buscaTurma(usuario.getCurso().getId());
 			cidades = classeGenericaDao.buscaCidade(usuario.getEstado().getId());
+			cursos = classeGenericaDao.buscaCurso(usuario.getCategoria().getId());
 			antigaSenha = usuario.getSenha();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			mensagem(e.toString());
+		}
+	}
+
+	public void buscaCurso() {
+		try {
+			cursos = classeGenericaDao.buscaCurso(usuario.getCategoria().getId());
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -87,6 +100,14 @@ public class AlunoEditarPerfilMBean {
 			e.printStackTrace();
 			mensagem(e.toString());
 		}
+	}
+
+	public List<ClasseGenerica> getCategorias() {
+		return categorias;
+	}
+
+	public void setCategorias(List<ClasseGenerica> categorias) {
+		this.categorias = categorias;
 	}
 
 	public String getAntigaSenhaDigitada() {
@@ -126,18 +147,18 @@ public class AlunoEditarPerfilMBean {
 	}
 
 	public String salvarUsuario() {
-		if(antigaSenha.equals(StringToMD5.convertStringToMd5(antigaSenhaDigitada))) {
+		if (antigaSenha.equals(StringToMD5.convertStringToMd5(antigaSenhaDigitada))) {
 			try {
-				if(usuarioDao.updateUsuario(usuario)) {
+				if (usuarioDao.updateUsuario(usuario)) {
 					mensagem("Usuario atualizado com sucesso !");
 					FacesContext.getCurrentInstance().getExternalContext().getFlash().setKeepMessages(true);
-					
+
 					SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
-					
+
 					System.out.println(sdf.format(usuario.getIdade().getTimeInMillis()));
-					
+
 					return "visualizarPerfil?faces-redirect=true";
-				}else {
+				} else {
 					mensagem("Falha ao atualizar o usuario !");
 					FacesContext.getCurrentInstance().getExternalContext().getFlash().setKeepMessages(true);
 					return "";
@@ -147,8 +168,8 @@ public class AlunoEditarPerfilMBean {
 				e.printStackTrace();
 				mensagem(e.toString());
 			}
-		}else {
-			mensagem("As senhas digitadas são incorretas");
+		} else {
+			mensagem("As senhas digitadas sï¿½o incorretas");
 			return null;
 		}
 		return null;

@@ -18,10 +18,28 @@ public class ClasseGenericaDao {
 		conn = ConnectionDB.getConnection();
 	}
 
-	public List<ClasseGenerica> buscaCurso() throws SQLException {
-		String sql = "SELECT * FROM curso;";
+	public List<ClasseGenerica> buscaCategoria() throws SQLException {
+		String sql = "SELECT * FROM categoria;";
 
 		PreparedStatement ps = conn.prepareStatement(sql);
+
+		ResultSet rs = ps.executeQuery();
+
+		List<ClasseGenerica> cursos = new ArrayList<ClasseGenerica>();
+
+		while (rs.next()) {
+			cursos.add(new ClasseGenerica(rs.getInt("id"), rs.getString("nome")));
+		}
+
+		return cursos;
+	}
+
+	public List<ClasseGenerica> buscaCurso(Integer id_categoria) throws SQLException {
+		String sql = "SELECT * FROM curso WHERE id_categoria = ?;";
+
+		PreparedStatement ps = conn.prepareStatement(sql);
+
+		ps.setInt(1, id_categoria);
 
 		ResultSet rs = ps.executeQuery();
 

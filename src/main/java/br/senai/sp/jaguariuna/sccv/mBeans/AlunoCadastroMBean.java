@@ -5,8 +5,8 @@ import java.util.List;
 
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
+import javax.faces.bean.ViewScoped;
 
 import br.senai.sp.jaguariuna.sccv.entities.Usuario;
 import br.senai.sp.jaguariuna.sccv.subEntities.ClasseGenerica;
@@ -23,6 +23,7 @@ public class AlunoCadastroMBean {
 	List<ClasseGenerica> turmas;
 	List<ClasseGenerica> estados;
 	List<ClasseGenerica> cidades;
+	List<ClasseGenerica> categorias;
 	// usuario a ser salvo no banco
 	Usuario usuario;
 	UsuarioDao usuarioDao;
@@ -31,16 +32,40 @@ public class AlunoCadastroMBean {
 		classeGenericaDao = new ClasseGenericaDao();
 		usuario = new Usuario();
 		usuarioDao = new UsuarioDao();
-		cursos = classeGenericaDao.buscaCurso();
 		estados = classeGenericaDao.buscaEstado();
+		categorias = classeGenericaDao.buscaCategoria();
 	}
 
-	public void buscaTurma() throws SQLException {
-		turmas = classeGenericaDao.buscaTurma(usuario.getCurso().getId());
+	public void buscaCurso() {
+		try {
+			cursos = classeGenericaDao.buscaCurso(usuario.getCategoria().getId());
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			mens(e.toString());
+
+		}
 	}
 
-	public void buscaCidade() throws SQLException {
-		cidades = classeGenericaDao.buscaCidade(usuario.getEstado().getId());
+	public void buscaTurma() {
+		try {
+			turmas = classeGenericaDao.buscaTurma(usuario.getCurso().getId());
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			mens(e.toString());
+
+		}
+	}
+
+	public void buscaCidade() {
+		try {
+			cidades = classeGenericaDao.buscaCidade(usuario.getEstado().getId());
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			mens(e.toString());
+		}
 	}
 
 	public List<ClasseGenerica> getCidades() {
@@ -53,6 +78,14 @@ public class AlunoCadastroMBean {
 
 	public List<ClasseGenerica> getEstados() {
 		return estados;
+	}
+
+	public List<ClasseGenerica> getCategorias() {
+		return categorias;
+	}
+
+	public void setCategorias(List<ClasseGenerica> categorias) {
+		this.categorias = categorias;
 	}
 
 	public void setEstados(List<ClasseGenerica> estados) {
@@ -83,6 +116,10 @@ public class AlunoCadastroMBean {
 		this.usuario = usuario;
 	}
 
+	private void mens(String s) {
+		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(s));
+	}
+
 	public String salvarUsuario() {
 		try {
 			if (usuarioDao.buscaUsuarioPorEmail(usuario.getEmail()) == null) {
@@ -98,11 +135,11 @@ public class AlunoCadastroMBean {
 					}
 				} else {
 					FacesContext.getCurrentInstance().addMessage(null,
-							new FacesMessage("Já existe um usuario cadastrado com este CPF !"));
+							new FacesMessage("Jï¿½ existe um usuario cadastrado com este CPF !"));
 				}
 			} else {
 				FacesContext.getCurrentInstance().addMessage(null,
-						new FacesMessage("Já existe um usuario cadastrado com este e-mail !"));
+						new FacesMessage("Jï¿½ existe um usuario cadastrado com este e-mail !"));
 			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block

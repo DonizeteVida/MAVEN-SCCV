@@ -8,14 +8,14 @@ import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
-import javax.faces.bean.ViewScoped;
+import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 
 import br.senai.sp.jaguariuna.sccv.entities.CurriculumVitae;
 import br.senai.sp.jaguariuna.sccv.uDao.CurriculoDao;
 
-@ManagedBean
-@ViewScoped
+@ManagedBean(eager = true)
+@SessionScoped
 public class AlunoHomeMBean {
 
 	CurriculoDao curriculoDao;
@@ -39,6 +39,10 @@ public class AlunoHomeMBean {
 
 	@PostConstruct
 	public void postConstruct() {
+		listarCurriculo();
+	}
+
+	public void listarCurriculo() {
 		try {
 			listaCurriculo = curriculoDao.listarCurriculo(alunoIndexMBean.getUsuario().getId());
 		} catch (SQLException e) {
@@ -65,7 +69,7 @@ public class AlunoHomeMBean {
 
 	public String editarCurriculo() {
 		if (curClick != null) {
-			return "cadastroCurriculo?faces-redirect=true";
+			return "editarCurriculo?faces-redirect=true";
 		} else {
 			mens("Selecione um curriculo");
 		}

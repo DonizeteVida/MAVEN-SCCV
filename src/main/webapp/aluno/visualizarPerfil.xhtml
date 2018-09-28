@@ -25,10 +25,11 @@
 							title="Campo para e-mail" />
 
 						<p:outputLabel value="Sua idade: " />
-						<p:calendar pattern="dd/MM/yyyy" value="#{alunoVisualizarPerfilMBean.usuario.idade.time}"
+						<p:calendar pattern="dd/MM/yyyy"
+							value="#{alunoVisualizarPerfilMBean.usuario.idade.time}"
 							title="Campo para idade" />
 
-						<p:outputLabel value="Insira seu CPF: " />
+						<p:outputLabel value="Seu CPF: " />
 						<p:inputMask mask="999.999.999-99"
 							value="#{alunoVisualizarPerfilMBean.usuario.cpf}"
 							title="Campo para CPF"
@@ -39,15 +40,21 @@
 							value="#{alunoVisualizarPerfilMBean.usuario.rg}"
 							title="Campo para RG" />
 
+						<p:outputLabel value="Sua categoria: " />
+						<p:outputLabel
+							value="#{alunoVisualizarPerfilMBean.usuario.categoria.nome}" />
 
 						<p:outputLabel value="Seu curso: " />
 						<p:outputLabel
 							value="#{alunoVisualizarPerfilMBean.usuario.curso.nome}" />
 
-
 						<p:outputLabel value="Sua turma: " />
 						<p:outputLabel
 							value="#{alunoVisualizarPerfilMBean.usuario.turma.nome}" />
+
+						<p:outputLabel value="Seu estado: " />
+						<p:outputLabel
+							value="#{alunoVisualizarPerfilMBean.usuario.estado.nome}" />
 
 						<p:outputLabel value="Sua cidade: " />
 						<p:outputLabel
