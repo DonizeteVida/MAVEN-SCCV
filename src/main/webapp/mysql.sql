@@ -5686,6 +5686,8 @@ CREATE TABLE sexo (
 	nome VARCHAR(100)
 );
 
+	INSERT INTO sexo (nome) VALUES ("Masculino"), ("Feminino");
+
 CREATE TABLE usuario(
 	id INTEGER NOT NULL PRIMARY KEY AUTO_INCREMENT,
     nome VARCHAR(100) NOT NULL,

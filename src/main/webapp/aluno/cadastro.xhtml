@@ -70,6 +70,15 @@
 						value="#{alunoCadastroMBean.usuario.rg}" title="Campo para RG"
 						requiredMessage="O e-mail é completo é necessário !" />
 
+					<p:outputLabel value="Insira o seu sexo: " />
+					<p:selectOneMenu value="#{alunoCadastroMBean.usuario.sexo.id}"
+						required="true"
+						requiredMessage="Uma seleção de sexo é necessária !">
+						<f:selectItem itemLabel="SELECIONE SEU SEXO" itemValue="" />
+						<f:selectItems value="#{alunoCadastroMBean.sexos}" var="sex"
+							itemLabel="#{sex.nome}" itemValue="#{sex.id}" />
+					</p:selectOneMenu>
+
 					<p:outputLabel value="Insira a categoria do seu curso atual: " />
 					<p:selectOneMenu value="#{alunoCadastroMBean.usuario.categoria.id}"
 						required="true" requiredMessage="Uma categoria é necessária">

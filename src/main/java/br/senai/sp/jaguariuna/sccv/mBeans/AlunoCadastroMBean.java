@@ -3,7 +3,6 @@ package br.senai.sp.jaguariuna.sccv.mBeans;
 import java.sql.SQLException;
 import java.util.List;
 
-import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.context.FacesContext;
 import javax.faces.bean.ViewScoped;
@@ -12,6 +11,7 @@ import br.senai.sp.jaguariuna.sccv.entities.Usuario;
 import br.senai.sp.jaguariuna.sccv.subEntities.ClasseGenerica;
 import br.senai.sp.jaguariuna.sccv.uDao.ClasseGenericaDao;
 import br.senai.sp.jaguariuna.sccv.uDao.UsuarioDao;
+import br.senai.sp.jaguariuna.sccv.utils.Mensagem;
 
 @ManagedBean
 @ViewScoped
@@ -24,16 +24,25 @@ public class AlunoCadastroMBean {
 	List<ClasseGenerica> estados;
 	List<ClasseGenerica> cidades;
 	List<ClasseGenerica> categorias;
+	List<ClasseGenerica> sexos;
 	// usuario a ser salvo no banco
 	Usuario usuario;
 	UsuarioDao usuarioDao;
 
-	public AlunoCadastroMBean() throws SQLException {
+	public AlunoCadastroMBean() {
 		classeGenericaDao = new ClasseGenericaDao();
 		usuario = new Usuario();
 		usuarioDao = new UsuarioDao();
-		estados = classeGenericaDao.buscaEstado();
-		categorias = classeGenericaDao.buscaCategoria();
+		try {
+			estados = classeGenericaDao.buscaEstado();
+			categorias = classeGenericaDao.buscaCategoria();
+			sexos = classeGenericaDao.buscaSexo();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			Mensagem.make(e.toString());
+		}
+
 	}
 
 	public void buscaCurso() {
@@ -42,8 +51,7 @@ public class AlunoCadastroMBean {
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-			mens(e.toString());
-
+			Mensagem.make(e.toString());
 		}
 	}
 
@@ -53,8 +61,7 @@ public class AlunoCadastroMBean {
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-			mens(e.toString());
-
+			Mensagem.make(e.toString());
 		}
 	}
 
@@ -64,7 +71,7 @@ public class AlunoCadastroMBean {
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-			mens(e.toString());
+			Mensagem.make(e.toString());
 		}
 	}
 
@@ -116,8 +123,12 @@ public class AlunoCadastroMBean {
 		this.usuario = usuario;
 	}
 
-	private void mens(String s) {
-		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(s));
+	public List<ClasseGenerica> getSexos() {
+		return sexos;
+	}
+
+	public void setSexos(List<ClasseGenerica> sexos) {
+		this.sexos = sexos;
 	}
 
 	public String salvarUsuario() {
@@ -125,26 +136,21 @@ public class AlunoCadastroMBean {
 			if (usuarioDao.buscaUsuarioPorEmail(usuario.getEmail()) == null) {
 				if (usuarioDao.buscaUsuarioPorCpf(usuario.getCpf()) == null) {
 					if (usuarioDao.inserirUsuario(usuario)) {
-
-						FacesContext.getCurrentInstance().addMessage(null,
-								new FacesMessage("Usuario salvo com sucesso !"));
-
+						Mensagem.make("Usuario salvo com sucesso !!! ");
 						FacesContext.getCurrentInstance().getExternalContext().getFlash().setKeepMessages(true);
 
 						return "index?faces-redirect=true";
 					}
 				} else {
-					FacesContext.getCurrentInstance().addMessage(null,
-							new FacesMessage("Jï¿½ existe um usuario cadastrado com este CPF !"));
+					Mensagem.make("Já existe um usuário cadastrado com este CPF !!! ");
 				}
 			} else {
-				FacesContext.getCurrentInstance().addMessage(null,
-						new FacesMessage("Jï¿½ existe um usuario cadastrado com este e-mail !"));
+				Mensagem.make("Já existe um usuário cadastrado com este e-mail !!! ");
 			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(e.toString()));
+			Mensagem.make(e.toString());
 		}
 		return null;
 	}
