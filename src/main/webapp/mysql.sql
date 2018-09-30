@@ -1,5 +1,3 @@
-DROP DATABASE SCCV;
-
 CREATE DATABASE SCCV;
 USE SCCV;
 
@@ -5636,7 +5634,7 @@ CREATE TABLE categoria(
 INSERT INTO categoria (nome) VALUES
 ("Técnico"), 
 ("CAI"), 
-("METALMECÂNICA"), 
+("Metalmecânica"), 
 ("Segurança do Trabalho"), 
 ("Eletroeletrônica"), 
 ("Gestão"), 
@@ -5681,7 +5679,12 @@ CREATE TABLE status_(
 	id INTEGER NOT NULL PRIMARY KEY AUTO_INCREMENT,
     nome VARCHAR(100) NOT NULL);
     
-    INSERT INTO status_(nome) VALUES ("ATIVO"), ("INATIVO");
+    INSERT INTO status_(nome) VALUES ("Ativo"), ("Inativo");
+    
+CREATE TABLE sexo (
+	id INTEGER NOT NULL PRIMARY KEY AUTO_INCREMENT,
+	nome VARCHAR(100)
+);
 
 CREATE TABLE usuario(
 	id INTEGER NOT NULL PRIMARY KEY AUTO_INCREMENT,
@@ -5691,6 +5694,7 @@ CREATE TABLE usuario(
     idade LONG NOT NULL,
     cpf CHAR(11) NOT NULL UNIQUE,
     rg CHAR(9) NOT NULL UNIQUE,
+	id_sexo INT NOT NULL,
     id_cidade INTEGER NOT NULL,
     id_estado INTEGER NOT NULL,
     id_status INTEGER NOT NULL DEFAULT 1,
@@ -5702,7 +5706,8 @@ CREATE TABLE usuario(
 	FOREIGN KEY (id_status) REFERENCES status_(id),
 	FOREIGN KEY (id_categoria) REFERENCES categoria (id),
     FOREIGN KEY (id_curso) REFERENCES curso(id),
-    FOREIGN KEY (id_turma) REFERENCES turma(id)
+    FOREIGN KEY (id_turma) REFERENCES turma(id),
+    FOREIGN KEY (id_sexo) REFERENCES sexo(id)
 ); 
 
 	SELECT * FROM usuario;

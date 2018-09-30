@@ -53,7 +53,7 @@ public class AdministradorDao {
 		String sql = "SELECT tudo = ?, WHERE a.nif = ?;";
 				
 		PreparedStatement ps = 	conn.prepareStatement(sql);
-		ps.setString(4,getNif(nif));
+		//ps.setString(4,getNif(nif));
 		
 		ResultSet rs = ps.executeQuery();
 		
@@ -67,7 +67,7 @@ public class AdministradorDao {
 			
 		}
 		
-		
+		return a;
 		
 	}
 	
