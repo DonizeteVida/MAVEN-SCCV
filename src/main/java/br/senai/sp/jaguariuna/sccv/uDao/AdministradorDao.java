@@ -49,6 +49,29 @@ public class AdministradorDao {
 		return ps.executeUpdate() > 0;
 	};
 	
+<<<<<<< HEAD
+//	public AdministradorDao buscarAdministradorPorNif(String nif) throws SQLException{
+//		String sql = "SELECT tudo = ?, WHERE a.nif = ?;";
+//				
+//		PreparedStatement ps = 	conn.prepareStatement(sql);
+////		ps.setString(4,getNif(nif));
+//		
+//		ResultSet rs = ps.executeQuery();
+//		
+//		AdministradorDao a = null;
+//		if(rs.next()) {
+//			a = new AdministradorDao();
+//			
+//			Calendar c = Calendar.getInstance();
+//			c.setTimeInMillis(rs.getLong("idade"));
+//			
+//			
+//		}
+//		
+//		
+//		
+//	}
+=======
 	public AdministradorDao buscarAdministradorPorNif(String nif) throws SQLException{
 		String sql = "SELECT tudo = ?, WHERE a.nif = ?;";
 				
@@ -70,6 +93,7 @@ public class AdministradorDao {
 		return a;
 		
 	}
+>>>>>>> 2cff5412cee05ed6d5f11f7eaa73586692133dd6
 	
 
 	
