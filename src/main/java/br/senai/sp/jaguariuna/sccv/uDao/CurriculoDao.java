@@ -45,14 +45,16 @@ public class CurriculoDao {
 
 		while (rs.next()) {
 
-			Calendar data_inicio = Calendar.getInstance();
-			Calendar data_fim = Calendar.getInstance();
+			Formacao f = new Formacao();
 
-			data_inicio.setTimeInMillis(rs.getLong("data_inicio"));
-			data_fim.setTimeInMillis(rs.getLong("data_fim"));
+			f.setId(rs.getInt("id"));
+			f.setNome(rs.getString("nome"));
+			f.getData_inicio().setTimeInMillis(rs.getLong("data_inicio"));
+			f.getData_fim().setTimeInMillis(rs.getLong("data_fim"));
+			f.setEscola(rs.getString("escola"));
+			f.setId_curriculum_vitae(rs.getInt("id_curriculum_vitae"));
 
-			formacoes.add(new Formacao(rs.getInt("id"), rs.getString("nome"), data_inicio, data_fim,
-					rs.getString("escola"), rs.getInt("id_curriculum_vitae")));
+			formacoes.add(f);
 
 		}
 
@@ -109,15 +111,18 @@ public class CurriculoDao {
 		List<Experiencia> experiencias = new ArrayList<>();
 
 		while (rs.next()) {
-			Calendar data_inicio = Calendar.getInstance();
-			Calendar data_fim = Calendar.getInstance();
 
-			data_inicio.setTimeInMillis(rs.getLong("data_inicio"));
-			data_fim.setTimeInMillis(rs.getLong("data_fim"));
+			Experiencia exp = new Experiencia();
+			exp.setId(rs.getInt("id"));
+			exp.setNome(rs.getString("nome"));
+			exp.getData_inicio().setTimeInMillis(rs.getLong("data_inicio"));
+			exp.getData_fim().setTimeInMillis(rs.getLong("data_fim"));
+			exp.setCargo(rs.getString("cargo"));
+			exp.setEmpresa(rs.getString("empresa"));
+			exp.setFuncoes(rs.getString("funcoes"));
+			exp.setId_curriculum_vitae(rs.getInt("id_curriculum_vitae"));
 
-			experiencias.add(
-					new Experiencia(rs.getInt("id"), rs.getString("nome"), data_inicio, data_fim, rs.getString("cargo"),
-							rs.getString("empresa"), rs.getString("funcoes"), rs.getInt("id_curriculum_vitae")));
+			experiencias.add(exp);
 		}
 
 		return experiencias;

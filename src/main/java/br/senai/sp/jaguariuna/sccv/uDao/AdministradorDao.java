@@ -19,7 +19,11 @@ public class AdministradorDao {
 
 	public boolean updateUsuarioAdministrador(UsuarioAdministrador a) throws SQLException {
 
+<<<<<<< HEAD
 		String sql = "UPDATE usuario_administrador SET nome = ?, email = ?, senha = ?, nif = ?, id_status = ?, WHERE usuario.id = ?;";
+=======
+		String sql = "UPDATE usuario SET nome = ?, email = ?, senha = ?, nif = ?, id_status = ?, WHERE usuario.id = ?;";
+>>>>>>> 5ffda01bc0fee6c1b89dee1b7548b7de9cccff76
 
 		PreparedStatement ps = conn.prepareStatement(sql);
 
@@ -33,8 +37,12 @@ public class AdministradorDao {
 	}
 
 	public boolean inserirUsuarioAdministrador(UsuarioAdministrador a) throws SQLException {
+<<<<<<< HEAD
 		String sql = "INSERT INTO usuario_administrador(nome, email, senha, idade, nif, status)"
 				+ " VALUES(?,?,?,?,?,?)";
+=======
+		String sql = "INSERT INTO usuario(nome, email, senha, idade, nif, status)" + " VALUES(?,?,?,?,?,?)";
+>>>>>>> 5ffda01bc0fee6c1b89dee1b7548b7de9cccff76
 
 		PreparedStatement ps = conn.prepareStatement(sql);
 
@@ -47,6 +55,7 @@ public class AdministradorDao {
 		return ps.executeUpdate() > 0;
 	};
 
+<<<<<<< HEAD
 	public UsuarioAdministrador buscarAdministradorPorNif(String nif) throws SQLException {
 		String sql = "SELECT * FROM usuario_administrador AS ua WHERE ua.nif = ?;";
 
@@ -93,4 +102,49 @@ public class AdministradorDao {
 		return ua;
 
 	}
+=======
+//	public AdministradorDao buscarAdministradorPorNif(String nif) throws SQLException{
+//		String sql = "SELECT tudo = ?, WHERE a.nif = ?;";
+//				
+//		PreparedStatement ps = 	conn.prepareStatement(sql);
+////		ps.setString(4,getNif(nif));
+//		
+//		ResultSet rs = ps.executeQuery();
+//		
+//		AdministradorDao a = null;
+//		if(rs.next()) {
+//			a = new AdministradorDao();
+//			
+//			Calendar c = Calendar.getInstance();
+//			c.setTimeInMillis(rs.getLong("idade"));
+//			
+//			
+//		}
+//		
+//		
+//		
+//	}
+
+	public AdministradorDao buscarAdministradorPorNif(String nif) throws SQLException {
+		String sql = "SELECT tudo = ?, WHERE a.nif = ?;";
+
+		PreparedStatement ps = conn.prepareStatement(sql);
+		// ps.setString(4,getNif(nif));
+
+		ResultSet rs = ps.executeQuery();
+
+		AdministradorDao a = null;
+		if (rs.next()) {
+			a = new AdministradorDao();
+
+			Calendar c = Calendar.getInstance();
+			c.setTimeInMillis(rs.getLong("idade"));
+
+		}
+
+		return a;
+
+	}
+
+>>>>>>> 5ffda01bc0fee6c1b89dee1b7548b7de9cccff76
 }

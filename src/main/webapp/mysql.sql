@@ -5686,6 +5686,7 @@ CREATE TABLE sexo (
 	nome VARCHAR(100)
 );
 
+
 	INSERT INTO sexo (nome) VALUES ("Masculino"), ("Feminino");
 
 CREATE TABLE usuario(
