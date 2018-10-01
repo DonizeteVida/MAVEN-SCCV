@@ -14,6 +14,7 @@ public class Usuario {
 		estado = new ClasseGenerica();
 		categoria = new ClasseGenerica();
 		sexo = new ClasseGenerica();
+		peso = new Integer(0);
 		idade = Calendar.getInstance();
 	}
 
@@ -24,6 +25,7 @@ public class Usuario {
 	private Calendar idade;
 	private String cpf;
 	private String rg;
+	private Integer peso;
 	private ClasseGenerica status;
 	private ClasseGenerica curso;
 	private ClasseGenerica turma;
@@ -142,6 +144,14 @@ public class Usuario {
 
 	public void setSexo(ClasseGenerica sexo) {
 		this.sexo = sexo;
+	}
+
+	public Integer getPeso() {
+		return peso;
+	}
+
+	public void setPeso(Integer peso) {
+		this.peso = peso;
 	}
 
 }

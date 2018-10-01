@@ -5696,6 +5696,7 @@ CREATE TABLE usuario(
     idade LONG NOT NULL,
     cpf CHAR(11) NOT NULL UNIQUE,
     rg CHAR(9) NOT NULL UNIQUE,
+	peso INTEGER NOT NULL DEFAULT 0,
 	id_sexo INT NOT NULL,
     id_cidade INTEGER NOT NULL,
     id_estado INTEGER NOT NULL,
@@ -5711,8 +5712,6 @@ CREATE TABLE usuario(
     FOREIGN KEY (id_turma) REFERENCES turma(id),
     FOREIGN KEY (id_sexo) REFERENCES sexo(id)
 ); 
-
-	SELECT * FROM usuario;
 
 	/*SELECT u.*, c.nome AS nomeCidade, e.nome AS nomeEstado, st.nome AS nomeStatus, cur.nome AS nomeCurso, tur.nome AS nomeTurma FROM usuario AS u 
     INNER JOIN cidade AS c ON c.id = u.id_cidade
@@ -5734,7 +5733,6 @@ CREATE TABLE usuario_administrador(
 
 CREATE TABLE curriculum_vitae(
 	id INTEGER NOT NULL PRIMARY KEY AUTO_INCREMENT,
-    peso INTEGER NOT NULL DEFAULT 0,
     data_criacao FLOAT,
     id_curso INTEGER NOT NULL,
     id_turma INTEGER NOT NULL,

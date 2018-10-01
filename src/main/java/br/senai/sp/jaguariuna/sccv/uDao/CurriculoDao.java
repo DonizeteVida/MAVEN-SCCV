@@ -186,7 +186,6 @@ public class CurriculoDao {
 			CurriculumVitae c = new CurriculumVitae();
 
 			c.setId(rs.getInt("id"));
-			c.setPeso(rs.getInt("peso"));
 			c.getData_criacao().setTimeInMillis(rs.getLong("data_criacao"));
 			c.getCurso().setId(rs.getInt("id_curso"));
 			c.getCurso().setNome(rs.getString("nomeCurso"));
@@ -220,7 +219,6 @@ public class CurriculoDao {
 			CurriculumVitae c = new CurriculumVitae();
 
 			c.setId(rs.getInt("id"));
-			c.setPeso(rs.getInt("peso"));
 			c.getData_criacao().setTimeInMillis(rs.getLong("data_criacao"));
 			c.getCurso().setId(rs.getInt("id_curso"));
 			c.getCurso().setNome(rs.getString("nomeCurso"));

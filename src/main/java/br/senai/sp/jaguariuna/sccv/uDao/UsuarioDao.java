@@ -19,7 +19,7 @@ public class UsuarioDao {
 	}
 
 	public boolean updateUsuario(Usuario u) throws SQLException {
-		String sql = "UPDATE usuario SET nome = ?, email = ?, senha = ?, idade = ?, cpf = ?, rg = ?, id_curso = ?, id_turma = ?, id_cidade = ?, id_estado = ?, id_categoria = ?, id_sexo = ? WHERE usuario.id = ?;";
+		String sql = "UPDATE usuario SET nome = ?, email = ?, senha = ?, idade = ?, cpf = ?, rg = ?, id_curso = ?, id_turma = ?, id_cidade = ?, id_estado = ?, id_categoria = ?, id_sexo = ?, peso = ? WHERE usuario.id = ?;";
 
 		PreparedStatement ps = conn.prepareStatement(sql);
 
@@ -34,8 +34,9 @@ public class UsuarioDao {
 		ps.setInt(9, u.getCidade().getId());
 		ps.setInt(10, u.getEstado().getId());
 		ps.setInt(11, u.getCategoria().getId());
-		ps.setInt(12, u.getId());
-		ps.setInt(13, u.getSexo().getId());
+		ps.setInt(12, u.getSexo().getId());
+		ps.setInt(13, u.getPeso());
+		ps.setInt(14, u.getId());
 
 		return ps.executeUpdate() > 0;
 	}
@@ -100,6 +101,8 @@ public class UsuarioDao {
 			u.getCategoria().setNome(rs.getString("nomeCategoria"));
 			u.getSexo().setId(rs.getInt("id_sexo"));
 			u.getSexo().setNome(rs.getString("nomeSexo"));
+			u.setPeso(rs.getInt("peso"));
+
 		}
 
 		return u;
@@ -143,6 +146,7 @@ public class UsuarioDao {
 			u.getCategoria().setNome(rs.getString("nomeCategoria"));
 			u.getSexo().setId(rs.getInt("id_sexo"));
 			u.getSexo().setNome(rs.getString("nomeSexo"));
+			u.setPeso(rs.getInt("peso"));
 		}
 
 		return u;
