@@ -140,12 +140,14 @@
 		<p:toolbar styleClass="toolbarCurriculo">
 			<f:facet name="left">
 				<p:commandButton onclick="PF('inserirExperiencia').show();"
-					value="Inserir experiencia" />
+					value="Inserir experiencia" ajax="true" event="onclick"
+					update=":formInserirExperiencia:inserirExperiencia" />
 			</f:facet>
 
 			<f:facet name="right">
 				<p:commandButton onclick="PF('inserirFormacao').show();"
-					value="Inserir formação" />
+					value="Inserir formação" ajax="true" event="onclick"
+					update=":formInserirFormacao:inserirFormacao" />
 			</f:facet>
 		</p:toolbar>
 
@@ -154,9 +156,9 @@
 		<p:dialog header="Insira a sua experiencia"
 			widgetVar="inserirExperiencia" resizable="true" responsive="true"
 			closable="true" modal="true">
-			<h:form>
+			<h:form id="formInserirExperiencia">
 				<center>
-					<p:panelGrid columns="2" id="limpaCampo">
+					<p:panelGrid columns="2" id="inserirExperiencia">
 
 						<p:outputLabel value="Nome da experiencia: " />
 						<p:inputText required="true"
@@ -207,9 +209,9 @@
 		<p:dialog header="Insira a sua formação" widgetVar="inserirFormacao"
 			resizable="true" responsive="true" closable="true" modal="true">
 
-			<h:form>
+			<h:form id="formInserirFormacao">
 				<center>
-					<p:panelGrid columns="2">
+					<p:panelGrid columns="2" id="inserirFormacao">
 
 						<p:outputLabel value="Nome da formacao: " />
 						<p:inputText required="true"
