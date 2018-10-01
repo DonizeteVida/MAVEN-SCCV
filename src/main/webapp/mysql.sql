@@ -5749,7 +5749,7 @@ CREATE TABLE curriculum_vitae(
     FOREIGN KEY (id_status) REFERENCES status_(id),
     FOREIGN KEY (id_categoria) REFERENCES categoria (id)
 );
-	
+
    /* SELECT c.*, cur.nome AS nomeCurso, tur.nome AS nomeTurma, sts.nome AS nomeStatus FROM curriculum_vitae AS c
     INNER JOIN curso AS cur ON cur.id = c.id_curso
     INNER JOIN turma AS tur ON tur.id = c.id_turma
