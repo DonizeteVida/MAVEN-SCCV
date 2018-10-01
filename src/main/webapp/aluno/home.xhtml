@@ -26,13 +26,15 @@
 						<p:graphicImage name="images/pdf.ico" />
 
 						<h:outputText value="#{cur.turma.nome}" style="text-align:center" />
-						<p:commandLink action="#{alunoHomeMBean.editarCurriculo}"
-							title="Ver curriculo">
-							<h:outputText styleClass="ui-icon ui-icon-search"
-								style="margin:0 auto;" />
-							<f:setPropertyActionListener value="#{cur}"
-								target="#{alunoHomeMBean.curClick}" />
-						</p:commandLink>
+
+						<p:panelGrid columns="3">
+							<p:commandLink action="#{alunoHomeMBean.visualizarCurriculo}"
+								title="Ver curriculo">
+								<h:outputText styleClass="ui-icon ui-icon-search" />
+								<f:setPropertyActionListener value="#{cur}"
+									target="#{alunoHomeMBean.curClick}" />
+							</p:commandLink>
+						</p:panelGrid>
 					</h:panelGrid>
 				</p:panel>
 			</p:dataGrid>

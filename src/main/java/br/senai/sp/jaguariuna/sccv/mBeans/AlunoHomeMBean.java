@@ -66,7 +66,7 @@ public class AlunoHomeMBean {
 		this.curClick = curClick;
 	}
 
-	public String editarCurriculo() {
+	public String visualizarCurriculo() {
 		if (curClick != null) {
 			return "editarCurriculo?faces-redirect=true";
 		} else {
