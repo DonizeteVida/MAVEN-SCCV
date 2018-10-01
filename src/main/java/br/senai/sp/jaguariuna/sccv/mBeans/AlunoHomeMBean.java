@@ -83,6 +83,7 @@ public class AlunoHomeMBean {
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+			Mensagem.make(e.toString());
 		}
 	}
 
@@ -101,6 +102,8 @@ public class AlunoHomeMBean {
 	public void setCurClick(CurriculumVitae curClick) {
 		try {
 			turmas = classeGenericaDao.buscaTurma(curClick.getCurso().getId());
+			cursos = classeGenericaDao.buscaCurso(curClick.getCategoria().getId());
+
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

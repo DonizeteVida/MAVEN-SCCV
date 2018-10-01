@@ -179,7 +179,7 @@ public class CurriculoDao {
 		String sql = "SELECT c.*, cur.nome AS nomeCurso, tur.nome AS nomeTurma, sts.nome AS nomeStatus, cat.nome AS nomeCategoria FROM curriculum_vitae AS c "
 				+ "INNER JOIN curso AS cur ON cur.id = c.id_curso " + "INNER JOIN turma AS tur ON tur.id = c.id_turma "
 				+ "INNER JOIN status_ AS sts ON sts.id = c.id_status "
-				+ "INNER JOIN categoria AS cat ON cat.id = c.id_categoria" + "WHERE c.id_usuario = ?;";
+				+ "INNER JOIN categoria AS cat ON cat.id = c.id_categoria " + "WHERE c.id_usuario = ?;";
 
 		PreparedStatement ps = conn.prepareStatement(sql);
 
@@ -203,7 +203,7 @@ public class CurriculoDao {
 			c.getStatus().setId(rs.getInt("id_status"));
 			c.getStatus().setNome(rs.getString("nomeStatus"));
 			c.getCategoria().setId(rs.getInt("id_categoria"));
-			c.getCategoria().setId(rs.getInt("id_categoria"));
+			c.getCategoria().setNome("nomeCategoria");
 
 			lista.add(c);
 		}

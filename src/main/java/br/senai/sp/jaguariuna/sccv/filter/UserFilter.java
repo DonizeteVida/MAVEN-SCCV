@@ -27,11 +27,8 @@ public class UserFilter implements Filter {
 			throws IOException, ServletException {
 
 		alunoIndexMBean = (AlunoIndexMBean) ((HttpServletRequest) request).getSession().getAttribute("alunoIndexMBean");
-		
-		System.out.println("entrou no filtro");
-		
+
 		if (alunoIndexMBean != null) {
-			System.out.println("aluno não é nulo");
 			if (alunoIndexMBean.getUsuario() != null) {
 				chain.doFilter(request, response);
 			} else {
