@@ -1,12 +1,10 @@
 package br.senai.sp.jaguariuna.sccv.mBeans;
 
 import java.sql.SQLException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
-import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.ViewScoped;
@@ -16,6 +14,7 @@ import br.senai.sp.jaguariuna.sccv.entities.Usuario;
 import br.senai.sp.jaguariuna.sccv.subEntities.ClasseGenerica;
 import br.senai.sp.jaguariuna.sccv.uDao.ClasseGenericaDao;
 import br.senai.sp.jaguariuna.sccv.uDao.UsuarioDao;
+import br.senai.sp.jaguariuna.sccv.utils.Mensagem;
 import br.senai.sp.jaguariuna.sccv.utils.StringToMD5;
 
 @ManagedBean
@@ -30,6 +29,7 @@ public class AlunoEditarPerfilMBean {
 	private List<ClasseGenerica> estados;
 	private List<ClasseGenerica> cidades;
 	private List<ClasseGenerica> categorias;
+	private List<ClasseGenerica> sexos;
 	private String antigaSenha;
 	private String antigaSenhaDigitada;
 
@@ -44,9 +44,11 @@ public class AlunoEditarPerfilMBean {
 		try {
 			estados = classeGenericaDao.buscaEstado();
 			categorias = classeGenericaDao.buscaCategoria();
+			sexos = classeGenericaDao.buscaSexo();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+			Mensagem.make(e.toString());
 		}
 	}
 
@@ -68,37 +70,7 @@ public class AlunoEditarPerfilMBean {
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-			mensagem(e.toString());
-		}
-	}
-
-	public void buscaCurso() {
-		try {
-			cursos = classeGenericaDao.buscaCurso(usuario.getCategoria().getId());
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-			mensagem(e.toString());
-		}
-	}
-
-	public void buscaCidade() {
-		try {
-			cidades = classeGenericaDao.buscaCidade(usuario.getEstado().getId());
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-			mensagem(e.toString());
-		}
-	}
-
-	public void buscaTurma() {
-		try {
-			turmas = classeGenericaDao.buscaTurma(usuario.getCurso().getId());
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-			mensagem(e.toString());
+			Mensagem.make(e.toString());
 		}
 	}
 
@@ -126,10 +98,6 @@ public class AlunoEditarPerfilMBean {
 		this.antigaSenha = antigaSenha;
 	}
 
-	private void mensagem(String s) {
-		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(s));
-	}
-
 	public Usuario getUsuario() {
 		return usuario;
 	}
@@ -146,33 +114,12 @@ public class AlunoEditarPerfilMBean {
 		this.usuario = usuario;
 	}
 
-	public String salvarUsuario() {
-		if (antigaSenha.equals(StringToMD5.convertStringToMd5(antigaSenhaDigitada))) {
-			try {
-				if (usuarioDao.updateUsuario(usuario)) {
-					mensagem("Usuario atualizado com sucesso !");
-					FacesContext.getCurrentInstance().getExternalContext().getFlash().setKeepMessages(true);
+	public List<ClasseGenerica> getSexos() {
+		return sexos;
+	}
 
-					SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
-
-					System.out.println(sdf.format(usuario.getIdade().getTimeInMillis()));
-
-					return "visualizarPerfil?faces-redirect=true";
-				} else {
-					mensagem("Falha ao atualizar o usuario !");
-					FacesContext.getCurrentInstance().getExternalContext().getFlash().setKeepMessages(true);
-					return "";
-				}
-			} catch (SQLException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-				mensagem(e.toString());
-			}
-		} else {
-			mensagem("As senhas digitadas sï¿½o incorretas");
-			return null;
-		}
-		return null;
+	public void setSexos(List<ClasseGenerica> sexos) {
+		this.sexos = sexos;
 	}
 
 	public List<ClasseGenerica> getCursos() {
@@ -197,6 +144,60 @@ public class AlunoEditarPerfilMBean {
 
 	public void setEstados(List<ClasseGenerica> estados) {
 		this.estados = estados;
+	}
+
+	public String salvarUsuario() {
+		if (antigaSenha.equals(StringToMD5.convertStringToMd5(antigaSenhaDigitada))) {
+			try {
+				if (usuarioDao.updateUsuario(usuario)) {
+					Mensagem.make("Usuario atualizado com sucesso !");
+					FacesContext.getCurrentInstance().getExternalContext().getFlash().setKeepMessages(true);
+
+					return "visualizarPerfil?faces-redirect=true";
+				} else {
+					Mensagem.make("Falha ao atualizar o usuario !");
+					return null;
+				}
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+				Mensagem.make(e.toString());
+			}
+		} else {
+			Mensagem.make("As senhas digitadas são incorretas");
+			return null;
+		}
+		return null;
+	}
+
+	public void buscaCurso() {
+		try {
+			cursos = classeGenericaDao.buscaCurso(usuario.getCategoria().getId());
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			Mensagem.make(e.toString());
+		}
+	}
+
+	public void buscaCidade() {
+		try {
+			cidades = classeGenericaDao.buscaCidade(usuario.getEstado().getId());
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			Mensagem.make(e.toString());
+		}
+	}
+
+	public void buscaTurma() {
+		try {
+			turmas = classeGenericaDao.buscaTurma(usuario.getCurso().getId());
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			Mensagem.make(e.toString());
+		}
 	}
 
 }

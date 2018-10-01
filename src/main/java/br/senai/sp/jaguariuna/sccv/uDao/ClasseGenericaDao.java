@@ -18,6 +18,22 @@ public class ClasseGenericaDao {
 		conn = ConnectionDB.getConnection();
 	}
 
+	public List<ClasseGenerica> buscaSexo() throws SQLException {
+		String sql = "SELECT * FROM sexo;";
+
+		PreparedStatement ps = conn.prepareStatement(sql);
+
+		ResultSet rs = ps.executeQuery();
+
+		List<ClasseGenerica> sexos = new ArrayList<ClasseGenerica>();
+
+		while (rs.next()) {
+			sexos.add(new ClasseGenerica(rs.getInt("id"), rs.getString("nome")));
+		}
+
+		return sexos;
+	}
+
 	public List<ClasseGenerica> buscaCategoria() throws SQLException {
 		String sql = "SELECT * FROM categoria;";
 

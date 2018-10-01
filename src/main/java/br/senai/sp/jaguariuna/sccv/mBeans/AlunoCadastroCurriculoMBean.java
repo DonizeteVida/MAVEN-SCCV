@@ -5,7 +5,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
-import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.ViewScoped;
@@ -17,6 +16,7 @@ import br.senai.sp.jaguariuna.sccv.subEntities.ClasseGenerica;
 import br.senai.sp.jaguariuna.sccv.uDao.ClasseGenericaDao;
 import br.senai.sp.jaguariuna.sccv.uDao.CurriculoDao;
 import br.senai.sp.jaguariuna.sccv.uDao.UsuarioDao;
+import br.senai.sp.jaguariuna.sccv.utils.Mensagem;
 
 @ManagedBean
 @ViewScoped
@@ -67,7 +67,7 @@ public class AlunoCadastroCurriculoMBean {
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-			mens(e.toString());
+			Mensagem.make(e.toString());
 		}
 	}
 
@@ -77,7 +77,7 @@ public class AlunoCadastroCurriculoMBean {
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-			mens(e.toString());
+			Mensagem.make(e.toString());
 		}
 	}
 
@@ -104,26 +104,22 @@ public class AlunoCadastroCurriculoMBean {
 				if (curriculoDao.criarCurriculo(curriculumVitae, usuario)) {
 					FacesContext.getCurrentInstance().getExternalContext().getFlash().setKeepMessages(true);
 					alunoHomeMBean.listarCurriculo();
-					mens("Curriculo criado com sucesso !");
+					Mensagem.make("Curriculo criado com sucesso !");
 
 					return "home?faces-redirect=true";
 				} else {
-					mens("Falha ao salvar um novo curriculo !");
+					Mensagem.make("Falha ao salvar um novo curriculo !");
 					return null;
 				}
 			} else {
-				mens("JÃ¡ existe um curriculo com este curso !");
+				Mensagem.make("Já existe um curriculo com este curso !");
 			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-			mens(e.toString());
+			Mensagem.make(e.toString());
 		}
 		return null;
-	}
-
-	private void mens(String s) {
-		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(s));
 	}
 
 	public Usuario getUsuario() {

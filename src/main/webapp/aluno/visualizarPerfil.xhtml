@@ -14,7 +14,7 @@
 		<p:panel>
 			<center>
 				<h:form id="formCadastro">
-					<p:panelGrid columns="2">
+					<p:panelGrid columns="2" styleClass="opacityOnly">
 						<p:outputLabel value="Seu nome: " />
 						<p:outputLabel placeholder="Insira seu nome completo"
 							value="#{alunoVisualizarPerfilMBean.usuario.nome}"
@@ -25,20 +25,24 @@
 							title="Campo para e-mail" />
 
 						<p:outputLabel value="Sua idade: " />
-						<p:calendar pattern="dd/MM/yyyy"
+						<p:calendar pattern="dd/MM/yyyy" disabled="true"
 							value="#{alunoVisualizarPerfilMBean.usuario.idade.time}"
 							title="Campo para idade" />
 
 						<p:outputLabel value="Seu CPF: " />
-						<p:inputMask mask="999.999.999-99"
+						<p:inputMask mask="999.999.999-99" disabled="true"
 							value="#{alunoVisualizarPerfilMBean.usuario.cpf}"
 							title="Campo para CPF"
 							requiredMessage="O CPF é completo é necessário !" />
 
 						<p:outputLabel value="Seu RG: " />
-						<p:inputMask mask="99.999.999-9"
+						<p:inputMask mask="99.999.999-9" disabled="true"
 							value="#{alunoVisualizarPerfilMBean.usuario.rg}"
 							title="Campo para RG" />
+
+						<p:outputLabel value="Seu sexo: " />
+						<p:outputLabel
+							value="#{alunoVisualizarPerfilMBean.usuario.sexo.nome}" />
 
 						<p:outputLabel value="Sua categoria: " />
 						<p:outputLabel
