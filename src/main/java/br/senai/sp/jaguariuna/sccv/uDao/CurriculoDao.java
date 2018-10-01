@@ -176,8 +176,10 @@ public class CurriculoDao {
 
 	public List<CurriculumVitae> listarCurriculo(Integer id_usuario) throws SQLException {
 		String sql = "SELECT c.*, cur.nome AS nomeCurso, tur.nome AS nomeTurma, sts.nome AS nomeStatus FROM curriculum_vitae AS c "
-				+ "INNER JOIN curso AS cur ON cur.id = c.id_curso " + "INNER JOIN turma AS tur ON tur.id = c.id_turma "
-				+ "INNER JOIN status_ AS sts ON sts.id = c.id_status " + "WHERE c.id_usuario = ?;";
+				+ "INNER JOIN curso AS cur ON cur.id = c.id_curso "
+				+ "INNER JOIN turma AS tur ON tur.id = c.id_turma "
+				+ "INNER JOIN status_ AS sts ON sts.id = c.id_status "
+				+ "WHERE c.id_usuario = ?;";
 
 		PreparedStatement ps = conn.prepareStatement(sql);
 
