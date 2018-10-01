@@ -5,14 +5,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
-import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
-import javax.faces.context.FacesContext;
 
 import br.senai.sp.jaguariuna.sccv.entities.CurriculumVitae;
 import br.senai.sp.jaguariuna.sccv.uDao.CurriculoDao;
+import br.senai.sp.jaguariuna.sccv.utils.Mensagem;
 
 @ManagedBean(eager = true)
 @SessionScoped
@@ -71,7 +70,7 @@ public class AlunoHomeMBean {
 		if (curClick != null) {
 			return "editarCurriculo?faces-redirect=true";
 		} else {
-			mens("Selecione um curriculo");
+			Mensagem.make("Selecione um curriculo");
 		}
 		return null;
 	}
@@ -87,9 +86,4 @@ public class AlunoHomeMBean {
 	public void setClicado(Boolean clicado) {
 		this.clicado = clicado;
 	}
-
-	private void mens(String s) {
-		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(s));
-	}
-
 }
