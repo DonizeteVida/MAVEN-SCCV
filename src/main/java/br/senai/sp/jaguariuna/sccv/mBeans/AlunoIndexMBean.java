@@ -14,8 +14,9 @@ import br.senai.sp.jaguariuna.sccv.email.EmailUtil;
 import br.senai.sp.jaguariuna.sccv.email.Mensagem;
 import br.senai.sp.jaguariuna.sccv.entities.Usuario;
 import br.senai.sp.jaguariuna.sccv.entities.UsuarioAdministrador;
-
+import br.senai.sp.jaguariuna.sccv.uDao.AdministradorDao;
 import br.senai.sp.jaguariuna.sccv.uDao.UsuarioDao;
+import br.senai.sp.jaguariuna.sccv.utils.FormatarCPFouRGtoString;
 import br.senai.sp.jaguariuna.sccv.utils.StringToMD5;
 
 @ManagedBean(eager = true)
@@ -29,6 +30,7 @@ public class AlunoIndexMBean {
 	private String cpfOuNif;
 	private String senha;
 	private UsuarioDao usuarioDao;
+	private AdministradorDao administradorDao;
 
 	private String cpfRecuperar;
 	private Mensagem mensagem;
@@ -40,6 +42,7 @@ public class AlunoIndexMBean {
 		modoSelecionado = "user";
 		funcaoCPF = "!TestaCPF(this.value) ? this.value = '' : this.value; avisoGrowl(TestaCPF(this.value));";
 		usuarioDao = new UsuarioDao();
+		administradorDao = new AdministradorDao();
 		mensagem = new Mensagem();
 	}
 
@@ -188,6 +191,19 @@ public class AlunoIndexMBean {
 				Mensagem(e.toString());
 			}
 		} else if (modoSelecionado.equals("admin")) {
+			try {
+				UsuarioAdministrador usuarioAdministrador = administradorDao.buscarAdministradorPorNif(cpfOuNif);
+
+				if (usuarioAdministrador.getSenha().equals(senha)) {
+					return "/admin/home?faces-redirect=true";
+				} else {
+					br.senai.sp.jaguariuna.sccv.utils.Mensagem.make("Admnistrador não encontrado !");
+				}
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+				br.senai.sp.jaguariuna.sccv.utils.Mensagem.make(e.toString());
+			}
 
 		}
 		return null;

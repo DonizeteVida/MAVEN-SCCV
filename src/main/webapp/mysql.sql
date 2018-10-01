@@ -5728,9 +5728,11 @@ CREATE TABLE usuario_administrador(
     email VARCHAR(100) NOT NULL,
     senha VARCHAR(1000) NOT NULL,
 	nif VARCHAR(10) NOT NULL,
-	id_status INTEGER NOT NULL,
+	id_status INTEGER NOT NULL DEFAULT 1,
     FOREIGN KEY (id_status) REFERENCES status_(id)
 );
+
+	INSERT INTO usuario_administrador (nome, email, senha, nif) VALUES ( "jose", "teste.testando.senai@gmail.com", "123", "sn10529865") ;
 
 CREATE TABLE curriculum_vitae(
 	id INTEGER NOT NULL PRIMARY KEY AUTO_INCREMENT,

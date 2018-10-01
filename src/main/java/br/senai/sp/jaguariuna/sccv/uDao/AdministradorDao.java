@@ -4,7 +4,6 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.Calendar;
 
 import br.senai.sp.jaguariuna.sccv.jdbc.ConnectionDB;
 import br.senai.sp.jaguariuna.sccv.utils.StringToMD5;
@@ -20,7 +19,7 @@ public class AdministradorDao {
 
 	public boolean updateUsuarioAdministrador(UsuarioAdministrador a) throws SQLException {
 
-		String sql = "UPDATE usuario SET nome = ?, email = ?, senha = ?, nif = ?, id_status = ?, WHERE usuario.id = ?;";
+		String sql = "UPDATE usuario_administrador SET nome = ?, email = ?, senha = ?, nif = ?, id_status = ?, WHERE usuario.id = ?;";
 
 		PreparedStatement ps = conn.prepareStatement(sql);
 
@@ -34,7 +33,9 @@ public class AdministradorDao {
 	}
 
 	public boolean inserirUsuarioAdministrador(UsuarioAdministrador a) throws SQLException {
-		String sql = "INSERT INTO usuario(nome, email, senha, idade, nif, status)" + " VALUES(?,?,?,?,?,?)";
+
+		String sql = "INSERT INTO usuario_administrador(nome, email, senha, idade, nif, status)"
+				+ " VALUES(?,?,?,?,?,?)";
 
 		PreparedStatement ps = conn.prepareStatement(sql);
 
@@ -47,47 +48,54 @@ public class AdministradorDao {
 		return ps.executeUpdate() > 0;
 	};
 
-//	public AdministradorDao buscarAdministradorPorNif(String nif) throws SQLException{
-//		String sql = "SELECT tudo = ?, WHERE a.nif = ?;";
-//				
-//		PreparedStatement ps = 	conn.prepareStatement(sql);
-////		ps.setString(4,getNif(nif));
-//		
-//		ResultSet rs = ps.executeQuery();
-//		
-//		AdministradorDao a = null;
-//		if(rs.next()) {
-//			a = new AdministradorDao();
-//			
-//			Calendar c = Calendar.getInstance();
-//			c.setTimeInMillis(rs.getLong("idade"));
-//			
-//			
-//		}
-//		
-//		
-//		
-//	}
 
-	public AdministradorDao buscarAdministradorPorNif(String nif) throws SQLException {
-		String sql = "SELECT tudo = ?, WHERE a.nif = ?;";
+	public UsuarioAdministrador buscarAdministradorPorNif(String nif) throws SQLException {
+		String sql = "SELECT * FROM usuario_administrador AS ua WHERE ua.nif = ?;";
 
 		PreparedStatement ps = conn.prepareStatement(sql);
-		// ps.setString(4,getNif(nif));
+		ps.setString(1, nif);
 
 		ResultSet rs = ps.executeQuery();
 
-		AdministradorDao a = null;
+		UsuarioAdministrador ua = null;
 		if (rs.next()) {
-			a = new AdministradorDao();
+			ua = new UsuarioAdministrador();
 
-			Calendar c = Calendar.getInstance();
-			c.setTimeInMillis(rs.getLong("idade"));
+			ua.setId(rs.getInt("id"));
+			ua.setEmail(rs.getString("email"));
+			ua.setNif(rs.getString("nif"));
+			ua.setNome(rs.getString("nome"));
+			ua.setSenha(rs.getString("senha"));
 
 		}
 
-		return a;
+		return ua;
 
 	}
+
+	public UsuarioAdministrador buscarAdmministradorPorEmail(String email) throws SQLException {
+		String sql = "SELECT * FROM usuario_administrador AS ua WHERE ua.email = ?;";
+
+		PreparedStatement ps = conn.prepareStatement(sql);
+		ps.setString(1, email);
+
+		ResultSet rs = ps.executeQuery();
+
+		UsuarioAdministrador ua = null;
+		if (rs.next()) {
+			ua = new UsuarioAdministrador();
+
+			ua.setId(rs.getInt("id"));
+			ua.setEmail(rs.getString("email"));
+			ua.setNif(rs.getString("nif"));
+			ua.setNome(rs.getString("nome"));
+			ua.setSenha(rs.getString("senha"));
+		}
+
+		return ua;
+
+	}
+
+
 
 }

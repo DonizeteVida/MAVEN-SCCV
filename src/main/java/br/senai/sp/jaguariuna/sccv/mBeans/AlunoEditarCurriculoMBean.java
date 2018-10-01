@@ -125,6 +125,7 @@ public class AlunoEditarCurriculoMBean {
 			if (curriculoDao.inserirFormacao(inserirFormacao, curriculumAtual)) {
 				Mensagem.make("Formacao salva com sucesso");
 				listarTudo();
+				inserirFormacao = new Formacao();
 			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
