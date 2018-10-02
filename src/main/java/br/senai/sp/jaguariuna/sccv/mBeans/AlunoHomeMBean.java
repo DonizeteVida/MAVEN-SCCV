@@ -62,7 +62,6 @@ public class AlunoHomeMBean {
 		try {
 			listaCurriculo = curriculoDao.listarCurriculo(alunoIndexMBean.getUsuario().getId());
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
@@ -71,7 +70,6 @@ public class AlunoHomeMBean {
 		try {
 			cursos = classeGenericaDao.buscaCurso(curClick.getCategoria().getId());
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 			Mensagem.make(e.toString());
 		}
@@ -81,7 +79,6 @@ public class AlunoHomeMBean {
 		try {
 			turmas = classeGenericaDao.buscaTurma(curClick.getCurso().getId());
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 			Mensagem.make(e.toString());
 		}
@@ -105,7 +102,6 @@ public class AlunoHomeMBean {
 			cursos = classeGenericaDao.buscaCurso(curClick.getCategoria().getId());
 
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 			Mensagem.make(e.toString());
 		}
