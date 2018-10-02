@@ -5748,12 +5748,11 @@ CREATE TABLE usuario_administrador(
 SELECT * FROM usuario;
 
 	INSERT INTO usuario_administrador (nome, email, senha, nif) VALUES ( "jose", "teste.testando.senai@gmail.com", "123", "sn10529865") ;
-<<<<<<< HEAD
+
     
-=======
     INSERT INTO usuario_administrador (nome, email, senha, nif) VALUES ( "jose eduardo", "jose.eduardo.ss@hotmail.com", "123", "sn12345678") ;
 
->>>>>>> feb44860c92c5bbc22077cef1fa18e657bd80843
+
 CREATE TABLE curriculum_vitae(
 	id INTEGER NOT NULL PRIMARY KEY AUTO_INCREMENT,
     data_criacao FLOAT,
