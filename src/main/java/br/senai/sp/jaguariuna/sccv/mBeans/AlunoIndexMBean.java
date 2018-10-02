@@ -3,10 +3,8 @@ package br.senai.sp.jaguariuna.sccv.mBeans;
 import java.sql.SQLException;
 import java.util.Calendar;
 
-import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
-import javax.faces.context.FacesContext;
 
 import org.apache.commons.mail.EmailException;
 
@@ -59,10 +57,14 @@ public class AlunoIndexMBean {
 				Mensagem("Verifique sua caixa de entrada, e/ou caixa de spam !");
 			} else {
 <<<<<<< HEAD
+<<<<<<< HEAD
 				Mensagem("Usuario não encontrado !");
 =======
 				Mensagem("Usuario nï¿½o encontrado !");
 >>>>>>> bc0e93ab894ddf123cca5690bc81a94d82de9d16
+=======
+				Mensagem("Usuario não encontrado !");
+>>>>>>> fdb699e2bbe075aa4ce7f6b2740d28217cf9e32d
 			}
 		} catch (EmailException e) {
 			e.printStackTrace();
@@ -88,10 +90,14 @@ public class AlunoIndexMBean {
 			}
 		} else {
 <<<<<<< HEAD
+<<<<<<< HEAD
 			Mensagem("Código incorreto");
 =======
 			Mensagem("Cï¿½digo incorreto");
 >>>>>>> bc0e93ab894ddf123cca5690bc81a94d82de9d16
+=======
+			Mensagem("Código incorreto");
+>>>>>>> fdb699e2bbe075aa4ce7f6b2740d28217cf9e32d
 		}
 	}
 
@@ -191,10 +197,14 @@ public class AlunoIndexMBean {
 					}
 				} else {
 <<<<<<< HEAD
+<<<<<<< HEAD
 					Mensagem("Usuario não encontrado !!! ");
 =======
 					Mensagem("Usuario nï¿½o encontrado !!! ");
 >>>>>>> bc0e93ab894ddf123cca5690bc81a94d82de9d16
+=======
+					Mensagem("Usuario nï¿½o encontrado !!! ");
+>>>>>>> fdb699e2bbe075aa4ce7f6b2740d28217cf9e32d
 				}
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
@@ -209,12 +219,20 @@ public class AlunoIndexMBean {
 					this.usuarioAdministrador = usuarioAdministrador;
 					return "/admin/home?faces-redirect=true";
 				} else {
+<<<<<<< HEAD
 					br.senai.sp.jaguariuna.sccv.utils.Mensagem.make("Admnistrador nÃ£o encontrado !");
+=======
+					Mensagem("Admnistrador nÃ£o encontrado !");
+>>>>>>> fdb699e2bbe075aa4ce7f6b2740d28217cf9e32d
 				}
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
+<<<<<<< HEAD
 				br.senai.sp.jaguariuna.sccv.utils.Mensagem.make(e.toString());
+=======
+				Mensagem(e.toString());
+>>>>>>> fdb699e2bbe075aa4ce7f6b2740d28217cf9e32d
 			}
 
 		}
@@ -222,11 +240,15 @@ public class AlunoIndexMBean {
 	}
 
 	public void Mensagem(String s) {
+<<<<<<< HEAD
 		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(s));
 	}
 
 	public void Mensagem(String s) {
 		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(s));
+=======
+		br.senai.sp.jaguariuna.sccv.utils.Mensagem.make(s);
+>>>>>>> fdb699e2bbe075aa4ce7f6b2740d28217cf9e32d
 	}
 
 }

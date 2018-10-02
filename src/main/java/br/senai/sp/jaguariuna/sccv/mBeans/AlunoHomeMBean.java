@@ -23,7 +23,12 @@ public class AlunoHomeMBean {
 	List<CurriculumVitae> listaCurriculo;
 
 	CurriculumVitae curClick;
-	Boolean clicado;
+	CurriculumVitae curEdit;
+	private List<ClasseGenerica> cursos;
+	private List<ClasseGenerica> turmas;
+	private List<ClasseGenerica> categorias;
+
+	private ClasseGenericaDao classeGenericaDao;
 
 	private List<ClasseGenerica> cursos;
 	private List<ClasseGenerica> turmas;
@@ -35,8 +40,12 @@ public class AlunoHomeMBean {
 		classeGenericaDao = new ClasseGenericaDao();
 		curriculoDao = new CurriculoDao();
 		listaCurriculo = new ArrayList<CurriculumVitae>();
+<<<<<<< HEAD
 		clicado = false;
 		curClick = new CurriculumVitae();
+=======
+		curEdit = new CurriculumVitae();
+>>>>>>> fdb699e2bbe075aa4ce7f6b2740d28217cf9e32d
 		try {
 			categorias = classeGenericaDao.buscaCategoria();
 		} catch (SQLException e) {
@@ -62,7 +71,6 @@ public class AlunoHomeMBean {
 		try {
 			listaCurriculo = curriculoDao.listarCurriculo(alunoIndexMBean.getUsuario().getId());
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
@@ -71,7 +79,10 @@ public class AlunoHomeMBean {
 		try {
 			cursos = classeGenericaDao.buscaCurso(curClick.getCategoria().getId());
 		} catch (SQLException e) {
+<<<<<<< HEAD
 			// TODO Auto-generated catch block
+=======
+>>>>>>> fdb699e2bbe075aa4ce7f6b2740d28217cf9e32d
 			e.printStackTrace();
 			Mensagem.make(e.toString());
 		}
@@ -81,7 +92,10 @@ public class AlunoHomeMBean {
 		try {
 			turmas = classeGenericaDao.buscaTurma(curClick.getCurso().getId());
 		} catch (SQLException e) {
+<<<<<<< HEAD
 			// TODO Auto-generated catch block
+=======
+>>>>>>> fdb699e2bbe075aa4ce7f6b2740d28217cf9e32d
 			e.printStackTrace();
 			Mensagem.make(e.toString());
 		}
@@ -125,12 +139,16 @@ public class AlunoHomeMBean {
 		return null;
 	}
 
-	public Boolean getClicado() {
-		return clicado;
+	public List<ClasseGenerica> getCursos() {
+		return cursos;
 	}
 
-	public void setClicado(Boolean clicado) {
-		this.clicado = clicado;
+	public void setCursos(List<ClasseGenerica> cursos) {
+		this.cursos = cursos;
+	}
+
+	public List<ClasseGenerica> getTurmas() {
+		return turmas;
 	}
 <<<<<<< HEAD
 =======
@@ -159,8 +177,51 @@ public class AlunoHomeMBean {
 		return categorias;
 	}
 
+<<<<<<< HEAD
 	public void setCategorias(List<ClasseGenerica> categorias) {
 		this.categorias = categorias;
+=======
+	public void setTurmas(List<ClasseGenerica> turmas) {
+		this.turmas = turmas;
+	}
+
+	public List<ClasseGenerica> getCategorias() {
+		return categorias;
+	}
+
+	public void setCategorias(List<ClasseGenerica> categorias) {
+		this.categorias = categorias;
+	}
+
+	public CurriculumVitae getCurEdit() {
+		return curEdit;
+	}
+
+	public void setCurEdit(CurriculumVitae curEdit) {
+		try {
+			turmas = classeGenericaDao.buscaTurma(curEdit.getCurso().getId());
+			cursos = classeGenericaDao.buscaCurso(curEdit.getCategoria().getId());
+
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		this.curEdit = curEdit;
+	}
+
+	public void salvarCurriculo() {
+		try {
+			if (curriculoDao.updateCurriculum(curEdit)) {
+				Mensagem.make("Curriculo alterado com sucesso !");
+				listarCurriculo();
+			} else {
+				Mensagem.make("Erro ao alterar currículo !");
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+>>>>>>> fdb699e2bbe075aa4ce7f6b2740d28217cf9e32d
 	}
 
 >>>>>>> bc0e93ab894ddf123cca5690bc81a94d82de9d16

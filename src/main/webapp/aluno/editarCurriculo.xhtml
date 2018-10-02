@@ -22,7 +22,15 @@
 					Data da criação do curriculo: 
 					<p:calendar
 						value="#{alunoEditarCurriculoMBean.curriculumAtual.data_criacao.time}"
-						pattern="dd/MM/yyyy" style="text-align: center;" />
+						pattern="dd/MM/yyyy" />
+						
+					Turma atual: 
+					<p:outputLabel
+						value="#{alunoEditarCurriculoMBean.curriculumAtual.turma.nome}" />
+						
+					Semestre atual: 
+					<p:outputLabel
+						value="#{alunoEditarCurriculoMBean.curriculumAtual.semestre}" />
 				</p:panelGrid>
 			</center>
 		</p:panel>
@@ -157,6 +165,7 @@
 			widgetVar="inserirExperiencia" resizable="true" responsive="true"
 			closable="true" modal="true">
 <<<<<<< HEAD
+<<<<<<< HEAD
 			<h:form>
 				<center>
 					<p:panelGrid columns="2" id="limpaCampo">
@@ -165,6 +174,11 @@
 				<center>
 					<p:panelGrid columns="2" id="inserirExperiencia">
 >>>>>>> bc0e93ab894ddf123cca5690bc81a94d82de9d16
+=======
+			<h:form id="formInserirExperiencia">
+				<center>
+					<p:panelGrid columns="2" id="inserirExperiencia">
+>>>>>>> fdb699e2bbe075aa4ce7f6b2740d28217cf9e32d
 
 						<p:outputLabel value="Nome da experiencia: " />
 						<p:inputText required="true"

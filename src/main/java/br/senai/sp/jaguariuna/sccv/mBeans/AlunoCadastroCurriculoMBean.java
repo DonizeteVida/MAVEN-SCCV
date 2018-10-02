@@ -145,10 +145,14 @@ public class AlunoCadastroCurriculoMBean {
 				}
 			} else {
 <<<<<<< HEAD
+<<<<<<< HEAD
 				Mensagem.make("J� existe um curriculo com este curso !");
 =======
 				Mensagem.make("Já existe um curriculo com este curso !");
 >>>>>>> bc0e93ab894ddf123cca5690bc81a94d82de9d16
+=======
+				Mensagem.make("Já existe um curriculo com este curso !");
+>>>>>>> fdb699e2bbe075aa4ce7f6b2740d28217cf9e32d
 			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -158,6 +162,7 @@ public class AlunoCadastroCurriculoMBean {
 		return null;
 	}
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	public Usuario getUsuario() {
 		return usuario;
@@ -193,4 +198,6 @@ public class AlunoCadastroCurriculoMBean {
 
 =======
 >>>>>>> bc0e93ab894ddf123cca5690bc81a94d82de9d16
+=======
+>>>>>>> fdb699e2bbe075aa4ce7f6b2740d28217cf9e32d
 }
