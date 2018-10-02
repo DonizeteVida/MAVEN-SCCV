@@ -200,4 +200,52 @@ public class UsuarioDao {
 
 	}
 
+	public List<Usuario> listarUsuario(String nome) throws SQLException {
+		String sql = "SELECT u.*, s.nome AS nomeSexo, c.nome AS nomeCidade, e.nome AS nomeEstado, sts.nome AS nomeStatus, ca.nome AS nomeCategoria, cur.nome AS nomeCurso, tur.nome AS nomeTurma FROM usuario AS u "
+				+ "INNER JOIN sexo AS s ON s.id = u.id_sexo " + "INNER JOIN cidade AS c ON c.id = u.id_cidade "
+				+ "INNER JOIN estado AS e ON e.id = u.id_estado " + "INNER JOIN status_ AS sts ON sts.id = u.id_status "
+				+ "INNER JOIN categoria AS ca ON ca.id = u.id_categoria "
+				+ "INNER JOIN curso AS cur ON cur.id = u.id_curso " + "INNER JOIN turma AS tur ON tur.id = u.id_turma "
+				+ "WHERE u.nome = %?%;";
+
+		PreparedStatement ps = conn.prepareStatement(sql);
+		ps.setString(1, nome);
+
+		ResultSet rs = ps.executeQuery();
+		List<Usuario> lista = new ArrayList<Usuario>();
+
+		while (rs.next()) {
+			Usuario u = new Usuario();
+
+			u.setId(rs.getInt("id"));
+			u.setNome(rs.getString("nome"));
+			u.setEmail(rs.getString("email"));
+			u.setSenha(rs.getString("senha"));
+			u.getIdade().setTimeInMillis(rs.getLong("idade"));
+			u.setCpf(rs.getString("cpf"));
+			u.setRg(rs.getString("rg"));
+			u.setPeso(rs.getInt("peso"));
+			u.getSexo().setId(rs.getInt("id_sexo"));
+			u.getSexo().setNome(rs.getString("nomeSexo"));
+			u.getCidade().setId(rs.getInt("id_cidade"));
+			u.getCidade().setNome(rs.getString("nomeCidade"));
+			u.getEstado().setId(rs.getInt("id_estado"));
+			u.getEstado().setNome(rs.getString("nomeEstado"));
+			u.getStatus().setId(rs.getInt("id_status"));
+			u.getStatus().setNome(rs.getString("nomeStatus"));
+			u.getCategoria().setId(rs.getInt("id_categoria"));
+			u.getCategoria().setNome(rs.getString("nomeCategoria"));
+			u.getCurso().setId(rs.getInt("id_curso"));
+			u.getCurso().setNome(rs.getString("nomeCurso"));
+			u.getTurma().setId(rs.getInt("id_turma"));
+			u.getTurma().setNome(rs.getString("nomeTurma"));
+
+			lista.add(u);
+
+		}
+
+		return lista;
+
+	}
+
 }

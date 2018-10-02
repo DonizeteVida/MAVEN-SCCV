@@ -13,20 +13,21 @@
 
 		<h:form id="form">
 			<p:fieldset legend="Alunos Cadastrados">
-				<p:dataTable
+				<p:dataTable rowKey="#{a.id}"
 					emptyMessage="Não foram encontrados alunos cadastrados." var="a"
 					value="#{administradorVerPerfilAlunoMBean.listaUsuario}"
-					styleClass="opacityOnly">
-					<p:column headerText="Id">
+					styleClass="opacityOnly" selectionMode="single"
+					selection="#{administradorVerPerfilAlunoMBean.usuarioSelecionado}">
+					<p:column width="2%" headerText="Id">
 						<h:outputText value="#{a.id}" />
 					</p:column>
 					<p:column headerText="Nome">
 						<h:outputText value="#{a.nome}" />
 					</p:column>
-					<p:column headerText="Email">
+					<p:column width="15%" headerText="Email">
 						<h:outputText value="#{a.email}" />
 					</p:column>
-					<p:column headerText="Data de Nascimento">
+					<p:column width="12%" headerText="Data de Nascimento">
 						<p:calendar value="#{a.idade.time}" pattern="dd/MM/yyyy"
 							disabled="true" />
 					</p:column>
@@ -42,16 +43,16 @@
 					<p:column headerText="Cidade">
 						<h:outputText value="#{a.cidade.nome}" />
 					</p:column>
-					<p:column headerText="Estado">
+					<p:column width="5%" headerText="Estado">
 						<h:outputText value="#{a.estado.nome}" />
 					</p:column>
-					<p:column headerText="Status">
+					<p:column width="5%" headerText="Status">
 						<h:outputText value="#{a.status.nome}" />
 					</p:column>
 					<p:column headerText="Curso">
 						<h:outputText value="#{a.curso.nome}" />
 					</p:column>
-					<p:column headerText="Turma">
+					<p:column width="4%" headerText="Turma">
 						<h:outputText value="#{a.turma.nome}" />
 					</p:column>
 				</p:dataTable>
