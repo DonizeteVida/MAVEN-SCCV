@@ -23,8 +23,7 @@ public class AlunoHomeMBean {
 	List<CurriculumVitae> listaCurriculo;
 
 	CurriculumVitae curClick;
-	Boolean clicado;
-
+	CurriculumVitae curEdit;
 	private List<ClasseGenerica> cursos;
 	private List<ClasseGenerica> turmas;
 	private List<ClasseGenerica> categorias;
@@ -35,8 +34,7 @@ public class AlunoHomeMBean {
 		classeGenericaDao = new ClasseGenericaDao();
 		curriculoDao = new CurriculoDao();
 		listaCurriculo = new ArrayList<CurriculumVitae>();
-		clicado = false;
-		curClick = new CurriculumVitae();
+		curEdit = new CurriculumVitae();
 		try {
 			categorias = classeGenericaDao.buscaCategoria();
 		} catch (SQLException e) {
@@ -121,14 +119,6 @@ public class AlunoHomeMBean {
 		return null;
 	}
 
-	public Boolean getClicado() {
-		return clicado;
-	}
-
-	public void setClicado(Boolean clicado) {
-		this.clicado = clicado;
-	}
-
 	public void salvarCurriculo() {
 
 	}
@@ -155,6 +145,14 @@ public class AlunoHomeMBean {
 
 	public void setCategorias(List<ClasseGenerica> categorias) {
 		this.categorias = categorias;
+	}
+
+	public CurriculumVitae getCurEdit() {
+		return curEdit;
+	}
+
+	public void setCurEdit(CurriculumVitae curEdit) {
+		this.curEdit = curEdit;
 	}
 
 }
