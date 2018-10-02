@@ -111,10 +111,6 @@ public class AlunoHomeMBean {
 		return null;
 	}
 
-	public void salvarCurriculo() {
-
-	}
-
 	public List<ClasseGenerica> getCursos() {
 		return cursos;
 	}
@@ -153,6 +149,20 @@ public class AlunoHomeMBean {
 			e.printStackTrace();
 		}
 		this.curEdit = curEdit;
+	}
+
+	public void salvarCurriculo() {
+		try {
+			if (curriculoDao.updateCurriculum(curEdit)) {
+				Mensagem.make("Curriculo alterado com sucesso !");
+				listarCurriculo();
+			} else {
+				Mensagem.make("Erro ao alterar currículo !");
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 }
