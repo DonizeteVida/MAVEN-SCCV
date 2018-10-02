@@ -50,13 +50,13 @@ public class AlunoIndexMBean {
 				codigo = String.valueOf(Calendar.getInstance().getTimeInMillis());
 				mensagem.setMensagem(codigo);
 				mensagem.setDestinatario(usuarioLocal.getEmail());
-				mensagem.setAssunto("Codigo de Alteraï¿½ï¿½o de Senha");
+				mensagem.setAssunto("Codigo de Alteração de Senha");
 				EmailUtil.enviaEmail(mensagem);
 				Mensagem("Codigo enviado, aguarde alguns instantes !");
 
 				Mensagem("Verifique sua caixa de entrada, e/ou caixa de spam !");
 			} else {
-				Mensagem("Usuario nï¿½o encontrado !");
+				Mensagem("Usuario não encontrado !");
 			}
 		} catch (EmailException e) {
 			e.printStackTrace();
@@ -81,7 +81,7 @@ public class AlunoIndexMBean {
 				Mensagem(e.toString());
 			}
 		} else {
-			Mensagem("CÃ³digo incorreto");
+			Mensagem("Código incorreto");
 		}
 	}
 
