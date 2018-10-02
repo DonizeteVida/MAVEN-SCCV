@@ -17,6 +17,7 @@ public class AdministradorVerPerfilAlunoMBean {
 
 	UsuarioDao usuarioDao;
 	List<Usuario> listaUsuario;
+	Usuario usuarioSelecionado;
 
 	public AdministradorVerPerfilAlunoMBean() {
 		usuarioDao = new UsuarioDao();
@@ -37,6 +38,14 @@ public class AdministradorVerPerfilAlunoMBean {
 
 	public void setListaUsuario(List<Usuario> listaUsuario) {
 		this.listaUsuario = listaUsuario;
+	}
+
+	public Usuario getUsuarioSelecionado() {
+		return usuarioSelecionado;
+	}
+
+	public void setUsuarioSelecionado(Usuario usuarioSelecionado) {
+		this.usuarioSelecionado = usuarioSelecionado;
 	}
 
 }
