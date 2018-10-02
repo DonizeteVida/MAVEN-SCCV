@@ -3,10 +3,8 @@ package br.senai.sp.jaguariuna.sccv.mBeans;
 import java.sql.SQLException;
 import java.util.Calendar;
 
-import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
-import javax.faces.context.FacesContext;
 
 import org.apache.commons.mail.EmailException;
 
@@ -83,7 +81,7 @@ public class AlunoIndexMBean {
 				Mensagem(e.toString());
 			}
 		} else {
-			Mensagem("C�digo incorreto");
+			Mensagem("Código incorreto");
 		}
 	}
 
@@ -197,12 +195,12 @@ public class AlunoIndexMBean {
 					this.usuarioAdministrador = usuarioAdministrador;
 					return "/admin/home?faces-redirect=true";
 				} else {
-					br.senai.sp.jaguariuna.sccv.utils.Mensagem.make("Admnistrador não encontrado !");
+					Mensagem("Admnistrador não encontrado !");
 				}
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
-				br.senai.sp.jaguariuna.sccv.utils.Mensagem.make(e.toString());
+				Mensagem(e.toString());
 			}
 
 		}
@@ -210,7 +208,7 @@ public class AlunoIndexMBean {
 	}
 
 	public void Mensagem(String s) {
-		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(s));
+		br.senai.sp.jaguariuna.sccv.utils.Mensagem.make(s);
 	}
 
 }
