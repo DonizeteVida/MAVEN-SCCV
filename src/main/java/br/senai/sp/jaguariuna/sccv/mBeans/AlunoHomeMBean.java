@@ -23,8 +23,7 @@ public class AlunoHomeMBean {
 	List<CurriculumVitae> listaCurriculo;
 
 	CurriculumVitae curClick;
-	Boolean clicado;
-
+	CurriculumVitae curEdit;
 	private List<ClasseGenerica> cursos;
 	private List<ClasseGenerica> turmas;
 	private List<ClasseGenerica> categorias;
@@ -35,8 +34,7 @@ public class AlunoHomeMBean {
 		classeGenericaDao = new ClasseGenericaDao();
 		curriculoDao = new CurriculoDao();
 		listaCurriculo = new ArrayList<CurriculumVitae>();
-		clicado = false;
-		curClick = new CurriculumVitae();
+		curEdit = new CurriculumVitae();
 		try {
 			categorias = classeGenericaDao.buscaCategoria();
 		} catch (SQLException e) {
@@ -62,7 +60,6 @@ public class AlunoHomeMBean {
 		try {
 			listaCurriculo = curriculoDao.listarCurriculo(alunoIndexMBean.getUsuario().getId());
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
@@ -71,7 +68,6 @@ public class AlunoHomeMBean {
 		try {
 			cursos = classeGenericaDao.buscaCurso(curClick.getCategoria().getId());
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 			Mensagem.make(e.toString());
 		}
@@ -81,7 +77,6 @@ public class AlunoHomeMBean {
 		try {
 			turmas = classeGenericaDao.buscaTurma(curClick.getCurso().getId());
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 			Mensagem.make(e.toString());
 		}
@@ -100,15 +95,6 @@ public class AlunoHomeMBean {
 	}
 
 	public void setCurClick(CurriculumVitae curClick) {
-		try {
-			turmas = classeGenericaDao.buscaTurma(curClick.getCurso().getId());
-			cursos = classeGenericaDao.buscaCurso(curClick.getCategoria().getId());
-
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-			Mensagem.make(e.toString());
-		}
 		this.curClick = curClick;
 	}
 
@@ -123,14 +109,6 @@ public class AlunoHomeMBean {
 
 	public String abrirEditar() {
 		return null;
-	}
-
-	public Boolean getClicado() {
-		return clicado;
-	}
-
-	public void setClicado(Boolean clicado) {
-		this.clicado = clicado;
 	}
 
 	public void salvarCurriculo() {
@@ -159,6 +137,22 @@ public class AlunoHomeMBean {
 
 	public void setCategorias(List<ClasseGenerica> categorias) {
 		this.categorias = categorias;
+	}
+
+	public CurriculumVitae getCurEdit() {
+		return curEdit;
+	}
+
+	public void setCurEdit(CurriculumVitae curEdit) {
+		try {
+			turmas = classeGenericaDao.buscaTurma(curEdit.getCurso().getId());
+			cursos = classeGenericaDao.buscaCurso(curEdit.getCategoria().getId());
+
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		this.curEdit = curEdit;
 	}
 
 }

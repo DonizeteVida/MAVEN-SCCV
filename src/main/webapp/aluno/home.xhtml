@@ -40,7 +40,7 @@
 								update=":formEdit:panel">
 								<h:outputText styleClass="fa fa-fw fa-edit" />
 								<f:setPropertyActionListener value="#{cur}"
-									target="#{alunoHomeMBean.curClick}" />
+									target="#{alunoHomeMBean.curEdit}" />
 							</p:commandLink>
 						</p:panelGrid>
 					</h:panelGrid>
@@ -55,7 +55,7 @@
 					<p:panelGrid columns="2" id="panel">
 
 						<p:outputLabel value="Insira a categoria do seu curso atual: " />
-						<p:selectOneMenu value="#{alunoHomeMBean.curClick.categoria.id}"
+						<p:selectOneMenu value="#{alunoHomeMBean.curEdit.categoria.id}"
 							required="true" requiredMessage="Uma categoria é necessária">
 							<f:selectItem itemLabel="SELECIONE SUA CATEGORIA ATUAL"
 								itemValue="" />
@@ -68,7 +68,7 @@
 
 						<p:outputLabel value="Insira seu curso atual: " />
 						<p:selectOneMenu id="selecaoCurso"
-							value="#{alunoHomeMBean.curClick.curso.id}" required="true"
+							value="#{alunoHomeMBean.curEdit.curso.id}" required="true"
 							requiredMessage="Um curso é necessário">
 							<f:selectItem itemLabel="SELECIONE SEU CURSO ATUAL" itemValue="" />
 							<f:selectItems value="#{alunoHomeMBean.cursos}" var="curso"
@@ -78,7 +78,7 @@
 						</p:selectOneMenu>
 
 						<p:outputLabel value="Insira sua turma atual: " />
-						<p:selectOneMenu value="#{alunoHomeMBean.curClick.turma.id}"
+						<p:selectOneMenu value="#{alunoHomeMBean.curEdit.turma.id}"
 							id="selecaoTurma" required="true"
 							requiredMessage="Uma turma é necessária">
 							<f:selectItem itemLabel="SELECIONE SUA TURMA ATUAL" itemValue="" />
@@ -88,7 +88,7 @@
 
 						<p:outputLabel value="Insira seu semestre atual: " />
 						<p:inputMask mask="9" required="true"
-							value="#{alunoHomeMBean.curClick.semestre}" />
+							value="#{alunoHomeMBean.curEdit.semestre}" />
 					</p:panelGrid>
 
 					<br />
