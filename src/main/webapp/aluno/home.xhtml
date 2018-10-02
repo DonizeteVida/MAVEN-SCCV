@@ -12,7 +12,7 @@
 		</p:growl>
 
 		<h:form id="form">
-			<p:dataGrid
+			<p:dataGrid id="dataGrid"
 				emptyMessage="Não foram encontrados curriculos cadastrados."
 				var="cur" value="#{alunoHomeMBean.listaCurriculo}" columns="10"
 				layout="grid">
@@ -52,11 +52,12 @@
 			height="50%" modal="true">
 			<center>
 				<h:form id="formEdit">
-					<p:panelGrid columns="2" id="panel">
+					<p:panelGrid columns="2" id="panel" styleClass="opacityOnly">
 
 						<p:outputLabel value="Insira a categoria do seu curso atual: " />
 						<p:selectOneMenu value="#{alunoHomeMBean.curEdit.categoria.id}"
-							required="true" requiredMessage="Uma categoria é necessária">
+							disabled="true" required="true"
+							requiredMessage="Uma categoria é necessária">
 							<f:selectItem itemLabel="SELECIONE SUA CATEGORIA ATUAL"
 								itemValue="" />
 							<f:selectItems value="#{alunoHomeMBean.categorias}"
@@ -67,7 +68,7 @@
 						</p:selectOneMenu>
 
 						<p:outputLabel value="Insira seu curso atual: " />
-						<p:selectOneMenu id="selecaoCurso"
+						<p:selectOneMenu id="selecaoCurso" disabled="true"
 							value="#{alunoHomeMBean.curEdit.curso.id}" required="true"
 							requiredMessage="Um curso é necessário">
 							<f:selectItem itemLabel="SELECIONE SEU CURSO ATUAL" itemValue="" />
@@ -92,7 +93,8 @@
 					</p:panelGrid>
 
 					<br />
-					<p:commandButton value="Salvar novo curriculo"
+					<p:commandButton ajax="true" update=":form:dataGrid"
+						oncomplete="PF('dlg1').hide();" value="Salvar novo curriculo"
 						action="#{alunoHomeMBean.salvarCurriculo}" />
 				</h:form>
 			</center>

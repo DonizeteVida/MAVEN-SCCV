@@ -59,7 +59,6 @@ public class AlunoEditarCurriculoMBean {
 			try {
 				FacesContext.getCurrentInstance().getExternalContext().redirect("home.xhtml");
 			} catch (IOException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 				Mensagem.make(e.toString());
 			}
@@ -76,7 +75,6 @@ public class AlunoEditarCurriculoMBean {
 				Mensagem.make("Experiencia alterada com sucesso !");
 			}
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
@@ -88,7 +86,6 @@ public class AlunoEditarCurriculoMBean {
 				Mensagem.make("Formação alterada com sucesso !");
 			}
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
@@ -101,7 +98,6 @@ public class AlunoEditarCurriculoMBean {
 				inserirExperiencia = new Experiencia();
 			}
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 			Mensagem.make(e.toString());
 		}
@@ -114,7 +110,6 @@ public class AlunoEditarCurriculoMBean {
 				Mensagem.make("Experiencia deletada com sucesso !");
 			}
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 			Mensagem.make(e.toString());
 		}
@@ -128,7 +123,6 @@ public class AlunoEditarCurriculoMBean {
 				inserirFormacao = new Formacao();
 			}
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 			Mensagem.make(e.toString());
 		}
@@ -141,7 +135,6 @@ public class AlunoEditarCurriculoMBean {
 				Mensagem.make("Formacao deletada com sucesso !");
 			}
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 			Mensagem.make(e.toString());
 		}
@@ -157,7 +150,6 @@ public class AlunoEditarCurriculoMBean {
 			formacoes = curriculoDao.listarFormacoes(curriculumAtual);
 
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 			Mensagem.make(e.toString());
 		}
