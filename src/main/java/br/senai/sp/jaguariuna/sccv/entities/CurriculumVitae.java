@@ -18,7 +18,6 @@ public class CurriculumVitae {
 
 	private Integer semestre;
 	private Integer id;
-	private Integer peso;
 	private Calendar data_criacao;
 	private ClasseGenerica curso;
 	private ClasseGenerica turma;
@@ -32,14 +31,6 @@ public class CurriculumVitae {
 
 	public void setId(int id) {
 		this.id = id;
-	}
-
-	public int getPeso() {
-		return peso;
-	}
-
-	public void setPeso(int peso) {
-		this.peso = peso;
 	}
 
 	public Calendar getData_criacao() {
@@ -96,10 +87,6 @@ public class CurriculumVitae {
 
 	public void setId(Integer id) {
 		this.id = id;
-	}
-
-	public void setPeso(Integer peso) {
-		this.peso = peso;
 	}
 
 	public Usuario getUsuario() {

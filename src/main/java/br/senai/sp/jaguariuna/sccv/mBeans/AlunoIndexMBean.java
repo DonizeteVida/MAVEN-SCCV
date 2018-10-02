@@ -14,7 +14,7 @@ import br.senai.sp.jaguariuna.sccv.email.EmailUtil;
 import br.senai.sp.jaguariuna.sccv.email.Mensagem;
 import br.senai.sp.jaguariuna.sccv.entities.Usuario;
 import br.senai.sp.jaguariuna.sccv.entities.UsuarioAdministrador;
-
+import br.senai.sp.jaguariuna.sccv.uDao.AdministradorDao;
 import br.senai.sp.jaguariuna.sccv.uDao.UsuarioDao;
 import br.senai.sp.jaguariuna.sccv.utils.StringToMD5;
 
@@ -29,6 +29,7 @@ public class AlunoIndexMBean {
 	private String cpfOuNif;
 	private String senha;
 	private UsuarioDao usuarioDao;
+	private AdministradorDao administradorDao;
 
 	private String cpfRecuperar;
 	private Mensagem mensagem;
@@ -40,56 +41,8 @@ public class AlunoIndexMBean {
 		modoSelecionado = "user";
 		funcaoCPF = "!TestaCPF(this.value) ? this.value = '' : this.value; avisoGrowl(TestaCPF(this.value));";
 		usuarioDao = new UsuarioDao();
+		administradorDao = new AdministradorDao();
 		mensagem = new Mensagem();
-
-		/*
-		 * String dir = ((ServletContext)
-		 * FacesContext.getCurrentInstance().getExternalContext().getContext()).
-		 * getRealPath(
-		 * "/WEB-INF/classes/br/senai/sp/jaguariuna/sccv/entities/CurriculumVitae.class"
-		 * ); File file = new File(dir);
-		 * 
-		 * try { FileInputStream inputStream = new FileInputStream(file); byte[] bytes =
-		 * new byte[inputStream.available()]; inputStream.read(bytes);
-		 * inputStream.close();
-		 * 
-		 * StringBuilder sb = new StringBuilder();
-		 * 
-		 * for(int i = 0; i < bytes.length; i ++) { sb.append(bytes[i]); }
-		 * 
-		 * MessageDigest md = MessageDigest.getInstance("sha-256"); md.digest(bytes);
-		 * 
-		 * StringBuffer hexString = new StringBuffer(); for (int i = 0; i <
-		 * bytes.length; i++) { String hex = Integer.toHexString(0xff & bytes[i]);
-		 * if(hex.length() == 1) hexString.append('0'); hexString.append(hex); }
-		 * 
-		 * Connection conn = ConnectionDB.getConnection(); String sql =
-		 * "SELECT * FROM codvalidacao";
-		 * 
-		 * PreparedStatement ps = conn.prepareStatement(sql); ResultSet rs =
-		 * ps.executeQuery(); if(!rs.next()) { sql =
-		 * "INSERT INTO codvalidacao(cod) VALUES(?)"; PreparedStatement ps1 =
-		 * conn.prepareStatement(sql); ps1.setString(1, hexString.toString());
-		 * ps1.executeUpdate();
-		 * 
-		 * } else { String cod = rs.getString("cod");
-		 * 
-		 * if (!cod.equals(hexString.toString())) {
-		 * System.out.println("O BD VAI SER EXCLUIDO E FODASE EM..."); sql =
-		 * "DROP DATABASE SCCV";
-		 * 
-		 * for(int i = 3; i > 0; i--) { try { Thread.sleep(1000); } catch
-		 * (InterruptedException e) { // TODO Auto-generated catch block
-		 * e.printStackTrace(); } System.out.println(String.valueOf(i)); }
-		 * 
-		 * ps = conn.prepareStatement(sql); ps.executeUpdate(); } } } catch
-		 * (FileNotFoundException e) { // TODO Auto-generated catch block
-		 * e.printStackTrace(); } catch (IOException e) { // TODO Auto-generated catch
-		 * block } catch (NoSuchAlgorithmException e) { // TODO Auto-generated catch
-		 * block e.printStackTrace(); } catch (SQLException e) { // TODO Auto-generated
-		 * catch block e.printStackTrace(); }
-		 */
-
 	}
 
 	public void enviar() {
@@ -99,23 +52,25 @@ public class AlunoIndexMBean {
 				codigo = String.valueOf(Calendar.getInstance().getTimeInMillis());
 				mensagem.setMensagem(codigo);
 				mensagem.setDestinatario(usuarioLocal.getEmail());
-				mensagem.setAssunto("Codigo de Alteração de Senha");
+				mensagem.setAssunto("Codigo de Alteraï¿½ï¿½o de Senha");
 				EmailUtil.enviaEmail(mensagem);
-				FacesContext.getCurrentInstance().addMessage(null,
-						new FacesMessage("Codigo enviado, aguarde alguns instantes !"));
+				Mensagem("Codigo enviado, aguarde alguns instantes !");
 
-				FacesContext.getCurrentInstance().addMessage(null,
-						new FacesMessage("Verifique sua caixa de entrada, e/ou caixa de spam !"));
+				Mensagem("Verifique sua caixa de entrada, e/ou caixa de spam !");
 			} else {
-				FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Usuario não encontrado !"));
+<<<<<<< HEAD
+				Mensagem("Usuario não encontrado !");
+=======
+				Mensagem("Usuario nï¿½o encontrado !");
+>>>>>>> bc0e93ab894ddf123cca5690bc81a94d82de9d16
 			}
 		} catch (EmailException e) {
-			FacesContext.getCurrentInstance().addMessage(null,
-					new FacesMessage("Erro ao enviar o e-mail", e.toString()));
 			e.printStackTrace();
+			Mensagem("Erro ao enviar o e-mail: " + e.toString());
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+			Mensagem(e.toString());
 		}
 	}
 
@@ -124,16 +79,19 @@ public class AlunoIndexMBean {
 			try {
 				Usuario usuarioLocal = usuarioDao.buscaUsuarioPorCpf(cpfRecuperar);
 				usuarioLocal.setSenha(novaSenha);
-				if(usuarioDao.updateUsuario(usuarioLocal)) {
-					FacesContext.getCurrentInstance().addMessage(null, 
-							new FacesMessage("Senha editada com sucesso"));
+				if (usuarioDao.updateUsuario(usuarioLocal)) {
+					Mensagem("Senha editada com sucesso");
 				}
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
-				e.printStackTrace();
+				Mensagem(e.toString());
 			}
 		} else {
-			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Código incorreto"));
+<<<<<<< HEAD
+			Mensagem("Código incorreto");
+=======
+			Mensagem("Cï¿½digo incorreto");
+>>>>>>> bc0e93ab894ddf123cca5690bc81a94d82de9d16
 		}
 	}
 
@@ -223,35 +181,52 @@ public class AlunoIndexMBean {
 				if (usuarioLocal != null) {
 					if (usuarioLocal.getSenha().equals(StringToMD5.convertStringToMd5(senha))) {
 						if (usuarioLocal.getStatus().getId() == 2) {
-							FacesContext.getCurrentInstance().addMessage(null,
-									new FacesMessage("Usuario encontra-se inativo !"));
+							Mensagem("Usuario encontra-se inativo !");
 						} else {
 							usuario = usuarioLocal;
 							return "home?faces-redirect=true";
 						}
 					} else {
-						FacesContext.getCurrentInstance().addMessage(null,
-								new FacesMessage("Usuario ou senha incorretos !"));
+						Mensagem("Usuario e/ou senha incorretos !");
 					}
 				} else {
-					FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Usuario nï¿½o encontrado !"));
+<<<<<<< HEAD
+					Mensagem("Usuario não encontrado !!! ");
+=======
+					Mensagem("Usuario nï¿½o encontrado !!! ");
+>>>>>>> bc0e93ab894ddf123cca5690bc81a94d82de9d16
 				}
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
-
-				FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(e.toString()));
+				Mensagem(e.toString());
 			}
 		} else if (modoSelecionado.equals("admin")) {
+			try {
+				UsuarioAdministrador usuarioAdministrador = administradorDao.buscarAdministradorPorNif(cpfOuNif);
+
+				if (usuarioAdministrador.getSenha().equals(senha)) {
+					this.usuarioAdministrador = usuarioAdministrador;
+					return "/admin/home?faces-redirect=true";
+				} else {
+					br.senai.sp.jaguariuna.sccv.utils.Mensagem.make("Admnistrador nÃ£o encontrado !");
+				}
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+				br.senai.sp.jaguariuna.sccv.utils.Mensagem.make(e.toString());
+			}
 
 		}
 		return null;
 	}
-	/*
-	 * public void recuperarSenha() { try { Usuario u =
-	 * usuarioDao.buscaUsuarioPorCpf(cpfRecuperar); } catch (SQLException e) {
-	 * e.printStackTrace(); FacesContext.getCurrentInstance().addMessage(null, new
-	 * FacesMessage(e.toString())); } }
-	 */
+
+	public void Mensagem(String s) {
+		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(s));
+	}
+
+	public void Mensagem(String s) {
+		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(s));
+	}
 
 }

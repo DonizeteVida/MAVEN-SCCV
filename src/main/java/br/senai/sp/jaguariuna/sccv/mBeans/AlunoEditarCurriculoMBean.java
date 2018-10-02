@@ -6,7 +6,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
-import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.ViewScoped;
@@ -16,6 +15,7 @@ import br.senai.sp.jaguariuna.sccv.entities.CurriculumVitae;
 import br.senai.sp.jaguariuna.sccv.subEntities.Experiencia;
 import br.senai.sp.jaguariuna.sccv.subEntities.Formacao;
 import br.senai.sp.jaguariuna.sccv.uDao.CurriculoDao;
+import br.senai.sp.jaguariuna.sccv.utils.Mensagem;
 
 @ManagedBean
 @ViewScoped
@@ -61,16 +61,11 @@ public class AlunoEditarCurriculoMBean {
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
+				Mensagem.make(e.toString());
 			}
 		} else {
 			curriculumAtual = alunoHomeMBean.getCurClick();
-			try {
-				listarTudo();
-			} catch (SQLException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-				mens(e.toString());
-			}
+			listarTudo();
 		}
 	}
 
@@ -78,7 +73,7 @@ public class AlunoEditarCurriculoMBean {
 		try {
 			if (curriculoDao.editarExperiencia(experienciaSelecionada)) {
 				listarTudo();
-				mens("Experiencia alterada com sucesso !");
+				Mensagem.make("Experiencia alterada com sucesso !");
 			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -90,7 +85,7 @@ public class AlunoEditarCurriculoMBean {
 		try {
 			if (curriculoDao.editarFormacao(formacaoSelecionada)) {
 				listarTudo();
-				mens("Formação alterada com sucesso !");
+				Mensagem.make("Formação alterada com sucesso !");
 			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -101,13 +96,14 @@ public class AlunoEditarCurriculoMBean {
 	public void inserirExperienciaM() {
 		try {
 			if (curriculoDao.inserirExperiencia(inserirExperiencia, curriculumAtual)) {
-				mens("Experiencia salva com sucesso");
+				Mensagem.make("Experiencia salva com sucesso");
 				listarTudo();
+				inserirExperiencia = new Experiencia();
 			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-			mens(e.toString());
+			Mensagem.make(e.toString());
 		}
 	}
 
@@ -115,25 +111,26 @@ public class AlunoEditarCurriculoMBean {
 		try {
 			if (curriculoDao.deletarExperiencia(experienciaSelecionada)) {
 				listarTudo();
-				mens("Experiencia deletada com sucesso !");
+				Mensagem.make("Experiencia deletada com sucesso !");
 			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-			mens(e.toString());
+			Mensagem.make(e.toString());
 		}
 	}
 
 	public void inserirFormacaoM() {
 		try {
 			if (curriculoDao.inserirFormacao(inserirFormacao, curriculumAtual)) {
-				mens("Formacao salva com sucesso");
+				Mensagem.make("Formacao salva com sucesso");
 				listarTudo();
+				inserirFormacao = new Formacao();
 			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-			mens(e.toString());
+			Mensagem.make(e.toString());
 		}
 	}
 
@@ -141,12 +138,12 @@ public class AlunoEditarCurriculoMBean {
 		try {
 			if (curriculoDao.deletarFormacao(formacaoSelecionada)) {
 				listarTudo();
-				mens("Formacao deletada com sucesso !");
+				Mensagem.make("Formacao deletada com sucesso !");
 			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-			mens(e.toString());
+			Mensagem.make(e.toString());
 		}
 	}
 
@@ -154,17 +151,20 @@ public class AlunoEditarCurriculoMBean {
 		return curriculumAtual;
 	}
 
-	public void listarTudo() throws SQLException {
-		experiencias = curriculoDao.listarExperiencias(curriculumAtual);
-		formacoes = curriculoDao.listarFormacoes(curriculumAtual);
+	public void listarTudo() {
+		try {
+			experiencias = curriculoDao.listarExperiencias(curriculumAtual);
+			formacoes = curriculoDao.listarFormacoes(curriculumAtual);
+
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			Mensagem.make(e.toString());
+		}
 	}
 
 	public void setCurriculumAtual(CurriculumVitae curriculumAtual) {
 		this.curriculumAtual = curriculumAtual;
-	}
-
-	private void mens(String s) {
-		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(s));
 	}
 
 	public List<Experiencia> getExperiencias() {

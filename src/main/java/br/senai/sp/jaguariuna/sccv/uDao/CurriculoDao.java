@@ -45,14 +45,16 @@ public class CurriculoDao {
 
 		while (rs.next()) {
 
-			Calendar data_inicio = Calendar.getInstance();
-			Calendar data_fim = Calendar.getInstance();
+			Formacao f = new Formacao();
 
-			data_inicio.setTimeInMillis(rs.getLong("data_inicio"));
-			data_fim.setTimeInMillis(rs.getLong("data_fim"));
+			f.setId(rs.getInt("id"));
+			f.setNome(rs.getString("nome"));
+			f.getData_inicio().setTimeInMillis(rs.getLong("data_inicio"));
+			f.getData_fim().setTimeInMillis(rs.getLong("data_fim"));
+			f.setEscola(rs.getString("escola"));
+			f.setId_curriculum_vitae(rs.getInt("id_curriculum_vitae"));
 
-			formacoes.add(new Formacao(rs.getInt("id"), rs.getString("nome"), data_inicio, data_fim,
-					rs.getString("escola"), rs.getInt("id_curriculum_vitae")));
+			formacoes.add(f);
 
 		}
 
@@ -109,15 +111,18 @@ public class CurriculoDao {
 		List<Experiencia> experiencias = new ArrayList<>();
 
 		while (rs.next()) {
-			Calendar data_inicio = Calendar.getInstance();
-			Calendar data_fim = Calendar.getInstance();
 
-			data_inicio.setTimeInMillis(rs.getLong("data_inicio"));
-			data_fim.setTimeInMillis(rs.getLong("data_fim"));
+			Experiencia exp = new Experiencia();
+			exp.setId(rs.getInt("id"));
+			exp.setNome(rs.getString("nome"));
+			exp.getData_inicio().setTimeInMillis(rs.getLong("data_inicio"));
+			exp.getData_fim().setTimeInMillis(rs.getLong("data_fim"));
+			exp.setCargo(rs.getString("cargo"));
+			exp.setEmpresa(rs.getString("empresa"));
+			exp.setFuncoes(rs.getString("funcoes"));
+			exp.setId_curriculum_vitae(rs.getInt("id_curriculum_vitae"));
 
-			experiencias.add(
-					new Experiencia(rs.getInt("id"), rs.getString("nome"), data_inicio, data_fim, rs.getString("cargo"),
-							rs.getString("empresa"), rs.getString("funcoes"), rs.getInt("id_curriculum_vitae")));
+			experiencias.add(exp);
 		}
 
 		return experiencias;
@@ -156,7 +161,7 @@ public class CurriculoDao {
 	}
 
 	public boolean criarCurriculo(CurriculumVitae c, Usuario u) throws SQLException {
-		String sql = "INSERT INTO curriculum_vitae(data_criacao, id_curso, id_turma, semestre, id_usuario) VALUES (?, ?, ?, ?, ?);";
+		String sql = "INSERT INTO curriculum_vitae(data_criacao, id_curso, id_turma, semestre, id_usuario, id_categoria) VALUES (?, ?, ?, ?, ?, ?);";
 
 		PreparedStatement ps = conn.prepareStatement(sql);
 
@@ -165,14 +170,16 @@ public class CurriculoDao {
 		ps.setInt(3, c.getTurma().getId());
 		ps.setInt(4, c.getSemestre());
 		ps.setInt(5, u.getId());
+		ps.setInt(6, c.getCategoria().getId());
 
 		return ps.executeUpdate() > 0;
 	}
 
 	public List<CurriculumVitae> listarCurriculo(Integer id_usuario) throws SQLException {
-		String sql = "SELECT c.*, cur.nome AS nomeCurso, tur.nome AS nomeTurma, sts.nome AS nomeStatus FROM curriculum_vitae AS c "
+		String sql = "SELECT c.*, cur.nome AS nomeCurso, tur.nome AS nomeTurma, sts.nome AS nomeStatus, cat.nome AS nomeCategoria FROM curriculum_vitae AS c "
 				+ "INNER JOIN curso AS cur ON cur.id = c.id_curso " + "INNER JOIN turma AS tur ON tur.id = c.id_turma "
-				+ "INNER JOIN status_ AS sts ON sts.id = c.id_status " + "WHERE c.id_usuario = ?;";
+				+ "INNER JOIN status_ AS sts ON sts.id = c.id_status "
+				+ "INNER JOIN categoria AS cat ON cat.id = c.id_categoria " + "WHERE c.id_usuario = ?;";
 
 		PreparedStatement ps = conn.prepareStatement(sql);
 
@@ -186,7 +193,6 @@ public class CurriculoDao {
 			CurriculumVitae c = new CurriculumVitae();
 
 			c.setId(rs.getInt("id"));
-			c.setPeso(rs.getInt("peso"));
 			c.getData_criacao().setTimeInMillis(rs.getLong("data_criacao"));
 			c.getCurso().setId(rs.getInt("id_curso"));
 			c.getCurso().setNome(rs.getString("nomeCurso"));
@@ -196,6 +202,8 @@ public class CurriculoDao {
 			c.getUsuario().setId(rs.getInt("id_usuario"));
 			c.getStatus().setId(rs.getInt("id_status"));
 			c.getStatus().setNome(rs.getString("nomeStatus"));
+			c.getCategoria().setId(rs.getInt("id_categoria"));
+			c.getCategoria().setNome("nomeCategoria");
 
 			lista.add(c);
 		}
@@ -220,7 +228,6 @@ public class CurriculoDao {
 			CurriculumVitae c = new CurriculumVitae();
 
 			c.setId(rs.getInt("id"));
-			c.setPeso(rs.getInt("peso"));
 			c.getData_criacao().setTimeInMillis(rs.getLong("data_criacao"));
 			c.getCurso().setId(rs.getInt("id_curso"));
 			c.getCurso().setNome(rs.getString("nomeCurso"));

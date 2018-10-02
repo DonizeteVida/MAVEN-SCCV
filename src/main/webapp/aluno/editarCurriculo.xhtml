@@ -140,12 +140,14 @@
 		<p:toolbar styleClass="toolbarCurriculo">
 			<f:facet name="left">
 				<p:commandButton onclick="PF('inserirExperiencia').show();"
-					value="Inserir experiencia" />
+					value="Inserir experiencia" ajax="true" event="onclick"
+					update=":formInserirExperiencia:inserirExperiencia" />
 			</f:facet>
 
 			<f:facet name="right">
 				<p:commandButton onclick="PF('inserirFormacao').show();"
-					value="Inserir formação" />
+					value="Inserir formação" ajax="true" event="onclick"
+					update=":formInserirFormacao:inserirFormacao" />
 			</f:facet>
 		</p:toolbar>
 
@@ -153,10 +155,16 @@
 
 		<p:dialog header="Insira a sua experiencia"
 			widgetVar="inserirExperiencia" resizable="true" responsive="true"
-			closable="true">
+			closable="true" modal="true">
+<<<<<<< HEAD
 			<h:form>
 				<center>
-					<p:panelGrid columns="2">
+					<p:panelGrid columns="2" id="limpaCampo">
+=======
+			<h:form id="formInserirExperiencia">
+				<center>
+					<p:panelGrid columns="2" id="inserirExperiencia">
+>>>>>>> bc0e93ab894ddf123cca5690bc81a94d82de9d16
 
 						<p:outputLabel value="Nome da experiencia: " />
 						<p:inputText required="true"
@@ -197,18 +205,19 @@
 
 					<p:commandButton value="Salvar sua experiencia" ajax="true"
 						update=":form:exp"
-						actionListener="#{alunoEditarCurriculoMBean.inserirExperienciaM}" />
+						actionListener="#{alunoEditarCurriculoMBean.inserirExperienciaM}"
+						oncomplete="PF('inserirExperiencia').hide();" />
 				</center>
 			</h:form>
 
 		</p:dialog>
 
 		<p:dialog header="Insira a sua formação" widgetVar="inserirFormacao"
-			resizable="true" responsive="true" closable="true">
+			resizable="true" responsive="true" closable="true" modal="true">
 
-			<h:form>
+			<h:form id="formInserirFormacao">
 				<center>
-					<p:panelGrid columns="2">
+					<p:panelGrid columns="2" id="inserirFormacao">
 
 						<p:outputLabel value="Nome da formacao: " />
 						<p:inputText required="true"
@@ -238,7 +247,8 @@
 
 					<p:commandButton value="Salvar sua formacao" ajax="true"
 						update=":form2:form"
-						actionListener="#{alunoEditarCurriculoMBean.inserirFormacaoM}" />
+						actionListener="#{alunoEditarCurriculoMBean.inserirFormacaoM}"
+						oncomplete="PF('inserirFormacao').hide();" />
 				</center>
 			</h:form>
 
@@ -246,7 +256,7 @@
 
 		<p:dialog header="Altere a sua experiencia"
 			widgetVar="editarExperiencia" id="editarExperiencia" resizable="true"
-			responsive="true" closable="true">
+			responsive="true" closable="true" modal="true">
 			<h:form>
 				<center>
 					<p:panelGrid columns="2">
@@ -290,7 +300,8 @@
 
 					<p:commandButton value="Salvar sua experiencia" ajax="true"
 						update=":form:exp"
-						actionListener="#{alunoEditarCurriculoMBean.editarExperienciaM}" />
+						actionListener="#{alunoEditarCurriculoMBean.editarExperienciaM}"
+						oncomplete="PF('editarExperiencia').hide();" />
 				</center>
 			</h:form>
 
@@ -298,7 +309,7 @@
 
 		<p:dialog header="Altere a sua formação" id="editarFormacao"
 			widgetVar="editarFormacao" resizable="true" responsive="true"
-			closable="true">
+			closable="true" modal="true">
 
 			<h:form>
 				<center>
@@ -332,7 +343,8 @@
 
 					<p:commandButton value="Salvar sua formacao" ajax="true"
 						update=":form2:form"
-						actionListener="#{alunoEditarCurriculoMBean.editarFormacaoM}" />
+						actionListener="#{alunoEditarCurriculoMBean.editarFormacaoM}"
+						oncomplete="PF('editarFormacao').hide();" />
 				</center>
 			</h:form>
 
