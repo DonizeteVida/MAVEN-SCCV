@@ -60,68 +60,6 @@ public class AlunoCadastroCurriculoMBean {
 		this.alunoIndexMBean = alunoIndexMBean;
 	}
 
-	@PostConstruct
-	void post() {
-		try {
-			usuario = usuarioDao.buscaUsuarioPorCpf(alunoIndexMBean.getUsuario().getCpf());
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-			Mensagem.make(e.toString());
-		}
-	}
-
-	public void buscaCurso() {
-		try {
-			cursos = classeGenericaDao.buscaCurso(curriculumVitae.getCategoria().getId());
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-			Mensagem.make(e.toString());
-		}
-	}
-
-	public void buscaTurma() {
-		try {
-			turmas = classeGenericaDao.buscaTurma(curriculumVitae.getCurso().getId());
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-	}
-
-	public List<ClasseGenerica> getCategorias() {
-		return categorias;
-	}
-
-	public void setCategorias(List<ClasseGenerica> categorias) {
-		this.categorias = categorias;
-	}
-
-	public String salvarCurriculo() {
-		try {
-			if (curriculoDao.listarCurriculo(usuario.getId(), curriculumVitae.getCurso().getId()).size() == 0) {
-				if (curriculoDao.criarCurriculo(curriculumVitae, usuario)) {
-					FacesContext.getCurrentInstance().getExternalContext().getFlash().setKeepMessages(true);
-					alunoHomeMBean.listarCurriculo();
-					Mensagem.make("Curriculo criado com sucesso !");
-
-					return "home?faces-redirect=true";
-				} else {
-					Mensagem.make("Falha ao salvar um novo curriculo !");
-					return null;
-				}
-			} else {
-				Mensagem.make("Já existe um curriculo com este curso !");
-			}
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-			Mensagem.make(e.toString());
-		}
-		return null;
-	}
-
 	public Usuario getUsuario() {
 		return usuario;
 	}
@@ -152,6 +90,68 @@ public class AlunoCadastroCurriculoMBean {
 
 	public void setTurmas(List<ClasseGenerica> turmas) {
 		this.turmas = turmas;
+	}
+
+	public List<ClasseGenerica> getCategorias() {
+		return categorias;
+	}
+
+	public void setCategorias(List<ClasseGenerica> categorias) {
+		this.categorias = categorias;
+	}
+
+	@PostConstruct
+	void post() {
+		try {
+			usuario = usuarioDao.buscaUsuarioPorCpf(alunoIndexMBean.getUsuario().getCpf());
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			Mensagem.make(e.toString());
+		}
+	}
+
+	public void buscaCurso() {
+		try {
+			cursos = classeGenericaDao.buscaCurso(curriculumVitae.getCategoria().getId());
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			Mensagem.make(e.toString());
+		}
+	}
+
+	public void buscaTurma() {
+		try {
+			turmas = classeGenericaDao.buscaTurma(curriculumVitae.getCurso().getId());
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+
+	public String salvarCurriculo() {
+		try {
+			if (curriculoDao.listarCurriculo(usuario.getId(), curriculumVitae.getCurso().getId()).size() == 0) {
+				if (curriculoDao.criarCurriculo(curriculumVitae, usuario)) {
+					FacesContext.getCurrentInstance().getExternalContext().getFlash().setKeepMessages(true);
+					alunoHomeMBean.listarCurriculo();
+					Mensagem.make("Curriculo criado com sucesso !");
+
+					return "home?faces-redirect=true";
+				} else {
+					Mensagem.make("Falha ao salvar um novo curriculo !");
+					return null;
+				}
+			} else {
+				Mensagem.make("JÃ¡ existe um curriculo com este curso !");
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			Mensagem.make(e.toString());
+		}
+		return null;
 	}
 
 }

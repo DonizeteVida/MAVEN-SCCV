@@ -13,23 +13,25 @@ import javax.servlet.http.HttpServletResponse;
 
 import br.senai.sp.jaguariuna.sccv.mBeans.AlunoIndexMBean;
 
-public class UserFilter implements Filter {
+public class AdminFilter implements Filter {
 
 	private AlunoIndexMBean alunoIndexMBean;
 
 	@Override
-	public void destroy() {
+	public void init(FilterConfig filterConfig) throws ServletException {
 		// TODO Auto-generated method stub
+
 	}
 
 	@Override
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)
 			throws IOException, ServletException {
+		// TODO Auto-generated method stub
 
 		alunoIndexMBean = (AlunoIndexMBean) ((HttpServletRequest) request).getSession().getAttribute("alunoIndexMBean");
 
 		if (alunoIndexMBean != null) {
-			if (alunoIndexMBean.getUsuario() != null) {
+			if (alunoIndexMBean.getUsuarioAdministrador() != null) {
 				chain.doFilter(request, response);
 			} else {
 				redirecionar(request, response);
@@ -37,10 +39,11 @@ public class UserFilter implements Filter {
 		} else {
 			redirecionar(request, response);
 		}
+
 	}
 
 	@Override
-	public void init(FilterConfig arg0) throws ServletException {
+	public void destroy() {
 		// TODO Auto-generated method stub
 
 	}

@@ -16,7 +16,6 @@ import br.senai.sp.jaguariuna.sccv.entities.Usuario;
 import br.senai.sp.jaguariuna.sccv.entities.UsuarioAdministrador;
 import br.senai.sp.jaguariuna.sccv.uDao.AdministradorDao;
 import br.senai.sp.jaguariuna.sccv.uDao.UsuarioDao;
-import br.senai.sp.jaguariuna.sccv.utils.FormatarCPFouRGtoString;
 import br.senai.sp.jaguariuna.sccv.utils.StringToMD5;
 
 @ManagedBean(eager = true)
@@ -53,13 +52,13 @@ public class AlunoIndexMBean {
 				codigo = String.valueOf(Calendar.getInstance().getTimeInMillis());
 				mensagem.setMensagem(codigo);
 				mensagem.setDestinatario(usuarioLocal.getEmail());
-				mensagem.setAssunto("Codigo de Alteração de Senha");
+				mensagem.setAssunto("Codigo de Alteraï¿½ï¿½o de Senha");
 				EmailUtil.enviaEmail(mensagem);
 				Mensagem("Codigo enviado, aguarde alguns instantes !");
 
 				Mensagem("Verifique sua caixa de entrada, e/ou caixa de spam !");
 			} else {
-				Mensagem("Usuario não encontrado !");
+				Mensagem("Usuario nï¿½o encontrado !");
 			}
 		} catch (EmailException e) {
 			e.printStackTrace();
@@ -84,7 +83,7 @@ public class AlunoIndexMBean {
 				Mensagem(e.toString());
 			}
 		} else {
-			Mensagem("Código incorreto");
+			Mensagem("Cï¿½digo incorreto");
 		}
 	}
 
@@ -183,7 +182,7 @@ public class AlunoIndexMBean {
 						Mensagem("Usuario e/ou senha incorretos !");
 					}
 				} else {
-					Mensagem("Usuario não encontrado !!! ");
+					Mensagem("Usuario nï¿½o encontrado !!! ");
 				}
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
@@ -195,9 +194,10 @@ public class AlunoIndexMBean {
 				UsuarioAdministrador usuarioAdministrador = administradorDao.buscarAdministradorPorNif(cpfOuNif);
 
 				if (usuarioAdministrador.getSenha().equals(senha)) {
+					this.usuarioAdministrador = usuarioAdministrador;
 					return "/admin/home?faces-redirect=true";
 				} else {
-					br.senai.sp.jaguariuna.sccv.utils.Mensagem.make("Admnistrador não encontrado !");
+					br.senai.sp.jaguariuna.sccv.utils.Mensagem.make("Admnistrador nÃ£o encontrado !");
 				}
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
@@ -208,12 +208,6 @@ public class AlunoIndexMBean {
 		}
 		return null;
 	}
-	/*
-	 * public void recuperarSenha() { try { Usuario u =
-	 * usuarioDao.buscaUsuarioPorCpf(cpfRecuperar); } catch (SQLException e) {
-	 * e.printStackTrace(); FacesContext.getCurrentInstance().addMessage(null, new
-	 * FacesMessage(e.toString())); } }
-	 */
 
 	public void Mensagem(String s) {
 		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(s));

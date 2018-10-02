@@ -5742,12 +5742,14 @@ CREATE TABLE curriculum_vitae(
     semestre INTEGER NOT NULL,
     id_usuario INTEGER NOT NULL,
     id_status INTEGER NOT NULL DEFAULT 1,
+    id_categoria INTEGER NOT NULL,
     FOREIGN KEY (id_usuario) REFERENCES usuario(id),
 	FOREIGN KEY (id_curso) REFERENCES curso(id),
 	FOREIGN KEY (id_turma) REFERENCES turma(id),
-    FOREIGN KEY (id_status) REFERENCES status_(id)
+    FOREIGN KEY (id_status) REFERENCES status_(id),
+    FOREIGN KEY (id_categoria) REFERENCES categoria (id)
 );
-	
+
    /* SELECT c.*, cur.nome AS nomeCurso, tur.nome AS nomeTurma, sts.nome AS nomeStatus FROM curriculum_vitae AS c
     INNER JOIN curso AS cur ON cur.id = c.id_curso
     INNER JOIN turma AS tur ON tur.id = c.id_turma
