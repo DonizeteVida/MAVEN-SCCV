@@ -95,14 +95,6 @@ public class AlunoHomeMBean {
 	}
 
 	public void setCurClick(CurriculumVitae curClick) {
-		try {
-			turmas = classeGenericaDao.buscaTurma(curClick.getCurso().getId());
-			cursos = classeGenericaDao.buscaCurso(curClick.getCategoria().getId());
-
-		} catch (SQLException e) {
-			e.printStackTrace();
-			Mensagem.make(e.toString());
-		}
 		this.curClick = curClick;
 	}
 
@@ -152,6 +144,14 @@ public class AlunoHomeMBean {
 	}
 
 	public void setCurEdit(CurriculumVitae curEdit) {
+		try {
+			turmas = classeGenericaDao.buscaTurma(curEdit.getCurso().getId());
+			cursos = classeGenericaDao.buscaCurso(curEdit.getCategoria().getId());
+
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		this.curEdit = curEdit;
 	}
 
