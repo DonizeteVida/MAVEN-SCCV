@@ -22,7 +22,15 @@
 					Data da criação do curriculo: 
 					<p:calendar
 						value="#{alunoEditarCurriculoMBean.curriculumAtual.data_criacao.time}"
-						pattern="dd/MM/yyyy" style="text-align: center;" />
+						pattern="dd/MM/yyyy" />
+						
+					Turma atual: 
+					<p:outputLabel
+						value="#{alunoEditarCurriculoMBean.curriculumAtual.turma.nome}" />
+						
+					Semestre atual: 
+					<p:outputLabel
+						value="#{alunoEditarCurriculoMBean.curriculumAtual.semestre}" />
 				</p:panelGrid>
 			</center>
 		</p:panel>
