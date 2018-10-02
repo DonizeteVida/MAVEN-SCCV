@@ -5733,7 +5733,7 @@ CREATE TABLE usuario_administrador(
 );
 
 	INSERT INTO usuario_administrador (nome, email, senha, nif) VALUES ( "jose", "teste.testando.senai@gmail.com", "123", "sn10529865") ;
-
+    
 CREATE TABLE curriculum_vitae(
 	id INTEGER NOT NULL PRIMARY KEY AUTO_INCREMENT,
     data_criacao FLOAT,
