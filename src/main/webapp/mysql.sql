@@ -5714,8 +5714,6 @@ CREATE TABLE usuario(
     FOREIGN KEY (id_sexo) REFERENCES sexo(id)
 ); 
 
-<<<<<<< HEAD
-=======
 	/*SELECT u.*, s.nome AS nomeSexo, c.nome AS nomeCidade, e.nome AS nomeEstado, sts.nome AS nomeStatus, ca.nome AS nomeCategoria, cur.nome AS nomeCurso, tur.nome AS nomeTurma FROM usuario AS u
     INNER JOIN sexo AS s ON s.id = u.id_sexo
     INNER JOIN cidade AS c ON c.id = u.id_cidade
@@ -5726,11 +5724,7 @@ CREATE TABLE usuario(
     INNER JOIN turma AS tur ON tur.id = u.id_turma;
 	*/
     
-    
-    
-
->>>>>>> fdb699e2bbe075aa4ce7f6b2740d28217cf9e32d
-	/*SELECT u.*, c.nome AS nomeCidade, e.nome AS nomeEstado, st.nome AS nomeStatus, cur.nome AS nomeCurso, tur.nome AS nomeTurma FROM usuario AS u 
+    /*SELECT u.*, c.nome AS nomeCidade, e.nome AS nomeEstado, st.nome AS nomeStatus, cur.nome AS nomeCurso, tur.nome AS nomeTurma FROM usuario AS u 
     INNER JOIN cidade AS c ON c.id = u.id_cidade
     INNER JOIN estado AS e ON e.id = u.id_estado
     INNER JOIN status_ AS st ON st.id = u.id_status
@@ -5748,10 +5742,6 @@ CREATE TABLE usuario_administrador(
     FOREIGN KEY (id_status) REFERENCES status_(id)
 );
 
-<<<<<<< HEAD
-	INSERT INTO usuario_administrador (nome, email, senha, nif) VALUES ( "jose", "teste.testando.senai@gmail.com", "123", "sn10529865") ;
-
-=======
 SELECT * FROM usuario;
 
 	INSERT INTO usuario_administrador (nome, email, senha, nif) VALUES ( "jose", "teste.testando.senai@gmail.com", "123", "sn10529865") ;
@@ -5759,8 +5749,6 @@ SELECT * FROM usuario;
     
     INSERT INTO usuario_administrador (nome, email, senha, nif) VALUES ( "jose eduardo", "jose.eduardo.ss@hotmail.com", "123", "sn12345678") ;
 
-
->>>>>>> fdb699e2bbe075aa4ce7f6b2740d28217cf9e32d
 CREATE TABLE curriculum_vitae(
 	id INTEGER NOT NULL PRIMARY KEY AUTO_INCREMENT,
     data_criacao FLOAT,
