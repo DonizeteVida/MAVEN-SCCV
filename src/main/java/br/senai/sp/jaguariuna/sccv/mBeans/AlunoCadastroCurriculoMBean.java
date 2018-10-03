@@ -144,15 +144,8 @@ public class AlunoCadastroCurriculoMBean {
 					return null;
 				}
 			} else {
-<<<<<<< HEAD
-<<<<<<< HEAD
-				Mensagem.make("J� existe um curriculo com este curso !");
-=======
+
 				Mensagem.make("Já existe um curriculo com este curso !");
->>>>>>> bc0e93ab894ddf123cca5690bc81a94d82de9d16
-=======
-				Mensagem.make("Já existe um curriculo com este curso !");
->>>>>>> fdb699e2bbe075aa4ce7f6b2740d28217cf9e32d
 			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -162,42 +155,4 @@ public class AlunoCadastroCurriculoMBean {
 		return null;
 	}
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-	public Usuario getUsuario() {
-		return usuario;
-	}
-
-	public void setUsuario(Usuario usuario) {
-		this.usuario = usuario;
-	}
-
-	public CurriculumVitae getCurriculumVitae() {
-		return curriculumVitae;
-	}
-
-	public void setCurriculumVitae(CurriculumVitae curriculumVitae) {
-		this.curriculumVitae = curriculumVitae;
-	}
-
-	public List<ClasseGenerica> getCursos() {
-		return cursos;
-	}
-
-	public void setCursos(List<ClasseGenerica> cursos) {
-		this.cursos = cursos;
-	}
-
-	public List<ClasseGenerica> getTurmas() {
-		return turmas;
-	}
-
-	public void setTurmas(List<ClasseGenerica> turmas) {
-		this.turmas = turmas;
-	}
-
-=======
->>>>>>> bc0e93ab894ddf123cca5690bc81a94d82de9d16
-=======
->>>>>>> fdb699e2bbe075aa4ce7f6b2740d28217cf9e32d
 }

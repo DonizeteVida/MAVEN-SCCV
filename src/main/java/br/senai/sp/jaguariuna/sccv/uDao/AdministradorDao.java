@@ -32,17 +32,9 @@ public class AdministradorDao {
 		return ps.executeUpdate() > 0;
 	}
 
-<<<<<<< HEAD
-
 	public boolean inserirUsuarioAdministrador(UsuarioAdministrador a) throws SQLException {
 
 		String sql = "INSERT INTO usuario_administrador(nome, email, senha, idade, nif, status)"
-
-=======
-	public boolean inserirUsuarioAdministrador(UsuarioAdministrador a) throws SQLException {
-
-		String sql = "INSERT INTO usuario_administrador(nome, email, senha, idade, nif, status)"
->>>>>>> fdb699e2bbe075aa4ce7f6b2740d28217cf9e32d
 				+ " VALUES(?,?,?,?,?,?)";
 
 		PreparedStatement ps = conn.prepareStatement(sql);
@@ -55,11 +47,6 @@ public class AdministradorDao {
 
 		return ps.executeUpdate() > 0;
 	};
-
-<<<<<<< HEAD
-	
-=======
->>>>>>> fdb699e2bbe075aa4ce7f6b2740d28217cf9e32d
 
 	public UsuarioAdministrador buscarAdministradorPorNif(String nif) throws SQLException {
 		String sql = "SELECT * FROM usuario_administrador AS ua WHERE ua.nif = ?;";
@@ -105,15 +92,6 @@ public class AdministradorDao {
 		}
 
 		return ua;
-
-<<<<<<< HEAD
-
-=======
->>>>>>> fdb699e2bbe075aa4ce7f6b2740d28217cf9e32d
 	}
 
-
-
 }
-	
-

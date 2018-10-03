@@ -40,11 +40,7 @@
 								update=":formEdit:panel">
 								<h:outputText styleClass="fa fa-fw fa-edit" />
 								<f:setPropertyActionListener value="#{cur}"
-<<<<<<< HEAD
-									target="#{alunoHomeMBean.curClick}" />
-=======
 									target="#{alunoHomeMBean.curEdit}" />
->>>>>>> fdb699e2bbe075aa4ce7f6b2740d28217cf9e32d
 							</p:commandLink>
 						</p:panelGrid>
 					</h:panelGrid>
@@ -56,20 +52,13 @@
 			height="50%" modal="true">
 			<center>
 				<h:form id="formEdit">
-<<<<<<< HEAD
-					<p:panelGrid columns="2" id="panel">
 
-						<p:outputLabel value="Insira a categoria do seu curso atual: " />
-						<p:selectOneMenu value="#{alunoHomeMBean.curClick.categoria.id}"
-							required="true" requiredMessage="Uma categoria é necessária">
-=======
 					<p:panelGrid columns="2" id="panel" styleClass="opacityOnly">
 
 						<p:outputLabel value="Insira a categoria do seu curso atual: " />
 						<p:selectOneMenu value="#{alunoHomeMBean.curEdit.categoria.id}"
 							disabled="true" required="true"
 							requiredMessage="Uma categoria é necessária">
->>>>>>> fdb699e2bbe075aa4ce7f6b2740d28217cf9e32d
 							<f:selectItem itemLabel="SELECIONE SUA CATEGORIA ATUAL"
 								itemValue="" />
 							<f:selectItems value="#{alunoHomeMBean.categorias}"
@@ -80,13 +69,10 @@
 						</p:selectOneMenu>
 
 						<p:outputLabel value="Insira seu curso atual: " />
-<<<<<<< HEAD
-						<p:selectOneMenu id="selecaoCurso"
-							value="#{alunoHomeMBean.curClick.curso.id}" required="true"
-=======
+
+
 						<p:selectOneMenu id="selecaoCurso" disabled="true"
 							value="#{alunoHomeMBean.curEdit.curso.id}" required="true"
->>>>>>> fdb699e2bbe075aa4ce7f6b2740d28217cf9e32d
 							requiredMessage="Um curso é necessário">
 							<f:selectItem itemLabel="SELECIONE SEU CURSO ATUAL" itemValue="" />
 							<f:selectItems value="#{alunoHomeMBean.cursos}" var="curso"
@@ -96,11 +82,8 @@
 						</p:selectOneMenu>
 
 						<p:outputLabel value="Insira sua turma atual: " />
-<<<<<<< HEAD
-						<p:selectOneMenu value="#{alunoHomeMBean.curClick.turma.id}"
-=======
+
 						<p:selectOneMenu value="#{alunoHomeMBean.curEdit.turma.id}"
->>>>>>> fdb699e2bbe075aa4ce7f6b2740d28217cf9e32d
 							id="selecaoTurma" required="true"
 							requiredMessage="Uma turma é necessária">
 							<f:selectItem itemLabel="SELECIONE SUA TURMA ATUAL" itemValue="" />
@@ -110,20 +93,12 @@
 
 						<p:outputLabel value="Insira seu semestre atual: " />
 						<p:inputMask mask="9" required="true"
-<<<<<<< HEAD
-							value="#{alunoHomeMBean.curClick.semestre}" />
-					</p:panelGrid>
-
-					<br />
-					<p:commandButton value="Salvar novo curriculo"
-=======
 							value="#{alunoHomeMBean.curEdit.semestre}" />
 					</p:panelGrid>
 
 					<br />
 					<p:commandButton ajax="true" update=":form:dataGrid"
 						oncomplete="PF('dlg1').hide();" value="Salvar novo curriculo"
->>>>>>> fdb699e2bbe075aa4ce7f6b2740d28217cf9e32d
 						action="#{alunoHomeMBean.salvarCurriculo}" />
 				</h:form>
 			</center>

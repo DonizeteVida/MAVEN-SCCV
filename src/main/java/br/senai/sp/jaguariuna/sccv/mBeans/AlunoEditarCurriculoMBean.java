@@ -150,10 +150,7 @@ public class AlunoEditarCurriculoMBean {
 			formacoes = curriculoDao.listarFormacoes(curriculumAtual);
 
 		} catch (SQLException e) {
-<<<<<<< HEAD
-			// TODO Auto-generated catch block
-=======
->>>>>>> fdb699e2bbe075aa4ce7f6b2740d28217cf9e32d
+
 			e.printStackTrace();
 			Mensagem.make(e.toString());
 		}
