@@ -5631,18 +5631,18 @@ CREATE TABLE categoria(
     nome VARCHAR(100)
 );
     
-INSERT INTO categoria (nome) VALUES
-("Técnico"), 
-("CAI"), 
-("Metalmecânica"), 
-("Segurança do Trabalho"), 
-("Eletroeletrônica"), 
-("Gestão"), 
-("Logistica"), 
-("Técnologia da Informação"), 
-("Automação Industrial"), 	
-("Energia"), 
-("Gestão");
+	INSERT INTO categoria (nome) VALUES
+	("Técnico"), 
+	("CAI"), 
+	("Metalmecânica"), 
+	("Segurança do Trabalho"), 
+	("Eletroeletrônica"), 
+	("Gestão"), 
+	("Logistica"), 
+	("Técnologia da Informação"), 
+	("Automação Industrial"), 	
+	("Energia"), 
+	("Gestão");
 
 CREATE TABLE curso(
 	id INTEGER NOT NULL PRIMARY KEY AUTO_INCREMENT,
@@ -5650,14 +5650,14 @@ CREATE TABLE curso(
     id_categoria INTEGER NOT NULL,
     FOREIGN KEY (id_categoria) REFERENCES categoria(id));
     
-INSERT INTO curso(nome, id_categoria) VALUES 
-("Técnico em Informática", 1),
-("Técnico em Eletrônica", 1), 
-("Eletricista de Manutenção Eletroeletronica", 2),
-("Mecanico de Usinagem", 2),
-("Assitente Administrativo", 2),
-("Almoxarife", 2 ),
-("Auxiliar de Linha de Produção", 2);
+	INSERT INTO curso(nome, id_categoria) VALUES 
+	("Técnico em Informática", 1),
+	("Técnico em Eletrônica", 1), 
+	("Eletricista de Manutenção Eletroeletronica", 2),
+	("Mecanico de Usinagem", 2),
+	("Assitente Administrativo", 2),
+	("Almoxarife", 2 ),
+	("Auxiliar de Linha de Produção", 2);
 
 CREATE TABLE turma(
 	id INTEGER NOT NULL PRIMARY KEY AUTO_INCREMENT,
@@ -5685,7 +5685,6 @@ CREATE TABLE sexo (
 	id INTEGER NOT NULL PRIMARY KEY AUTO_INCREMENT,
 	nome VARCHAR(100)
 );
-
 
 	INSERT INTO sexo (nome) VALUES ("Masculino"), ("Feminino");
 
@@ -5742,7 +5741,7 @@ CREATE TABLE usuario_administrador(
     FOREIGN KEY (id_status) REFERENCES status_(id)
 );
 
-SELECT * FROM usuario;
+	SELECT * FROM usuario;
 
 	INSERT INTO usuario_administrador (nome, email, senha, nif) VALUES ( "jose", "teste.testando.senai@gmail.com", "123", "sn10529865") ;
 
