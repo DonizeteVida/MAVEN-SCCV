@@ -12,12 +12,27 @@
 		</p:growl>
 
 		<h:form id="form">
+			<p:toolbar>
+				<f:facet name="right">
+					<p:inputText placeholder="Digite o CPF ou Nome"
+						value="#{administradorVerPerfilAlunoMBean.filtro}" />
+					<nbsp />
+					<p:commandButton value="Filtrar" ajax="true" event="onclick"
+						update="dataAlunos"
+						actionListener="#{administradorVerPerfilAlunoMBean.buscaFiltro}" />
+				</f:facet>
+				<f:facet name="left">
+					<p:button value="Editar Aluno" icon="ui-icon-pencil" />
+				</f:facet>
+			</p:toolbar>
+			<br />
 			<p:fieldset legend="Alunos Cadastrados">
-				<p:dataTable rowKey="#{a.id}"
+				<p:dataTable rowKey="#{a.id}" id="dataAlunos"
 					emptyMessage="Não foram encontrados alunos cadastrados." var="a"
 					value="#{administradorVerPerfilAlunoMBean.listaUsuario}"
 					styleClass="opacityOnly" selectionMode="single"
 					selection="#{administradorVerPerfilAlunoMBean.usuarioSelecionado}">
+
 					<p:column width="2%" headerText="Id">
 						<h:outputText value="#{a.id}" />
 					</p:column>

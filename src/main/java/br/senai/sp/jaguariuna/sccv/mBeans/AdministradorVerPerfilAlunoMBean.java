@@ -18,6 +18,7 @@ public class AdministradorVerPerfilAlunoMBean {
 	UsuarioDao usuarioDao;
 	List<Usuario> listaUsuario;
 	Usuario usuarioSelecionado;
+	private String filtro;
 
 	public AdministradorVerPerfilAlunoMBean() {
 		usuarioDao = new UsuarioDao();
@@ -30,6 +31,30 @@ public class AdministradorVerPerfilAlunoMBean {
 			e.printStackTrace();
 			Mensagem.make(e.toString());
 		}
+	}
+
+	public void buscaFiltro() {
+		try {
+
+			if (filtro.length() > 0 && Character.isDigit(filtro.charAt(0))) {
+				listaUsuario = usuarioDao.listarUsuarioCpf(filtro);
+			} else {
+				listaUsuario = usuarioDao.listarUsuario(filtro);
+			}
+
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			Mensagem.make(e.toString());
+		}
+	}
+
+	public String getFiltro() {
+		return filtro;
+	}
+
+	public void setFiltro(String filtro) {
+		this.filtro = filtro;
 	}
 
 	public List<Usuario> getListaUsuario() {
@@ -47,5 +72,4 @@ public class AdministradorVerPerfilAlunoMBean {
 	public void setUsuarioSelecionado(Usuario usuarioSelecionado) {
 		this.usuarioSelecionado = usuarioSelecionado;
 	}
-
 }
