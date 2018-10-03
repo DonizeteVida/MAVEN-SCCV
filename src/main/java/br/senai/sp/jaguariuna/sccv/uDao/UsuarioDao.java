@@ -21,7 +21,7 @@ public class UsuarioDao {
 	}
 
 	public boolean updateUsuario(Usuario u) throws SQLException {
-		String sql = "UPDATE usuario SET nome = ?, email = ?, senha = ?, idade = ?, cpf = ?, rg = ?, id_curso = ?, id_turma = ?, id_cidade = ?, id_estado = ?, id_categoria = ?, id_sexo = ?, peso = ? WHERE usuario.id = ?;";
+		String sql = "UPDATE usuario SET nome = ?, email = ?, senha = ?, idade = ?, cpf = ?, rg = ?, id_curso = ?, id_turma = ?, id_cidade = ?, id_estado = ?, id_categoria = ?, id_sexo = ?, peso = ?, nivel_ingles = ?, nivel_espanhol = ? WHERE usuario.id = ?;";
 
 		PreparedStatement ps = conn.prepareStatement(sql);
 
@@ -38,13 +38,15 @@ public class UsuarioDao {
 		ps.setInt(11, u.getCategoria().getId());
 		ps.setInt(12, u.getSexo().getId());
 		ps.setInt(13, u.getPeso());
-		ps.setInt(14, u.getId());
+		ps.setInt(14, u.getNivel_ingles());
+		ps.setInt(15, u.getNivel_espanhol());
+		ps.setInt(16, u.getId());
 
 		return ps.executeUpdate() > 0;
 	}
 
 	public boolean inserirUsuario(Usuario u) throws SQLException {
-		String sql = "INSERT INTO usuario(nome, email, senha, idade, cpf, rg, id_curso, id_turma, id_cidade, id_estado, id_categoria, id_sexo)"
+		String sql = "INSERT INTO usuario(nome, email, senha, idade, cpf, rg, id_curso, id_turma, id_cidade, id_estado, id_categoria, id_sexo, nivel_ingles, nivel_espanhol)"
 				+ " VALUES(?,?,?,?,?,?,?,?,?, ?, ?, ?)";
 
 		PreparedStatement ps = conn.prepareStatement(sql);
@@ -61,6 +63,8 @@ public class UsuarioDao {
 		ps.setInt(10, u.getEstado().getId());
 		ps.setInt(11, u.getCategoria().getId());
 		ps.setInt(12, u.getSexo().getId());
+		ps.setInt(13, u.getNivel_ingles());
+		ps.setInt(14, u.getNivel_espanhol());
 
 		return ps.executeUpdate() > 0;
 	};
@@ -104,6 +108,8 @@ public class UsuarioDao {
 			u.getSexo().setId(rs.getInt("id_sexo"));
 			u.getSexo().setNome(rs.getString("nomeSexo"));
 			u.setPeso(rs.getInt("peso"));
+			u.setNivel_ingles(rs.getInt("nivel_ingles"));
+			u.setNivel_espanhol(rs.getInt("nivel_espanhol"));
 
 		}
 
@@ -149,6 +155,8 @@ public class UsuarioDao {
 			u.getSexo().setId(rs.getInt("id_sexo"));
 			u.getSexo().setNome(rs.getString("nomeSexo"));
 			u.setPeso(rs.getInt("peso"));
+			u.setNivel_ingles(rs.getInt("nivel_ingles"));
+			u.setNivel_espanhol(rs.getInt("nivel_espanhol"));
 		}
 
 		return u;
@@ -191,6 +199,8 @@ public class UsuarioDao {
 			u.getCurso().setNome(rs.getString("nomeCurso"));
 			u.getTurma().setId(rs.getInt("id_turma"));
 			u.getTurma().setNome(rs.getString("nomeTurma"));
+			u.setNivel_ingles(rs.getInt("nivel_ingles"));
+			u.setNivel_espanhol(rs.getInt("nivel_espanhol"));
 
 			lista.add(u);
 
@@ -239,6 +249,8 @@ public class UsuarioDao {
 			u.getCurso().setNome(rs.getString("nomeCurso"));
 			u.getTurma().setId(rs.getInt("id_turma"));
 			u.getTurma().setNome(rs.getString("nomeTurma"));
+			u.setNivel_ingles(rs.getInt("nivel_ingles"));
+			u.setNivel_espanhol(rs.getInt("nivel_espanhol"));
 
 			lista.add(u);
 

@@ -33,6 +33,8 @@ public class Usuario {
 	private ClasseGenerica estado;
 	private ClasseGenerica categoria;
 	private ClasseGenerica sexo;
+	private Integer nivel_ingles;
+	private Integer nivel_espanhol;
 
 	public ClasseGenerica getCategoria() {
 		return categoria;
@@ -152,6 +154,22 @@ public class Usuario {
 
 	public void setPeso(Integer peso) {
 		this.peso = peso;
+	}
+
+	public Integer getNivel_ingles() {
+		return nivel_ingles;
+	}
+
+	public void setNivel_ingles(Integer nivel_ingles) {
+		this.nivel_ingles = nivel_ingles;
+	}
+
+	public Integer getNivel_espanhol() {
+		return nivel_espanhol;
+	}
+
+	public void setNivel_espanhol(Integer nivel_espanhol) {
+		this.nivel_espanhol = nivel_espanhol;
 	}
 
 }
