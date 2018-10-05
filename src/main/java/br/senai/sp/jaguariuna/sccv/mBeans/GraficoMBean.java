@@ -48,6 +48,5 @@ public class GraficoMBean {
 		grafico.setShowDataLabels(true);
 		grafico.setShadow(false);
 		grafico.setDiameter(200);
-
 	}
 }
