@@ -25,6 +25,10 @@
 	text-align: center;
 }
 
+.panel input {
+	text-align: center;
+}
+
 .datagrid input {
 	opacity: 1 !important;
 }
