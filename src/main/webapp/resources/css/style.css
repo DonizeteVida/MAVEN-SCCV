@@ -4,15 +4,7 @@
 	background-color: red;
 	width: 100%;
 	position: fixed;
-<<<<<<< HEAD
-<<<<<<< HEAD
 	height: 3%;
-=======
-	height: 2%;
->>>>>>> bc0e93ab894ddf123cca5690bc81a94d82de9d16
-=======
-	height: 2%;
->>>>>>> fdb699e2bbe075aa4ce7f6b2740d28217cf9e32d
 	left: 0px;
 	right: 0px;
 	bottom: 0px;
@@ -22,7 +14,6 @@
 .toolbar_text {
 	font-family: sans-serif;
 	color: white;
-	
 }
 
 .datagrid td {
@@ -38,11 +29,14 @@
 	opacity: 1 !important;
 }
 
-
 .toolbarCurriculo {
 	background: white !important;
 }
 
 .opacityOnly input {
+	opacity: 1 !important;
+}
+
+.opacityOnly div {
 	opacity: 1 !important;
 }

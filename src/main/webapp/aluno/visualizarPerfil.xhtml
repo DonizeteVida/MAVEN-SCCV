@@ -40,6 +40,30 @@
 							value="#{alunoVisualizarPerfilMBean.usuario.rg}"
 							title="Campo para RG" />
 
+						<p:outputLabel value="Seu nível de inglês: " />
+						<p:selectOneMenu disabled="true"
+							value="#{alunoVisualizarPerfilMBean.usuario.nivel_ingles}"
+							required="true" requiredMessage="Um nivel de inglês é necessário">
+							<f:selectItem itemLabel="SELECIONE SEU INGLÊS ATUAL" itemValue="" />
+							<f:selectItem itemLabel="Sem inglês" itemValue="0" />
+							<f:selectItem itemLabel="Nível básico" itemValue="1" />
+							<f:selectItem itemLabel="Nível intermediário" itemValue="2" />
+							<f:selectItem itemLabel="Nível avançado" itemValue="3" />
+						</p:selectOneMenu>
+
+						<p:outputLabel value="Seu nível de espanhol: " />
+						<p:selectOneMenu disabled="true"
+							value="#{alunoVisualizarPerfilMBean.usuario.nivel_espanhol}"
+							required="true"
+							requiredMessage="Um nivel de espanhol é necessário">
+							<f:selectItem itemLabel="SELECIONE SEU ESPANHOL ATUAL"
+								itemValue="" />
+							<f:selectItem itemLabel="Sem espanhol" itemValue="0" />
+							<f:selectItem itemLabel="Nível básico" itemValue="1" />
+							<f:selectItem itemLabel="Nível intermediário" itemValue="2" />
+							<f:selectItem itemLabel="Nível avançado" itemValue="3" />
+						</p:selectOneMenu>
+
 						<p:outputLabel value="Seu sexo: " />
 						<p:outputLabel
 							value="#{alunoVisualizarPerfilMBean.usuario.sexo.nome}" />
