@@ -46,6 +46,30 @@
 							title="Campo para RG"
 							requiredMessage="O e-mail é completo é necessário !" />
 
+						<p:outputLabel value="Insira o seu nível de inglês: " />
+						<p:selectOneMenu
+							value="#{alunoEditarPerfilMBean.usuario.nivel_ingles}"
+							required="true" requiredMessage="Um nivel de inglês é necessário">
+							<f:selectItem itemLabel="SELECIONE SEU INGLÊS ATUAL" itemValue="" />
+							<f:selectItem itemLabel="Sem inglês" itemValue="0" />
+							<f:selectItem itemLabel="Nível básico" itemValue="1" />
+							<f:selectItem itemLabel="Nível intermediário" itemValue="2" />
+							<f:selectItem itemLabel="Nível avançado" itemValue="3" />
+						</p:selectOneMenu>
+
+						<p:outputLabel value="Insira o seu nível de espanhol: " />
+						<p:selectOneMenu
+							value="#{alunoEditarPerfilMBean.usuario.nivel_espanhol}"
+							required="true"
+							requiredMessage="Um nivel de espanhol é necessário">
+							<f:selectItem itemLabel="SELECIONE SEU ESPANHOL ATUAL"
+								itemValue="" />
+							<f:selectItem itemLabel="Sem espanhol" itemValue="0" />
+							<f:selectItem itemLabel="Nível básico" itemValue="1" />
+							<f:selectItem itemLabel="Nível intermediário" itemValue="2" />
+							<f:selectItem itemLabel="Nível avançado" itemValue="3" />
+						</p:selectOneMenu>
+
 						<p:outputLabel value="Insira o seu sexo: " />
 						<p:selectOneMenu value="#{alunoEditarPerfilMBean.usuario.sexo.id}"
 							required="true"
