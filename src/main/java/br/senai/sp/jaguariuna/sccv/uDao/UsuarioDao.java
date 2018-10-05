@@ -47,7 +47,7 @@ public class UsuarioDao {
 
 	public boolean inserirUsuario(Usuario u) throws SQLException {
 		String sql = "INSERT INTO usuario(nome, email, senha, idade, cpf, rg, id_curso, id_turma, id_cidade, id_estado, id_categoria, id_sexo, nivel_ingles, nivel_espanhol)"
-				+ " VALUES(?,?,?,?,?,?,?,?,?, ?, ?, ?)";
+				+ " VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
 
 		PreparedStatement ps = conn.prepareStatement(sql);
 
