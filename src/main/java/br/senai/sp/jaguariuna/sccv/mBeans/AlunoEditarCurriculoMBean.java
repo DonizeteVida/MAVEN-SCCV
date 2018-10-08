@@ -83,7 +83,7 @@ public class AlunoEditarCurriculoMBean {
 		try {
 			if (curriculoDao.editarFormacao(formacaoSelecionada)) {
 				listarTudo();
-				Mensagem.make("FormaÃ§Ã£o alterada com sucesso !");
+				Mensagem.make("Formação alterada com sucesso !");
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();

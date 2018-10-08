@@ -7,6 +7,7 @@ import java.sql.SQLException;
 
 import br.senai.sp.jaguariuna.sccv.jdbc.ConnectionDB;
 import br.senai.sp.jaguariuna.sccv.utils.StringToMD5;
+import br.senai.sp.jaguariuna.sccv.entities.Usuario;
 import br.senai.sp.jaguariuna.sccv.entities.UsuarioAdministrador;
 
 public class AdministradorDao {
@@ -92,6 +93,18 @@ public class AdministradorDao {
 		}
 
 		return ua;
+	}
+	
+	public boolean EditarAluno (Usuario u) throws SQLException {
+		String sql = "UPDATE usuario SET email = ?, id_status = ?, WHERE usuario.id = ?;";
+		
+		PreparedStatement ps = conn.prepareStatement(sql);
+
+		ps.setString(1, u.getEmail());
+		ps.setInt(2, u.getStatus().getId());
+
+		return ps.executeUpdate() > 0;
+		
 	}
 
 }
