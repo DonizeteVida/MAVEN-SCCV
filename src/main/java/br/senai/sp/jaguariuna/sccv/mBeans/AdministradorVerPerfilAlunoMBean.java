@@ -1,7 +1,7 @@
 package br.senai.sp.jaguariuna.sccv.mBeans;
 
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.ViewScoped;
+import javax.faces.bean.SessionScoped;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -12,7 +12,7 @@ import br.senai.sp.jaguariuna.sccv.uDao.UsuarioDao;
 import br.senai.sp.jaguariuna.sccv.utils.Mensagem;
 
 @ManagedBean(eager = true)
-@ViewScoped
+@SessionScoped
 public class AdministradorVerPerfilAlunoMBean {
 
 	UsuarioDao usuarioDao;
@@ -23,14 +23,10 @@ public class AdministradorVerPerfilAlunoMBean {
 	public AdministradorVerPerfilAlunoMBean() {
 		usuarioDao = new UsuarioDao();
 		listaUsuario = new ArrayList<Usuario>();
+		usuarioSelecionado = new Usuario();
 
-		try {
-			listaUsuario = usuarioDao.listarUsuario();
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-			Mensagem.make(e.toString());
-		}
+		atualizaListaUsuario();
+
 	}
 
 	public void buscaFiltro() {
@@ -71,5 +67,24 @@ public class AdministradorVerPerfilAlunoMBean {
 
 	public void setUsuarioSelecionado(Usuario usuarioSelecionado) {
 		this.usuarioSelecionado = usuarioSelecionado;
+	}
+
+	public void atualizaListaUsuario() {
+		try {
+			listaUsuario = usuarioDao.listarUsuario();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			Mensagem.make(e.toString());
+		}
+	}
+
+	public String visualizarAluno() {
+		if (usuarioSelecionado != null) {
+			return "editarUsuario?faces-redirect=true";
+		} else {
+			Mensagem.make("Selecione um usuario !");
+		}
+		return null;
 	}
 }

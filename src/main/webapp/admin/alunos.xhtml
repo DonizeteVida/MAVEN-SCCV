@@ -22,7 +22,9 @@
 						actionListener="#{administradorVerPerfilAlunoMBean.buscaFiltro}" />
 				</f:facet>
 				<f:facet name="left">
-					<p:button value="Editar Aluno" icon="ui-icon-pencil" />
+					<p:commandButton
+						action="#{administradorVerPerfilAlunoMBean.visualizarAluno}"
+						value="Editar Aluno" icon="ui-icon-pencil" />
 				</f:facet>
 			</p:toolbar>
 			<br />
