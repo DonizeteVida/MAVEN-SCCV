@@ -150,6 +150,20 @@ public class AlunoHomeMBean {
 		return curEdit;
 	}
 
+	public void deleteCurriculo() {
+		if (curClick != null) {
+			try {
+				if (curriculoDao.deleteCurriculum(curClick)) {
+					listarCurriculo();
+				}
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+				Mensagem.make(e.toString());
+			}
+		}
+	}
+
 	public void setCurEdit(CurriculumVitae curEdit) {
 		try {
 			turmas = classeGenericaDao.buscaTurma(curEdit.getCurso().getId());

@@ -257,4 +257,27 @@ public class CurriculoDao {
 		return ps.executeUpdate() > 0;
 	}
 
+	public boolean deleteCurriculum(CurriculumVitae c) throws SQLException {
+		String sql = "DELETE FROM formacao WHERE id_curriculum_vitae = ?;";
+
+		PreparedStatement ps = conn.prepareStatement(sql);
+
+		ps.setInt(1, c.getId());
+
+		ps.executeUpdate();
+		sql = sql.replace("formacao", "experiencia");
+
+		ps = conn.prepareStatement(sql);
+		ps.setInt(1, c.getId());
+
+		ps.execute();
+		String sqlFinal = "DELETE FROM curriculum_vitae WHERE id = ?;";
+
+		ps = conn.prepareStatement(sqlFinal);
+
+		ps.setInt(1, c.getId());
+
+		return ps.executeUpdate() > 0;
+	}
+
 }

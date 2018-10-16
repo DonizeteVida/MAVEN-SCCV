@@ -45,9 +45,12 @@
 											target="#{alunoHomeMBean.curEdit}" />
 									</p:commandLink>
 
-									<p:commandLink title="Excluir currículo">
+									<p:commandLink update=":form:dataGrid"
+										action="#{alunoHomeMBean.deleteCurriculo}"
+										title="Excluir currículo">
 										<h:outputText styleClass="fa fa-close" />
-
+										<f:setPropertyActionListener value="#{cur}"
+											target="#{alunoHomeMBean.curClick}" />
 									</p:commandLink>
 								</h:panelGrid>
 							</f:facet>
