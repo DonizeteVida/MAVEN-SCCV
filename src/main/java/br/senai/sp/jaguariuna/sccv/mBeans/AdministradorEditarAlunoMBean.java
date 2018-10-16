@@ -8,6 +8,7 @@ import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.ViewScoped;
+import javax.faces.context.FacesContext;
 
 import br.senai.sp.jaguariuna.sccv.entities.Usuario;
 import br.senai.sp.jaguariuna.sccv.uDao.AdministradorDao;
@@ -85,16 +86,21 @@ public class AdministradorEditarAlunoMBean {
 		this.usuario = usuario;
 	}
 
-	public void updateUsuario() {
+	public String updateUsuario() {
 		try {
 			if (usuarioDao.updateUsuario(usuarioSelecionado)) {
 				downloadUsuario();
 				administradorVerPerfilAlunoMBean.atualizaListaUsuario();
+				FacesContext.getCurrentInstance().getExternalContext().getFlash().setKeepMessages(true);
+				Mensagem.make("Aluno alterado com sucesso !");
+				return "alunos?faces-redirect=true";
 			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+
+		return null;
 	}
 
 }
