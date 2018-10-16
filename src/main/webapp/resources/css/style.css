@@ -37,6 +37,10 @@
 	background: white !important;
 }
 
+.toolbarCurriculo a span {
+	color: black !important;
+}
+
 .opacityOnly input {
 	opacity: 1 !important;
 }

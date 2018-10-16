@@ -27,22 +27,32 @@
 
 						<h:outputText value="#{cur.turma.nome}" style="text-align:center" />
 
-						<p:panelGrid columns="3">
-							<p:commandLink action="#{alunoHomeMBean.visualizarCurriculo}"
-								title="Ver curriculo">
-								<h:outputText styleClass="ui-icon ui-icon-search" />
-								<f:setPropertyActionListener value="#{cur}"
-									target="#{alunoHomeMBean.curClick}" />
-							</p:commandLink>
+						<p:toolbar styleClass="toolbarCurriculo">
+							<f:facet name="right">
+								<h:panelGrid columns="3">
+									<p:commandLink action="#{alunoHomeMBean.visualizarCurriculo}"
+										title="Ver currículo">
+										<h:outputText styleClass="fa fa-search" />
+										<f:setPropertyActionListener value="#{cur}"
+											target="#{alunoHomeMBean.curClick}" />
+									</p:commandLink>
 
-							<p:commandLink title="Editar curriculo"
-								oncomplete="PF('dlg1').show();" ajax="true"
-								update=":formEdit:panel">
-								<h:outputText styleClass="fa fa-fw fa-edit" />
-								<f:setPropertyActionListener value="#{cur}"
-									target="#{alunoHomeMBean.curEdit}" />
-							</p:commandLink>
-						</p:panelGrid>
+									<p:commandLink title="Editar currículo"
+										oncomplete="PF('dlg1').show();" ajax="true"
+										update=":formEdit:panel">
+										<h:outputText styleClass="fa fa-fw fa-edit" />
+										<f:setPropertyActionListener value="#{cur}"
+											target="#{alunoHomeMBean.curEdit}" />
+									</p:commandLink>
+
+									<p:commandLink title="Excluir currículo">
+										<h:outputText styleClass="fa fa-close" />
+
+									</p:commandLink>
+								</h:panelGrid>
+							</f:facet>
+						</p:toolbar>
+
 					</h:panelGrid>
 				</p:panel>
 			</p:dataGrid>

@@ -5744,7 +5744,7 @@ CREATE TABLE usuario_administrador(
 );
 
 	SELECT * FROM usuario;
-
+    	
 	INSERT INTO usuario_administrador (nome, email, senha, nif) VALUES ( "jose", "teste.testando.senai@gmail.com", "123", "sn10529865") ;
 
     
