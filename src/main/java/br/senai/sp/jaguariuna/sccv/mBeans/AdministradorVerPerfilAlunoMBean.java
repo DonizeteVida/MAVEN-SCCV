@@ -26,7 +26,6 @@ public class AdministradorVerPerfilAlunoMBean {
 		usuarioSelecionado = new Usuario();
 
 		atualizaListaUsuario();
-
 	}
 
 	public void buscaFiltro() {
