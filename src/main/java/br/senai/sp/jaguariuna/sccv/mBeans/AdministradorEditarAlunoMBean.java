@@ -1,5 +1,6 @@
 package br.senai.sp.jaguariuna.sccv.mBeans;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -7,10 +8,12 @@ import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.ViewScoped;
+import javax.faces.context.FacesContext;
 
 import br.senai.sp.jaguariuna.sccv.entities.Usuario;
 import br.senai.sp.jaguariuna.sccv.uDao.AdministradorDao;
 import br.senai.sp.jaguariuna.sccv.uDao.UsuarioDao;
+import br.senai.sp.jaguariuna.sccv.utils.Mensagem;
 
 @ManagedBean
 @ViewScoped
@@ -30,7 +33,18 @@ public class AdministradorEditarAlunoMBean {
 
 	@PostConstruct
 	void postConstruct() {
-		usuarioSelecionado = administradorVerPerfilAlunoMBean.getUsuarioSelecionado();
+		try {
+			downloadUsuario();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			Mensagem.make(e.toString());
+		}
+	}
+
+	private void downloadUsuario() throws SQLException {
+		usuarioSelecionado = usuarioDao
+				.buscaUsuarioPorCpf(administradorVerPerfilAlunoMBean.getUsuarioSelecionado().getCpf());
 	}
 
 	@ManagedProperty(value = "#{administradorVerPerfilAlunoMBean}")
@@ -70,6 +84,23 @@ public class AdministradorEditarAlunoMBean {
 
 	public void setUsuario(List<Usuario> usuario) {
 		this.usuario = usuario;
+	}
+
+	public String updateUsuario() {
+		try {
+			if (usuarioDao.updateUsuario(usuarioSelecionado)) {
+				downloadUsuario();
+				administradorVerPerfilAlunoMBean.atualizaListaUsuario();
+				FacesContext.getCurrentInstance().getExternalContext().getFlash().setKeepMessages(true);
+				Mensagem.make("Aluno alterado com sucesso !");
+				return "alunos?faces-redirect=true";
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		return null;
 	}
 
 }

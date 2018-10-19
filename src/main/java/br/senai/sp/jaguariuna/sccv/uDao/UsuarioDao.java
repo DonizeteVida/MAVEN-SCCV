@@ -21,26 +21,27 @@ public class UsuarioDao {
 	}
 
 	public boolean updateUsuario(Usuario u) throws SQLException {
-		String sql = "UPDATE usuario SET nome = ?, email = ?, senha = ?, idade = ?, cpf = ?, rg = ?, id_curso = ?, id_turma = ?, id_cidade = ?, id_estado = ?, id_categoria = ?, id_sexo = ?, peso = ?, nivel_ingles = ?, nivel_espanhol = ? WHERE usuario.id = ?;";
+		String sql = "UPDATE usuario SET nome = ?, id_status = ?, email = ?, senha = ?, idade = ?, cpf = ?, rg = ?, id_curso = ?, id_turma = ?, id_cidade = ?, id_estado = ?, id_categoria = ?, id_sexo = ?, peso = ?, nivel_ingles = ?, nivel_espanhol = ? WHERE usuario.id = ?;";
 
 		PreparedStatement ps = conn.prepareStatement(sql);
 
 		ps.setString(1, u.getNome());
-		ps.setString(2, u.getEmail());
-		ps.setString(3, StringToMD5.convertStringToMd5(u.getSenha()));
-		ps.setLong(4, u.getIdade().getTimeInMillis());
-		ps.setString(5, FormatarCPFouRGtoString.format(u.getCpf()));
-		ps.setString(6, FormatarCPFouRGtoString.format(u.getRg()));
-		ps.setInt(7, u.getCurso().getId());
-		ps.setInt(8, u.getTurma().getId());
-		ps.setInt(9, u.getCidade().getId());
-		ps.setInt(10, u.getEstado().getId());
-		ps.setInt(11, u.getCategoria().getId());
-		ps.setInt(12, u.getSexo().getId());
-		ps.setInt(13, u.getPeso());
-		ps.setInt(14, u.getNivel_ingles());
-		ps.setInt(15, u.getNivel_espanhol());
-		ps.setInt(16, u.getId());
+		ps.setInt(2, u.getStatus().getId());
+		ps.setString(3, u.getEmail());
+		ps.setString(4, StringToMD5.convertStringToMd5(u.getSenha()));
+		ps.setLong(5, u.getIdade().getTimeInMillis());
+		ps.setString(6, FormatarCPFouRGtoString.format(u.getCpf()));
+		ps.setString(7, FormatarCPFouRGtoString.format(u.getRg()));
+		ps.setInt(8, u.getCurso().getId());
+		ps.setInt(9, u.getTurma().getId());
+		ps.setInt(10, u.getCidade().getId());
+		ps.setInt(11, u.getEstado().getId());
+		ps.setInt(12, u.getCategoria().getId());
+		ps.setInt(13, u.getSexo().getId());
+		ps.setInt(14, u.getPeso());
+		ps.setInt(15, u.getNivel_ingles());
+		ps.setInt(16, u.getNivel_espanhol());
+		ps.setInt(17, u.getId());
 
 		return ps.executeUpdate() > 0;
 	}

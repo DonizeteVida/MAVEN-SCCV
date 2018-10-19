@@ -11,11 +11,44 @@
 			<p:autoUpdate />
 		</p:growl>
 
+		<center>
+			<p:panel>
+				<h:form id="form">
+					<p:toolbar>
+						<f:facet name="right">
+							<p:commandButton value="Salvar alterações" ajax="true"
+								update=":form:panel" event="onclick"
+								action="#{administradorEditarAlunoMBean.updateUsuario}" />
+						</f:facet>
+						<f:facet name="left">
+							<p:outputLabel value="Informações pessoais: " />
+						</f:facet>
+					</p:toolbar>
+					<br />
+					<p:panelGrid columns="2" id="panel">
+						<p:outputLabel value="Nome do aluno: " />
+						<p:outputLabel
+							value="#{administradorEditarAlunoMBean.usuarioSelecionado.nome}" />
 
+						<p:outputLabel value="CPF do aluno: " />
+						<p:outputLabel
+							value="#{administradorEditarAlunoMBean.usuarioSelecionado.cpf}" />
 
+						<p:outputLabel value="E-mail do aluno: " />
+						<p:inputText
+							value="#{administradorEditarAlunoMBean.usuarioSelecionado.email}" />
 
-		<p:outputLabel
-			value="#{administradorEditarAlunoMBean.usuarioSelecionado.nome}" />
+						<p:outputLabel value="Situação do usuario: " />
+						<p:selectOneMenu
+							value="#{administradorEditarAlunoMBean.usuarioSelecionado.status.id}">
+							<f:selectItem itemLabel="Usuario ativo" itemValue="1" />
+							<f:selectItem itemLabel="Usuario inativo" itemValue="2" />
+						</p:selectOneMenu>
+					</p:panelGrid>
+					<br />
+				</h:form>
+			</p:panel>
+		</center>
 
 	</ui:define>
 </ui:composition>
