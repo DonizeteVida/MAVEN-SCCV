@@ -180,7 +180,7 @@ public class AlunoIndexMBean {
 						Mensagem("Usuario e/ou senha incorretos !");
 					}
 				} else {
-					Mensagem("Usuario n�o encontrado !!! ");
+					Mensagem("Usuario não encontrado !!! ");
 				}
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block

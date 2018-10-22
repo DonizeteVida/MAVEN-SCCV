@@ -20,7 +20,7 @@ public class UsuarioDao {
 		conn = ConnectionDB.getConnection();
 	}
 
-	public boolean updateUsuarioAdministrador(Usuario u) throws SQLException {
+	public boolean updateUsuarioModoAdministrador(Usuario u) throws SQLException {
 		String sql = "UPDATE usuario SET nome = ?, id_status = ?, email = ?, senha = ?, idade = ?, cpf = ?, rg = ?, id_curso = ?, id_turma = ?, id_cidade = ?, id_estado = ?, id_categoria = ?, id_sexo = ?, peso = ?, nivel_ingles = ?, nivel_espanhol = ? WHERE usuario.id = ?;";
 
 		PreparedStatement ps = conn.prepareStatement(sql);

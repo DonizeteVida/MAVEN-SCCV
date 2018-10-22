@@ -88,7 +88,7 @@ public class AdministradorEditarAlunoMBean {
 
 	public String updateUsuario() {
 		try {
-			if (usuarioDao.updateUsuarioAdministrador(usuarioSelecionado)) {
+			if (usuarioDao.updateUsuarioModoAdministrador(usuarioSelecionado)) {
 				downloadUsuario();
 				administradorVerPerfilAlunoMBean.atualizaListaUsuario();
 				FacesContext.getCurrentInstance().getExternalContext().getFlash().setKeepMessages(true);
