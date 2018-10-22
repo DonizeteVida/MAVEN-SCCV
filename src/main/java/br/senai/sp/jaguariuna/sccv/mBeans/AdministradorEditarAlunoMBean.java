@@ -6,7 +6,7 @@ import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
-import javax.faces.bean.ViewScoped;
+import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 
 import br.senai.sp.jaguariuna.sccv.entities.CurriculumVitae;
@@ -16,8 +16,8 @@ import br.senai.sp.jaguariuna.sccv.uDao.CurriculoDao;
 import br.senai.sp.jaguariuna.sccv.uDao.UsuarioDao;
 import br.senai.sp.jaguariuna.sccv.utils.Mensagem;
 
-@ManagedBean
-@ViewScoped
+@ManagedBean(eager = true)
+@SessionScoped
 public class AdministradorEditarAlunoMBean {
 
 	private Usuario usuarioSelecionado;
@@ -117,7 +117,7 @@ public class AdministradorEditarAlunoMBean {
 
 	public String visualizarCurriculo() {
 		if (curClick != null) {
-			return "visualizarCurriculoAdministrador?faces-redirect=true";
+			return "administradorVisualizarCurriculo?faces-redirect=true";
 		}
 		return null;
 	}

@@ -1,0 +1,84 @@
+<?xml version='1.0' encoding='ISO-8859-1' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns:ui="http://java.sun.com/jsf/facelets"
+	template="../menu/templateAdministrador.xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://java.sun.com/jsf/core">
+	<ui:define name="Conteudo">
+		<p:growl>
+			<p:autoUpdate />
+		</p:growl>
+
+		<h:form id="form">
+			<p:dataGrid id="exp"
+				emptyMessage="Não foram experiencias cadastradas." var="exp"
+				value="#{administradorVisualizarCurriculoMBean.experiencias}"
+				columns="10" layout="grid">
+
+				<f:facet name="header">
+					<p:outputLabel value="Suas experiencias" />
+				</f:facet>
+				<p:panel header="#{exp.nome}" styleClass="panel">
+					<h:panelGrid columns="2" styleClass="datagrid">
+						Data inicio: 
+						<p:calendar disabled="true" value="#{exp.data_inicio.time}"
+							pattern="dd/MM/yyyy" />
+						
+						Data fim:
+						<p:calendar disabled="true" value="#{exp.data_fim.time}"
+							pattern="dd/MM/yyyy" />
+						
+						Cargo:
+						<p:inputText disabled="true" value="#{exp.cargo}" />
+						
+						Empresa:
+						<p:inputText disabled="true" value="#{exp.empresa}" />
+						
+						Funções:
+						<p:outputLabel value="#{exp.funcoes}" />
+
+					</h:panelGrid>
+					<br />
+					<p:toolbar styleClass="toolbarCurriculo">
+
+					</p:toolbar>
+				</p:panel>
+			</p:dataGrid>
+		</h:form>
+		<br />
+		<h:form id="form2">
+			<p:dataGrid id="form" emptyMessage="Não foram formações cadastradas."
+				var="form"
+				value="#{administradorVisualizarCurriculoMBean.formacoes}"
+				columns="10" layout="grid">
+
+
+				<f:facet name="header">
+					<p:outputLabel value="Suas formações" />
+				</f:facet>
+				<p:panel header="#{form.nome}" styleClass="panel">
+					<h:panelGrid columns="2" styleClass="datagrid">
+						Data inicio: 
+						<p:calendar disabled="true" value="#{form.data_inicio.time}"
+							pattern="dd/MM/yyyy" />
+						
+						Data fim:
+						<p:calendar disabled="true" value="#{form.data_fim.time}"
+							pattern="dd/MM/yyyy" />
+						
+						Escola:
+						<p:inputText disabled="true" value="#{form.escola}" />
+
+					</h:panelGrid>
+					<br />
+					<p:toolbar styleClass="toolbarCurriculo">
+
+					</p:toolbar>
+				</p:panel>
+			</p:dataGrid>
+		</h:form>
+
+
+	</ui:define>
+</ui:composition>
