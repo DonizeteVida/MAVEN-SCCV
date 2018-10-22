@@ -48,6 +48,47 @@
 					<br />
 				</h:form>
 			</p:panel>
+
+			<h:form id="formData">
+				<p:dataGrid id="dataGrid"
+					emptyMessage="Não foram encontrados curriculos cadastrados."
+					var="cur" value="#{administradorEditarAlunoMBean.curriculumVitaes}"
+					columns="10" layout="grid">
+
+
+					<f:facet name="header" id="face">
+						<p:outputLabel value="Seus currículos" />
+					</f:facet>
+					<p:panel header="#{cur.curso.nome}" styleClass="panel">
+						<h:panelGrid columns="1" styleClass="datagrid">
+							<p:graphicImage name="images/pdf.ico" />
+
+							<h:outputText value="#{cur.turma.nome}" style="text-align:center" />
+
+							<p:toolbar styleClass="toolbarCurriculo">
+								<f:facet name="right">
+									<h:panelGrid columns="3">
+										<p:commandLink
+											action="#{administradorEditarAlunoMBean.visualizarCurriculo}"
+											title="Ver currículo">
+											<h:outputText styleClass="fa fa-search" />
+											<f:setPropertyActionListener value="#{cur}"
+												target="#{administradorEditarAlunoMBean.curClick}" />
+										</p:commandLink>
+
+										<p:commandLink title="Editar currículo" ajax="true">
+											<h:outputText styleClass="fa fa-fw fa-edit" />
+
+										</p:commandLink>
+
+									</h:panelGrid>
+								</f:facet>
+							</p:toolbar>
+
+						</h:panelGrid>
+					</p:panel>
+				</p:dataGrid>
+			</h:form>
 		</center>
 
 	</ui:define>

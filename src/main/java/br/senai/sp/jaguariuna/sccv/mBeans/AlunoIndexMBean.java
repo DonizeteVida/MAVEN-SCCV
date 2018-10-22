@@ -193,7 +193,7 @@ public class AlunoIndexMBean {
 
 				if (usuarioAdministrador.getSenha().equals(senha)) {
 					this.usuarioAdministrador = usuarioAdministrador;
-					return "/admin/home?faces-redirect=true";
+					return "/admin/administradorHome?faces-redirect=true";
 				} else {
 					Mensagem("Admnistrador não encontrado !");
 				}

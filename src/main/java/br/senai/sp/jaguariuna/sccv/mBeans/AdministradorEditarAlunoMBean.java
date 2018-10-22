@@ -1,7 +1,6 @@
 package br.senai.sp.jaguariuna.sccv.mBeans;
 
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
@@ -10,8 +9,10 @@ import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 
+import br.senai.sp.jaguariuna.sccv.entities.CurriculumVitae;
 import br.senai.sp.jaguariuna.sccv.entities.Usuario;
 import br.senai.sp.jaguariuna.sccv.uDao.AdministradorDao;
+import br.senai.sp.jaguariuna.sccv.uDao.CurriculoDao;
 import br.senai.sp.jaguariuna.sccv.uDao.UsuarioDao;
 import br.senai.sp.jaguariuna.sccv.utils.Mensagem;
 
@@ -21,20 +22,23 @@ public class AdministradorEditarAlunoMBean {
 
 	private Usuario usuarioSelecionado;
 	private UsuarioDao usuarioDao;
-	private List<Usuario> usuario;
 	private AdministradorDao administradorDao;
+	private CurriculoDao curriculoDao;
+	private List<CurriculumVitae> curriculumVitaes;
+	private CurriculumVitae curClick;
 
 	public AdministradorEditarAlunoMBean() {
 		usuarioSelecionado = new Usuario();
 		usuarioDao = new UsuarioDao();
 		administradorDao = new AdministradorDao();
-		usuario = new ArrayList<>();
+		curriculoDao = new CurriculoDao();
 	}
 
 	@PostConstruct
 	void postConstruct() {
 		try {
 			downloadUsuario();
+			curriculumVitaes = curriculoDao.listarCurriculo(usuarioSelecionado.getId());
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -78,12 +82,20 @@ public class AdministradorEditarAlunoMBean {
 		this.usuarioDao = usuarioDao;
 	}
 
-	public List<Usuario> getUsuario() {
-		return usuario;
+	public List<CurriculumVitae> getCurriculumVitaes() {
+		return curriculumVitaes;
 	}
 
-	public void setUsuario(List<Usuario> usuario) {
-		this.usuario = usuario;
+	public void setCurriculumVitaes(List<CurriculumVitae> curriculumVitaes) {
+		this.curriculumVitaes = curriculumVitaes;
+	}
+
+	public CurriculumVitae getCurClick() {
+		return curClick;
+	}
+
+	public void setCurClick(CurriculumVitae curClick) {
+		this.curClick = curClick;
 	}
 
 	public String updateUsuario() {
@@ -93,13 +105,20 @@ public class AdministradorEditarAlunoMBean {
 				administradorVerPerfilAlunoMBean.atualizaListaUsuario();
 				FacesContext.getCurrentInstance().getExternalContext().getFlash().setKeepMessages(true);
 				Mensagem.make("Aluno alterado com sucesso !");
-				return "alunos?faces-redirect=true";
+				return "administradorVerPerfilAluno?faces-redirect=true";
 			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 
+		return null;
+	}
+
+	public String visualizarCurriculo() {
+		if (curClick != null) {
+			return "visualizarCurriculoAdministrador?faces-redirect=true";
+		}
 		return null;
 	}
 

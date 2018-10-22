@@ -246,13 +246,14 @@ public class CurriculoDao {
 	}
 
 	public boolean updateCurriculum(CurriculumVitae cv) throws SQLException {
-		String sql = "UPDATE curriculum_vitae AS cv SET id_turma = ?, semestre = ? WHERE cv.id = ?;";
+		String sql = "UPDATE curriculum_vitae AS cv SET id_turma = ?, semestre = ?, id_status = ? WHERE cv.id = ?;";
 
 		PreparedStatement ps = conn.prepareStatement(sql);
 
 		ps.setInt(1, cv.getTurma().getId());
 		ps.setInt(2, cv.getSemestre());
-		ps.setInt(3, cv.getId());
+		ps.setInt(3, cv.getStatus().getId());
+		ps.setInt(4, cv.getId());
 
 		return ps.executeUpdate() > 0;
 	}

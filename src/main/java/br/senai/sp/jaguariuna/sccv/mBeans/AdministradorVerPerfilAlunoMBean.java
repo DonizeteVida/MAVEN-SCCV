@@ -80,7 +80,7 @@ public class AdministradorVerPerfilAlunoMBean {
 
 	public String visualizarAluno() {
 		if (usuarioSelecionado != null) {
-			return "editarUsuario?faces-redirect=true";
+			return "administradorEditarPerfilAluno?faces-redirect=true";
 		} else {
 			Mensagem.make("Selecione um usuario !");
 		}
