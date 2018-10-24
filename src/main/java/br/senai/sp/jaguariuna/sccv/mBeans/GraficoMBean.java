@@ -19,45 +19,82 @@ import br.senai.sp.jaguariuna.sccv.uDao.GraficoDao;
 @ViewScoped
 public class GraficoMBean {
 
-	private PieChartModel grafico;
+	private PieChartModel graficoCategoria = new PieChartModel();
+	private PieChartModel graficoSexo = new PieChartModel();
+	GraficoDao dao;
 
-	@PostConstruct
-	public void init() throws SQLException {
-		createGrafico();
+	public GraficoMBean() {
+		dao = new GraficoDao();
+		createPieModelCategoria();
+		createPieModelSexo();
 	}
 
-	public PieChartModel getGrafico() {
-		return grafico;
-	}
+	public void createPieModelCategoria() {
 
-	public void setGrafico(PieChartModel grafico) {
-		this.grafico = grafico;
-	}
-
-	public void createGrafico() throws SQLException {
-
-		createPieModel();
-
-	}
-
-	public void createPieModel() throws SQLException {
-
-		grafico = new PieChartModel();
+		graficoCategoria = new PieChartModel();
 
 		Map<String, Number> dados = new HashMap<>();
-		GraficoDao dao = new GraficoDao();
-		List<ClasseGenericaGrafico> classeGenericaGraficos = dao.quantideCategoria();
+		List<ClasseGenericaGrafico> classeGenericaGraficos = null;
+		try {
+			classeGenericaGraficos = dao.quantideCategoria();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		for (ClasseGenericaGrafico cg : classeGenericaGraficos) {
 			dados.put(cg.getNome(), cg.getValor());
 		}
 
-		grafico.setData(dados);
+		graficoCategoria.setData(dados);
 
-		grafico.setTitle("Curriclos cadastrados por categoria");
-		grafico.setLegendPosition("e");
-		grafico.setFill(true);
-		grafico.setShowDataLabels(true);
-		grafico.setShadow(false);
-		grafico.setDiameter(200);
+		graficoCategoria.setTitle("Curriculos cadastrados por categoria");
+		graficoCategoria.setLegendPosition("e");
+		graficoCategoria.setFill(true);
+		graficoCategoria.setShowDataLabels(true);
+		graficoCategoria.setShadow(false);
+		graficoCategoria.setDiameter(200);
 	}
+
+	public void createPieModelSexo() {
+
+		graficoSexo = new PieChartModel();
+
+		Map<String, Number> dados = new HashMap<>();
+		List<ClasseGenericaGrafico> classeGenericaGraficos = null;
+		try {
+			classeGenericaGraficos = dao.quantidadeSexo();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		for (ClasseGenericaGrafico cg : classeGenericaGraficos) {
+			dados.put(cg.getNome(), cg.getValor());
+		}
+
+		graficoSexo.setData(dados);
+
+		graficoSexo.setTitle("Perfis cadastrados por sexo");
+		graficoSexo.setLegendPosition("e");
+		graficoSexo.setFill(true);
+		graficoSexo.setShowDataLabels(true);
+		graficoSexo.setShadow(false);
+		graficoSexo.setDiameter(200);
+	}
+
+	public PieChartModel getGraficoCategoria() {
+		return graficoCategoria;
+	}
+
+	public void setGraficoCategoria(PieChartModel graficoCategoria) {
+		this.graficoCategoria = graficoCategoria;
+	}
+
+	public PieChartModel getGraficoSexo() {
+		return graficoSexo;
+	}
+
+	public void setGraficoSexo(PieChartModel graficoSexo) {
+		this.graficoSexo = graficoSexo;
+	}
+
 }

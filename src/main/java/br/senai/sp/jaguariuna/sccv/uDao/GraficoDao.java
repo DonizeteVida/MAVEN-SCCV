@@ -40,4 +40,22 @@ public class GraficoDao {
 
 	}
 
+	public List<ClasseGenericaGrafico> quantidadeSexo() throws SQLException {
+		String sql = "SELECT s.nome, COUNT(*) as qtd FROM usuario as u\r\n"
+				+ "INNER JOIN sexo as s on u.id_sexo = s.id GROUP BY s.id;";
+
+		PreparedStatement ps = conn.prepareStatement(sql);
+
+		ResultSet rs = ps.executeQuery();
+
+		List<ClasseGenericaGrafico> result = new ArrayList<>();
+		while (rs.next()) {
+			ClasseGenericaGrafico a = new ClasseGenericaGrafico();
+			a.setValor(rs.getDouble("qtd"));
+			a.setNome(rs.getString("nome"));
+			result.add(a);
+		}
+		return result;
+	}
+
 }

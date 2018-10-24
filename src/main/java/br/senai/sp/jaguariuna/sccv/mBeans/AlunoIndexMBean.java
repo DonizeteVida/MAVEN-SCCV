@@ -190,12 +190,16 @@ public class AlunoIndexMBean {
 		} else if (modoSelecionado.equals("admin")) {
 			try {
 				UsuarioAdministrador usuarioAdministrador = administradorDao.buscarAdministradorPorNif(cpfOuNif);
+				if (usuarioAdministrador != null) {
 
-				if (usuarioAdministrador.getSenha().equals(senha)) {
-					this.usuarioAdministrador = usuarioAdministrador;
-					return "/admin/administradorHome?faces-redirect=true";
+					if (usuarioAdministrador.getSenha().equals(senha)) {
+						this.usuarioAdministrador = usuarioAdministrador;
+						return "/admin/administradorHome?faces-redirect=true";
+					} else {
+						Mensagem("Usu·rio e/ou senha incorretos !");
+					}
 				} else {
-					Mensagem("Admnistrador n√£o encontrado !");
+					Mensagem("Usu·rio n„o encontrado !");
 				}
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
