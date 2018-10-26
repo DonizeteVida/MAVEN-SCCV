@@ -10,12 +10,15 @@
 		<p:growl>
 			<p:autoUpdate />
 		</p:growl>
+		<center>
+			<h:form>
+				<p:chart type="pie" model="#{graficoMBean.graficoCategoria}"
+					style="width:400px;height:300px" />
 
-		<h:form>
-			<p:chart type="pie" model="#{graficoMBean.grafico}"
-				style="width:400px;height:300px" />
-		</h:form>
-
+				<p:chart type="pie" model="#{graficoMBean.graficoSexo}"
+					style="width:400px;height:300px" />
+			</h:form>
+		</center>
 
 
 
