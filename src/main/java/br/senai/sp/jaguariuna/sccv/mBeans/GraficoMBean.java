@@ -37,8 +37,8 @@ public class GraficoMBean {
 
 		Map<String, Number> dados = new HashMap<>();
 
-		dados.put("TÈcnico em inform·tica", 500);
-		dados.put("TÈcnico em eletrÙnica", 500);
+		dados.put("T√©cnico em inform√°tica", 500);
+		dados.put("T√©cnico em eletr√¥nica", 500);
 
 		grafico.setData(dados);
 

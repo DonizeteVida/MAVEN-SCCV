@@ -7,6 +7,7 @@ import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
+import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 
 import br.senai.sp.jaguariuna.sccv.entities.CurriculumVitae;
@@ -34,6 +35,13 @@ public class AdministradorEditarAlunoMBean {
 		curriculoDao = new CurriculoDao();
 	}
 
+	@ManagedProperty(value = "#{administradorVerPerfilAlunoMBean}")
+	private AdministradorVerPerfilAlunoMBean administradorVerPerfilAlunoMBean;
+
+	public void setAdministradorVerPerfilAlunoMBean(AdministradorVerPerfilAlunoMBean administradorVerPerfilAlunoMBean) {
+		this.administradorVerPerfilAlunoMBean = administradorVerPerfilAlunoMBean;
+	}
+
 	@PostConstruct
 	void postConstruct() {
 		try {
@@ -46,16 +54,10 @@ public class AdministradorEditarAlunoMBean {
 		}
 	}
 
-	private void downloadUsuario() throws SQLException {
+	public void downloadUsuario() throws SQLException {
 		usuarioSelecionado = usuarioDao
 				.buscaUsuarioPorCpf(administradorVerPerfilAlunoMBean.getUsuarioSelecionado().getCpf());
-	}
-
-	@ManagedProperty(value = "#{administradorVerPerfilAlunoMBean}")
-	AdministradorVerPerfilAlunoMBean administradorVerPerfilAlunoMBean;
-
-	public void setAdministradorVerPerfilAlunoMBean(AdministradorVerPerfilAlunoMBean administradorVerPerfilAlunoMBean) {
-		this.administradorVerPerfilAlunoMBean = administradorVerPerfilAlunoMBean;
+		administradorVerPerfilAlunoMBean.setAdministradorEditarAlunoMBean(this);
 	}
 
 	public AdministradorDao getAdministradorDao() {
@@ -101,7 +103,6 @@ public class AdministradorEditarAlunoMBean {
 	public String updateUsuario() {
 		try {
 			if (usuarioDao.updateUsuarioModoAdministrador(usuarioSelecionado)) {
-				downloadUsuario();
 				administradorVerPerfilAlunoMBean.atualizaListaUsuario();
 				FacesContext.getCurrentInstance().getExternalContext().getFlash().setKeepMessages(true);
 				Mensagem.make("Aluno alterado com sucesso !");
