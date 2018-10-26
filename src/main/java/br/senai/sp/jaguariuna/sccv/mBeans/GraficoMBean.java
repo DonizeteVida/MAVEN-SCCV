@@ -71,13 +71,7 @@ public class GraficoMBean {
 			dados.put(cg.getNome(), cg.getValor());
 		}
 
-<<<<<<< HEAD
-		dados.put("Técnico em informática", 500);
-		dados.put("Técnico em eletrônica", 500);
-=======
 		graficoSexo.setData(dados);
->>>>>>> 7fbad7e79ffbcda8a4e10268c344c2a352de61bf
-
 		graficoSexo.setTitle("Perfis cadastrados por sexo");
 		graficoSexo.setLegendPosition("e");
 		graficoSexo.setFill(true);

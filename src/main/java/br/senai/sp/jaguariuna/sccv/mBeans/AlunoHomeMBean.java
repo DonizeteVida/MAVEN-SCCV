@@ -155,6 +155,7 @@ public class AlunoHomeMBean {
 			try {
 				if (curriculoDao.deleteCurriculum(curClick)) {
 					listarCurriculo();
+					Mensagem.make("Currículo excluído com sucesso !");
 				}
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block

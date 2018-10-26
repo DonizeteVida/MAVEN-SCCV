@@ -70,11 +70,16 @@ public class AdministradorVerPerfilAlunoMBean {
 		return usuarioSelecionado;
 	}
 
+	public AdministradorEditarAlunoMBean getAdministradorEditarAlunoMBean() {
+		return administradorEditarAlunoMBean;
+	}
+
 	public void setUsuarioSelecionado(Usuario usuarioSelecionado) {
 		this.usuarioSelecionado = usuarioSelecionado;
 		if (administradorEditarAlunoMBean != null) {
 			try {
 				administradorEditarAlunoMBean.downloadUsuario();
+				administradorEditarAlunoMBean.downloadListaCurriculo();
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
