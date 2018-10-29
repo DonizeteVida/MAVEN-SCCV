@@ -20,15 +20,23 @@
 	</div>
 	<p:panel>
 		<center>
-			<h:outputLabel value="José" />
+			<h3>Informações Pessoais</h3>
+			<h:outputLabel value="Nome: #{alunoIndexMBean.usuario.nome}" />
 			<br />
-			<h:outputLabel value="07/05/1998" />
+			<p:calendar styleClass="panel"
+				value="Data de Nascimento: #{alunoIndexMBean.usuario.idade}"
+				pattern="dd/MM/yyyy" disabled="true" />
 			<br />
-			<h:outputLabel value="Masculino" />
+			<h:outputLabel value="Sexo: #{alunoIndexMBean.usuario.sexo}" />
+
 			<br />
 			<h:outputLabel value="Deficiencia: Não" />
-			<br />
-			<h:outputLabel value="Estado Civil: Solteiro" />
+		</center>
+	</p:panel>
+	<p:panel>
+		<center>
+			<h3>Formações Academicas</h3>
+
 		</center>
 	</p:panel>
 </h:body>
