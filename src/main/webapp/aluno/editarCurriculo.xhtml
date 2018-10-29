@@ -74,9 +74,13 @@
 							<p:commandLink update=":form:exp"
 								action="#{alunoEditarCurriculoMBean.deletarExperienciaM}"
 								title="Deletar">
-								<h:outputText styleClass="fa fa-eraser" style="color:black" />
+								<h:outputText styleClass="fa fa-close" style="color:black" />
 								<f:setPropertyActionListener value="#{exp}"
 									target="#{alunoEditarCurriculoMBean.experienciaSelecionada}" />
+
+								<p:confirm header="Confirmar"
+									message="Deseja mesmo excluir a experiencia ?"
+									icon="ui-icon-alert" />
 							</p:commandLink>
 						</f:facet>
 
@@ -124,9 +128,12 @@
 						<f:facet name="left">
 							<p:commandLink update=":form2:form" title="Deletar"
 								action="#{alunoEditarCurriculoMBean.deletarFormacaoM}">
-								<h:outputText styleClass="fa fa-eraser" style="color:black" />
+								<h:outputText styleClass="fa fa-close" style="color:black" />
 								<f:setPropertyActionListener value="#{form}"
 									target="#{alunoEditarCurriculoMBean.formacaoSelecionada}" />
+								<p:confirm header="Confirmar"
+									message="Deseja mesmo excluir a formação ?"
+									icon="ui-icon-alert" />
 							</p:commandLink>
 						</f:facet>
 
@@ -351,6 +358,13 @@
 			</h:form>
 
 		</p:dialog>
+
+		<p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
+			<p:commandButton value="Sim" styleClass="ui-confirmdialog-yes"
+				icon="ui-icon-check" />
+			<p:commandButton value="Não" styleClass="ui-confirmdialog-no"
+				icon="ui-icon-close" />
+		</p:confirmDialog>
 
 	</ui:define>
 </ui:composition>

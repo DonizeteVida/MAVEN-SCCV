@@ -72,7 +72,6 @@ public class GraficoMBean {
 		}
 
 		graficoSexo.setData(dados);
-
 		graficoSexo.setTitle("Perfis cadastrados por sexo");
 		graficoSexo.setLegendPosition("e");
 		graficoSexo.setFill(true);

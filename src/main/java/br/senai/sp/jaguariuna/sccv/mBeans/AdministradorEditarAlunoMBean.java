@@ -7,10 +7,12 @@ import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
+import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 
 import br.senai.sp.jaguariuna.sccv.entities.CurriculumVitae;
 import br.senai.sp.jaguariuna.sccv.entities.Usuario;
+import br.senai.sp.jaguariuna.sccv.subEntities.ClasseGenerica;
 import br.senai.sp.jaguariuna.sccv.uDao.AdministradorDao;
 import br.senai.sp.jaguariuna.sccv.uDao.CurriculoDao;
 import br.senai.sp.jaguariuna.sccv.uDao.UsuarioDao;
@@ -34,11 +36,18 @@ public class AdministradorEditarAlunoMBean {
 		curriculoDao = new CurriculoDao();
 	}
 
+	@ManagedProperty(value = "#{administradorVerPerfilAlunoMBean}")
+	private AdministradorVerPerfilAlunoMBean administradorVerPerfilAlunoMBean;
+
+	public void setAdministradorVerPerfilAlunoMBean(AdministradorVerPerfilAlunoMBean administradorVerPerfilAlunoMBean) {
+		this.administradorVerPerfilAlunoMBean = administradorVerPerfilAlunoMBean;
+	}
+
 	@PostConstruct
 	void postConstruct() {
 		try {
 			downloadUsuario();
-			curriculumVitaes = curriculoDao.listarCurriculo(usuarioSelecionado.getId());
+			downloadListaCurriculo();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -46,16 +55,16 @@ public class AdministradorEditarAlunoMBean {
 		}
 	}
 
-	private void downloadUsuario() throws SQLException {
+	public void downloadUsuario() throws SQLException {
 		usuarioSelecionado = usuarioDao
 				.buscaUsuarioPorCpf(administradorVerPerfilAlunoMBean.getUsuarioSelecionado().getCpf());
+		if (administradorVerPerfilAlunoMBean.getAdministradorEditarAlunoMBean() == null) {
+			administradorVerPerfilAlunoMBean.setAdministradorEditarAlunoMBean(this);
+		}
 	}
 
-	@ManagedProperty(value = "#{administradorVerPerfilAlunoMBean}")
-	AdministradorVerPerfilAlunoMBean administradorVerPerfilAlunoMBean;
-
-	public void setAdministradorVerPerfilAlunoMBean(AdministradorVerPerfilAlunoMBean administradorVerPerfilAlunoMBean) {
-		this.administradorVerPerfilAlunoMBean = administradorVerPerfilAlunoMBean;
+	public void downloadListaCurriculo() throws SQLException {
+		curriculumVitaes = curriculoDao.listarCurriculo(usuarioSelecionado.getId());
 	}
 
 	public AdministradorDao getAdministradorDao() {
@@ -101,7 +110,6 @@ public class AdministradorEditarAlunoMBean {
 	public String updateUsuario() {
 		try {
 			if (usuarioDao.updateUsuarioModoAdministrador(usuarioSelecionado)) {
-				downloadUsuario();
 				administradorVerPerfilAlunoMBean.atualizaListaUsuario();
 				FacesContext.getCurrentInstance().getExternalContext().getFlash().setKeepMessages(true);
 				Mensagem.make("Aluno alterado com sucesso !");
@@ -120,6 +128,20 @@ public class AdministradorEditarAlunoMBean {
 			return "administradorVisualizarCurriculo?faces-redirect=true";
 		}
 		return null;
+	}
+
+	public void alterarStatus() {
+		ClasseGenerica a = curClick.getStatus();
+		a.setId(a.getId() == 1 ? 2 : 1);
+		curClick.setStatus(a);
+		try {
+			curriculoDao.updateCurriculum(curClick);
+			downloadListaCurriculo();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			Mensagem.make("O status foi alterado com sucesso !");
+		}
 	}
 
 }

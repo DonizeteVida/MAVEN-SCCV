@@ -1,6 +1,7 @@
 package br.senai.sp.jaguariuna.sccv.mBeans;
 
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
 
 import java.sql.SQLException;
@@ -19,6 +20,7 @@ public class AdministradorVerPerfilAlunoMBean {
 	List<Usuario> listaUsuario;
 	Usuario usuarioSelecionado;
 	private String filtro;
+	private AdministradorEditarAlunoMBean administradorEditarAlunoMBean;
 
 	public AdministradorVerPerfilAlunoMBean() {
 		usuarioDao = new UsuarioDao();
@@ -26,6 +28,10 @@ public class AdministradorVerPerfilAlunoMBean {
 		usuarioSelecionado = new Usuario();
 
 		atualizaListaUsuario();
+	}
+
+	public void setAdministradorEditarAlunoMBean(AdministradorEditarAlunoMBean administradorEditarAlunoMBean) {
+		this.administradorEditarAlunoMBean = administradorEditarAlunoMBean;
 	}
 
 	public void buscaFiltro() {
@@ -64,8 +70,21 @@ public class AdministradorVerPerfilAlunoMBean {
 		return usuarioSelecionado;
 	}
 
+	public AdministradorEditarAlunoMBean getAdministradorEditarAlunoMBean() {
+		return administradorEditarAlunoMBean;
+	}
+
 	public void setUsuarioSelecionado(Usuario usuarioSelecionado) {
 		this.usuarioSelecionado = usuarioSelecionado;
+		if (administradorEditarAlunoMBean != null) {
+			try {
+				administradorEditarAlunoMBean.downloadUsuario();
+				administradorEditarAlunoMBean.downloadListaCurriculo();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
 	}
 
 	public void atualizaListaUsuario() {

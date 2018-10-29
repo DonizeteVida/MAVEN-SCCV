@@ -71,7 +71,15 @@
 										<p:commandLink
 											action="#{administradorEditarAlunoMBean.visualizarCurriculo}"
 											title="Ver currículo">
-											<h:outputText styleClass="fa fa-search" />
+											<h:outputText styleClass="fa fa-eye" />
+											<f:setPropertyActionListener value="#{cur}"
+												target="#{administradorEditarAlunoMBean.curClick}" />
+										</p:commandLink>
+
+										<p:commandLink ajax="true" event="onclick"
+											action="#{administradorEditarAlunoMBean.alterarStatus}"
+											title="Alterar status">
+											<h:outputText styleClass="fa fa-lock" />
 											<f:setPropertyActionListener value="#{cur}"
 												target="#{administradorEditarAlunoMBean.curClick}" />
 										</p:commandLink>

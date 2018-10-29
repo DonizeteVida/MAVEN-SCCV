@@ -32,7 +32,7 @@
 								<h:panelGrid columns="3">
 									<p:commandLink action="#{alunoHomeMBean.visualizarCurriculo}"
 										title="Ver currículo">
-										<h:outputText styleClass="fa fa-search" />
+										<h:outputText styleClass="fa fa-eye" />
 										<f:setPropertyActionListener value="#{cur}"
 											target="#{alunoHomeMBean.curClick}" />
 									</p:commandLink>
@@ -51,7 +51,18 @@
 										<h:outputText styleClass="fa fa-close" />
 										<f:setPropertyActionListener value="#{cur}"
 											target="#{alunoHomeMBean.curClick}" />
+										<p:confirm header="Confirmar"
+											message="Deseja mesmo excluir o curriculo ?"
+											icon="ui-icon-alert" />
 									</p:commandLink>
+
+									<p:confirmDialog global="true" showEffect="fade"
+										hideEffect="fade">
+										<p:commandButton value="Sim" styleClass="ui-confirmdialog-yes"
+											icon="ui-icon-check" />
+										<p:commandButton value="Não" styleClass="ui-confirmdialog-no"
+											icon="ui-icon-close" />
+									</p:confirmDialog>
 								</h:panelGrid>
 							</f:facet>
 						</p:toolbar>
