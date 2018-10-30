@@ -5706,6 +5706,8 @@ CREATE TABLE usuario(
     id_turma INTEGER NOT NULL,
     nivel_ingles INTEGER NOT NULL NOT NULL,
     nivel_espanhol INTEGER NOT NULL NOT NULL,
+    pessoa_pcd INTEGER NOT NULL DEFAULT 0,
+    numero_telefone VARCHAR(100) NOT NULL,
     FOREIGN KEY (id_cidade) REFERENCES cidade (id),
     FOREIGN KEY (id_estado) REFERENCES estado (id),
 	FOREIGN KEY (id_status) REFERENCES status_(id),
