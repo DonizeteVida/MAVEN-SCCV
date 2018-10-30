@@ -41,13 +41,15 @@ public class UsuarioDao {
 		ps.setInt(14, u.getPeso());
 		ps.setInt(15, u.getNivel_ingles());
 		ps.setInt(16, u.getNivel_espanhol());
-		ps.setInt(17, u.getId());
+		ps.setInt(17, u.getPessoa_pcd());
+		ps.setString(18, u.getNumero_telefone());
+		ps.setInt(19, u.getId());
 
 		return ps.executeUpdate() > 0;
 	}
 
 	public boolean updateUsuario(Usuario u) throws SQLException {
-		String sql = "UPDATE usuario SET nome = ?, id_status = ?, email = ?, senha = ?, idade = ?, cpf = ?, rg = ?, id_curso = ?, id_turma = ?, id_cidade = ?, id_estado = ?, id_categoria = ?, id_sexo = ?, peso = ?, nivel_ingles = ?, nivel_espanhol = ? WHERE usuario.id = ?;";
+		String sql = "UPDATE usuario SET nome = ?, id_status = ?, email = ?, senha = ?, idade = ?, cpf = ?, rg = ?, id_curso = ?, id_turma = ?, id_cidade = ?, id_estado = ?, id_categoria = ?, id_sexo = ?, peso = ?, nivel_ingles = ?, nivel_espanhol = ?, pessoa_pcd = ?, numero_telefone = ? WHERE usuario.id = ?;";
 
 		PreparedStatement ps = conn.prepareStatement(sql);
 
@@ -67,7 +69,9 @@ public class UsuarioDao {
 		ps.setInt(14, u.getPeso());
 		ps.setInt(15, u.getNivel_ingles());
 		ps.setInt(16, u.getNivel_espanhol());
-		ps.setInt(17, u.getId());
+		ps.setInt(17, u.getPessoa_pcd());
+		ps.setString(18, u.getNumero_telefone());
+		ps.setInt(19, u.getId());
 
 		return ps.executeUpdate() > 0;
 	}
@@ -143,7 +147,6 @@ public class UsuarioDao {
 			u.setNumero_telefone(rs.getString("numero_telefone"));
 
 		}
-
 		return u;
 	}
 
@@ -191,7 +194,6 @@ public class UsuarioDao {
 			u.setPessoa_pcd(rs.getInt("pessoa_pcd"));
 			u.setNumero_telefone(rs.getString("numero_telefone"));
 		}
-
 		return u;
 	}
 
@@ -238,11 +240,8 @@ public class UsuarioDao {
 			u.setNumero_telefone(rs.getString("numero_telefone"));
 
 			lista.add(u);
-
 		}
-
 		return lista;
-
 	}
 
 	public List<Usuario> listarUsuario(String nome) throws SQLException {
@@ -293,11 +292,8 @@ public class UsuarioDao {
 			u.setNumero_telefone(rs.getString("numero_telefone"));
 
 			lista.add(u);
-
 		}
-
 		return lista;
-
 	}
 
 	public List<Usuario> listarUsuarioCpf(String nome) throws SQLException {
@@ -344,13 +340,8 @@ public class UsuarioDao {
 			u.setNivel_espanhol(rs.getInt("nivel_espanhol"));
 			u.setPessoa_pcd(rs.getInt("pessoa_pcd"));
 			u.setNumero_telefone(rs.getString("numero_telefone"));
-
 			lista.add(u);
-
 		}
-
 		return lista;
-
 	}
-
 }
