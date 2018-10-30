@@ -38,6 +38,7 @@ public class Usuario {
 
 	public ClasseGenerica getCategoria() {
 		return categoria;
+		
 	}
 
 	public void setCategoria(ClasseGenerica categoria) {

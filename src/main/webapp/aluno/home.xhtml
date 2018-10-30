@@ -37,6 +37,13 @@
 											target="#{alunoHomeMBean.curClick}" />
 									</p:commandLink>
 
+									<p:commandLink action="#{alunoHomeMBean.imprimirCurriculo}"
+										title="Imprimir Curriculo">
+										<h:outputText styleClass="fa fa-print" />
+										<f:setPropertyActionListener value="#{cur}"
+											target="#{alunoHomeMBean.curClick}" />
+									</p:commandLink>
+
 									<p:commandLink title="Editar currículo"
 										oncomplete="PF('dlg1').show();" ajax="true"
 										update=":formEdit:panel">

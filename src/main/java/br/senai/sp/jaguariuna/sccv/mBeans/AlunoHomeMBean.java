@@ -190,4 +190,8 @@ public class AlunoHomeMBean {
 		}
 	}
 
+	public String imprimirCurriculo() {
+		return "impressao?faces-redirect=true";
+	}
+
 }

@@ -8,6 +8,7 @@
 <h:head>
 	<title>Impressão PDF</title>
 	<h:outputScript library="script" name="javascript.js" target="form" />
+	<h:outputStylesheet library="css" name="impressao.css" target="form" />
 </h:head>
 <h:body>
 	<p:growl widgetVar="growlWV">
@@ -21,13 +22,14 @@
 	<p:panel>
 		<center>
 			<h3>Informações Pessoais</h3>
-			<h:outputLabel value="Nome: #{alunoIndexMBean.usuario.nome}" />
+			<h:outputLabel value="Nome: #{impressaoPDFMBean.usuario.nome}" />
 			<br />
-			<p:calendar styleClass="panel"
-				value="Data de Nascimento: #{alunoIndexMBean.usuario.idade}"
-				pattern="dd/MM/yyyy" disabled="true" />
+			<h:outputLabel value="Email: #{impressaoPDFMBean.usuario.email}" />
 			<br />
-			<h:outputLabel value="Sexo: #{alunoIndexMBean.usuario.sexo}" />
+			<h:outputLabel
+				value="#{impressaoPDFMBean.convertTime(impressaoPDFMBean.usuario.idade.time)}" />
+			<br />
+			<h:outputLabel value="Sexo: #{impressaoPDFMBean.usuario.sexo.nome}" />
 
 			<br />
 			<h:outputLabel value="Deficiencia: Não" />
@@ -36,7 +38,18 @@
 	<p:panel>
 		<center>
 			<h3>Formações Academicas</h3>
-
+			<h4>Cursando</h4>
+			<h:outputLabel
+				value="Curso: #{impressaoPDFMBean.curriculumVitae.curso.nome}" />
+			<br />
+			<h:outputLabel
+				value="Semestre: #{impressaoPDFMBean.curriculumVitae.semestre}°" />
+			<h4>Concluido</h4>
+			<h:dataTable value="#{impressaoPDFMBean.formacao}" var="f">
+				<h:column>
+					<h:outputText value="Curso: #{f.nome}" />
+				</h:column>
+			</h:dataTable>
 		</center>
 	</p:panel>
 </h:body>
