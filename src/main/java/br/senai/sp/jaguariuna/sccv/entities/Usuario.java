@@ -35,6 +35,8 @@ public class Usuario {
 	private ClasseGenerica sexo;
 	private Integer nivel_ingles;
 	private Integer nivel_espanhol;
+	private Integer pessoa_pcd;
+	private String numero_telefone;
 
 	public ClasseGenerica getCategoria() {
 		return categoria;
@@ -170,6 +172,22 @@ public class Usuario {
 
 	public void setNivel_espanhol(Integer nivel_espanhol) {
 		this.nivel_espanhol = nivel_espanhol;
+	}
+
+	public Integer getPessoa_pcd() {
+		return pessoa_pcd;
+	}
+
+	public void setPessoa_pcd(Integer pessoa_pcd) {
+		this.pessoa_pcd = pessoa_pcd;
+	}
+
+	public String getNumero_telefone() {
+		return numero_telefone;
+	}
+
+	public void setNumero_telefone(String numero_telefone) {
+		this.numero_telefone = numero_telefone;
 	}
 
 }

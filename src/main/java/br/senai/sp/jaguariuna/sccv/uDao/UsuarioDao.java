@@ -73,8 +73,8 @@ public class UsuarioDao {
 	}
 
 	public boolean inserirUsuario(Usuario u) throws SQLException {
-		String sql = "INSERT INTO usuario(nome, email, senha, idade, cpf, rg, id_curso, id_turma, id_cidade, id_estado, id_categoria, id_sexo, nivel_ingles, nivel_espanhol)"
-				+ " VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+		String sql = "INSERT INTO usuario(nome, email, senha, idade, cpf, rg, id_curso, id_turma, id_cidade, id_estado, id_categoria, id_sexo, nivel_ingles, nivel_espanhol, pessoa_pcd, numero_telefone)"
+				+ " VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
 
 		PreparedStatement ps = conn.prepareStatement(sql);
 
@@ -92,6 +92,8 @@ public class UsuarioDao {
 		ps.setInt(12, u.getSexo().getId());
 		ps.setInt(13, u.getNivel_ingles());
 		ps.setInt(14, u.getNivel_espanhol());
+		ps.setInt(15, u.getPessoa_pcd());
+		ps.setString(16, u.getNumero_telefone());
 
 		return ps.executeUpdate() > 0;
 	};
@@ -137,6 +139,8 @@ public class UsuarioDao {
 			u.setPeso(rs.getInt("peso"));
 			u.setNivel_ingles(rs.getInt("nivel_ingles"));
 			u.setNivel_espanhol(rs.getInt("nivel_espanhol"));
+			u.setPessoa_pcd(rs.getInt("pessoa_pcd"));
+			u.setNumero_telefone(rs.getString("numero_telefone"));
 
 		}
 
@@ -184,6 +188,8 @@ public class UsuarioDao {
 			u.setPeso(rs.getInt("peso"));
 			u.setNivel_ingles(rs.getInt("nivel_ingles"));
 			u.setNivel_espanhol(rs.getInt("nivel_espanhol"));
+			u.setPessoa_pcd(rs.getInt("pessoa_pcd"));
+			u.setNumero_telefone(rs.getString("numero_telefone"));
 		}
 
 		return u;
@@ -228,6 +234,8 @@ public class UsuarioDao {
 			u.getTurma().setNome(rs.getString("nomeTurma"));
 			u.setNivel_ingles(rs.getInt("nivel_ingles"));
 			u.setNivel_espanhol(rs.getInt("nivel_espanhol"));
+			u.setPessoa_pcd(rs.getInt("pessoa_pcd"));
+			u.setNumero_telefone(rs.getString("numero_telefone"));
 
 			lista.add(u);
 
@@ -281,6 +289,8 @@ public class UsuarioDao {
 			u.getCurso().setNome(rs.getString("nomeCurso"));
 			u.getTurma().setId(rs.getInt("id_turma"));
 			u.getTurma().setNome(rs.getString("nomeTurma"));
+			u.setPessoa_pcd(rs.getInt("pessoa_pcd"));
+			u.setNumero_telefone(rs.getString("numero_telefone"));
 
 			lista.add(u);
 
@@ -332,6 +342,8 @@ public class UsuarioDao {
 			u.getTurma().setNome(rs.getString("nomeTurma"));
 			u.setNivel_ingles(rs.getInt("nivel_ingles"));
 			u.setNivel_espanhol(rs.getInt("nivel_espanhol"));
+			u.setPessoa_pcd(rs.getInt("pessoa_pcd"));
+			u.setNumero_telefone(rs.getString("numero_telefone"));
 
 			lista.add(u);
 
