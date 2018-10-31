@@ -68,6 +68,16 @@
 						<p:outputLabel
 							value="#{alunoVisualizarPerfilMBean.usuario.sexo.nome}" />
 
+						<p:outputLabel value="Pessoa com deficiencia: " />
+						<p:outputLabel
+							value="#{alunoVisualizarPerfilMBean.usuario.pessoa_pcd eq '0' ? 'Não' : 'Sim'}" />
+
+						<p:outputLabel value="Insira o seu numero de telefone: " />
+						<p:outputLabel
+							value="#{alunoVisualizarPerfilMBean.usuario.numero_telefone}"
+							title="Campo para telefone"
+							requiredMessage="O número de telefone é necessário !" />
+
 						<p:outputLabel value="Sua categoria: " />
 						<p:outputLabel
 							value="#{alunoVisualizarPerfilMBean.usuario.categoria.nome}" />

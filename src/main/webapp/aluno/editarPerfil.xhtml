@@ -79,6 +79,22 @@
 								itemLabel="#{sex.nome}" itemValue="#{sex.id}" />
 						</p:selectOneMenu>
 
+						<p:outputLabel value="Pessoa com deficiencia: " />
+						<p:selectOneMenu
+							value="#{alunoEditarPerfilMBean.usuario.pessoa_pcd}"
+							required="true" requiredMessage="Informar PCD é necessário !">
+							<f:selectItem itemLabel="PESSOA COM DEFICIÊNCIA ?" itemValue="" />
+							<f:selectItem itemLabel="NÃO" itemValue="0" />
+							<f:selectItem itemLabel="SIM" itemValue="1" />
+						</p:selectOneMenu>
+
+						<p:outputLabel value="Insira o seu numero de telefone: " />
+						<p:inputMask mask="(999) 99999-9999"
+							value="#{alunoEditarPerfilMBean.usuario.numero_telefone}"
+							placeholder="Insira seu numero de telefone" required="true"
+							title="Campo para telefone"
+							requiredMessage="O número de telefone é necessário !" />
+
 						<p:outputLabel value="Insira sua categoria atual: " />
 						<p:selectOneMenu
 							value="#{alunoEditarPerfilMBean.usuario.categoria.id}"
