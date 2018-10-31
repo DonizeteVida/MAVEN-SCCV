@@ -18,6 +18,9 @@
 	input {
 		display: none;
 	}
+	#button {
+		display: none;
+	}
 }
 </style>
 </h:head>
@@ -122,8 +125,11 @@
 
 	</p:panel>
 	<div align="right">
-		<input type="button" value="Imprimir" onclick="printpage()" />
+		<p:button id="button" icon="fa fa-print" value="Imprimir"
+			onclick="printpage()" />
 	</div>
+
+
 
 </h:body>
 </html>
