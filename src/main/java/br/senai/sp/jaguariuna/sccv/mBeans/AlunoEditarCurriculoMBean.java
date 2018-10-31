@@ -39,6 +39,7 @@ public class AlunoEditarCurriculoMBean {
 		formacaoSelecionada = new Formacao();
 
 		inserirExperiencia = new Experiencia();
+		inserirExperiencia.getData_fim().setTimeInMillis((long) 0);
 		inserirFormacao = new Formacao();
 
 		curriculoDao = new CurriculoDao();
@@ -96,6 +97,8 @@ public class AlunoEditarCurriculoMBean {
 				Mensagem.make("Experiencia salva com sucesso");
 				listarTudo();
 				inserirExperiencia = new Experiencia();
+				inserirExperiencia.getData_fim().setTimeInMillis((long) 0);
+
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
