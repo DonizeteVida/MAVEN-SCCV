@@ -8,7 +8,18 @@
 <h:head>
 	<title>Impressão PDF</title>
 	<h:outputScript library="script" name="javascript.js" target="form" />
-	<h:outputStylesheet library="css" name="impressao.css" target="form" />
+	<script type="text/javascript">
+		function printpage() {
+			window.print()
+		}
+	</script>
+	<style>
+@media print {
+	input {
+		display: none;
+	}
+}
+</style>
 </h:head>
 <h:body>
 	<p:growl widgetVar="growlWV">
@@ -27,30 +38,92 @@
 			<h:outputLabel value="Email: #{impressaoPDFMBean.usuario.email}" />
 			<br />
 			<h:outputLabel
+				value="Telefone: #{impressaoPDFMBean.usuario.numero_telefone}" />
+			<br />
+			<h:outputLabel
 				value="#{impressaoPDFMBean.convertTime(impressaoPDFMBean.usuario.idade.time)}" />
 			<br />
 			<h:outputLabel value="Sexo: #{impressaoPDFMBean.usuario.sexo.nome}" />
 
 			<br />
-			<h:outputLabel value="Deficiencia: Não" />
+			<h:outputLabel
+				value="#{impressaoPDFMBean.usuario.pessoa_pcd eq '0' ? '' : 'Deficiencia: Sim'}" />
 		</center>
 	</p:panel>
 	<p:panel>
 		<center>
-			<h3>Formações Academicas</h3>
-			<h4>Cursando</h4>
-			<h:outputLabel
-				value="Curso: #{impressaoPDFMBean.curriculumVitae.curso.nome}" />
-			<br />
-			<h:outputLabel
-				value="Semestre: #{impressaoPDFMBean.curriculumVitae.semestre}°" />
-			<h4>Concluido</h4>
-			<h:dataTable value="#{impressaoPDFMBean.formacao}" var="f">
-				<h:column>
-					<h:outputText value="Curso: #{f.nome}" />
-				</h:column>
-			</h:dataTable>
+			<h3>Formações Acadêmicas</h3>
 		</center>
+		<h:outputLabel value="Curso Atual:"
+			style="margin-letf: -60%; font-weight:bold; text-decoration: underline" />
+		<h:outputLabel
+			value=" #{impressaoPDFMBean.curriculumVitae.curso.nome}"
+			style="margin-letf: -60%;" />
+
+		<br />
+		<h:outputLabel value="Semestre:"
+			style="margin-letf: -60%; font-weight:bold; text-decoration: underline" />
+		<h:outputLabel value=" #{impressaoPDFMBean.curriculumVitae.semestre}°"
+			style="margin-letf: -60%;" />
+		<br />
+		<br />
+		<h:outputLabel value="Cursos concluidos"
+			style="font-size: 18px; margin-letf: -60%; font-weight:bold; text-decoration: underline" />
+		<h:dataTable value="#{impressaoPDFMBean.formacao}" var="f">
+			<h:column>
+				<h:outputText value="- #{f.nome} ; " style="margin-letf: -60%;" />
+				<h:outputText value="Escola: #{f.escola} ; "
+					style="margin-letf: -60%;" />
+				<h:outputText
+					value=" Data Inicio: #{impressaoPDFMBean.convertTime(f.data_inicio.time)} ;  "
+					style="margin-letf: -60%;" />
+				<h:outputText
+					value=" Data Fim: #{impressaoPDFMBean.convertTime(f.data_fim.time)}."
+					style="margin-letf: -60%;" />
+
+			</h:column>
+		</h:dataTable>
 	</p:panel>
+	<p:panel>
+		<center>
+			<h3>Experiências</h3>
+		</center>
+
+		<h:dataTable value="#{impressaoPDFMBean.experiencia}" var="e">
+			<h:column>
+				<h:outputText value="- Cargo: #{e.cargo} ; "
+					style="margin-letf: -60%;" />
+				<h:outputText value="Empresa: #{e.empresa} ; "
+					style="margin-letf: -60%;" />
+				<h:outputText
+					value=" Data Inicio: #{impressaoPDFMBean.convertTime(e.data_inicio.time)}. "
+					style="margin-letf: -60%;" />
+				<h:outputText
+					value=" Data Fim: #{impressaoPDFMBean.convertTime(e.data_fim.time)}."
+					style="margin-letf: -60%;" />
+			</h:column>
+		</h:dataTable>
+	</p:panel>
+	<p:panel>
+		<center>
+			<h3>Linguas Estrangeiras</h3>
+		</center>
+		<h:outputLabel value="Nivel de Inglês:"
+			style="font-size: 18px; margin-letf: -60%; font-weight:bold; text-decoration: underline" />
+		<h:outputLabel
+			value=" #{impressaoPDFMBean.usuario.nivel_ingles eq '0' ? 'Sem Inglês' : impressaoPDFMBean.usuario.nivel_ingles eq '1' ? 'Nivel Básico' : impressaoPDFMBean.usuario.nivel_ingles eq '2' ? 'Nivel Intermediário' : impressaoPDFMBean.usuario.nivel_ingles eq '3' ? 'Nivel Avançado' : '' }"
+			style="margin-letf: -60%;" />
+		<br />
+		<h:outputLabel value="Nivel de Espanhol:"
+			style="font-size: 18px; margin-letf: -60%; font-weight:bold; text-decoration: underline" />
+		<h:outputLabel
+			value=" #{impressaoPDFMBean.usuario.nivel_espanhol eq '0' ? 'Sem Espanhol' : impressaoPDFMBean.usuario.nivel_espanhol eq '1' ? 'Nivel Básico' : impressaoPDFMBean.usuario.nivel_espanhol eq '2' ? 'Nivel Intermediário' : impressaoPDFMBean.usuario.nivel_espanhol eq '3' ? 'Nivel Avançado' : '' }"
+			style="margin-letf: -60%;" />
+
+	</p:panel>
+	<div align="right">
+		<input type="button" value="Imprimir" onclick="printpage()" />
+	</div>
+
 </h:body>
 </html>
