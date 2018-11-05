@@ -152,6 +152,7 @@ public class AlunoEditarPerfilMBean {
 				if (usuarioDao.updateUsuario(usuario)) {
 					Mensagem.make("Usuario atualizado com sucesso !");
 					FacesContext.getCurrentInstance().getExternalContext().getFlash().setKeepMessages(true);
+					alunoIndexMBean.setUsuario(usuario);
 
 					return "visualizarPerfil?faces-redirect=true";
 				} else {
@@ -164,7 +165,7 @@ public class AlunoEditarPerfilMBean {
 				Mensagem.make(e.toString());
 			}
 		} else {
-			Mensagem.make("As senhas digitadas são incorretas");
+			Mensagem.make("As senhas digitadas sï¿½o incorretas");
 			return null;
 		}
 		return null;
