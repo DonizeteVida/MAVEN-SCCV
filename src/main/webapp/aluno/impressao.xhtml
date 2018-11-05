@@ -116,10 +116,10 @@
 				<h:outputText value="Empresa: #{e.empresa} ; "
 					style="margin-letf: -60%;" />
 				<h:outputText
-					value=" Data Inicio: #{impressaoPDFMBean.convertTime(e.data_inicio.time)}. "
+					value=" Data Inicio: #{impressaoPDFMBean.convertTime(e.data_inicio.time)}"
 					style="margin-letf: -60%;" />
 				<h:outputText
-					value=" Data Fim: #{impressaoPDFMBean.convertTime(e.data_fim.time)}."
+					value="#{e.data_fim.timeInMillis eq '0' ? '' : '; Data fim: ' .concat(impressaoPDFMBean.convertTime(e.data_fim.time))}."
 					style="margin-letf: -60%;" />
 			</h:column>
 		</h:dataTable>

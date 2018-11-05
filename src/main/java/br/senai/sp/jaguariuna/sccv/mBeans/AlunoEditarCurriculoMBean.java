@@ -33,13 +33,13 @@ public class AlunoEditarCurriculoMBean {
 	private List<Formacao> formacoes;
 
 	private CurriculoDao curriculoDao;
+	private Boolean emprego_atual = false;
 
 	public AlunoEditarCurriculoMBean() {
 		experienciaSelecionada = new Experiencia();
 		formacaoSelecionada = new Formacao();
 
 		inserirExperiencia = new Experiencia();
-		inserirExperiencia.getData_fim().setTimeInMillis((long) 0);
 		inserirFormacao = new Formacao();
 
 		curriculoDao = new CurriculoDao();
@@ -71,7 +71,12 @@ public class AlunoEditarCurriculoMBean {
 
 	public void editarExperienciaM() {
 		try {
+			if (emprego_atual) {
+				experienciaSelecionada.getData_fim().setTimeInMillis((long) 0);
+			}
+
 			if (curriculoDao.editarExperiencia(experienciaSelecionada)) {
+				emprego_atual = false;
 				listarTudo();
 				Mensagem.make("Experiencia alterada com sucesso !");
 			}
@@ -84,7 +89,7 @@ public class AlunoEditarCurriculoMBean {
 		try {
 			if (curriculoDao.editarFormacao(formacaoSelecionada)) {
 				listarTudo();
-				Mensagem.make("Formação alterada com sucesso !");
+				Mensagem.make("Formaï¿½ï¿½o alterada com sucesso !");
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -93,12 +98,14 @@ public class AlunoEditarCurriculoMBean {
 
 	public void inserirExperienciaM() {
 		try {
+			if (emprego_atual) {
+				inserirExperiencia.getData_fim().setTimeInMillis((long) 0);
+			}
 			if (curriculoDao.inserirExperiencia(inserirExperiencia, curriculumAtual)) {
+				emprego_atual = false;
 				Mensagem.make("Experiencia salva com sucesso");
 				listarTudo();
 				inserirExperiencia = new Experiencia();
-				inserirExperiencia.getData_fim().setTimeInMillis((long) 0);
-
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -209,6 +216,14 @@ public class AlunoEditarCurriculoMBean {
 
 	public void setInserirExperiencia(Experiencia inserirExperiencia) {
 		this.inserirExperiencia = inserirExperiencia;
+	}
+
+	public Boolean getEmprego_atual() {
+		return emprego_atual;
+	}
+
+	public void setEmprego_atual(Boolean emprego_atual) {
+		this.emprego_atual = emprego_atual;
 	}
 
 }
