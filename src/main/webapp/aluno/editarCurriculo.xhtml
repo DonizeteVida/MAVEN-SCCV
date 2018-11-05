@@ -37,9 +37,9 @@
 
 		<h:form id="form">
 			<p:dataGrid id="exp"
-				emptyMessage="Não foram experiencias cadastradas." var="exp"
-				value="#{alunoEditarCurriculoMBean.experiencias}" columns="10"
-				layout="grid">
+				emptyMessage="Não foram encontradas experiencias cadastradas."
+				var="exp" value="#{alunoEditarCurriculoMBean.experiencias}"
+				columns="10" layout="grid">
 
 
 				<f:facet name="header">
@@ -102,7 +102,8 @@
 		<br />
 
 		<h:form id="form2">
-			<p:dataGrid id="form" emptyMessage="Não foram formações cadastradas."
+			<p:dataGrid id="form"
+				emptyMessage="Não foram encontradas formações cadastradas."
 				var="form" value="#{alunoEditarCurriculoMBean.formacoes}"
 				columns="10" layout="grid">
 
@@ -115,13 +116,10 @@
 						Data inicio: 
 						<p:calendar disabled="true" value="#{form.data_inicio.time}"
 							pattern="dd/MM/yyyy" />
-
-						<p:outputLabel
-							value="#{form.data_fim.timeInMillis eq '0' ? 'false' : 'true'}" />
 				
 						Data fim:
-						<p:calendar rendered="#{form.data_fim.time}" disabled="true"
-							value="#{form.data_fim.time}" pattern="dd/MM/yyyy" />
+						<p:calendar disabled="true" value="#{form.data_fim.time}"
+							pattern="dd/MM/yyyy" />
 
 						Escola:
 						<p:inputText disabled="true" value="#{form.escola}" />
