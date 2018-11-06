@@ -2,7 +2,9 @@ package br.senai.sp.jaguariuna.sccv.mBeans;
 
 import java.io.IOException;
 import java.sql.SQLException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
@@ -164,6 +166,11 @@ public class AlunoEditarCurriculoMBean {
 			e.printStackTrace();
 			Mensagem.make(e.toString());
 		}
+	}
+
+	public String convertTime(Date date) {
+		SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd/MM/yyyy");
+		return simpleDateFormat.format(date);
 	}
 
 	public void setCurriculumAtual(CurriculumVitae curriculumAtual) {
