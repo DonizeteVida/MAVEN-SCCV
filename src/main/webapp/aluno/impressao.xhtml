@@ -91,7 +91,8 @@
 			style="font-size: 18px; margin-letf: -60%; font-weight:bold; text-decoration: underline" />
 		<h:dataTable value="#{impressaoPDFMBean.formacao}" var="f">
 			<h:column>
-				<h:outputText value="- #{f.nome} ; " style="margin-letf: -60%;" />
+				<h:outputText value="- Nome: #{f.nome} ; "
+					style="margin-letf: -60%;" />
 				<h:outputText value="Escola: #{f.escola} ; "
 					style="margin-letf: -60%;" />
 				<h:outputText

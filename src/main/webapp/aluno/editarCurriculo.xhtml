@@ -20,9 +20,9 @@
 						value="#{alunoEditarCurriculoMBean.curriculumAtual.curso.nome}" />
 
 					Data da criação do curriculo: 
-					<p:calendar
-						value="#{alunoEditarCurriculoMBean.curriculumAtual.data_criacao.time}"
-						pattern="dd/MM/yyyy" />
+					<p:outputLabel
+						value="#{alunoEditarCurriculoMBean.convertTime(alunoEditarCurriculoMBean.curriculumAtual.data_criacao.time)}"
+						pattern="dd/MM/yyyy" disabled="true" />
 						
 					Turma atual: 
 					<p:outputLabel
