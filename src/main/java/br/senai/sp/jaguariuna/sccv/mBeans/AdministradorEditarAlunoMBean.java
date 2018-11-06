@@ -135,11 +135,11 @@ public class AdministradorEditarAlunoMBean {
 		curClick.setStatus(a);
 		try {
 			curriculoDao.updateCurriculum(curClick);
+			Mensagem.make("O status foi alterado com sucesso !");
 			downloadListaCurriculo();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-			Mensagem.make("O status foi alterado com sucesso !");
 		}
 	}
 

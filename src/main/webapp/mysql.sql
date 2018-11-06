@@ -5778,7 +5778,7 @@ CREATE TABLE experiencia(
 	id INTEGER NOT NULL PRIMARY KEY AUTO_INCREMENT,
     nome VARCHAR(100),
     data_inicio LONG NOT NULL,
-    data_fim LONG,
+    data_fim LONG NOT NULL,
     cargo VARCHAR(100),
     empresa VARCHAR(100),
     funcoes VARCHAR(100),
