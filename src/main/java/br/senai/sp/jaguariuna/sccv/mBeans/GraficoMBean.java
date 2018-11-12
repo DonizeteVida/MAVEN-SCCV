@@ -19,12 +19,14 @@ public class GraficoMBean {
 
 	private PieChartModel graficoCategoria = new PieChartModel();
 	private PieChartModel graficoSexo = new PieChartModel();
+	private PieChartModel graficoPCD = new PieChartModel();
 	GraficoDao dao;
 
 	public GraficoMBean() {
 		dao = new GraficoDao();
 		createPieModelCategoria();
 		createPieModelSexo();
+		createPieModelPCD();
 	}
 
 	public void createPieModelCategoria() {
@@ -78,6 +80,32 @@ public class GraficoMBean {
 		graficoSexo.setDiameter(200);
 	}
 
+	public void createPieModelPCD() {
+		graficoPCD = new PieChartModel();
+
+		Map<String, Number> dados = new HashMap<>();
+		List<ClasseGenericaGrafico> classeGenericaGraficos = null;
+
+		try {
+			classeGenericaGraficos = dao.quantidadePCD();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		for (ClasseGenericaGrafico cg : classeGenericaGraficos) {
+			dados.put(cg.getNome(), cg.getValor());
+		}
+
+		graficoPCD.setData(dados);
+		graficoPCD.setTitle("PCD");
+		graficoPCD.setLegendPosition("e");
+		graficoPCD.setFill(true);
+		graficoPCD.setShowDataLabels(true);
+		graficoPCD.setShadow(false);
+		graficoPCD.setDiameter(200);
+
+	}
+
 	public PieChartModel getGraficoCategoria() {
 		return graficoCategoria;
 	}
@@ -92,6 +120,14 @@ public class GraficoMBean {
 
 	public void setGraficoSexo(PieChartModel graficoSexo) {
 		this.graficoSexo = graficoSexo;
+	}
+
+	public PieChartModel getGraficoPCD() {
+		return graficoPCD;
+	}
+
+	public void setGraficoPCD(PieChartModel graficoPCD) {
+		this.graficoPCD = graficoPCD;
 	}
 
 }
