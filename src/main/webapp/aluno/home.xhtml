@@ -35,14 +35,14 @@
 							<f:facet name="right">
 								<h:panelGrid columns="4">
 									<p:commandLink action="#{alunoHomeMBean.visualizarCurriculo}"
-										title="Ver currículo">
+										title="Ver currículo" update=":form:dataGrid">
 										<h:outputText styleClass="fa fa-eye" />
 										<f:setPropertyActionListener value="#{cur}"
 											target="#{alunoHomeMBean.curClick}" />
 									</p:commandLink>
 
 									<p:commandLink action="#{alunoHomeMBean.imprimirCurriculo}"
-										title="Imprimir Curriculo">
+										title="Imprimir Curriculo" update=":form:dataGrid">
 										<h:outputText styleClass="fa fa-print" />
 										<f:setPropertyActionListener value="#{cur}"
 											target="#{alunoHomeMBean.curClick}" />

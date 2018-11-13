@@ -106,6 +106,7 @@ public class AlunoHomeMBean {
 			e.printStackTrace();
 			Mensagem.make(e.toString());
 		}
+		listarCurriculo();
 		this.curClick = curClick;
 	}
 
@@ -115,10 +116,6 @@ public class AlunoHomeMBean {
 		} else {
 			Mensagem.make("Selecione um curriculo");
 		}
-		return null;
-	}
-
-	public String abrirEditar() {
 		return null;
 	}
 
@@ -156,7 +153,7 @@ public class AlunoHomeMBean {
 				if (curriculoDao.deleteCurriculum(curClick)) {
 					Mensagem.make("Currículo excluído com sucesso !");
 				} else {
-					Mensagem.make("Nao foi possível excluir o curriculo !");
+					Mensagem.make("O currículo se encontra inativo !");
 				}
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
