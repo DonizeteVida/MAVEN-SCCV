@@ -259,6 +259,9 @@ public class CurriculoDao {
 	}
 
 	public boolean deleteCurriculum(CurriculumVitae c) throws SQLException {
+		if (buscaCurriculo(c.getId()).getStatus().getId() == 2) {
+			return false;
+		}
 		String sql = "DELETE FROM formacao WHERE id_curriculum_vitae = ?;";
 
 		PreparedStatement ps = conn.prepareStatement(sql);
@@ -279,6 +282,37 @@ public class CurriculoDao {
 		ps.setInt(1, c.getId());
 
 		return ps.executeUpdate() > 0;
+	}
+
+	public CurriculumVitae buscaCurriculo(Integer id_curriculo) throws SQLException {
+		String sql = "SELECT c.*, cur.nome AS nomeCurso, tur.nome AS nomeTurma, sts.nome AS nomeStatus FROM curriculum_vitae AS c "
+				+ "INNER JOIN curso AS cur ON cur.id = c.id_curso " + "INNER JOIN turma AS tur ON tur.id = c.id_turma "
+				+ "INNER JOIN status_ AS sts ON sts.id = c.id_status WHERE c.id = ?;";
+
+		PreparedStatement ps = conn.prepareStatement(sql);
+
+		ps.setInt(1, id_curriculo);
+		ResultSet rs = ps.executeQuery();
+
+		CurriculumVitae c = null;
+
+		if (rs.next()) {
+			c = new CurriculumVitae();
+
+			c.setId(rs.getInt("id"));
+			c.getData_criacao().setTimeInMillis(rs.getLong("data_criacao"));
+			c.getCurso().setId(rs.getInt("id_curso"));
+			c.getCurso().setNome(rs.getString("nomeCurso"));
+			c.getTurma().setId(rs.getInt("id_turma"));
+			c.getTurma().setNome(rs.getString("nomeTurma"));
+			c.setSemestre(rs.getInt("semestre"));
+			c.getUsuario().setId(rs.getInt("id_usuario"));
+			c.getStatus().setId(rs.getInt("id_status"));
+			c.getStatus().setNome(rs.getString("nomeStatus"));
+
+		}
+
+		return c;
 	}
 
 }

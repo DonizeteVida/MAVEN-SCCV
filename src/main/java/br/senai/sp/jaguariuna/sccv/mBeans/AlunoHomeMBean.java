@@ -154,8 +154,9 @@ public class AlunoHomeMBean {
 		if (curClick != null) {
 			try {
 				if (curriculoDao.deleteCurriculum(curClick)) {
-					listarCurriculo();
 					Mensagem.make("Currículo excluído com sucesso !");
+				} else {
+					Mensagem.make("Nao foi possível excluir o curriculo !");
 				}
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
@@ -163,6 +164,7 @@ public class AlunoHomeMBean {
 				Mensagem.make(e.toString());
 			}
 		}
+		listarCurriculo();
 	}
 
 	public void setCurEdit(CurriculumVitae curEdit) {

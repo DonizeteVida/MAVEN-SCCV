@@ -5743,7 +5743,10 @@ CREATE TABLE usuario_administrador(
 	nif VARCHAR(10) NOT NULL,
 	id_status INTEGER NOT NULL DEFAULT 1,
     FOREIGN KEY (id_status) REFERENCES status_(id)
-);
+);	
+	
+	SELECT FROM_UNIXTIME((SELECT u.idade FROM usuario u WHERE u.id = 2)/1000,
+                        '%d %m %Y');
 
 	SELECT * FROM usuario;
     	
