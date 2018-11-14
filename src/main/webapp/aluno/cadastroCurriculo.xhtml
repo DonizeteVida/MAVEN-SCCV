@@ -14,7 +14,7 @@
 		<p:panel>
 			<center>
 				<h:form>
-					<p:panelGrid columns="2">
+					<p:panelGrid columns="2" styleClass="alinhar">
 
 						<p:outputLabel value="Insira a categoria do seu curso atual: " />
 						<p:selectOneMenu
@@ -30,7 +30,7 @@
 						</p:selectOneMenu>
 
 						<p:outputLabel value="Insira seu curso atual: " />
-						<p:selectOneMenu id="selecaoCurso"
+						<p:selectOneMenu id="selecaoCurso" autoWidth="false"
 							value="#{alunoCadastroCurriculoMBean.curriculumVitae.curso.id}"
 							required="true" requiredMessage="Um curso é necessário">
 							<f:selectItem itemLabel="SELECIONE SEU CURSO ATUAL" itemValue="" />

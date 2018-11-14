@@ -57,11 +57,11 @@ function ligaBtCriarUsuario() {
 	PF('btCriarUsuario').enable();
 }
 
-function testaSenha(campoSenha){
+function testaSenha(campoSenha) {
 	var primeiraSenha = document.getElementById("formCadastro:campoSenha");
-	if(!(campoSenha.value == primeiraSenha.value)){
+	if (!(campoSenha.value == primeiraSenha.value)) {
 		campoSenha.value = "";
-		
+
 		PF('growlWV').renderMessage({
 			"summary" : "SENHA INCORRETA !",
 			"detail" : "Por favor, insira senhas corretas !",
