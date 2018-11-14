@@ -14,7 +14,7 @@
 		<h:form id="form">
 			<p:toolbar>
 				<f:facet name="right">
-					<p:inputText placeholder="Digite o CPF ou Nome"
+					<p:inputText  placeholder="Digite o CPF ou Nome"
 						value="#{administradorVerPerfilAlunoMBean.filtro}" />
 					<nbsp />
 					<p:commandButton value="Filtrar" ajax="true" event="onclick"
@@ -32,7 +32,7 @@
 				<p:dataTable rowKey="#{a.id}" id="dataAlunos"
 					emptyMessage="Não foram encontrados alunos cadastrados." var="a"
 					value="#{administradorVerPerfilAlunoMBean.listaUsuario}"
-					styleClass="opacityOnly" selectionMode="single"
+					selectionMode="single" styleClass="alignCenter"
 					selection="#{administradorVerPerfilAlunoMBean.usuarioSelecionado}">
 
 					<p:column width="2%" headerText="Id">
@@ -44,11 +44,11 @@
 					<p:column width="15%" headerText="Email">
 						<h:outputText value="#{a.email}" />
 					</p:column>
-					<p:column width="12%" headerText="Data de Nascimento">
-						<p:calendar styleClass="panel" value="#{a.idade.time}"
-							pattern="dd/MM/yyyy" disabled="true" />
+					<p:column width="6%" headerText="Data de Nascimento">
+						<p:outputLabel
+							value="#{administradorVerPerfilAlunoMBean.convertTime(a.idade.time)}" />
 					</p:column>
-					<p:column headerText="CPF">
+					<p:column width="7%" headerText="CPF">
 						<h:outputText value="#{a.cpf}" />
 					</p:column>
 					<p:column headerText="RG">
