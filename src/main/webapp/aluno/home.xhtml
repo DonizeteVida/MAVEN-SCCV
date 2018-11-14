@@ -42,7 +42,8 @@
 									</p:commandLink>
 
 									<p:commandLink action="#{alunoHomeMBean.imprimirCurriculo}"
-										title="Imprimir Curriculo" update=":form:dataGrid">
+										target="_blank" title="Imprimir Curriculo" ajax="false"
+										update=":form:dataGrid">
 										<h:outputText styleClass="fa fa-print" />
 										<f:setPropertyActionListener value="#{cur}"
 											target="#{alunoHomeMBean.curClick}" />
