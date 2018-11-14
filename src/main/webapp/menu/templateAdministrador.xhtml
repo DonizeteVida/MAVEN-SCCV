@@ -26,6 +26,11 @@
 				<p:menuitem value="Alunos" url="administradorVerPerfilAluno.xhtml"
 					icon="fa fa-user" />
 			</p:submenu>
+			<p:submenu label="Modo root" icon="fa fa-user"
+				rendered="#{alunoIndexMBean.usuarioAdministrador._super eq '0' ? false : true}">
+				<p:menuitem value="Inserir administrador"
+					url="inserirAdministrador.xhtml" icon="fa fa-user" />
+			</p:submenu>
 			<f:facet name="options">
 				<p:commandButton value="Sair"
 					action="#{templateAdministradorMBean.removeSessionScoped}"
