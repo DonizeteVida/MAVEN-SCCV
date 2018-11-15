@@ -20,23 +20,24 @@ public class AdministradorDao {
 
 	public boolean updateUsuarioAdministrador(UsuarioAdministrador a) throws SQLException {
 
-		String sql = "UPDATE usuario_administrador SET nome = ?, email = ?, senha = ?, nif = ?, id_status = ?, WHERE usuario.id = ?;";
+		String sql = "UPDATE usuario_administrador as ua SET nome = ?, email = ?, senha = ?, nif = ?, id_status = ?, _super = ? WHERE ua.id = ?;";
 
 		PreparedStatement ps = conn.prepareStatement(sql);
 
 		ps.setString(1, a.getNome());
 		ps.setString(2, a.getEmail());
-		ps.setString(3, StringToMD5.convertStringToMd5(a.getSenha()));
+		ps.setString(3, a.getSenha());
 		ps.setString(4, a.getNif());
 		ps.setInt(5, a.getStatus().getId());
+		ps.setInt(6, a.get_super());
+		ps.setInt(7, a.getId());
 
 		return ps.executeUpdate() > 0;
 	}
 
 	public boolean inserirUsuarioAdministrador(UsuarioAdministrador a) throws SQLException {
 
-		String sql = "INSERT INTO usuario_administrador(nome, email, senha, idade, nif, status)"
-				+ " VALUES(?,?,?,?,?,?)";
+		String sql = "INSERT INTO usuario_administrador(nome, email, senha, nif)" + " VALUES(?,?,?,?)";
 
 		PreparedStatement ps = conn.prepareStatement(sql);
 
@@ -44,7 +45,6 @@ public class AdministradorDao {
 		ps.setString(2, a.getEmail());
 		ps.setString(3, StringToMD5.convertStringToMd5(a.getSenha()));
 		ps.setString(4, a.getNif());
-		ps.setInt(5, a.getStatus().getId());
 
 		return ps.executeUpdate() > 0;
 	};
@@ -66,7 +66,7 @@ public class AdministradorDao {
 			ua.setNif(rs.getString("nif"));
 			ua.setNome(rs.getString("nome"));
 			ua.setSenha(rs.getString("senha"));
-
+			ua.set_super(rs.getInt("_super"));
 		}
 
 		return ua;
@@ -90,21 +90,23 @@ public class AdministradorDao {
 			ua.setNif(rs.getString("nif"));
 			ua.setNome(rs.getString("nome"));
 			ua.setSenha(rs.getString("senha"));
+			ua.set_super(rs.getInt("_super"));
+
 		}
 
 		return ua;
 	}
-	
-	public boolean EditarAluno (Usuario u) throws SQLException {
+
+	public boolean EditarAluno(Usuario u) throws SQLException {
 		String sql = "UPDATE usuario SET email = ?, id_status = ?, WHERE usuario.id = ?;";
-		
+
 		PreparedStatement ps = conn.prepareStatement(sql);
 
 		ps.setString(1, u.getEmail());
 		ps.setInt(2, u.getStatus().getId());
 
 		return ps.executeUpdate() > 0;
-		
+
 	}
 
 }

@@ -20,9 +20,9 @@
 						value="#{alunoEditarCurriculoMBean.curriculumAtual.curso.nome}" />
 
 					Data da criação do curriculo: 
-					<p:calendar
-						value="#{alunoEditarCurriculoMBean.curriculumAtual.data_criacao.time}"
-						pattern="dd/MM/yyyy" />
+					<p:outputLabel
+						value="#{alunoEditarCurriculoMBean.convertTime(alunoEditarCurriculoMBean.curriculumAtual.data_criacao.time)}"
+						pattern="dd/MM/yyyy" disabled="true" />
 						
 					Turma atual: 
 					<p:outputLabel
@@ -37,9 +37,9 @@
 
 		<h:form id="form">
 			<p:dataGrid id="exp"
-				emptyMessage="Não foram experiencias cadastradas." var="exp"
-				value="#{alunoEditarCurriculoMBean.experiencias}" columns="10"
-				layout="grid">
+				emptyMessage="Não foram encontradas experiencias cadastradas."
+				var="exp" value="#{alunoEditarCurriculoMBean.experiencias}"
+				columns="10" layout="grid">
 
 
 				<f:facet name="header">
@@ -50,10 +50,12 @@
 						Data inicio: 
 						<p:calendar disabled="true" value="#{exp.data_inicio.time}"
 							pattern="dd/MM/yyyy" />
-						
-						Data fim:
-						<p:calendar disabled="true" value="#{exp.data_fim.time}"
-							pattern="dd/MM/yyyy" />
+
+						<p:outputLabel value="Data fim: "
+							rendered="#{exp.data_fim.timeInMillis eq '0' ? false : true}" />
+						<p:calendar disabled="true"
+							rendered="#{exp.data_fim.timeInMillis eq '0' ? false : true}"
+							value="#{exp.data_fim.time}" pattern="dd/MM/yyyy" />
 						
 						Cargo:
 						<p:inputText disabled="true" value="#{exp.cargo}" />
@@ -100,7 +102,8 @@
 		<br />
 
 		<h:form id="form2">
-			<p:dataGrid id="form" emptyMessage="Não foram formações cadastradas."
+			<p:dataGrid id="form"
+				emptyMessage="Não foram encontradas formações cadastradas."
 				var="form" value="#{alunoEditarCurriculoMBean.formacoes}"
 				columns="10" layout="grid">
 
@@ -113,11 +116,11 @@
 						Data inicio: 
 						<p:calendar disabled="true" value="#{form.data_inicio.time}"
 							pattern="dd/MM/yyyy" />
-						
+				
 						Data fim:
 						<p:calendar disabled="true" value="#{form.data_fim.time}"
 							pattern="dd/MM/yyyy" />
-						
+
 						Escola:
 						<p:inputText disabled="true" value="#{form.escola}" />
 
@@ -187,7 +190,8 @@
 							pattern="dd/MM/yyyy" />
 
 						<p:outputLabel value="Data fim: " />
-						<p:calendar
+						<p:calendar disabled="#{alunoEditarCurriculoMBean.emprego_atual}"
+							id="data_fim"
 							value="#{alunoEditarCurriculoMBean.inserirExperiencia.data_fim.time}"
 							pattern="dd/MM/yyyy" />
 
@@ -206,6 +210,11 @@
 							requiredMessage="Insira suas funções da experiencia"
 							value="#{alunoEditarCurriculoMBean.inserirExperiencia.funcoes}" />
 
+						<p:outputLabel value="Emprego atual ? " />
+						<p:selectBooleanCheckbox
+							value="#{alunoEditarCurriculoMBean.emprego_atual}">
+							<p:ajax update="data_fim" />
+						</p:selectBooleanCheckbox>
 
 					</p:panelGrid>
 
@@ -281,8 +290,8 @@
 							pattern="dd/MM/yyyy" />
 
 						<p:outputLabel value="Data fim: " />
-						<p:calendar required="true"
-							requiredMessage="Insira a data fim da experiencia"
+						<p:calendar id="data_fim_editar"
+							disabled="#{alunoEditarCurriculoMBean.emprego_atual}"
 							value="#{alunoEditarCurriculoMBean.experienciaSelecionada.data_fim.time}"
 							pattern="dd/MM/yyyy" />
 
@@ -300,6 +309,12 @@
 						<p:inputText required="true"
 							requiredMessage="Insira suas funções da experiencia"
 							value="#{alunoEditarCurriculoMBean.experienciaSelecionada.funcoes}" />
+
+						<p:outputLabel value="Emprego atual ? " />
+						<p:selectBooleanCheckbox
+							value="#{alunoEditarCurriculoMBean.emprego_atual}">
+							<p:ajax update="data_fim_editar" />
+						</p:selectBooleanCheckbox>
 
 
 					</p:panelGrid>

@@ -27,18 +27,23 @@
 
 						<h:outputText value="#{cur.turma.nome}" style="text-align:center" />
 
+						<br />
+
+						<p:outputLabel value="#{cur.status.nome}" />
+
 						<p:toolbar styleClass="toolbarCurriculo">
 							<f:facet name="right">
-								<h:panelGrid columns="3">
+								<h:panelGrid columns="4">
 									<p:commandLink action="#{alunoHomeMBean.visualizarCurriculo}"
-										title="Ver currículo">
+										title="Ver currículo" update=":form:dataGrid">
 										<h:outputText styleClass="fa fa-eye" />
 										<f:setPropertyActionListener value="#{cur}"
 											target="#{alunoHomeMBean.curClick}" />
 									</p:commandLink>
 
 									<p:commandLink action="#{alunoHomeMBean.imprimirCurriculo}"
-										title="Imprimir Curriculo">
+										target="_blank" title="Imprimir Curriculo" ajax="false"
+										update=":form:dataGrid">
 										<h:outputText styleClass="fa fa-print" />
 										<f:setPropertyActionListener value="#{cur}"
 											target="#{alunoHomeMBean.curClick}" />

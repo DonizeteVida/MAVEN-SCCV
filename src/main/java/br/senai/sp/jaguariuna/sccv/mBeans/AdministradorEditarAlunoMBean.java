@@ -7,7 +7,6 @@ import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
-import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 
 import br.senai.sp.jaguariuna.sccv.entities.CurriculumVitae;
@@ -136,11 +135,11 @@ public class AdministradorEditarAlunoMBean {
 		curClick.setStatus(a);
 		try {
 			curriculoDao.updateCurriculum(curClick);
+			Mensagem.make("O status foi alterado com sucesso !");
 			downloadListaCurriculo();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-			Mensagem.make("O status foi alterado com sucesso !");
 		}
 	}
 

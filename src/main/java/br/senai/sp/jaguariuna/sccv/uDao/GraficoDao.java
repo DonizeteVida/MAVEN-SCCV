@@ -41,8 +41,8 @@ public class GraficoDao {
 	}
 
 	public List<ClasseGenericaGrafico> quantidadeSexo() throws SQLException {
-		String sql = "SELECT s.nome, COUNT(*) as qtd FROM usuario as u\r\n"
-				+ "INNER JOIN sexo as s on u.id_sexo = s.id GROUP BY s.id;";
+		String sql = "SELECT sexo.nome, COUNT(*) as qtd FROM usuario "
+				+ "INNER JOIN sexo on usuario.id_sexo = sexo.id GROUP BY sexo.id;";
 
 		PreparedStatement ps = conn.prepareStatement(sql);
 
@@ -56,6 +56,24 @@ public class GraficoDao {
 			result.add(a);
 		}
 		return result;
+	}
+
+	public List<ClasseGenericaGrafico> quantidadePCD() throws SQLException {
+		String sql = "SELECT usuario.pessoa_pcd , COUNT(*) " + " AS qtde FROM usuario GROUP BY usuario.pessoa_pcd;";
+
+		PreparedStatement ps = conn.prepareStatement(sql);
+
+		ResultSet rs = ps.executeQuery();
+
+		List<ClasseGenericaGrafico> result = new ArrayList<>();
+		while (rs.next()) {
+			ClasseGenericaGrafico a = new ClasseGenericaGrafico();
+			a.setValor(rs.getDouble("qtde"));
+			a.setNome(rs.getInt("pessoa_pcd") == 0 ? "S/ Deficiencia" : "C/ Deficiencia");
+			result.add(a);
+		}
+		return result;
+
 	}
 
 }

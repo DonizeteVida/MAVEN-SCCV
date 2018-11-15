@@ -35,11 +35,11 @@
 							value="#{administradorEditarAlunoMBean.usuarioSelecionado.cpf}" />
 
 						<p:outputLabel value="E-mail do aluno: " />
-						<p:inputText
+						<p:inputText style="width: 102%;"
 							value="#{administradorEditarAlunoMBean.usuarioSelecionado.email}" />
 
 						<p:outputLabel value="Situação do usuario: " />
-						<p:selectOneMenu
+						<p:selectOneMenu style="width: 86%;"
 							value="#{administradorEditarAlunoMBean.usuarioSelecionado.status.id}">
 							<f:selectItem itemLabel="Usuario ativo" itemValue="1" />
 							<f:selectItem itemLabel="Usuario inativo" itemValue="2" />
@@ -64,6 +64,8 @@
 							<p:graphicImage name="images/pdf.ico" />
 
 							<h:outputText value="#{cur.turma.nome}" style="text-align:center" />
+							<p:outputLabel value="#{cur.status.nome}" />
+
 
 							<p:toolbar styleClass="toolbarCurriculo">
 								<f:facet name="right">
@@ -78,7 +80,7 @@
 
 										<p:commandLink ajax="true" event="onclick"
 											action="#{administradorEditarAlunoMBean.alterarStatus}"
-											title="Alterar status">
+											title="Alterar status" update="dataGrid">
 											<h:outputText styleClass="fa fa-lock" />
 											<f:setPropertyActionListener value="#{cur}"
 												target="#{administradorEditarAlunoMBean.curClick}" />

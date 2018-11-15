@@ -1,11 +1,12 @@
 package br.senai.sp.jaguariuna.sccv.mBeans;
 
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
 
 import java.sql.SQLException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import br.senai.sp.jaguariuna.sccv.entities.Usuario;
@@ -104,5 +105,9 @@ public class AdministradorVerPerfilAlunoMBean {
 			Mensagem.make("Selecione um usuario !");
 		}
 		return null;
+	}
+
+	public String convertTime(Date date) {
+		return new SimpleDateFormat("dd/MM/yyyy").format(date);
 	}
 }
