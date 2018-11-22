@@ -1,11 +1,23 @@
 <
 style
+
  
+
 type
-="text/css"
+
+
+="
+text
+/css"
+
  
+
 rel
-="stylesheet"
+
+
+="
+stylesheet
+"
 >
 @media print {
 	.botaotopo {
@@ -17,8 +29,8 @@ rel
 }
 
 </
-style> <style type ="text/css">.nav, footer, video, audio, object, embed
-	{
+style> <style type ="text /css">.nav, footer, video, audio, object,
+	embed {
 	display: none;
 }
 
