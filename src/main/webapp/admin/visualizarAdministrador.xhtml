@@ -1,0 +1,60 @@
+<?xml version='1.0' encoding='ISO-8859-1' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns:ui="http://java.sun.com/jsf/facelets"
+	template="../menu/templateAdministrador.xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://java.sun.com/jsf/core">
+	<ui:define name="Conteudo">
+
+		<p:growl>
+			<p:autoUpdate />
+		</p:growl>
+
+		<h:form id="form">
+			<p:toolbar>
+				<f:facet name="right">
+					<p:inputText placeholder="Digite o NIF ou Nome"
+						value="#{visualizarAdministradorMBean.filtro}" />
+					<nbsp />
+					<p:commandButton value="Filtrar" ajax="true" event="onclick"
+						update="dataAlunos"
+						actionListener="#{visualizarAdministradorMBean.buscaFiltro}" />
+				</f:facet>
+				<f:facet name="left">
+					<p:commandButton
+						action="#{visualizarAdministradorMBean.visualizarAdministrador}"
+						value="Editar Administrador" icon="ui-icon-pencil" />
+				</f:facet>
+			</p:toolbar>
+			<br />
+			<p:fieldset legend="Administradores Cadastrados">
+				<p:dataTable rowKey="#{a.id}" id="dataAlunos"
+					emptyMessage="Não foram encontrados alunos cadastrados." var="a"
+					value="#{visualizarAdministradorMBean.listaAdministrador}"
+					selectionMode="single" styleClass="alignCenter"
+					selection="#{visualizarAdministradorMBean.administradorSelecionado}">
+
+					<p:column width="2%" headerText="Id">
+						<h:outputText value="#{a.id}" />
+					</p:column>
+					<p:column headerText="Nome">
+						<h:outputText value="#{a.nome}" />
+					</p:column>
+					<p:column width="15%" headerText="Email">
+						<h:outputText value="#{a.email}" />
+					</p:column>
+					<p:column width="7%" headerText="NIF">
+						<h:outputText value="#{a.nif}" />
+					</p:column>
+					<p:column width="7%" headerText="Status">
+						<h:outputText value="#{a.status.nome}" />
+					</p:column>
+					<p:column width="7%" headerText="Super">
+						<h:outputText value="#{a._super}" />
+					</p:column>
+				</p:dataTable>
+			</p:fieldset>
+		</h:form>
+	</ui:define>
+</ui:composition>

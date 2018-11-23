@@ -32,10 +32,16 @@ public class InserirAdministradorMBean {
 		this.alunoIndexMBean = alunoIndexMBean;
 	}
 
+	@ManagedProperty("#{visualizarAdministradorMBean}")
+	private VisualizarAdministradorMBean visualizarAdministradorMBean;
+
+	public void setVisualizarAdministradorMBean(VisualizarAdministradorMBean visualizarAdministradorMBean) {
+		this.visualizarAdministradorMBean = visualizarAdministradorMBean;
+	}
+
 	@PostConstruct
 	public void post() {
 		UsuarioAdministrador usuarioAdministrador = alunoIndexMBean.getUsuarioAdministrador();
-
 		if (usuarioAdministrador.get_super() == 0) {
 			try {
 				FacesContext.getCurrentInstance().getExternalContext().redirect("/MAVEN-SCCV/aluno/index.xhtml");
@@ -51,8 +57,8 @@ public class InserirAdministradorMBean {
 			if (administradorDao.inserirUsuarioAdministrador(usuarioAdministrador)) {
 				Mensagem.make("Usuário administrador inserido com sucesso !");
 				FacesContext.getCurrentInstance().getExternalContext().getFlash().setKeepMessages(true);
+				visualizarAdministradorMBean.atualizaListaAdministrador();
 				return "administradorHome?faces-redirect=true";
-
 			} else {
 				Mensagem.make("Erro ao inserir usuário administrador !");
 			}
