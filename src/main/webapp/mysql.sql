@@ -5735,12 +5735,10 @@ CREATE TABLE usuario(
     INNER JOIN turma AS tur ON tur.id = u.id_turma
     WHERE u.cpf = "46939417869";*/
     
-    SELECT s.nome, COUNT(*) as qtd FROM usuario as u
+    /*SELECT s.nome, COUNT(*) as qtd FROM usuario as u
 				INNER JOIN sexo as s on u.id_sexo = s.id GROUP BY s.id;
-    
-    select * from usuario;
-    use SCCV;
-    
+	*/
+        
 CREATE TABLE usuario_administrador(
 	id INTEGER NOT NULL PRIMARY KEY AUTO_INCREMENT,
     nome VARCHAR(100) NOT NULL,
@@ -5752,10 +5750,8 @@ CREATE TABLE usuario_administrador(
     FOREIGN KEY (id_status) REFERENCES status_(id)
 );
 
-	SELECT * FROM usuario;
     	
 	INSERT INTO usuario_administrador (nome, email, senha, nif) VALUES ( "jose", "teste.testando.senai@gmail.com", "123", "sn10529865") ;
- USE SCCV;
     
     INSERT INTO usuario_administrador (nome, email, senha, nif) VALUES ( "jose eduardo", "jose.eduardo.ss@hotmail.com", "123", "sn12345678") ;
     
@@ -5794,8 +5790,6 @@ CREATE TABLE experiencia(
     id_curriculum_vitae INTEGER NOT NULL,
     FOREIGN KEY (id_curriculum_vitae) REFERENCES curriculum_vitae(id)
 );
-select * from experiencia;
-
 
 CREATE TABLE formacao(
 	id INTEGER NOT NULL PRIMARY KEY AUTO_INCREMENT,
