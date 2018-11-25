@@ -22,11 +22,12 @@ public class AdministradorEditarAdministradorMBean {
 		administradorDao = new AdministradorDao();
 	}
 
-	@ManagedProperty(value = "#{visualizarAdministradorMBean}")
-	private VisualizarAdministradorMBean visualizarAdministradorMBean;
+	@ManagedProperty(value = "#{administradorVisualizarAdministradorMBean}")
+	private AdministradorVisualizarAdministradorMBean administradorVisualizarAdministradorMBean;
 
-	public void setVisualizarAdministradorMBean(VisualizarAdministradorMBean visualizarAdministradorMBean) {
-		this.visualizarAdministradorMBean = visualizarAdministradorMBean;
+	public void setAdministradorVisualizarAdministradorMBean(
+			AdministradorVisualizarAdministradorMBean administradorVisualizarAdministradorMBean) {
+		this.administradorVisualizarAdministradorMBean = administradorVisualizarAdministradorMBean;
 	}
 
 	@PostConstruct
@@ -40,8 +41,8 @@ public class AdministradorEditarAdministradorMBean {
 	}
 
 	public void downloadAdministrador() throws SQLException {
-		administradorSelecionado = administradorDao
-				.buscarAdministradorPorNif(visualizarAdministradorMBean.getAdministradorSelecionado().getNif());
+		administradorSelecionado = administradorDao.buscarAdministradorPorNif(
+				administradorVisualizarAdministradorMBean.getAdministradorSelecionado().getNif());
 	}
 
 	public UsuarioAdministrador getAdministradorSelecionado() {

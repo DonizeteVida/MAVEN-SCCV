@@ -15,14 +15,14 @@ import br.senai.sp.jaguariuna.sccv.utils.Mensagem;
 
 @ManagedBean(eager = true)
 @SessionScoped
-public class VisualizarAdministradorMBean {
+public class AdministradorVisualizarAdministradorMBean {
 
 	private AdministradorDao administradorDao;
 	private List<UsuarioAdministrador> listaAdministrador;
 	private UsuarioAdministrador administradorSelecionado;
 	private String filtro;
 
-	public VisualizarAdministradorMBean() {
+	public AdministradorVisualizarAdministradorMBean() {
 		administradorDao = new AdministradorDao();
 		listaAdministrador = new ArrayList<UsuarioAdministrador>();
 		administradorSelecionado = new UsuarioAdministrador();

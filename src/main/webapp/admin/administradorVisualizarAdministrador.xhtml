@@ -15,15 +15,15 @@
 			<p:toolbar>
 				<f:facet name="right">
 					<p:inputText placeholder="Digite o NIF ou Nome"
-						value="#{visualizarAdministradorMBean.filtro}" />
+						value="#{administradorVisualizarAdministradorMBean.filtro}" />
 					<nbsp />
 					<p:commandButton value="Filtrar" ajax="true" event="onclick"
 						update="dataAlunos"
-						actionListener="#{visualizarAdministradorMBean.buscaFiltro}" />
+						actionListener="#{administradorVisualizarAdministradorMBean.buscaFiltro}" />
 				</f:facet>
 				<f:facet name="left">
 					<p:commandButton
-						action="#{visualizarAdministradorMBean.visualizarAdministrador}"
+						action="#{administradorVisualizarAdministradorMBean.visualizarAdministrador}"
 						value="Editar Administrador" icon="ui-icon-pencil" />
 				</f:facet>
 			</p:toolbar>
@@ -31,9 +31,9 @@
 			<p:fieldset legend="Administradores Cadastrados">
 				<p:dataTable rowKey="#{a.id}" id="dataAlunos"
 					emptyMessage="Não foram encontrados alunos cadastrados." var="a"
-					value="#{visualizarAdministradorMBean.listaAdministrador}"
+					value="#{administradorVisualizarAdministradorMBean.listaAdministrador}"
 					selectionMode="single" styleClass="alignCenter"
-					selection="#{visualizarAdministradorMBean.administradorSelecionado}">
+					selection="#{administradorVisualizarAdministradorMBean.administradorSelecionado}">
 
 					<p:column width="2%" headerText="Id">
 						<h:outputText value="#{a.id}" />

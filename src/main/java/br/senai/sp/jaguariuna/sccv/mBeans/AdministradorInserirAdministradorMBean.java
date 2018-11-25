@@ -15,12 +15,12 @@ import br.senai.sp.jaguariuna.sccv.utils.Mensagem;
 
 @ManagedBean
 @ViewScoped
-public class InserirAdministradorMBean {
+public class AdministradorInserirAdministradorMBean {
 
 	private UsuarioAdministrador usuarioAdministrador;
 	private AdministradorDao administradorDao;
 
-	public InserirAdministradorMBean() {
+	public AdministradorInserirAdministradorMBean() {
 		administradorDao = new AdministradorDao();
 		usuarioAdministrador = new UsuarioAdministrador();
 	}
@@ -32,11 +32,12 @@ public class InserirAdministradorMBean {
 		this.alunoIndexMBean = alunoIndexMBean;
 	}
 
-	@ManagedProperty("#{visualizarAdministradorMBean}")
-	private VisualizarAdministradorMBean visualizarAdministradorMBean;
+	@ManagedProperty("#{administradorVisualizarAdministradorMBean}")
+	private AdministradorVisualizarAdministradorMBean administradorVisualizarAdministradorMBean;
 
-	public void setVisualizarAdministradorMBean(VisualizarAdministradorMBean visualizarAdministradorMBean) {
-		this.visualizarAdministradorMBean = visualizarAdministradorMBean;
+	public void setAdministradorVisualizarAdministradorMBean(
+			AdministradorVisualizarAdministradorMBean administradorVisualizarAdministradorMBean) {
+		this.administradorVisualizarAdministradorMBean = administradorVisualizarAdministradorMBean;
 	}
 
 	@PostConstruct
@@ -57,11 +58,11 @@ public class InserirAdministradorMBean {
 			if (administradorDao.inserirUsuarioAdministrador(usuarioAdministrador)) {
 				Mensagem.make("Usuário administrador inserido com sucesso !");
 				FacesContext.getCurrentInstance().getExternalContext().getFlash().setKeepMessages(true);
-				visualizarAdministradorMBean.atualizaListaAdministrador();
+				administradorVisualizarAdministradorMBean.atualizaListaAdministrador();
 				return "administradorHome?faces-redirect=true";
-			} else {
-				Mensagem.make("Erro ao inserir usuário administrador !");
 			}
+			Mensagem.make("Erro ao inserir usuário administrador !");
+
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

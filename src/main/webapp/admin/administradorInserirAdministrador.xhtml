@@ -18,18 +18,18 @@
 						<p:outputLabel value="Insira seu nome: " />
 						<p:inputText placeholder="Insira seu nome completo"
 							required="true"
-							value="#{inserirAdministradorMBean.usuarioAdministrador.nome}"
+							value="#{administradorInserirAdministradorMBean.usuarioAdministrador.nome}"
 							title="Campo para o nome"
 							requiredMessage="O nome é completo é necessário !" />
 
 						<p:outputLabel value="Insira seu e-mail: " />
 						<p:inputText placeholder="Insira seu e-mail completo"
-							value="#{inserirAdministradorMBean.usuarioAdministrador.email}"
+							value="#{administradorInserirAdministradorMBean.usuarioAdministrador.email}"
 							required="true" title="Campo para e-mail"
 							requiredMessage="O e-mail é completo é necessário !" />
 						<p:outputLabel value="Insira seu NIF: " />
 						<p:inputText placeholder="Insira seu NIF"
-							value="#{inserirAdministradorMBean.usuarioAdministrador.nif}"
+							value="#{administradorInserirAdministradorMBean.usuarioAdministrador.nif}"
 							required="true" title="Campo para NIF"
 							requiredMessage="O NIF é necessário!" />
 
@@ -46,12 +46,12 @@
 							onfocus="desligaBtCriarUsuario();"
 							onblur="ligaBtCriarUsuario(); testaSenha(this);"
 							title="Campo para repetir a senha"
-							value="#{inserirAdministradorMBean.usuarioAdministrador.senha}" />
+							value="#{administradorInserirAdministradorMBean.usuarioAdministrador.senha}" />
 
 						<p:outputLabel value="Super administrador ?" />
 						<p:selectOneMenu required="true"
 							requiredMessage="Selecione uma opção de super !"
-							value="#{inserirAdministradorMBean.usuarioAdministrador._super}">
+							value="#{administradorInserirAdministradorMBean.usuarioAdministrador._super}">
 							<f:selectItem itemLabel="Selecione uma opção" itemValue="" />
 							<f:selectItem itemLabel="Sim" itemValue="1" />
 							<f:selectItem itemLabel="Não" itemValue="0" />
@@ -61,7 +61,7 @@
 					</p:panelGrid>
 					<br />
 					<p:commandButton value="Criar usuário administrador"
-						action="#{inserirAdministradorMBean.inserirUsuarioAdministrador}" />
+						action="#{administradorInserirAdministradorMBean.inserirUsuarioAdministrador}" />
 				</h:form>
 			</center>
 		</p:panel>
