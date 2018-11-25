@@ -153,20 +153,16 @@ public class AlunoEditarPerfilMBean {
 					Mensagem.make("Usuario atualizado com sucesso !");
 					FacesContext.getCurrentInstance().getExternalContext().getFlash().setKeepMessages(true);
 					alunoIndexMBean.setUsuario(usuario);
-
 					return "visualizarPerfil?faces-redirect=true";
-				} else {
-					Mensagem.make("Falha ao atualizar o usuario !");
-					return null;
 				}
+				Mensagem.make("Falha ao atualizar o usuario !");
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 				Mensagem.make(e.toString());
 			}
 		} else {
-			Mensagem.make("As senhas digitadas s�o incorretas");
-			return null;
+			Mensagem.make("Digite corretamente a antiga senha !");
 		}
 		return null;
 	}

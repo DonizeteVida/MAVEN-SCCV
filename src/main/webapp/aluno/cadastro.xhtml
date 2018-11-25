@@ -55,9 +55,13 @@
 
 					<p:outputLabel value="Insira seu e-mail: " />
 					<p:inputText placeholder="Insira seu e-mail completo"
+						validatorMessage="Insira um email válido !"
 						value="#{alunoCadastroMBean.usuario.email}" required="true"
 						title="Campo para e-mail"
-						requiredMessage="O e-mail é completo é necessário !" />
+						requiredMessage="O e-mail é completo é necessário !">
+						<f:validateRegex
+							pattern="[\w\.-]*[a-zA-Z0-9_]@[\w\.-]*[a-zA-Z0-9]\.[a-zA-Z][a-zA-Z\.]*[a-zA-Z]" />
+					</p:inputText>
 
 					<p:outputLabel value="Insira sua data de nascimento: " />
 					<p:calendar pattern="dd/MM/yyyy"
@@ -182,7 +186,7 @@
 					<p:outputLabel value="Insira sua senha: " />
 					<p:password required="true" onfocus="desligaBtCriarUsuario();"
 						widgetVar="campoSenha" id="campoSenha"
-						onblur="ligaBtCriarUsuario();"
+						onblur="ligaBtCriarUsuario(); verifica();"
 						requiredMessage="Sua senha é necessária"
 						placeholder="Insira sua senha" title="Campo para a senha" />
 
@@ -191,7 +195,7 @@
 						requiredMessage="Repetir a senha é necessário"
 						onfocus="desligaBtCriarUsuario();"
 						onblur="ligaBtCriarUsuario(); testaSenha(this);"
-						title="Campo para repetir a senha"
+						title="Campo para repetir a senha" goodLabel="true"
 						value="#{alunoCadastroMBean.usuario.senha}" />
 
 
@@ -202,5 +206,6 @@
 			</h:form>
 		</center>
 	</p:panel>
+
 </h:body>
 </html>

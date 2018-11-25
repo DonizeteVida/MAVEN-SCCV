@@ -28,7 +28,11 @@
 						<p:inputText placeholder="Insira seu e-mail completo"
 							value="#{alunoEditarPerfilMBean.usuario.email}" required="true"
 							title="Campo para e-mail"
-							requiredMessage="O e-mail é completo é necessário !" />
+							validatorMessage="Insira um email válido !"
+							requiredMessage="O e-mail é completo é necessário !">
+							<f:validateRegex
+								pattern="[\w\.-]*[a-zA-Z0-9_]@[\w\.-]*[a-zA-Z0-9]\.[a-zA-Z][a-zA-Z\.]*[a-zA-Z]" />
+						</p:inputText>
 
 						<p:outputLabel value="Insira sua idade: " />
 						<p:calendar value="#{alunoEditarPerfilMBean.usuario.idade.time}"
@@ -162,7 +166,8 @@
 						<p:outputLabel value="Insira sua nova senha: " />
 						<p:password placeholder="Insira sua nova senha" required="true"
 							requiredMessage="Inserir a nova senha é necessário"
-							onfocus="desligaBtCriarUsuario();" onblur="ligaBtCriarUsuario();"
+							onfocus="desligaBtCriarUsuario();"
+							onblur="ligaBtCriarUsuario();  verifica();"
 							title="Campo para repetir a senha" widgetVar="campoSenha"
 							id="campoSenha" value="#{alunoEditarPerfilMBean.usuario.senha}" />
 

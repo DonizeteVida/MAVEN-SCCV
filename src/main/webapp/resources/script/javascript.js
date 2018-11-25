@@ -69,3 +69,86 @@ function testaSenha(campoSenha) {
 		})
 	}
 }
+
+function verifica() {
+
+	senha = document.getElementById("formCadastro:campoSenha").value;
+
+	forca = 0;
+
+	if ((senha.length >= 6) && (senha.length <= 8)) {
+		forca += 10;
+	} else if (senha.length > 8) {
+		forca += 25;
+	}
+	if (senha.match(/[a-z]+/)) {
+		forca += 10;
+	}
+	if (senha.match(/[A-Z]+/)) {
+		forca += 20;
+	}
+	if (senha.match(/d+/)) {
+		forca += 20;
+	}
+	if (senha.match(/W+/)) {
+		forca += 25;
+	}
+	return mostra_res(forca);
+}
+
+function mostra_res(forca) {
+
+	var result = 0;
+
+	if (forca < 30) {
+		result = 1;
+	} else if ((forca >= 30) && (forca < 60)) {
+		result = 2;
+	} else if ((forca >= 60) && (forca < 85)) {
+		result = 3;
+	} else {
+		result = 4;
+	}
+
+	switch (result) {
+	case 1:
+		PF('growlWV').renderMessage({
+			"summary" : "Campo senha",
+			"detail" : "Senha fraca !",
+			"severity" : "error"
+		});
+
+		document.getElementById("formCadastro:campoSenha").value = "";
+
+		break;
+
+	case 2:
+		PF('growlWV').renderMessage({
+			"summary" : "Campo senha",
+			"detail" : "Senha justa !",
+			"severity" : "warn"
+		});
+
+		break;
+
+	case 3:
+		PF('growlWV').renderMessage({
+			"summary" : "Campo senha",
+			"detail" : "Senha forte !",
+			"severity" : "warn"
+		});
+
+		break;
+
+	case 4:
+
+		PF('growlWV').renderMessage({
+			"summary" : "Campo senha",
+			"detail" : "Senha excelente",
+			"severity" : "info"
+		});
+
+		break;
+
+	}
+}

@@ -76,6 +76,21 @@ public class AdministradorVerPerfilAlunoMBean {
 	}
 
 	public void setUsuarioSelecionado(Usuario usuarioSelecionado) {
+		// pode parecer complexo, mas aqui é guardado o perfil do aluno, apenas, pra
+		// saber quem foi clicado, de uma enorme lista.
+
+		// tive de manter administradorEditarAlunoMBean em session, para que eu pudesse
+		// guardar o curriculo selecionado, e posteriormente buscar as informações dele
+
+		// o problema foi que, session scoped só cai no postConstruct uma vez, na
+		// instancia do mbean, por isso, o metodo downloadUsuario, e
+		// downloadListaCurriculo nunca mais iam acontecer, visto que, ele nunca mais ia
+		// nascer
+
+		// essa é apenas uma gambiarra, visto que ao nascer do proximo mbean, eu devolvo
+		// o apontador dele pra cá, para poder chamar o metodo de lá, conhecido como
+		// callfodace
+
 		this.usuarioSelecionado = usuarioSelecionado;
 		if (administradorEditarAlunoMBean != null) {
 			try {
@@ -100,10 +115,10 @@ public class AdministradorVerPerfilAlunoMBean {
 
 	public String visualizarAluno() {
 		if (usuarioSelecionado != null) {
-			return "administradorEditarPerfilAluno?faces-redirect=true";
-		} else {
-			Mensagem.make("Selecione um usuario !");
+			return "administradorEditarAluno?faces-redirect=true";
 		}
+		Mensagem.make("Selecione um usuario !");
+
 		return null;
 	}
 

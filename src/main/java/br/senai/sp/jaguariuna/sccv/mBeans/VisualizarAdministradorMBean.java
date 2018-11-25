@@ -17,11 +17,10 @@ import br.senai.sp.jaguariuna.sccv.utils.Mensagem;
 @SessionScoped
 public class VisualizarAdministradorMBean {
 
-	AdministradorDao administradorDao;
-	List<UsuarioAdministrador> listaAdministrador;
-	UsuarioAdministrador administradorSelecionado;
+	private AdministradorDao administradorDao;
+	private List<UsuarioAdministrador> listaAdministrador;
+	private UsuarioAdministrador administradorSelecionado;
 	private String filtro;
-	private EditarAdministradorMBean editarAdministradorMBean;
 
 	public VisualizarAdministradorMBean() {
 		administradorDao = new AdministradorDao();
@@ -44,14 +43,6 @@ public class VisualizarAdministradorMBean {
 		}
 	}
 
-	public EditarAdministradorMBean getEditarAdministradorMBean() {
-		return editarAdministradorMBean;
-	}
-
-	public void setEditarAdministradorMBean(EditarAdministradorMBean editarAdministradorMBean) {
-		this.editarAdministradorMBean = editarAdministradorMBean;
-	}
-
 	public List<UsuarioAdministrador> getListaAdministrador() {
 		return listaAdministrador;
 	}
@@ -66,14 +57,6 @@ public class VisualizarAdministradorMBean {
 
 	public void setAdministradorSelecionado(UsuarioAdministrador administradorSelecionado) {
 		this.administradorSelecionado = administradorSelecionado;
-		if (editarAdministradorMBean != null) {
-			try {
-				editarAdministradorMBean.downloadAdministrador();
-			} catch (SQLException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-		}
 	}
 
 	public String getFiltro() {
@@ -96,10 +79,10 @@ public class VisualizarAdministradorMBean {
 
 	public String visualizarAdministrador() {
 		if (administradorSelecionado != null) {
-			return "editarAdministrador?faces-redirect=true";
-		} else {
-			Mensagem.make("Selecione um usuario !");
+			return "administradorEditarAdministrador?faces-redirect=true";
 		}
+		Mensagem.make("Selecione um usuario !");
+
 		return null;
 	}
 

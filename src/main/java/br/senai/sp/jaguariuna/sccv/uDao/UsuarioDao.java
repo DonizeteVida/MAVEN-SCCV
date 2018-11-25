@@ -236,10 +236,6 @@ public class UsuarioDao {
 				+ "INNER JOIN curso AS cur ON cur.id = u.id_curso " + "INNER JOIN turma AS tur ON tur.id = u.id_turma "
 				+ "WHERE u.nome like ?;";
 
-		if (nome.equals("")) {
-			return listarUsuario();
-		}
-
 		String local = "%" + nome + "%";
 		PreparedStatement ps = conn.prepareStatement(sql);
 		ps.setString(1, local);
