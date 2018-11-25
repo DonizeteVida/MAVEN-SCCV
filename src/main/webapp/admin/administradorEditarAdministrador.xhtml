@@ -7,12 +7,69 @@
 	xmlns:f="http://java.sun.com/jsf/core">
 	<ui:define name="Conteudo">
 
-		<p:growl>
+		<p:growl widgetVar="growlWV">
 			<p:autoUpdate />
 		</p:growl>
 
-		<p:outputLabel
-			value="#{administradorEditarAdministradorMBean.administradorSelecionado.nome}" />
+		<p:panel>
+			<center>
+				<h:form id="formCadastro">
+					<p:panelGrid columns="2">
+						<p:outputLabel value="Insira seu nome: " />
+						<p:inputText placeholder="Insira seu nome completo"
+							required="true"
+							value="#{administradorEditarAdministradorMBean.administradorSelecionado.nome}"
+							title="Campo para o nome"
+							requiredMessage="O nome é completo é necessário !" />
+
+						<p:outputLabel value="Insira seu e-mail: " />
+						<p:inputText placeholder="Insira seu e-mail completo"
+							value="#{administradorEditarAdministradorMBean.administradorSelecionado.email}"
+							required="true" title="Campo para e-mail"
+							requiredMessage="O e-mail é completo é necessário !" />
+						<p:outputLabel value="Insira seu NIF: " />
+						<p:inputText placeholder="Insira seu NIF"
+							value="#{administradorEditarAdministradorMBean.administradorSelecionado.nif}"
+							required="true" title="Campo para NIF"
+							requiredMessage="O NIF é necessário!" />
+
+						<p:outputLabel value="Super administrador ?" />
+						<p:selectOneMenu required="true"
+							requiredMessage="Selecione uma opção de super !"
+							value="#{administradorEditarAdministradorMBean.administradorSelecionado._super}">
+							<f:selectItem itemLabel="Selecione uma opção" itemValue="" />
+							<f:selectItem itemLabel="Sim" itemValue="1" />
+							<f:selectItem itemLabel="Não" itemValue="0" />
+						</p:selectOneMenu>
+
+						<p:outputLabel
+							rendered="#{administradorEditarAdministradorMBean.alterar_senha}"
+							value="Insira sua senha: " />
+
+						<p:password required="true" onfocus="desligaBtCriarUsuario();"
+							widgetVar="campoSenha" id="campoSenha"
+							onblur="ligaBtCriarUsuario(); verifica();"
+							requiredMessage="Sua senha é necessária"
+							placeholder="Insira sua senha" title="Campo para a senha" />
+
+						<p:outputLabel value="Repita sua senha: " />
+						<p:password placeholder="Repita sua senha" required="true"
+							requiredMessage="Repetir a senha é necessário"
+							onfocus="desligaBtCriarUsuario();"
+							onblur="ligaBtCriarUsuario(); testaSenha(this);"
+							title="Campo para repetir a senha"
+							value="#{administradorEditarAdministradorMBean.administradorSelecionado.senha}" />
+
+
+					</p:panelGrid>
+
+					<br />
+					<p:commandButton value="Atualizar usuario administrador"
+						widgetVar="btCriarUsuario"
+						action="#{administradorEditarAdministradorMBean.inserirAdministradorSelecionado}" />
+				</h:form>
+			</center>
+		</p:panel>
 
 
 
