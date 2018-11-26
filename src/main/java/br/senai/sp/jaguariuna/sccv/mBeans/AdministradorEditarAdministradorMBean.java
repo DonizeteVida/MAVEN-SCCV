@@ -6,9 +6,11 @@ import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.ViewScoped;
+import javax.faces.context.FacesContext;
 
 import br.senai.sp.jaguariuna.sccv.entities.UsuarioAdministrador;
 import br.senai.sp.jaguariuna.sccv.uDao.AdministradorDao;
+import br.senai.sp.jaguariuna.sccv.utils.Mensagem;
 
 @ManagedBean(eager = true)
 @ViewScoped
@@ -33,17 +35,11 @@ public class AdministradorEditarAdministradorMBean {
 
 	@PostConstruct
 	void postConstruct() {
-		try {
-			downloadAdministrador();
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		downloadAdministrador();
 	}
 
-	public void downloadAdministrador() throws SQLException {
-		administradorSelecionado = administradorDao.buscarAdministradorPorNif(
-				administradorVisualizarAdministradorMBean.getAdministradorSelecionado().getNif());
+	public void downloadAdministrador() {
+		administradorSelecionado = administradorVisualizarAdministradorMBean.getAdministradorSelecionado();
 	}
 
 	public UsuarioAdministrador getAdministradorSelecionado() {
@@ -63,6 +59,18 @@ public class AdministradorEditarAdministradorMBean {
 	}
 
 	public String updateAdministradorSelecionado() {
+		try {
+			if (administradorDao.updateUsuarioAdministrador(administradorSelecionado)) {
+				Mensagem.make("Administrador alterado com sucesso !");
+				FacesContext.getCurrentInstance().getExternalContext().getFlash().setKeepMessages(true);
+				administradorVisualizarAdministradorMBean.atualizaListaAdministrador();
+				return "administradorVisualizarAdministrador?faces-redirect=true";
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			Mensagem.make(e.toString());
+		}
 		return "";
 	}
 

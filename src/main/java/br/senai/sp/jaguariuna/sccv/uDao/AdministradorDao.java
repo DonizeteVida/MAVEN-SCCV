@@ -103,7 +103,7 @@ public class AdministradorDao {
 	public List<UsuarioAdministrador> listarAdministrador() throws SQLException {
 
 		String sql = "SELECT u.*, s.nome AS nomeStatus FROM usuario_administrador AS u "
-				+ " INNER JOIN status_ AS s ON s.id = u.id_status";
+				+ "INNER JOIN status_ AS s ON s.id = u.id_status";
 		PreparedStatement ps = conn.prepareStatement(sql);
 
 		ResultSet rs = ps.executeQuery();
