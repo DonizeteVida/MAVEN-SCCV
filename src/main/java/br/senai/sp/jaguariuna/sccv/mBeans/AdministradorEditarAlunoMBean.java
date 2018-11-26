@@ -55,10 +55,12 @@ public class AdministradorEditarAlunoMBean {
 	}
 
 	public void downloadUsuario() throws SQLException {
-		usuarioSelecionado = usuarioDao
-				.buscaUsuarioPorCpf(administradorVerPerfilAlunoMBean.getUsuarioSelecionado().getCpf());
-		if (administradorVerPerfilAlunoMBean.getAdministradorEditarAlunoMBean() == null) {
-			administradorVerPerfilAlunoMBean.setAdministradorEditarAlunoMBean(this);
+		if (administradorVerPerfilAlunoMBean.getUsuarioSelecionado() != null) {
+			usuarioSelecionado = usuarioDao
+					.buscaUsuarioPorCpf(administradorVerPerfilAlunoMBean.getUsuarioSelecionado().getCpf());
+			if (administradorVerPerfilAlunoMBean.getAdministradorEditarAlunoMBean() == null) {
+				administradorVerPerfilAlunoMBean.setAdministradorEditarAlunoMBean(this);
+			}
 		}
 	}
 
