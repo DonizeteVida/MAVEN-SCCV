@@ -58,7 +58,13 @@ function ligaBtCriarUsuario() {
 }
 
 function testaSenha(campoSenha) {
-	var primeiraSenha = document.getElementById("formCadastro:campoSenha");
+	var primeiraSenha;
+
+	if (document.getElementById("formCadastro:campoSenha") == null) {
+		primeiraSenha = document.getElementById("formSenha:campoSenha");
+	} else {
+		primeiraSenha = document.getElementById("formCadastro:campoSenha");
+	}
 	if (!(campoSenha.value == primeiraSenha.value)) {
 		campoSenha.value = "";
 
@@ -72,8 +78,11 @@ function testaSenha(campoSenha) {
 
 function verifica() {
 
-	senha = document.getElementById("formCadastro:campoSenha").value;
-
+	if (document.getElementById("formSenha:campoSenha") == null) {
+		senha = document.getElementById("formCadastro:campoSenha").value;
+	} else {
+		senha = document.getElementById("formSenha:campoSenha").value;
+	}
 	forca = 0;
 
 	if ((senha.length >= 6) && (senha.length <= 8)) {
@@ -118,7 +127,11 @@ function mostra_res(forca) {
 			"severity" : "error"
 		});
 
-		document.getElementById("formCadastro:campoSenha").value = "";
+		if (document.getElementById("formSenha:campoSenha") == null) {
+			document.getElementById("formCadastro:campoSenha").value = "";
+		} else {
+			document.getElementById("formSenha:campoSenha").value = "";
+		}
 
 		break;
 

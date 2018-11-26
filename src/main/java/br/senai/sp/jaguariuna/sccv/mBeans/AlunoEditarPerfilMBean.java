@@ -30,8 +30,8 @@ public class AlunoEditarPerfilMBean {
 	private List<ClasseGenerica> cidades;
 	private List<ClasseGenerica> categorias;
 	private List<ClasseGenerica> sexos;
-	private String antigaSenha;
 	private String antigaSenhaDigitada;
+	private String antigaSenhaUsuario;
 
 	public AlunoEditarPerfilMBean() {
 		usuarioDao = new UsuarioDao();
@@ -66,7 +66,7 @@ public class AlunoEditarPerfilMBean {
 			turmas = classeGenericaDao.buscaTurma(usuario.getCurso().getId());
 			cidades = classeGenericaDao.buscaCidade(usuario.getEstado().getId());
 			cursos = classeGenericaDao.buscaCurso(usuario.getCategoria().getId());
-			antigaSenha = usuario.getSenha();
+			antigaSenhaUsuario = usuario.getSenha();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -88,14 +88,6 @@ public class AlunoEditarPerfilMBean {
 
 	public void setAntigaSenhaDigitada(String antigaSenhaDigitada) {
 		this.antigaSenhaDigitada = antigaSenhaDigitada;
-	}
-
-	public String getAntigaSenha() {
-		return antigaSenha;
-	}
-
-	public void setAntigaSenha(String antigaSenha) {
-		this.antigaSenha = antigaSenha;
 	}
 
 	public Usuario getUsuario() {
@@ -147,7 +139,8 @@ public class AlunoEditarPerfilMBean {
 	}
 
 	public String salvarUsuario() {
-		if (antigaSenha.equals(StringToMD5.convertStringToMd5(antigaSenhaDigitada))) {
+		if (usuario.getSenha().equals(StringToMD5.convertStringToMd5(antigaSenhaDigitada))) {
+			usuario.setSenha(antigaSenhaDigitada);
 			try {
 				if (usuarioDao.updateUsuario(usuario)) {
 					Mensagem.make("Usuario atualizado com sucesso !");
@@ -165,6 +158,26 @@ public class AlunoEditarPerfilMBean {
 			Mensagem.make("Digite corretamente a antiga senha !");
 		}
 		return null;
+	}
+
+	public String salvarSenha() {
+		if (antigaSenhaUsuario.equals(StringToMD5.convertStringToMd5(antigaSenhaDigitada))) {
+			try {
+				if (usuarioDao.updateUsuario(usuario)) {
+					Mensagem.make("Senha atualizada com sucesso !");
+					FacesContext.getCurrentInstance().getExternalContext().getFlash().setKeepMessages(true);
+					alunoIndexMBean.setUsuario(usuario);
+					return "visualizarPerfil?faces-redirect=true";
+				}
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+				Mensagem.make(e.toString());
+			}
+		} else {
+			Mensagem.make("Antiga senha incorreta !");
+		}
+		return "";
 	}
 
 	public void buscaCurso() {
