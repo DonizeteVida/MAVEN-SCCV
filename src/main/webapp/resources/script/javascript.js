@@ -144,7 +144,7 @@ function mostra_res(forca) {
 
 		PF('growlWV').renderMessage({
 			"summary" : "Campo senha",
-			"detail" : "Senha excelente",
+			"detail" : "Senha excelente !",
 			"severity" : "info"
 		});
 
