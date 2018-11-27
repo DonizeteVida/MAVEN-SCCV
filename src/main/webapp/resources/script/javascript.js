@@ -127,6 +127,27 @@ function mostra_res(forca) {
 			"severity" : "error"
 		});
 
+		PF('growlWV')
+				.renderMessage(
+						{
+							"summary" : "Regra à senha: ",
+							"detail" : "As regras buscam dar força à senha. Conter mais de 8 caracteres,"
+									+ " letras maiúsculas, números e simbolos podem ajudar a construir uma"
+									+ " senha mais segura.",
+							"severity" : "info"
+						});
+		
+		var trocaSenha = PF('trocaSenha').getJQ().find(".ui-dialog-footer");
+		trocaSenha.text("Fique atento as regras de construção de senha.");
+
+		sleep(1000).then(() => {
+				trocaSenha.text("A senha mínima deve conter mais de 8 caracteres.");
+		});
+		
+		
+		
+		
+
 		if (document.getElementById("formSenha:campoSenha") == null) {
 			document.getElementById("formCadastro:campoSenha").value = "";
 		} else {
@@ -164,4 +185,9 @@ function mostra_res(forca) {
 		break;
 
 	}
+	
+	function sleep (time) {
+		  return new Promise((resolve) => setTimeout(resolve, time));
+		}
+		
 }
