@@ -137,13 +137,6 @@ function mostra_res(forca) {
 							"severity" : "info"
 						});
 		
-		var trocaSenha = PF('trocaSenha').getJQ().find(".ui-dialog-footer");
-		trocaSenha.text("Fique atento as regras de construção de senha.");
-
-		sleep(1000).then(() => {
-			trocaSenha.text("A senha mínima deve conter mais de 8 caracteres.");
-		});
-		
 		if (document.getElementById("formSenha:campoSenha") == null) {
 			document.getElementById("formCadastro:campoSenha").value = "";
 		} else {

@@ -142,7 +142,7 @@
 
 						<f:facet name="right">
 							<p:commandLink update="editarFormacao" title="Editar"
-								onclick="PF('editarFormacao').show();">
+								onsuccess="PF('editarFormacao').show();">
 								<h:outputText styleClass="fa fa-edit" style="color:black" />
 								<f:setPropertyActionListener value="#{form}"
 									target="#{alunoEditarCurriculoMBean.formacaoSelecionada}" />
