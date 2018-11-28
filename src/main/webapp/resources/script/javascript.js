@@ -141,13 +141,9 @@ function mostra_res(forca) {
 		trocaSenha.text("Fique atento as regras de construção de senha.");
 
 		sleep(1000).then(() => {
-				trocaSenha.text("A senha mínima deve conter mais de 8 caracteres.");
+			trocaSenha.text("A senha mínima deve conter mais de 8 caracteres.");
 		});
 		
-		
-		
-		
-
 		if (document.getElementById("formSenha:campoSenha") == null) {
 			document.getElementById("formCadastro:campoSenha").value = "";
 		} else {

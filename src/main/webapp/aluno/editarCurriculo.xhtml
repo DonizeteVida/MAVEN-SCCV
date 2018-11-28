@@ -88,7 +88,7 @@
 
 						<f:facet name="right">
 							<p:commandLink update="editarExperiencia" title="Editar"
-								onsuccess="PF('editarExperiencia').show();">
+								onclick="PF('editarExperiencia').show();">
 								<h:outputText styleClass="fa fa-edit" style="color:black" />
 								<f:setPropertyActionListener value="#{exp}"
 									target="#{alunoEditarCurriculoMBean.experienciaSelecionada}" />
@@ -142,7 +142,7 @@
 
 						<f:facet name="right">
 							<p:commandLink update="editarFormacao" title="Editar"
-								onsuccess="PF('editarFormacao').show();">
+								onclick="PF('editarFormacao').show();">
 								<h:outputText styleClass="fa fa-edit" style="color:black" />
 								<f:setPropertyActionListener value="#{form}"
 									target="#{alunoEditarCurriculoMBean.formacaoSelecionada}" />
@@ -157,13 +157,13 @@
 
 		<p:toolbar styleClass="toolbarCurriculo">
 			<f:facet name="left">
-				<p:commandButton onsuccess="PF('inserirExperiencia').show();"
+				<p:commandButton onclick="PF('inserirExperiencia').show();"
 					value="Inserir experiencia" ajax="true" event="onclick"
 					update=":formInserirExperiencia:inserirExperiencia" />
 			</f:facet>
 
 			<f:facet name="right">
-				<p:commandButton onsuccess="PF('inserirFormacao').show();"
+				<p:commandButton onclick="PF('inserirFormacao').show();"
 					value="Inserir formação" ajax="true" event="onclick"
 					update=":formInserirFormacao:inserirFormacao" />
 			</f:facet>
