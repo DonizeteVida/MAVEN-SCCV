@@ -136,7 +136,7 @@ function mostra_res(forca) {
 									+ " senha mais segura.",
 							"severity" : "info"
 						});
-		
+
 		if (document.getElementById("formSenha:campoSenha") == null) {
 			document.getElementById("formCadastro:campoSenha").value = "";
 		} else {
@@ -174,9 +174,5 @@ function mostra_res(forca) {
 		break;
 
 	}
-	
-	function sleep (time) {
-		  return new Promise((resolve) => setTimeout(resolve, time));
-		}
-		
+
 }
