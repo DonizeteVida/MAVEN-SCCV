@@ -68,6 +68,7 @@ public class AdministradorEditarAdministradorMBean {
 			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
+			
 			e.printStackTrace();
 			Mensagem.make(e.toString());
 		}
