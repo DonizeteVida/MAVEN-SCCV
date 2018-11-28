@@ -3,5 +3,4 @@ target/
 src/main/java/br/senai/sp/jaguariuna/sccv/mBeans/GraficoMBean.java
 .settings/org.eclipse.wst.common.component
 
-src/main/webapp/aluno/editarCurriculo.xhtml
 
