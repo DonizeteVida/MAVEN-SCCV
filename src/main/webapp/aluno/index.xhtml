@@ -100,18 +100,31 @@
 
 		<p:dialog header="Inserir Codigo" widgetVar="dlg2" resizable="false"
 			draggable="false" modal="true">
-			<h:form>
+			<h:form id="formSenha">
 
 				<p:panelGrid columns="2">
 					<p:outputLabel value="Insira o codigo enviado " />
-					<p:inputText value="#{alunoIndexMBean.codEnviado}" />
+					<p:inputText value="#{alunoIndexMBean.codEnviado}" required="true"
+						requiredMessage="Insira o codigo enviado !"
+						title="Codigo enviado ao e-mail" />
 
-					<p:outputLabel value="Insira a nova Senha " />
-					<p:password value="#{alunoIndexMBean.novaSenha}" />
+					<p:outputLabel value="Insira a nova senha: " />
+					<p:password value="#{alunoIndexMBean.novaSenha}" id="campoSenha"
+						required="true" onfocus="desligaBtCriarUsuario();"
+						requiredMessage="Insira a nova senha !"
+						onblur="ligaBtCriarUsuario(); verifica();"
+						title="Inserir nova senha " />
+
+					<p:outputLabel value="Repita a nova senha: " />
+					<p:password value="#{alunoIndexMBean.novaSenha}"
+						title="Repetir a nova senha" required="true"
+						requiredMessage="Repita a nova senha !"
+						onfocus="desligaBtCriarUsuario();"
+						onblur="ligaBtCriarUsuario(); testaSenha(this);" />
 
 				</p:panelGrid>
 				<br />
-				<p:commandButton value="Enviar"
+				<p:commandButton value="Enviar" widgetVar="btCriarUsuario"
 					actionListener="#{alunoIndexMBean.comparaCod}"
 					oncomplete="PF('dlg2').hide()" />
 
