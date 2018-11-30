@@ -50,6 +50,16 @@ public class ClasseGenericaDao {
 		return cursos;
 	}
 
+	public boolean updateCategoria(ClasseGenerica cg) throws SQLException {
+		String sql = "UPDATE categoria as ca SET nome = ? WHERE c.id = ?";
+
+		PreparedStatement ps = conn.prepareStatement(sql);
+
+		ps.setString(1, cg.getNome());
+
+		return ps.executeUpdate() > 0;
+	}
+
 	public List<ClasseGenerica> buscaCurso(Integer id_categoria) throws SQLException {
 		String sql = "SELECT * FROM curso WHERE id_categoria = ?;";
 
@@ -68,6 +78,16 @@ public class ClasseGenericaDao {
 		return cursos;
 	}
 
+	public boolean updateCurso(ClasseGenerica cg) throws SQLException {
+		String sql = "UPDATE curso as ca SET nome = ? WHERE c.id = ?";
+
+		PreparedStatement ps = conn.prepareStatement(sql);
+
+		ps.setString(1, cg.getNome());
+
+		return ps.executeUpdate() > 0;
+	}
+
 	public List<ClasseGenerica> buscaTurma(Integer id) throws SQLException {
 		String sql = "SELECT t.id, t.nome FROM turma AS t WHERE id_curso = ?;";
 
@@ -82,6 +102,16 @@ public class ClasseGenericaDao {
 		}
 
 		return turmas;
+	}
+
+	public boolean updateTurma(ClasseGenerica cg) throws SQLException {
+		String sql = "UPDATE turma as ca SET nome = ? WHERE c.id = ?";
+
+		PreparedStatement ps = conn.prepareStatement(sql);
+
+		ps.setString(1, cg.getNome());
+
+		return ps.executeUpdate() > 0;
 	}
 
 	public List<ClasseGenerica> buscaEstado() throws SQLException {
