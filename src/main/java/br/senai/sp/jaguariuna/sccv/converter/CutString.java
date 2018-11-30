@@ -17,7 +17,12 @@ public class CutString implements Converter {
 	@Override
 	public String getAsString(FacesContext context, UIComponent component, Object value) {
 		// TODO Auto-generated method stub
-		return value.toString().length() > 15 ? value.toString().substring(0, 14) : value.toString();
+		String palavra = value.toString();
+		if (palavra.length() > 15) {
+			palavra = palavra.substring(0, 15);
+			palavra += "...";
+		}
+		return palavra;
 	}
 
 }
