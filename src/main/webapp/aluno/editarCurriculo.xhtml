@@ -45,9 +45,9 @@
 				<f:facet name="header">
 					<p:outputLabel value="Suas experiencias" />
 				</f:facet>
-				<p:panel header="#{exp.nome}" styleClass="panel">
+				<p:panel header="#{exp.empresa}" styleClass="panel">
 					<h:panelGrid columns="2" styleClass="datagrid">
-						Data inicio: 
+						<p:outputLabel value="Data inicio: " />
 						<p:calendar navigator="true" disabled="true"
 							value="#{exp.data_inicio.time}" pattern="dd/MM/yyyy" />
 
@@ -56,17 +56,21 @@
 						<p:calendar navigator="true" disabled="true"
 							rendered="#{exp.data_fim.timeInMillis eq '0' ? false : true}"
 							value="#{exp.data_fim.time}" pattern="dd/MM/yyyy" />
-						
-						Cargo:
-						<p:inputText disabled="true" value="#{exp.cargo}">
+
+						<p:outputLabel value="Cargo: " />
+						<p:outputLabel title="#{exp.cargo}" value="#{exp.cargo}">
 							<f:converter converterId="cutString" />
-						</p:inputText>
-						
-						Empresa:
-						<p:inputText disabled="true" value="#{exp.empresa}" />
-						
-						Funções:
-						<p:outputLabel value="#{exp.funcoes}" />
+						</p:outputLabel>
+
+						<p:outputLabel value="Experiencia: " />
+						<p:outputLabel title="#{exp.nome}" value="#{exp.nome}">
+							<f:converter converterId="cutString" />
+						</p:outputLabel>
+
+						<p:outputLabel value="Funções: " />
+						<p:outputLabel title="#{exp.funcoes}" value="#{exp.funcoes}">
+							<f:converter converterId="cutString" />
+						</p:outputLabel>
 
 					</h:panelGrid>
 
@@ -97,7 +101,6 @@
 							</p:commandLink>
 						</f:facet>
 					</p:toolbar>
-
 				</p:panel>
 			</p:dataGrid>
 		</h:form>
@@ -214,7 +217,7 @@
 							value="#{alunoEditarCurriculoMBean.inserirExperiencia.cargo}" />
 
 						<p:outputLabel value="Nome da empresa: " />
-						<p:inputText required="true"
+						<p:inputText required="true" maxlength="30"
 							requiredMessage="Insira o nome da empresa da experiencia"
 							value="#{alunoEditarCurriculoMBean.inserirExperiencia.empresa}" />
 
@@ -263,6 +266,7 @@
 							requiredMessage="Insira a data fim da formação"
 							value="#{alunoEditarCurriculoMBean.inserirFormacao.data_fim.time}"
 							pattern="dd/MM/yyyy" />
+
 						<p:outputLabel value="Formação atual ? " />
 						<p:selectBooleanCheckbox
 							value="#{alunoEditarCurriculoMBean.formacao_atual}">
@@ -323,7 +327,7 @@
 							value="#{alunoEditarCurriculoMBean.experienciaSelecionada.cargo}" />
 
 						<p:outputLabel value="Nome da empresa: " />
-						<p:inputText required="true"
+						<p:inputText required="true" maxlength="30"
 							requiredMessage="Insira o nome da empresa da experiencia"
 							value="#{alunoEditarCurriculoMBean.experienciaSelecionada.empresa}" />
 
