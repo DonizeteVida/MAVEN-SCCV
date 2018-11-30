@@ -27,6 +27,15 @@ public class Formacao {
 	private String escola;
 	private Integer id_curriculum_vitae;
 
+	public String getMyWord(String palavra) {
+		if (palavra.length() > 15) {
+			palavra = palavra.substring(0, 15);
+			palavra += "...";
+		}
+
+		return palavra;
+	}
+
 	public String getEscola() {
 		return escola;
 	}

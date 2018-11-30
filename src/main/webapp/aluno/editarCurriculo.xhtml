@@ -116,10 +116,13 @@
 						Data inicio: 
 						<p:calendar disabled="true" value="#{form.data_inicio.time}"
 							pattern="dd/MM/yyyy" />
-				
-						Data fim:
+
+						<p:outputLabel value="Data fim:"
+							rendered="#{form.data_fim.timeInMillis eq '0' ? false : true}" />
 						<p:calendar disabled="true" value="#{form.data_fim.time}"
+							rendered="#{form.data_fim.timeInMillis eq '0' ? false : true}"
 							pattern="dd/MM/yyyy" />
+							
 
 						Escola:
 						<p:inputText disabled="true" value="#{form.escola}" />
@@ -194,6 +197,11 @@
 							id="data_fim"
 							value="#{alunoEditarCurriculoMBean.inserirExperiencia.data_fim.time}"
 							pattern="dd/MM/yyyy" />
+						<p:outputLabel value="Emprego atual ? " />
+						<p:selectBooleanCheckbox
+							value="#{alunoEditarCurriculoMBean.emprego_atual}">
+							<p:ajax update="data_fim" />
+						</p:selectBooleanCheckbox>
 
 						<p:outputLabel value="Nome do cargo: " />
 						<p:inputText required="true"
@@ -210,11 +218,7 @@
 							requiredMessage="Insira suas funções da experiencia"
 							value="#{alunoEditarCurriculoMBean.inserirExperiencia.funcoes}" />
 
-						<p:outputLabel value="Emprego atual ? " />
-						<p:selectBooleanCheckbox
-							value="#{alunoEditarCurriculoMBean.emprego_atual}">
-							<p:ajax update="data_fim" />
-						</p:selectBooleanCheckbox>
+
 
 					</p:panelGrid>
 
@@ -249,14 +253,22 @@
 
 						<p:outputLabel value="Data fim: " />
 						<p:calendar required="true"
+							disabled="#{alunoEditarCurriculoMBean.formacao_atual}"
+							id="data_fim_formacao"
 							requiredMessage="Insira a data fim da formação"
 							value="#{alunoEditarCurriculoMBean.inserirFormacao.data_fim.time}"
 							pattern="dd/MM/yyyy" />
+						<p:outputLabel value="Formação atual ? " />
+						<p:selectBooleanCheckbox
+							value="#{alunoEditarCurriculoMBean.formacao_atual}">
+							<p:ajax update="data_fim_formacao" />
+						</p:selectBooleanCheckbox>
 
 						<p:outputLabel value="Nome da escola: " />
 						<p:inputText required="true"
 							requiredMessage="Insira o nome da escola da formação"
 							value="#{alunoEditarCurriculoMBean.inserirFormacao.escola}" />
+
 
 					</p:panelGrid>
 
@@ -294,6 +306,11 @@
 							disabled="#{alunoEditarCurriculoMBean.emprego_atual}"
 							value="#{alunoEditarCurriculoMBean.experienciaSelecionada.data_fim.time}"
 							pattern="dd/MM/yyyy" />
+						<p:outputLabel value="Emprego atual ? " />
+						<p:selectBooleanCheckbox
+							value="#{alunoEditarCurriculoMBean.emprego_atual}">
+							<p:ajax update="data_fim_editar" />
+						</p:selectBooleanCheckbox>
 
 						<p:outputLabel value="Nome do cargo: " />
 						<p:inputText required="true"
@@ -310,11 +327,7 @@
 							requiredMessage="Insira suas funções da experiencia"
 							value="#{alunoEditarCurriculoMBean.experienciaSelecionada.funcoes}" />
 
-						<p:outputLabel value="Emprego atual ? " />
-						<p:selectBooleanCheckbox
-							value="#{alunoEditarCurriculoMBean.emprego_atual}">
-							<p:ajax update="data_fim_editar" />
-						</p:selectBooleanCheckbox>
+
 
 
 					</p:panelGrid>
@@ -341,7 +354,7 @@
 						<p:outputLabel value="Nome da formacao: " />
 						<p:inputText required="true"
 							requiredMessage="Insira o nome da formação"
-							value="#{alunoEditarCurriculoMBean.formacaoSelecionada.nome}" />
+							value="#{alunoEditarCurriculoMBean.formacaoSelecionada.getMyWord(alunoEditarCurriculoMBean.formacaoSelecionada.nome)}" />
 
 						<p:outputLabel value="Data inicio: " />
 						<p:calendar required="true"
@@ -351,14 +364,22 @@
 
 						<p:outputLabel value="Data fim: " />
 						<p:calendar required="true"
+							disabled="#{alunoEditarCurriculoMBean.formacao_atual}"
+							id="data_fim_curso"
 							requiredMessage="Insira a data fim da formação"
 							value="#{alunoEditarCurriculoMBean.formacaoSelecionada.data_fim.time}"
 							pattern="dd/MM/yyyy" />
+						<p:outputLabel value="Formação atual ? " />
+						<p:selectBooleanCheckbox
+							value="#{alunoEditarCurriculoMBean.formacao_atual}">
+							<p:ajax update="data_fim_curso" />
+						</p:selectBooleanCheckbox>
 
 						<p:outputLabel value="Nome da escola: " />
 						<p:inputText required="true"
 							requiredMessage="Insira o nome da escola da formação"
 							value="#{alunoEditarCurriculoMBean.formacaoSelecionada.escola}" />
+
 
 					</p:panelGrid>
 

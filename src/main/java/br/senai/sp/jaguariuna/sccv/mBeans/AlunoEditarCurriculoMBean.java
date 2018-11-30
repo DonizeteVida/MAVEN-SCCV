@@ -36,6 +36,7 @@ public class AlunoEditarCurriculoMBean {
 
 	private CurriculoDao curriculoDao;
 	private Boolean emprego_atual = false;
+	private Boolean formacao_atual = false;
 
 	public AlunoEditarCurriculoMBean() {
 		experienciaSelecionada = new Experiencia();
@@ -89,9 +90,13 @@ public class AlunoEditarCurriculoMBean {
 
 	public void editarFormacaoM() {
 		try {
+			if (formacao_atual) {
+				formacaoSelecionada.getData_fim().setTimeInMillis(0);
+			}
 			if (curriculoDao.editarFormacao(formacaoSelecionada)) {
+				formacao_atual = false;
 				listarTudo();
-				Mensagem.make("Formaï¿½ï¿½o alterada com sucesso !");
+				Mensagem.make("Formação alterada com sucesso !");
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -129,7 +134,11 @@ public class AlunoEditarCurriculoMBean {
 
 	public void inserirFormacaoM() {
 		try {
+			if (formacao_atual) {
+				inserirFormacao.getData_fim().setTimeInMillis(0);
+			}
 			if (curriculoDao.inserirFormacao(inserirFormacao, curriculumAtual)) {
+				formacao_atual = false;
 				Mensagem.make("Formacao salva com sucesso");
 				listarTudo();
 				inserirFormacao = new Formacao();
@@ -231,6 +240,14 @@ public class AlunoEditarCurriculoMBean {
 
 	public void setEmprego_atual(Boolean emprego_atual) {
 		this.emprego_atual = emprego_atual;
+	}
+
+	public Boolean getFormacao_atual() {
+		return formacao_atual;
+	}
+
+	public void setFormacao_atual(Boolean formacao_atual) {
+		this.formacao_atual = formacao_atual;
 	}
 
 }
