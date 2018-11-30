@@ -58,7 +58,9 @@
 							value="#{exp.data_fim.time}" pattern="dd/MM/yyyy" />
 						
 						Cargo:
-						<p:inputText disabled="true" value="#{exp.cargo}" />
+						<p:inputText disabled="true" value="#{exp.cargo}">
+							<f:converter converterId="cutString" />
+						</p:inputText>
 						
 						Empresa:
 						<p:inputText disabled="true" value="#{exp.empresa}" />
@@ -95,7 +97,7 @@
 							</p:commandLink>
 						</f:facet>
 					</p:toolbar>
-					<f:converter converterId="cutString" />
+
 				</p:panel>
 			</p:dataGrid>
 		</h:form>
