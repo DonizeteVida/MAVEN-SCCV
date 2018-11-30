@@ -51,13 +51,25 @@ public class ClasseGenericaDao {
 	}
 
 	public boolean updateCategoria(ClasseGenerica cg) throws SQLException {
-		String sql = "UPDATE categoria as ca SET nome = ? WHERE c.id = ?";
+		String sql = "UPDATE categoria as ca SET nome = ? WHERE ca.id = ?;";
+
+		PreparedStatement ps = conn.prepareStatement(sql);
+
+		ps.setString(1, cg.getNome());
+		ps.setInt(2, cg.getId());
+
+		return ps.executeUpdate() > 0;
+	}
+
+	public boolean inserirCategoria(ClasseGenerica cg) throws SQLException {
+		String sql = "INSERT INTO categoria(nome) VALUES(?)";
 
 		PreparedStatement ps = conn.prepareStatement(sql);
 
 		ps.setString(1, cg.getNome());
 
 		return ps.executeUpdate() > 0;
+
 	}
 
 	public List<ClasseGenerica> buscaCurso(Integer id_categoria) throws SQLException {
@@ -79,11 +91,23 @@ public class ClasseGenericaDao {
 	}
 
 	public boolean updateCurso(ClasseGenerica cg) throws SQLException {
-		String sql = "UPDATE curso as ca SET nome = ? WHERE c.id = ?";
+		String sql = "UPDATE curso as cur SET nome = ? WHERE cur.id = ?";
 
 		PreparedStatement ps = conn.prepareStatement(sql);
 
 		ps.setString(1, cg.getNome());
+		ps.setInt(2, cg.getId());
+
+		return ps.executeUpdate() > 0;
+	}
+
+	public boolean inserirCurso(Integer id_categoria, ClasseGenerica cg) throws SQLException {
+		String sql = "INSERT INTO curso(nome, id_categoria) VALUES(?, ?)";
+
+		PreparedStatement ps = conn.prepareStatement(sql);
+
+		ps.setString(1, cg.getNome());
+		ps.setInt(2, id_categoria);
 
 		return ps.executeUpdate() > 0;
 	}
@@ -105,11 +129,23 @@ public class ClasseGenericaDao {
 	}
 
 	public boolean updateTurma(ClasseGenerica cg) throws SQLException {
-		String sql = "UPDATE turma as ca SET nome = ? WHERE c.id = ?";
+		String sql = "UPDATE turma as tu SET nome = ? WHERE tu.id = ?";
 
 		PreparedStatement ps = conn.prepareStatement(sql);
 
 		ps.setString(1, cg.getNome());
+		ps.setInt(2, cg.getId());
+
+		return ps.executeUpdate() > 0;
+	}
+
+	public boolean inserirTurma(Integer id_curso, ClasseGenerica cg) throws SQLException {
+		String sql = "INSERT INTO turma(nome, id_curso) VALUES(?, ?)";
+
+		PreparedStatement ps = conn.prepareStatement(sql);
+
+		ps.setString(1, cg.getNome());
+		ps.setInt(2, id_curso);
 
 		return ps.executeUpdate() > 0;
 	}

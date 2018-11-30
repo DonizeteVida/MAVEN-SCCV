@@ -1,0 +1,87 @@
+<?xml version='1.0' encoding='ISO-8859-1' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns:ui="http://java.sun.com/jsf/facelets"
+	template="../menu/templateAdministrador.xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://java.sun.com/jsf/core">
+	<ui:define name="Conteudo">
+
+		<p:growl>
+			<p:autoUpdate />
+		</p:growl>
+
+		<h:form id="form">
+			<p:toolbar>
+				<f:facet name="right">
+
+					<p:commandButton oncomplete="PF('dialogInserirCategoria').show();"
+						update="dialogInserirCategoria" value="InserirCategoria"
+						icon="fa fa-plus" />
+				</f:facet>
+				<f:facet name="left">
+					<p:commandButton oncomplete="PF('dialogEditarCategoria').show();"
+						update="dialogEditarCategoria" value="Editar Categoria"
+						icon="ui-icon-pencil" />
+					<p:commandButton
+						action="#{administradorVisualizarCategoriaMBean.visualizarCurso}"
+						value="Visualizar cursos da categoria" icon="fa fa-eye" />
+				</f:facet>
+			</p:toolbar>
+			<br />
+			<p:fieldset legend="Cursos Cadastrados">
+				<p:dataTable rowKey="#{a.id}" id="dataAlunos"
+					emptyMessage="Não foram encontrados categorias cadastrados."
+					var="a" value="#{administradorVisualizarCategoriaMBean.categorias}"
+					selectionMode="single" styleClass="alignCenter"
+					selection="#{administradorVisualizarCategoriaMBean.categoriaSelecionada}">
+
+					<p:column width="2%" headerText="Id">
+						<h:outputText value="#{a.id}" />
+					</p:column>
+					<p:column headerText="Nome">
+						<h:outputText value="#{a.nome}" />
+					</p:column>
+				</p:dataTable>
+			</p:fieldset>
+		</h:form>
+
+		<p:dialog widgetVar="dialogEditarCategoria" id="dialogEditarCategoria"
+			resizable="false" draggable="false" modal="true"
+			header="Editar categoria">
+			<h:form>
+				<h:panelGrid columns="2">
+					<p:outputLabel value="Nome:" />
+					<p:inputText
+						value="#{administradorVisualizarCategoriaMBean.categoriaSelecionada.nome}" />
+				</h:panelGrid>
+				<br />
+				<center>
+					<p:commandButton
+						actionListener="#{administradorVisualizarCategoriaMBean.editarCategoria}"
+						oncomplete="PF('dialogEditarCategoria').hide()" update=":form"
+						value="Editar" />
+				</center>
+			</h:form>
+		</p:dialog>
+		<p:dialog widgetVar="dialogInserirCategoria"
+			id="dialogInserirCategoria" resizable="false" draggable="false"
+			modal="true" header="Editar categoria">
+			<h:form>
+				<h:panelGrid columns="2">
+					<p:outputLabel value="Nome:" />
+					<p:inputText
+						value="#{administradorVisualizarCategoriaMBean.inserirCategoria.nome}" />
+				</h:panelGrid>
+				<br />
+				<center>
+					<p:commandButton
+						actionListener="#{administradorVisualizarCategoriaMBean.inserirCategoria()}"
+						oncomplete="PF('dialogInserirCategoria').hide()" update=":form"
+						value="Inserir" />
+				</center>
+			</h:form>
+		</p:dialog>
+
+	</ui:define>
+</ui:composition>
