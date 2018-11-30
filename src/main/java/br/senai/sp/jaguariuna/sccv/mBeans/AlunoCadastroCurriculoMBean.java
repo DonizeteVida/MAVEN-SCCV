@@ -139,10 +139,9 @@ public class AlunoCadastroCurriculoMBean {
 					Mensagem.make("Curriculo criado com sucesso !");
 
 					return "home?faces-redirect=true";
-				} else {
-					Mensagem.make("Falha ao salvar um novo curriculo !");
-					return null;
 				}
+				Mensagem.make("Falha ao salvar um novo curriculo !");
+
 			} else {
 
 				Mensagem.make("Já existe um curriculo com este curso !");

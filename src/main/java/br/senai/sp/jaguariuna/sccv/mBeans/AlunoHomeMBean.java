@@ -113,9 +113,9 @@ public class AlunoHomeMBean {
 	public String visualizarCurriculo() {
 		if (curClick != null) {
 			return "editarCurriculo?faces-redirect=true";
-		} else {
-			Mensagem.make("Selecione um curriculo");
 		}
+		Mensagem.make("Selecione um curriculo");
+
 		return null;
 	}
 

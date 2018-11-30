@@ -88,7 +88,7 @@
 
 						<f:facet name="right">
 							<p:commandLink update="editarExperiencia" title="Editar"
-								onclick="PF('editarExperiencia').show();">
+								oncomplete="PF('editarExperiencia').show();">
 								<h:outputText styleClass="fa fa-edit" style="color:black" />
 								<f:setPropertyActionListener value="#{exp}"
 									target="#{alunoEditarCurriculoMBean.experienciaSelecionada}" />
@@ -142,7 +142,7 @@
 
 						<f:facet name="right">
 							<p:commandLink update="editarFormacao" title="Editar"
-								onsuccess="PF('editarFormacao').show();">
+								oncomplete="PF('editarFormacao').show();">
 								<h:outputText styleClass="fa fa-edit" style="color:black" />
 								<f:setPropertyActionListener value="#{form}"
 									target="#{alunoEditarCurriculoMBean.formacaoSelecionada}" />
@@ -223,7 +223,7 @@
 					<p:commandButton value="Salvar sua experiencia" ajax="true"
 						update=":form:exp"
 						actionListener="#{alunoEditarCurriculoMBean.inserirExperienciaM}"
-						onsuccess="PF('inserirExperiencia').hide();" />
+						oncomplete="PF('inserirExperiencia').hide();" />
 				</center>
 			</h:form>
 
@@ -265,7 +265,7 @@
 					<p:commandButton value="Salvar sua formacao" ajax="true"
 						update=":form2:form"
 						actionListener="#{alunoEditarCurriculoMBean.inserirFormacaoM}"
-						onsuccess="PF('inserirFormacao').hide();" />
+						oncomplete="PF('inserirFormacao').hide();" />
 				</center>
 			</h:form>
 
@@ -324,7 +324,7 @@
 					<p:commandButton value="Salvar sua experiencia" ajax="true"
 						update=":form:exp"
 						actionListener="#{alunoEditarCurriculoMBean.editarExperienciaM}"
-						onsuccess="PF('editarExperiencia').hide();" />
+						oncomplete="PF('editarExperiencia').hide();" />
 				</center>
 			</h:form>
 
@@ -367,7 +367,7 @@
 					<p:commandButton value="Salvar sua formacao" ajax="true"
 						update=":form2:form"
 						actionListener="#{alunoEditarCurriculoMBean.editarFormacaoM}"
-						onsuccess="PF('editarFormacao').hide();" />
+						oncomplete="PF('editarFormacao').hide();" />
 				</center>
 			</h:form>
 

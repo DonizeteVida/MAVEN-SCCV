@@ -65,6 +65,7 @@ function testaSenha(campoSenha) {
 	} else {
 		primeiraSenha = document.getElementById("formCadastro:campoSenha");
 	}
+
 	if (!(campoSenha.value == primeiraSenha.value)) {
 		campoSenha.value = "";
 
@@ -77,12 +78,14 @@ function testaSenha(campoSenha) {
 }
 
 function verifica() {
+	var senha = null;
 
 	if (document.getElementById("formSenha:campoSenha") == null) {
 		senha = document.getElementById("formCadastro:campoSenha").value;
 	} else {
 		senha = document.getElementById("formSenha:campoSenha").value;
 	}
+
 	forca = 0;
 
 	if ((senha.length >= 6) && (senha.length <= 8)) {

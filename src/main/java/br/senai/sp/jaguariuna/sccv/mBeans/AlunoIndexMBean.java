@@ -195,9 +195,9 @@ public class AlunoIndexMBean {
 					if (usuarioAdministrador.getSenha().equals(senha)) {
 						this.usuarioAdministrador = usuarioAdministrador;
 						return "/admin/administradorHome?faces-redirect=true";
-					} else {
-						Mensagem("Usu�rio e/ou senha incorretos !");
 					}
+					Mensagem("Usu�rio e/ou senha incorretos !");
+
 				} else {
 					Mensagem("Usu�rio n�o encontrado !");
 				}

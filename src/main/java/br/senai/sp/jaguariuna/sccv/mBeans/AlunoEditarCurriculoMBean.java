@@ -74,7 +74,7 @@ public class AlunoEditarCurriculoMBean {
 	public void editarExperienciaM() {
 		try {
 			if (emprego_atual) {
-				experienciaSelecionada.getData_fim().setTimeInMillis((long) 0);
+				experienciaSelecionada.getData_fim().setTimeInMillis(0);
 			}
 
 			if (curriculoDao.editarExperiencia(experienciaSelecionada)) {
@@ -101,7 +101,7 @@ public class AlunoEditarCurriculoMBean {
 	public void inserirExperienciaM() {
 		try {
 			if (emprego_atual) {
-				inserirExperiencia.getData_fim().setTimeInMillis((long) 0);
+				inserirExperiencia.getData_fim().setTimeInMillis(0);
 			}
 			if (curriculoDao.inserirExperiencia(inserirExperiencia, curriculumAtual)) {
 				emprego_atual = false;
