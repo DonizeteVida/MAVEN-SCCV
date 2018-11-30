@@ -48,12 +48,12 @@
 				<p:panel header="#{exp.nome}" styleClass="panel">
 					<h:panelGrid columns="2" styleClass="datagrid">
 						Data inicio: 
-						<p:calendar disabled="true" value="#{exp.data_inicio.time}"
-							pattern="dd/MM/yyyy" />
+						<p:calendar navigator="true" disabled="true"
+							value="#{exp.data_inicio.time}" pattern="dd/MM/yyyy" />
 
 						<p:outputLabel value="Data fim: "
 							rendered="#{exp.data_fim.timeInMillis eq '0' ? false : true}" />
-						<p:calendar disabled="true"
+						<p:calendar navigator="true" disabled="true"
 							rendered="#{exp.data_fim.timeInMillis eq '0' ? false : true}"
 							value="#{exp.data_fim.time}" pattern="dd/MM/yyyy" />
 						
@@ -114,12 +114,13 @@
 				<p:panel header="#{form.nome}" styleClass="panel">
 					<h:panelGrid columns="2" styleClass="datagrid">
 						Data inicio: 
-						<p:calendar disabled="true" value="#{form.data_inicio.time}"
-							pattern="dd/MM/yyyy" />
+						<p:calendar navigator="true" disabled="true"
+							value="#{form.data_inicio.time}" pattern="dd/MM/yyyy" />
 
 						<p:outputLabel value="Data fim:"
 							rendered="#{form.data_fim.timeInMillis eq '0' ? false : true}" />
-						<p:calendar disabled="true" value="#{form.data_fim.time}"
+						<p:calendar navigator="true" disabled="true"
+							value="#{form.data_fim.time}"
 							rendered="#{form.data_fim.timeInMillis eq '0' ? false : true}"
 							pattern="dd/MM/yyyy" />
 							
@@ -187,13 +188,14 @@
 							value="#{alunoEditarCurriculoMBean.inserirExperiencia.nome}" />
 
 						<p:outputLabel value="Data inicio: " />
-						<p:calendar required="true"
+						<p:calendar navigator="true" required="true"
 							requiredMessage="Insira data inicio da experiencia"
 							value="#{alunoEditarCurriculoMBean.inserirExperiencia.data_inicio.time}"
 							pattern="dd/MM/yyyy" />
 
 						<p:outputLabel value="Data fim: " />
-						<p:calendar disabled="#{alunoEditarCurriculoMBean.emprego_atual}"
+						<p:calendar navigator="true"
+							disabled="#{alunoEditarCurriculoMBean.emprego_atual}"
 							id="data_fim"
 							value="#{alunoEditarCurriculoMBean.inserirExperiencia.data_fim.time}"
 							pattern="dd/MM/yyyy" />
@@ -246,13 +248,13 @@
 							value="#{alunoEditarCurriculoMBean.inserirFormacao.nome}" />
 
 						<p:outputLabel value="Data inicio: " />
-						<p:calendar required="true"
+						<p:calendar navigator="true" required="true"
 							requiredMessage="Insira a data inicio da formação"
 							value="#{alunoEditarCurriculoMBean.inserirFormacao.data_inicio.time}"
 							pattern="dd/MM/yyyy" />
 
 						<p:outputLabel value="Data fim: " />
-						<p:calendar required="true"
+						<p:calendar navigator="true" required="true"
 							disabled="#{alunoEditarCurriculoMBean.formacao_atual}"
 							id="data_fim_formacao"
 							requiredMessage="Insira a data fim da formação"
@@ -296,13 +298,13 @@
 							value="#{alunoEditarCurriculoMBean.experienciaSelecionada.nome}" />
 
 						<p:outputLabel value="Data inicio: " />
-						<p:calendar required="true"
+						<p:calendar navigator="true" required="true"
 							requiredMessage="Insira a data inicio da experiencia"
 							value="#{alunoEditarCurriculoMBean.experienciaSelecionada.data_inicio.time}"
 							pattern="dd/MM/yyyy" />
 
 						<p:outputLabel value="Data fim: " />
-						<p:calendar id="data_fim_editar"
+						<p:calendar navigator="true" id="data_fim_editar"
 							disabled="#{alunoEditarCurriculoMBean.emprego_atual}"
 							value="#{alunoEditarCurriculoMBean.experienciaSelecionada.data_fim.time}"
 							pattern="dd/MM/yyyy" />
@@ -357,13 +359,13 @@
 							value="#{alunoEditarCurriculoMBean.formacaoSelecionada.getMyWord(alunoEditarCurriculoMBean.formacaoSelecionada.nome)}" />
 
 						<p:outputLabel value="Data inicio: " />
-						<p:calendar required="true"
+						<p:calendar navigator="true" required="true"
 							requiredMessage="Insira a data inicio da formação"
 							value="#{alunoEditarCurriculoMBean.formacaoSelecionada.data_inicio.time}"
 							pattern="dd/MM/yyyy" />
 
 						<p:outputLabel value="Data fim: " />
-						<p:calendar required="true"
+						<p:calendar navigator="true" required="true"
 							disabled="#{alunoEditarCurriculoMBean.formacao_atual}"
 							id="data_fim_curso"
 							requiredMessage="Insira a data fim da formação"
