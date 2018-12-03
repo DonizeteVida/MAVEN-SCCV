@@ -16,7 +16,7 @@
 				<f:facet name="right">
 
 					<p:commandButton oncomplete="PF('dialogInserirCurso').show();"
-						update="dialogInserirCurso" value="InserirCategoria"
+						update="dialogInserirCurso" value="Inserir curso"
 						icon="fa fa-plus" />
 				</f:facet>
 				<f:facet name="left">
@@ -48,35 +48,35 @@
 
 		<p:dialog widgetVar="dialogEditarCurso" id="dialogEditarCurso"
 			resizable="false" draggable="false" modal="true"
-			header="Editar categoria">
+			header="Editar Curso">
 			<h:form>
 				<h:panelGrid columns="2">
 					<p:outputLabel value="Nome:" />
 					<p:inputText
-						value="#{administradorVisualizarCategoriaMBean.categoriaSelecionada.nome}" />
+						value="#{administradorVisualizarCursoMBean.cursoSelecionado.nome}" />
 				</h:panelGrid>
 				<br />
 				<center>
 					<p:commandButton
-						actionListener="#{administradorVisualizarCategoriaMBean.editarCategoria}"
+						actionListener="#{administradorVisualizarCursoMBean.editarCurso}"
 						oncomplete="PF('dialogEditarCurso').hide()" update=":form"
-						value="Salvar 3" />
+						value="Salvar" />
 				</center>
 			</h:form>
 		</p:dialog>
 		<p:dialog widgetVar="dialogInserirCurso" id="dialogInserirCurso"
 			resizable="false" draggable="false" modal="true"
-			header="Editar categoria">
+			header="Inserir categoria">
 			<h:form>
 				<h:panelGrid columns="2">
 					<p:outputLabel value="Nome:" />
 					<p:inputText
-						value="#{administradorVisualizarCategoriaMBean.inserirCategoria.nome}" />
+						value="#{administradorVisualizarCursoMBean.inserirCurso.nome}" />
 				</h:panelGrid>
 				<br />
 				<center>
 					<p:commandButton
-						actionListener="#{administradorVisualizarCategoriaMBean.inserirCategoria()}"
+						actionListener="#{administradorVisualizarCursoMBean.inserirCurso()}"
 						oncomplete="PF('dialogInserirCurso').hide()" update=":form"
 						value="Inserir" />
 				</center>

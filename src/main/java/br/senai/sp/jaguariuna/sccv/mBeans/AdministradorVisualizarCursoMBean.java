@@ -19,12 +19,14 @@ public class AdministradorVisualizarCursoMBean {
 
 	private List<ClasseGenerica> cursos;
 	private ClasseGenericaDao classeGenericaDao;
-	private ClasseGenerica categoria;
 	private ClasseGenerica cursoSelecionado;
+	private Integer categoriaSelecionada;
+	private ClasseGenerica inserirCurso;
 
 	public AdministradorVisualizarCursoMBean() {
 		cursos = new ArrayList<ClasseGenerica>();
 		classeGenericaDao = new ClasseGenericaDao();
+		inserirCurso = new ClasseGenerica();
 
 	}
 
@@ -39,14 +41,42 @@ public class AdministradorVisualizarCursoMBean {
 	@PostConstruct
 	public void downloadCursos() {
 		try {
-			cursos = classeGenericaDao
-					.buscaCurso(administradorVisualizarCategoriaMBean.getCategoriaSelecionada().getId());
+			categoriaSelecionada = administradorVisualizarCategoriaMBean.getCategoriaSelecionada().getId();
+			cursos = classeGenericaDao.buscaCurso(categoriaSelecionada);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 			Mensagem.make(e.toString());
 		}
 		administradorVisualizarCategoriaMBean.setAdministradorVisualizarCursoMBean(this);
+	}
+
+	public void editarCurso() {
+		if (cursoSelecionado != null) {
+			try {
+				if (classeGenericaDao.updateCurso(cursoSelecionado)) {
+					Mensagem.make("Curso editado com sucesso !");
+					downloadCursos();
+				}
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+				Mensagem.make(e.toString());
+			}
+		}
+	}
+
+	public void inserirCurso() {
+		try {
+			if (classeGenericaDao.inserirCurso(categoriaSelecionada, inserirCurso)) {
+				Mensagem.make("Curso inserido com sucesso !");
+				downloadCursos();
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			Mensagem.make(e.toString());
+		}
 	}
 
 	public List<ClasseGenerica> getCursos() {
@@ -63,6 +93,14 @@ public class AdministradorVisualizarCursoMBean {
 
 	public void setCursoSelecionado(ClasseGenerica cursoSelecionado) {
 		this.cursoSelecionado = cursoSelecionado;
+	}
+
+	public ClasseGenerica getInserirCurso() {
+		return inserirCurso;
+	}
+
+	public void setInserirCurso(ClasseGenerica inserirCurso) {
+		this.inserirCurso = inserirCurso;
 	}
 
 }
