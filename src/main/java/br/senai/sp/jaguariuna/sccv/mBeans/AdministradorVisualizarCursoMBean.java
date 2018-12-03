@@ -103,4 +103,11 @@ public class AdministradorVisualizarCursoMBean {
 		this.inserirCurso = inserirCurso;
 	}
 
+	public String visualizarTurmas() {
+		if (cursoSelecionado != null) {
+			return "administradorVisualizarTurma?faces-redirect=true";
+		}
+		Mensagem.make("Selecione um curso !");
+		return null;
+	}
 }
