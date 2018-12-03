@@ -1,0 +1,84 @@
+<?xml version='1.0' encoding='ISO-8859-1' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns:ui="http://java.sun.com/jsf/facelets"
+	template="../menu/templateAdministrador.xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://java.sun.com/jsf/core">
+	<ui:define name="Conteudo">
+
+		<p:growl>
+			<p:autoUpdate />
+		</p:growl>
+
+		<h:form id="form">
+			<p:toolbar>
+				<f:facet name="right">
+
+					<p:commandButton oncomplete="PF('dialogInserirTurma').show();"
+						update="dialogInserirTurma" value="Inserir turma"
+						icon="fa fa-plus" />
+				</f:facet>
+				<f:facet name="left">
+					<p:commandButton oncomplete="PF('dialogEditarTurma').show();"
+						update="dialogEditarTurma" value="Editar turma"
+						icon="ui-icon-pencil" />
+				</f:facet>
+			</p:toolbar>
+			<br />
+			<p:fieldset legend="Turmas Cadastrados">
+				<p:dataTable rowKey="#{a.id}" id="dataAlunos"
+					emptyMessage="Não foram encontradas turmas cadastradas." var="a"
+					value="#{administradorVisualizarTurmaMBean.turmas}"
+					selectionMode="single" styleClass="alignCenter"
+					selection="#{administradorVisualizarTurmaMBean.turmaSelecionada}">
+
+					<p:column width="2%" headerText="Id">
+						<h:outputText value="#{a.id}" />
+					</p:column>
+					<p:column headerText="Nome">
+						<h:outputText value="#{a.nome}" />
+					</p:column>
+				</p:dataTable>
+			</p:fieldset>
+		</h:form>
+
+		<p:dialog widgetVar="dialogEditarTurma" id="dialogEditarTurma"
+			resizable="false" draggable="false" modal="true"
+			header="Editar turma">
+			<h:form>
+				<h:panelGrid columns="2">
+					<p:outputLabel value="Nome:" />
+					<p:inputText
+						value="#{administradorVisualizarTurmaMBean.turmaSelecionada.nome}" />
+				</h:panelGrid>
+				<br />
+				<center>
+					<p:commandButton
+						actionListener="#{administradorVisualizarTurmaMBean.editarTurma}"
+						oncomplete="PF('dialogEditarTurma').hide()" update=":form"
+						value="Salvar turma" />
+				</center>
+			</h:form>
+		</p:dialog>
+		<p:dialog widgetVar="dialogInserirTurma" id="dialogInserirTurma"
+			resizable="false" draggable="false" modal="true"
+			header="Editar turma">
+			<h:form>
+				<h:panelGrid columns="2">
+					<p:outputLabel value="Nome:" />
+					<p:inputText
+						value="#{administradorVisualizarTurmaMBean.inserirTurma.nome}" />
+				</h:panelGrid>
+				<br />
+				<center>
+					<p:commandButton
+						actionListener="#{administradorVisualizarTurmaMBean.inserirTurma()}"
+						oncomplete="PF('dialogInserirTurma').hide()" update=":form"
+						value="Inserir" />
+				</center>
+			</h:form>
+		</p:dialog>
+
+	</ui:define>
+</ui:composition>
