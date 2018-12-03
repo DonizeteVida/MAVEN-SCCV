@@ -9,6 +9,11 @@
 	<h:outputStylesheet library="css" name="styleAdmin.css" />
 
 	<h:outputScript library="script" name="javascript.js" target="form" />
+	<style>
+.ui-menu-child {
+	width: 15em !important;
+}
+</style>
 </h:head>
 <h:body>
 	<br />
@@ -30,9 +35,9 @@
 				rendered="#{alunoIndexMBean.usuarioAdministrador._super eq '0' ? false : true}">
 				<p:menuitem value="Inserir administrador"
 					url="administradorInserirAdministrador.xhtml" icon="fa fa-user " />
-				<p:menuitem value="Visualizar Adm..."
+				<p:menuitem value="Visualizar administradores"
 					url="administradorVisualizarAdministrador.xhtml" icon="fa fa-eye " />
-				<p:menuitem value="Visualizar cursos"
+				<p:menuitem value="Visualizar categorias"
 					url="administradorVisualizarCategoria.xhtml" icon="fa fa-eye " />
 			</p:submenu>
 			<f:facet name="options">

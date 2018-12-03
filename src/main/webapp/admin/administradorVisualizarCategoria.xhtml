@@ -60,10 +60,11 @@
 					<p:commandButton
 						actionListener="#{administradorVisualizarCategoriaMBean.editarCategoria}"
 						oncomplete="PF('dialogEditarCategoria').hide()" update=":form"
-						value="Editar" />
+						value="Salvar a categoria" />
 				</center>
 			</h:form>
 		</p:dialog>
+
 		<p:dialog widgetVar="dialogInserirCategoria"
 			id="dialogInserirCategoria" resizable="false" draggable="false"
 			modal="true" header="Editar categoria">

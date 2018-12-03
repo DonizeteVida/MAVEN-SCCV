@@ -46,7 +46,7 @@
 			</p:fieldset>
 		</h:form>
 
-		<p:dialog widgetVar="dialogEditarCategoria" id="dialogEditarCategoria"
+		<p:dialog widgetVar="dialogEditarCurso" id="dialogEditarCurso"
 			resizable="false" draggable="false" modal="true"
 			header="Editar categoria">
 			<h:form>
@@ -59,8 +59,8 @@
 				<center>
 					<p:commandButton
 						actionListener="#{administradorVisualizarCategoriaMBean.editarCategoria}"
-						oncomplete="PF('dialogEditarCategoria').hide()" update=":form"
-						value="Editar" />
+						oncomplete="PF('dialogEditarCurso').hide()" update=":form"
+						value="Salvar 3" />
 				</center>
 			</h:form>
 		</p:dialog>
