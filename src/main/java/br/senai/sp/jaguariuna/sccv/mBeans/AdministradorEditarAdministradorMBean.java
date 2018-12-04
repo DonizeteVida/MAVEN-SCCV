@@ -18,7 +18,6 @@ public class AdministradorEditarAdministradorMBean {
 
 	private UsuarioAdministrador administradorSelecionado;
 	private AdministradorDao administradorDao;
-	private Boolean alterar_senha = true;
 
 	public AdministradorEditarAdministradorMBean() {
 		administradorSelecionado = new UsuarioAdministrador();
@@ -68,19 +67,11 @@ public class AdministradorEditarAdministradorMBean {
 			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
-			
+
 			e.printStackTrace();
 			Mensagem.make(e.toString());
 		}
 		return "";
-	}
-
-	public Boolean getAlterar_senha() {
-		return alterar_senha;
-	}
-
-	public void setAlterar_senha(Boolean alterar_senha) {
-		this.alterar_senha = alterar_senha;
 	}
 
 }
