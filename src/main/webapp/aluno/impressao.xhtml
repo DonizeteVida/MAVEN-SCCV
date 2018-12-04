@@ -25,7 +25,7 @@
 
 @page {
 	size: auto;
-	margin: 0mm;
+	margin: 5mm;
 }
 </style>
 </h:head>
@@ -108,8 +108,19 @@
 				<h:outputText
 					value="#{impressaoPDFMBean.convertTime(f.data_inicio.time)}; "
 					style="margin-letf: -60%;" />
-				<strong>Data fim: </strong>
+
+				<h:panelGroup
+					rendered="#{f.data_fim.timeInMillis eq '0' ? true : false}">
+					<strong>Cursando.</strong>
+				</h:panelGroup>
+
+				<h:panelGroup
+					rendered="#{f.data_fim.timeInMillis eq '0' ? false : true}">
+					<strong>Data fim: </strong>
+				</h:panelGroup>
+
 				<h:outputText
+					rendered="#{f.data_fim.timeInMillis eq '0' ? false : true}"
 					value="#{impressaoPDFMBean.convertTime(f.data_fim.time)}."
 					style="margin-letf: -60%;" />
 				<br />
@@ -139,7 +150,7 @@
 
 				<h:panelGroup
 					rendered="#{e.data_fim.timeInMillis eq '0' ? true : false}">
-					<strong>Emprego atual.</strong>
+					<strong>Emprego atual</strong>
 				</h:panelGroup>
 
 				<h:outputText

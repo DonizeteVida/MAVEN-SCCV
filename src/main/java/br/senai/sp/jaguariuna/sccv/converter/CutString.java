@@ -24,5 +24,4 @@ public class CutString implements Converter {
 		}
 		return palavra;
 	}
-
 }
