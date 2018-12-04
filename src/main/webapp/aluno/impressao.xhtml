@@ -25,7 +25,7 @@
 
 @page {
 	size: auto;
-	margin: 5mm;
+	margin: 0mm;
 }
 </style>
 </h:head>
@@ -40,10 +40,10 @@
 	</div>
 	<p:panel>
 		<center>
-			<h3>Informações Pessoais</h3>
-			<strong>Nome: </strong>
-			<h:outputLabel value="#{impressaoPDFMBean.usuario.nome}" />
-			<br /> <strong>Email: </strong>
+		<br/>
+			<font size = "06"><strong> <h:outputLabel  value="#{impressaoPDFMBean.usuario.nome}" /> </strong> </font>
+			<br/>
+			<font size = "03"> <br /> <strong>Email: </strong>
 			<h:outputLabel value="#{impressaoPDFMBean.usuario.email}" />
 			<br /> <strong>Telefone: </strong>
 			<h:outputLabel value="#{impressaoPDFMBean.usuario.numero_telefone}" />
@@ -59,25 +59,8 @@
 				<strong>Deficiencia: </strong>
 			</h:panelGroup>
 			<h:outputLabel
-				value="#{impressaoPDFMBean.usuario.pessoa_pcd eq '0' ? '' : 'Sim'}" />
+				value="#{impressaoPDFMBean.usuario.pessoa_pcd eq '0' ? '' : 'Sim'}" /> </font>
 		</center>
-	</p:panel>
-	<p:panel>
-		<center>
-			<h3>Linguas Estrangeiras</h3>
-		</center>
-		<h:outputLabel value="Nivel de Inglês:"
-			style="font-size: 18px; margin-letf: -60%; font-weight:bold; text-decoration: underline" />
-		<h:outputLabel
-			value=" #{impressaoPDFMBean.usuario.nivel_ingles eq '0' ? 'Sem Inglês' : impressaoPDFMBean.usuario.nivel_ingles eq '1' ? 'Nivel Básico' : impressaoPDFMBean.usuario.nivel_ingles eq '2' ? 'Nivel Intermediário' : impressaoPDFMBean.usuario.nivel_ingles eq '3' ? 'Nivel Avançado' : '' }"
-			style="margin-letf: -60%;" />
-		<br />
-		<h:outputLabel value="Nivel de Espanhol:"
-			style="font-size: 18px; margin-letf: -60%; font-weight:bold; text-decoration: underline" />
-		<h:outputLabel
-			value=" #{impressaoPDFMBean.usuario.nivel_espanhol eq '0' ? 'Sem Espanhol' : impressaoPDFMBean.usuario.nivel_espanhol eq '1' ? 'Nivel Básico' : impressaoPDFMBean.usuario.nivel_espanhol eq '2' ? 'Nivel Intermediário' : impressaoPDFMBean.usuario.nivel_espanhol eq '3' ? 'Nivel Avançado' : '' }"
-			style="margin-letf: -60%;" />
-
 	</p:panel>
 	<p:panel>
 		<center>
@@ -130,6 +113,23 @@
 	</p:panel>
 	<p:panel>
 		<center>
+			<h3>Linguas Estrangeiras</h3>
+		</center>
+		<h:outputLabel value="Nivel de Inglês:"
+			style="font-size: 18px; margin-letf: -60%; font-weight:bold; text-decoration: underline" />
+		<h:outputLabel
+			value=" #{impressaoPDFMBean.usuario.nivel_ingles eq '0' ? 'Sem Inglês' : impressaoPDFMBean.usuario.nivel_ingles eq '1' ? 'Nivel Básico' : impressaoPDFMBean.usuario.nivel_ingles eq '2' ? 'Nivel Intermediário' : impressaoPDFMBean.usuario.nivel_ingles eq '3' ? 'Nivel Avançado' : '' }"
+			style="margin-letf: -60%;" />
+		<br />
+		<h:outputLabel value="Nivel de Espanhol:"
+			style="font-size: 18px; margin-letf: -60%; font-weight:bold; text-decoration: underline" />
+		<h:outputLabel
+			value=" #{impressaoPDFMBean.usuario.nivel_espanhol eq '0' ? 'Sem Espanhol' : impressaoPDFMBean.usuario.nivel_espanhol eq '1' ? 'Nivel Básico' : impressaoPDFMBean.usuario.nivel_espanhol eq '2' ? 'Nivel Intermediário' : impressaoPDFMBean.usuario.nivel_espanhol eq '3' ? 'Nivel Avançado' : '' }"
+			style="margin-letf: -60%;" />
+
+	</p:panel>
+	<p:panel>
+		<center>
 			<h3>Experiências</h3>
 		</center>
 
@@ -167,6 +167,7 @@
 			</h:column>
 		</h:dataTable>
 	</p:panel>
+	
 	<div align="right">
 		<p:button id="button" icon="fa fa-print" value="Imprimir"
 			onclick="printpage()" />
