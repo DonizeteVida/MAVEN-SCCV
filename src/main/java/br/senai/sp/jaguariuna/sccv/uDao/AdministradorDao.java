@@ -20,7 +20,7 @@ public class AdministradorDao {
 		conn = ConnectionDB.getConnection();
 	}
 
-	public boolean updateUsuarioAdministrador(UsuarioAdministrador a) throws SQLException {
+	public boolean updateUsuarioAdministrador(UsuarioAdministrador a, Boolean controle) throws SQLException {
 
 		String sql = "UPDATE usuario_administrador as ua SET nome = ?, email = ?, senha = ?, nif = ?, id_status = ?, _super = ? WHERE ua.id = ?;";
 
@@ -29,6 +29,9 @@ public class AdministradorDao {
 		ps.setString(1, a.getNome());
 		ps.setString(2, a.getEmail());
 		ps.setString(3, a.getSenha());
+		if (controle) {
+			ps.setString(3, StringToMD5.convertStringToMd5(a.getSenha()));
+		}
 		ps.setString(4, a.getNif());
 		ps.setInt(5, a.getStatus().getId());
 		ps.setInt(6, a.get_super());
@@ -53,51 +56,58 @@ public class AdministradorDao {
 	};
 
 	public UsuarioAdministrador buscarAdministradorPorNif(String nif) throws SQLException {
-		String sql = "SELECT * FROM usuario_administrador AS ua WHERE ua.nif = ?;";
+		String sql = "SELECT ua.*, s.nome AS nomeStatus FROM usuario_administrador AS ua"
+				+ " INNER JOIN status_ AS s ON s.id = ua.id_status" + " WHERE ua.nif = ?;";
 
 		PreparedStatement ps = conn.prepareStatement(sql);
 		ps.setString(1, nif);
 
 		ResultSet rs = ps.executeQuery();
 
-		UsuarioAdministrador ua = null;
+		UsuarioAdministrador u = null;
 		if (rs.next()) {
-			ua = new UsuarioAdministrador();
+			u = new UsuarioAdministrador();
 
-			ua.setId(rs.getInt("id"));
-			ua.setEmail(rs.getString("email"));
-			ua.setNif(rs.getString("nif"));
-			ua.setNome(rs.getString("nome"));
-			ua.setSenha(rs.getString("senha"));
-			ua.set_super(rs.getInt("_super"));
+			u.setId(rs.getInt("id"));
+			u.setNome(rs.getString("nome"));
+			u.set_super(rs.getInt("_super"));
+			u.setEmail(rs.getString("email"));
+			u.setSenha(rs.getString("senha"));
+			u.setNif(rs.getString("nif"));
+			u.getStatus().setId(rs.getInt("id_status"));
+			u.getStatus().setNome(rs.getString("nomeStatus"));
+
 		}
 
-		return ua;
+		return u;
 
 	}
 
 	public UsuarioAdministrador buscarAdmministradorPorEmail(String email) throws SQLException {
-		String sql = "SELECT * FROM usuario_administrador AS ua WHERE ua.email = ?;";
+		String sql = "SELECT ua.*, s.nome AS nomeStatus FROM usuario_administrador AS ua"
+				+ " INNER JOIN status_ AS s ON s.id = ua.id_status" + " WHERE ua.email = ?;";
 
 		PreparedStatement ps = conn.prepareStatement(sql);
 		ps.setString(1, email);
 
 		ResultSet rs = ps.executeQuery();
 
-		UsuarioAdministrador ua = null;
+		UsuarioAdministrador u = null;
 		if (rs.next()) {
-			ua = new UsuarioAdministrador();
+			u = new UsuarioAdministrador();
 
-			ua.setId(rs.getInt("id"));
-			ua.setEmail(rs.getString("email"));
-			ua.setNif(rs.getString("nif"));
-			ua.setNome(rs.getString("nome"));
-			ua.setSenha(rs.getString("senha"));
-			ua.set_super(rs.getInt("_super"));
+			u.setId(rs.getInt("id"));
+			u.setNome(rs.getString("nome"));
+			u.set_super(rs.getInt("_super"));
+			u.setEmail(rs.getString("email"));
+			u.setSenha(rs.getString("senha"));
+			u.setNif(rs.getString("nif"));
+			u.getStatus().setId(rs.getInt("id_status"));
+			u.getStatus().setNome(rs.getString("nomeStatus"));
 
 		}
 
-		return ua;
+		return u;
 	}
 
 	public List<UsuarioAdministrador> listarAdministrador() throws SQLException {

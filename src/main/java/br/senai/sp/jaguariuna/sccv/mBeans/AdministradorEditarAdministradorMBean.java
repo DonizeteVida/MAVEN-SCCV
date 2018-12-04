@@ -19,9 +19,14 @@ public class AdministradorEditarAdministradorMBean {
 	private UsuarioAdministrador administradorSelecionado;
 	private AdministradorDao administradorDao;
 
+	private String alterarSenha;
+	private Boolean controleAlterarSenha;
+
 	public AdministradorEditarAdministradorMBean() {
 		administradorSelecionado = new UsuarioAdministrador();
 		administradorDao = new AdministradorDao();
+		alterarSenha = "FALSE";
+		controleAlterarSenha = false;
 	}
 
 	@ManagedProperty(value = "#{administradorVisualizarAdministradorMBean}")
@@ -57,9 +62,21 @@ public class AdministradorEditarAdministradorMBean {
 		this.administradorDao = administradorDao;
 	}
 
+	public String getAlterarSenha() {
+		return alterarSenha;
+	}
+
+	public void setAlterarSenha(String alterarSenha) {
+		this.alterarSenha = alterarSenha;
+	}
+
 	public String updateAdministradorSelecionado() {
 		try {
-			if (administradorDao.updateUsuarioAdministrador(administradorSelecionado)) {
+			if (!(alterarSenha.equals("FALSE"))) {
+				controleAlterarSenha = true;
+				administradorSelecionado.setSenha(alterarSenha);
+			}
+			if (administradorDao.updateUsuarioAdministrador(administradorSelecionado, controleAlterarSenha)) {
 				Mensagem.make("Administrador alterado com sucesso !");
 				FacesContext.getCurrentInstance().getExternalContext().getFlash().setKeepMessages(true);
 				administradorVisualizarAdministradorMBean.atualizaListaAdministrador();

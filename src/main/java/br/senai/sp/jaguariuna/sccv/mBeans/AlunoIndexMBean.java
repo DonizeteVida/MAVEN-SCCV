@@ -171,7 +171,7 @@ public class AlunoIndexMBean {
 				if (usuarioLocal != null) {
 					if (usuarioLocal.getSenha().equals(StringToMD5.convertStringToMd5(senha))) {
 						if (usuarioLocal.getStatus().getId() == 2) {
-							Mensagem("Usuario encontra-se inativo !");
+							Mensagem("Usuario se encontra inativo !");
 						} else {
 							usuario = usuarioLocal;
 							return "home?faces-redirect=true";
@@ -191,15 +191,18 @@ public class AlunoIndexMBean {
 			try {
 				UsuarioAdministrador usuarioAdministrador = administradorDao.buscarAdministradorPorNif(cpfOuNif);
 				if (usuarioAdministrador != null) {
-
-					if (usuarioAdministrador.getSenha().equals(senha)) {
-						this.usuarioAdministrador = usuarioAdministrador;
-						return "/admin/administradorHome?faces-redirect=true";
+					if (usuarioAdministrador.getSenha().equals(StringToMD5.convertStringToMd5(senha))) {
+						if (usuarioAdministrador.getStatus().getId() == 2) {
+							Mensagem("Este administrador se encontra inativo");
+						} else {
+							this.usuarioAdministrador = usuarioAdministrador;
+							return "/admin/administradorHome?faces-redirect=true";
+						}
+					} else {
+						Mensagem("Usuário e/ou senha incorretos !");
 					}
-					Mensagem("Usu�rio e/ou senha incorretos !");
-
 				} else {
-					Mensagem("Usu�rio n�o encontrado !");
+					Mensagem("Usuário não encontrado !");
 				}
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
