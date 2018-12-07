@@ -83,7 +83,7 @@ public class AdministradorDao {
 
 	}
 
-	public UsuarioAdministrador buscarAdmministradorPorEmail(String email) throws SQLException {
+	public UsuarioAdministrador buscarAdministradorPorEmail(String email) throws SQLException {
 		String sql = "SELECT ua.*, s.nome AS nomeStatus FROM usuario_administrador AS ua"
 				+ " INNER JOIN status_ AS s ON s.id = ua.id_status" + " WHERE ua.email = ?;";
 
@@ -202,7 +202,7 @@ public class AdministradorDao {
 		return lista;
 	}
 
-	public boolean EditarAluno(Usuario u) throws SQLException {
+	public boolean editarAluno(Usuario u) throws SQLException {
 		String sql = "UPDATE usuario SET email = ?, id_status = ?, WHERE usuario.id = ?;";
 
 		PreparedStatement ps = conn.prepareStatement(sql);
