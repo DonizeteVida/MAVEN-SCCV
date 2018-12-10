@@ -47,7 +47,7 @@ public class GraficoMBean {
 
 		graficoCategoria.setData(dados);
 
-		graficoCategoria.setTitle("Curriculos cadastrados por categoria");
+		graficoCategoria.setTitle("Perfis cadastrados por categoria");
 		graficoCategoria.setLegendPosition("e");
 		graficoCategoria.setFill(true);
 		graficoCategoria.setShowDataLabels(true);
