@@ -1,2 +1,2 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<pageflow:Pageflow xmlns:pageflow="http://www.sybase.com/suade/pageflow" id="pf15367292862150" configfile="/MAVEN-SCCV/src/main/webapp/WEB-INF/faces-config.xml"/>
+<pageflow:Pageflow xmlns:pageflow="http://www.sybase.com/suade/pageflow" id="pf15367292862150" configfile="/SCCV/src/main/webapp/WEB-INF/faces-config.xml"/>

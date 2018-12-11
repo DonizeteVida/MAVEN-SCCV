@@ -3,7 +3,7 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>br.com.donizete</groupId>
-	<artifactId>MAVEN-SCCV</artifactId>
+	<artifactId>SCCV</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>war</packaging>
 	<build>
@@ -74,8 +74,8 @@
 			<artifactId>mysql-connector-java</artifactId>
 			<version>8.0.12</version>
 		</dependency>
-		
-		
+
+
 
 		<!-- <dependency> <groupId>com.ocpsoft</groupId> <artifactId>prettyfaces-jsf2</artifactId> 
 			<version>3.3.3</version> </dependency> -->
