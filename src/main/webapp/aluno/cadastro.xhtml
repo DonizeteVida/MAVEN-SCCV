@@ -159,7 +159,8 @@
 					<p:selectOneMenu value="#{alunoCadastroMBean.usuario.turma.id}"
 						id="selecaoTurma" required="true"
 						requiredMessage="Uma turma é necessária">
-						<f:selectItem itemLabel="SELECIONE SUA TURMA ATUAL" itemValue="" />
+						<f:selectItem itemLabel="SELECIONE O ANO DE INICIO DE SUA TURMA"
+							itemValue="" />
 						<f:selectItems value="#{alunoCadastroMBean.turmas}" var="turma"
 							itemLabel="#{turma.nome}" itemValue="#{turma.id}" />
 					</p:selectOneMenu>
