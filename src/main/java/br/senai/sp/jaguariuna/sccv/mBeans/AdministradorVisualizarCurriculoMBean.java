@@ -1,6 +1,8 @@
 package br.senai.sp.jaguariuna.sccv.mBeans;
 
 import java.sql.SQLException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
@@ -67,6 +69,11 @@ public class AdministradorVisualizarCurriculoMBean {
 
 	public void setFormacoes(List<Formacao> formacoes) {
 		this.formacoes = formacoes;
+	}
+
+	public String convertTime(Date date) {
+		SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd/MM/yyyy");
+		return simpleDateFormat.format(date);
 	}
 
 }

@@ -10,33 +10,66 @@
 			<p:autoUpdate />
 		</p:growl>
 
+		<p:panel>
+			<center>
+				<p:panelGrid columns="2" style="text-align: center;">
+
+					<p:outputLabel value="Nome do curso: " />
+					<p:outputLabel
+						value="#{administradorVisualizarCurriculoMBean.curClick.curso.nome}" />
+
+					<p:outputLabel value="Data da criação do curriculo: " />
+					<p:outputLabel
+						value="#{administradorVisualizarCurriculoMBean.convertTime(administradorVisualizarCurriculoMBean.curClick.data_criacao.time)}"
+						pattern="dd/MM/yyyy" disabled="true" />
+
+					<p:outputLabel value="Turma atual: " />
+					<p:outputLabel
+						value="#{administradorVisualizarCurriculoMBean.curClick.turma.nome}" />
+
+					<p:outputLabel value="Semestre atual: " />
+					<p:outputLabel
+						value="#{administradorVisualizarCurriculoMBean.curClick.semestre}" />
+				</p:panelGrid>
+			</center>
+		</p:panel>
+
 		<h:form id="form">
 			<p:dataGrid id="exp"
-				emptyMessage="Não foram experiencias cadastradas." var="exp"
+				emptyMessage="Não foram encontradas experiencias cadastradas."
+				var="exp"
 				value="#{administradorVisualizarCurriculoMBean.experiencias}"
 				columns="10" layout="grid">
 
 				<f:facet name="header">
-					<p:outputLabel value="Suas experiencias" />
+					<p:outputLabel value="Experiencias do curriculo do aluno: " />
 				</f:facet>
 				<p:panel header="#{exp.nome}" styleClass="panel">
 					<h:panelGrid columns="2" styleClass="datagrid">
-						Data inicio: 
-						<p:calendar disabled="true" value="#{exp.data_inicio.time}"
-							pattern="dd/MM/yyyy" />
-						
-						Data fim:
-						<p:calendar disabled="true" value="#{exp.data_fim.time}"
-							pattern="dd/MM/yyyy" />
-						
-						Cargo:
-						<p:inputText disabled="true" value="#{exp.cargo}" />
-						
-						Empresa:
-						<p:inputText disabled="true" value="#{exp.empresa}" />
-						
-						Funções:
-						<p:outputLabel value="#{exp.funcoes}" />
+						<p:outputLabel value="Data inicio: " />
+						<p:calendar navigator="true" disabled="true"
+							value="#{exp.data_inicio.time}" pattern="dd/MM/yyyy" />
+
+						<p:outputLabel value="Data fim: "
+							rendered="#{exp.data_fim.timeInMillis eq '0' ? false : true}" />
+						<p:calendar navigator="true" disabled="true"
+							rendered="#{exp.data_fim.timeInMillis eq '0' ? false : true}"
+							value="#{exp.data_fim.time}" pattern="dd/MM/yyyy" />
+
+						<p:outputLabel value="Cargo: " />
+						<p:outputLabel title="#{exp.cargo}" value="#{exp.cargo}">
+							<f:converter converterId="cutString" />
+						</p:outputLabel>
+
+						<p:outputLabel value="Experiencia: " />
+						<p:outputLabel title="#{exp.nome}" value="#{exp.nome}">
+							<f:converter converterId="cutString" />
+						</p:outputLabel>
+
+						<p:outputLabel value="Funções: " />
+						<p:outputLabel title="#{exp.funcoes}" value="#{exp.funcoes}">
+							<f:converter converterId="cutString" />
+						</p:outputLabel>
 
 					</h:panelGrid>
 					<br />
@@ -48,25 +81,30 @@
 		</h:form>
 		<br />
 		<h:form id="form2">
-			<p:dataGrid id="form" emptyMessage="Não foram formações cadastradas."
+			<p:dataGrid id="form"
+				emptyMessage="Não foram encontradas formações cadastradas."
 				var="form"
 				value="#{administradorVisualizarCurriculoMBean.formacoes}"
 				columns="10" layout="grid">
 
 
 				<f:facet name="header">
-					<p:outputLabel value="Suas formações" />
+					<p:outputLabel value="Formações do curriculo do aluno: " />
 				</f:facet>
 				<p:panel header="#{form.nome}" styleClass="panel">
 					<h:panelGrid columns="2" styleClass="datagrid">
 						Data inicio: 
-						<p:calendar disabled="true" value="#{form.data_inicio.time}"
+						<p:calendar navigator="true" disabled="true"
+							value="#{form.data_inicio.time}" pattern="dd/MM/yyyy" />
+
+						<p:outputLabel value="Data fim:"
+							rendered="#{form.data_fim.timeInMillis eq '0' ? false : true}" />
+						<p:calendar navigator="true" disabled="true"
+							value="#{form.data_fim.time}"
+							rendered="#{form.data_fim.timeInMillis eq '0' ? false : true}"
 							pattern="dd/MM/yyyy" />
-						
-						Data fim:
-						<p:calendar disabled="true" value="#{form.data_fim.time}"
-							pattern="dd/MM/yyyy" />
-						
+							
+
 						Escola:
 						<p:inputText disabled="true" value="#{form.escola}" />
 
@@ -74,9 +112,12 @@
 					<br />
 					<p:toolbar styleClass="toolbarCurriculo">
 
+
 					</p:toolbar>
 				</p:panel>
+
 			</p:dataGrid>
+
 		</h:form>
 
 

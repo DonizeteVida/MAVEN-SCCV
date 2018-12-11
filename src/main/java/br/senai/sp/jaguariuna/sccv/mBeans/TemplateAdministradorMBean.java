@@ -14,7 +14,7 @@ public class TemplateAdministradorMBean {
 
 		FacesContext.getCurrentInstance().getExternalContext().invalidateSession();
 		try {
-			FacesContext.getCurrentInstance().getExternalContext().redirect("/MAVEN-SCCV/aluno/index.xhtml");
+			FacesContext.getCurrentInstance().getExternalContext().redirect("/SCCV");
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

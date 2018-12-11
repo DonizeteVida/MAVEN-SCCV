@@ -14,21 +14,21 @@
 		<p:panel>
 			<center>
 				<p:panelGrid columns="2" style="text-align: center;">
-					
-					Nome do curso: 
+
+					<p:outputLabel value="Nome do curso: " />
 					<p:outputLabel
 						value="#{alunoEditarCurriculoMBean.curriculumAtual.curso.nome}" />
 
-					Data da criação do curriculo: 
+					<p:outputLabel value="Data da criação do curriculo: " />
 					<p:outputLabel
 						value="#{alunoEditarCurriculoMBean.convertTime(alunoEditarCurriculoMBean.curriculumAtual.data_criacao.time)}"
 						pattern="dd/MM/yyyy" disabled="true" />
-						
-					Turma atual: 
+
+					<p:outputLabel value="Turma atual: " />
 					<p:outputLabel
 						value="#{alunoEditarCurriculoMBean.curriculumAtual.turma.nome}" />
-						
-					Semestre atual: 
+
+					<p:outputLabel value="Semestre atual: " />
 					<p:outputLabel
 						value="#{alunoEditarCurriculoMBean.curriculumAtual.semestre}" />
 				</p:panelGrid>
@@ -119,7 +119,7 @@
 				</f:facet>
 				<p:panel header="#{form.nome}" styleClass="panel">
 					<h:panelGrid columns="2" styleClass="datagrid">
-						Data inicio: 
+						<p:outputLabel value="Data inicio: " />
 						<p:calendar navigator="true" disabled="true"
 							value="#{form.data_inicio.time}" pattern="dd/MM/yyyy" />
 
@@ -129,9 +129,9 @@
 							value="#{form.data_fim.time}"
 							rendered="#{form.data_fim.timeInMillis eq '0' ? false : true}"
 							pattern="dd/MM/yyyy" />
-							
 
-						Escola:
+
+						<p:outputLabel value="Escola: " />
 						<p:inputText disabled="true" value="#{form.escola}" />
 
 					</h:panelGrid>
