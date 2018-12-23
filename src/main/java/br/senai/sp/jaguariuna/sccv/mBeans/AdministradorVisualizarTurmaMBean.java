@@ -51,7 +51,7 @@ public class AdministradorVisualizarTurmaMBean {
 
 	public void inserirTurma() {
 		try {
-			if (classeGenericaDao.inserirTurma(1, inserirTurma)) {
+			if (classeGenericaDao.inserirTurma(cursoSelecionado.getId(), inserirTurma)) {
 				Mensagem.make("Turma inserida com sucesso !");
 				downloadCursos();
 			}

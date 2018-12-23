@@ -9,9 +9,9 @@ import javax.faces.context.FacesContext;
 @ManagedBean
 @ViewScoped
 public class TemplateMBean {
-	
+
 	public void removeSessionScoped() {
-		
+
 		FacesContext.getCurrentInstance().getExternalContext().invalidateSession();
 		try {
 			FacesContext.getCurrentInstance().getExternalContext().redirect("index.xhtml");

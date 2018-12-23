@@ -97,7 +97,7 @@ public class GraficoMBean {
 		}
 
 		graficoPCD.setData(dados);
-		graficoPCD.setTitle("PCD");
+		graficoPCD.setTitle("Pessoas com deficiencia");
 		graficoPCD.setLegendPosition("e");
 		graficoPCD.setFill(true);
 		graficoPCD.setShowDataLabels(true);
