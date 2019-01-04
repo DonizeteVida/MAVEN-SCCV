@@ -11,17 +11,15 @@ public class ConnectionDB {
 	private static String pass = "root";
 
 	public static Connection getConnection() {
-		if (con == null) {
-			getGet();
-		} else
-			try {
-				if (con.isClosed()) {
-					getGet();
-				}
-			} catch (SQLException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+		try {
+			if (con == null || con.isClosed()) {
+				getGet();
 			}
+
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		return con;
 	}
 
